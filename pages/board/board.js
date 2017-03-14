@@ -2,7 +2,7 @@ var app = getApp()
 
 Page({
   data: {
-    images: ['../images/m1.jpg', '../images/m2.jpg', '../images/m3.jpg','../images/m1.jpg'],
+    // images: ['../images/m1.jpg', '../images/m2.jpg', '../images/m3.jpg','../images/m1.jpg'],
     imgCss: {},
 
     userInfo: {},
@@ -15,6 +15,7 @@ Page({
       "hashId": "607ce18b4bed0d7b0012b66ed201fb08",
       "unixtime": 1418815439,
       "updatetime": "2014-12-17 19:23:59",
+      "pictures" : ['../images/m1.jpg', '../images/m2.jpg', '../images/m3.jpg','../images/m1.jpg']
     },
 
     {
@@ -191,11 +192,13 @@ Page({
   },
   onImageLoad: function (e) {
     let that = this;
-    console.log('that.images.length', that.data.images.length);
+    console.log('e', e);
+    
+    console.log('that.images.length', e.currentTarget.dataset.pictures.length);
 
     // for (var i = imgs.length - 1; i >= 0; i--) {
       //  大的div可能有多个对每一个进行操作
-      var length = that.data.images.length;               //  找大div下的图片有多少个
+      var length = e.currentTarget.dataset.pictures.length;               //  找大div下的图片有多少个
       var row = Math.ceil(length / 3);      //  length/3向上取整 行数
       var line = Math.ceil(length / row);  //   length/row向上取整 列数
       //  var widthM = 26*line>46?46:26*line;  

@@ -95,5 +95,5 @@ image {
 }
 
 .item-body ,.list-item{
- padding-bottom: 1px;
+ padding-bottom: 1.5px;
 }
