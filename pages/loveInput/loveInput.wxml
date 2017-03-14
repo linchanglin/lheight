@@ -1,0 +1,95 @@
+<view class="page">
+  <view class="page__bd">
+
+    <!--<view class="weui-panel"></view>-->
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" style="height: 6em" auto-focus/>
+
+            <!--<view class="weui-textarea-counter">0/140</view>-->
+          </view>
+        </view>
+
+        <!--</view>
+      <view class="weui-cells">-->
+        <view class="weui-cell" style="border-top:;">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+
+              <!--<view class="weui-uploader__hd">
+                <view class="weui-uploader__title">图片上传</view>
+                <view class="weui-uploader__info">{{files.length}}/2</view>
+              </view>-->
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                  <block wx:for-items="{{files}}" wx:key="{{index}}">
+                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                    </view>
+                  </block>
+
+                  <!--<view class="weui-uploader__file">
+                    <image class="weui-uploader__img" src="../images/pic_160.png" mode="aspectFill" />
+                  </view>
+                  <view class="weui-uploader__file">
+                    <image class="weui-uploader__img" src="../images/pic_160.png" mode="aspectFill" />
+                  </view>
+                  <view class="weui-uploader__file">
+                    <image class="weui-uploader__img" src="../images/pic_160.png" mode="aspectFill" />
+                  </view>
+                  <view class="weui-uploader__file weui-uploader__file_status">
+                    <image class="weui-uploader__img" src="../images/pic_160.png" mode="aspectFill" />
+                    <view class="weui-uploader__file-content">
+                      <icon type="warn" size="23" color="#F43530"></icon>
+                    </view>
+                  </view>
+                  <view class="weui-uploader__file weui-uploader__file_status">
+                    <image class="weui-uploader__img" src="../images/pic_160.png" mode="aspectFill" />
+                    <view class="weui-uploader__file-content">50%</view>
+                  </view>-->
+                </view>
+                <view class="weui-uploader__input-box">
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      <!--</view>
+    </view>
+    <view class="weui-panel">
+      <view class="weui-panel__bd">-->
+        <view class="weui-cells weui-cells_after-title">
+          <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__hd">
+              <image wx:if="{{userInfo.gender == 1}}" src="../images/location.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+              <image wx:else="{{userInfo.gender !== 1}}" src="../images/location_fill.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+            </view>
+            <view class="weui-cell__bd">
+              <view style="display: inline-block; vertical-align: middle">所在位置</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </navigator>
+        </view>
+      </view>
+    </view>
+    <view class="weui-panel">
+      <view class="weui-panel__bd">
+        <view class="weui-cells weui-cells_after-title">
+          <navigator url="../visiableInput/visiableInput" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__hd">
+              <image wx:if="{{userInfo.gender == 1}}" src="../images/global.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+              <image wx:else="{{userInfo.gender !== 1}}" src="../images/global_fill.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+            </view>
+            <view class="weui-cell__bd">
+              <view style="display: inline-block; vertical-align: middle">谁可以看</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">公开</view>
+          </navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

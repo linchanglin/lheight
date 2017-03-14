@@ -1,0 +1,117 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-panel"></view>
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">
+            <view style="display: inline-block; vertical-align: middle">头像</view>
+          </view>
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-panel">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+          <view class="weui-cells weui-cells_in-small-appmsg">
+            <view class="weui-cell weui-cell_access">
+              <view class="weui-cell__bd">
+                <view style="display: inline-block; vertical-align: middle">名字</view>
+              </view>
+              <view class="weui-cell__ft">{{userInfo.nickName}}</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+              <view class="weui-cell__bd">
+                <view style="display: inline-block; vertical-align: middle">性别</view>
+              </view>
+              <view wx:if="{{userInfo.gender == 0}}" class="weui-cell__ft">未知</view>
+              <view wx:elif="{{userInfo.gender == 1}}" class="weui-cell__ft">男</view>
+              <view wx:else class="weui-cell__ft">女</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+              <view class="weui-cell__bd">
+                <view style="display: inline-block; vertical-align: middle">地区</view>
+              </view>
+              <view wx:if="{userInfo.country}} == CN" class="weui-cell__ft">{{userInfo.province}} {{userInfo.city}}</view>
+              <view wx:else class="weui-cell__ft">{{userInfo.country}} {{userInfo.province}} {{userInfo.city}}</view>
+            </view>
+
+            <!--<navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>我的地址</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>-->
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-panel">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+          <view class="weui-cells weui-cells_in-small-appmsg">
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-panel">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+          <view class="weui-cells weui-cells_in-small-appmsg">
+            <navigator url="../realNameInput/realNameInput" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>真实姓名</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access">林畅</view>
+            </navigator>
+            <navigator url="../collegeInput/collegeInput" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>我的学校</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access">福州大学</view>
+            </navigator>
+            <!--<view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">c</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker value="{{collegeIndex}}" bindchange="bindCollegeChange" range="{{colleges}}">
+                  <view class="weui-input weui-cell__ft weui-cell__ft_in-access">{{colleges[collegeIndex]}}</view>
+                </picker>
+              </view>
+            </view>-->
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">我的生日</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+                  <view class="weui-input weui-cell__ft weui-cell__ft_in-access">{{date}}</view>
+                </picker>
+              </view>
+            </view>
+            <!--<view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">故乡</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+                  <view class="weui-input weui-cell__ft weui-cell__ft_in-access">{{date}}</view>
+                </picker>
+              </view>
+            </view>-->
+            <navigator url="../signatureInput/signatureInput" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>个性签名</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
