@@ -2,7 +2,7 @@ var app = getApp()
 
 Page({
   data: {
-    // images: ['../images/m1.jpg', '../images/m2.jpg', '../images/m3.jpg','../images/m1.jpg'],
+    
     imgCss: {},
 
     userInfo: {},
@@ -15,20 +15,28 @@ Page({
       "hashId": "607ce18b4bed0d7b0012b66ed201fb08",
       "unixtime": 1418815439,
       "updatetime": "2014-12-17 19:23:59",
-      "pictures" : ['../images/m1.jpg', '../images/m2.jpg', '../images/m3.jpg','../images/m1.jpg']
+      "pictures": ['http://tnfs.tngou.net/img/ext/161223/7083a1fde72448a62e477c5aab0721c8.jpg',
+'http://tnfs.tngou.net/img/ext/161213/c5f1416b4feb857b8d711f83dc692885.jpg',
+'http://tnfs.tngou.net/img/ext/161209/6cc26c6f440c091e0cf78229a9642929.jpg',
+'http://tnfs.tngou.net/img/ext/161213/a94ead894d0d0e4e5b3b807626eeab4d.jpg']
     },
 
     {
       "content": "老师讲完课后，问道 “同学们，你们还有什么问题要问吗？” 这时，班上一男同学举手， “老师，这节什么课？”",
       "hashId": "20670bc096a2448b5d78c66746c930b6",
       "unixtime": 1418814837,
-      "updatetime": "2014-12-17 19:13:57"
+      "updatetime": "2014-12-17 19:13:57",
+      "pictures": ['http://tnfs.tngou.net/img/ext/161223/7083a1fde72448a62e477c5aab0721c8.jpg',
+'http://tnfs.tngou.net/img/ext/161213/c5f1416b4feb857b8d711f83dc692885.jpg',
+'http://tnfs.tngou.net/img/ext/161209/6cc26c6f440c091e0cf78229a9642929.jpg']
     },
     {
       "content": "“老公，结婚前你不是常对我说，我是你的女神吗？” “老婆，现在你总该看出来，自从结婚后，我成了一个无神论者。”",
       "hashId": "1a0b402983f22b7ad6ff38787e238f6d",
       "unixtime": 1418814837,
-      "updatetime": "2014-12-17 19:13:57"
+      "updatetime": "2014-12-17 19:13:57",
+      "pictures": ['http://tnfs.tngou.net/img/ext/161223/7083a1fde72448a62e477c5aab0721c8.jpg',
+'http://tnfs.tngou.net/img/ext/161213/c5f1416b4feb857b8d711f83dc692885.jpg']
     },
     {
       "content": "昨天下班坐公交车回家，白天上班坐着坐多了想站一会儿， 就把座位让给了一个阿姨，阿姨道谢一番开始和我聊天，聊了挺多的。 后来我要下车了，阿姨热情的和我道别。 下车的一瞬间我回头看了一眼，只见那阿姨对着手机说：“儿子， 刚才遇见一个姑娘特不错，可惜长得不好看，不然我肯定帮你要号码！” 靠，阿姨你下车，我保证不打死你！",
@@ -146,11 +154,23 @@ Page({
   onLoad: function () {
     let that = this;
 
+
+
     wx.getSystemInfo({
       success: (res) => {
         let ww = res.windowWidth;
+        var length = 3;
+        var row = Math.ceil(length / 3);
+        var line = Math.ceil(length / row);
+        var widthM = ww - 20;
+        var widthX = (widthM / line).toFixed(2) - 6;
+        var margin = "3px";
         that.setData({
-          ww: ww
+          imgCss: {
+            width: widthX + 'px',
+            height: widthX + 'px',
+            margin: margin
+          }
         })
       }
     })
@@ -190,30 +210,15 @@ Page({
       inputVal: e.detail.value
     });
   },
-  onImageLoad: function (e) {
-    let that = this;
-    console.log('e', e);
-    
-    console.log('that.images.length', e.currentTarget.dataset.pictures.length);
+  previewImage: function (e) {
+    console.log('preview e', e);
+    var current = e.currentTarget.dataset.current;
+    var urls = e.currentTarget.dataset.urls;
 
-    // for (var i = imgs.length - 1; i >= 0; i--) {
-      //  大的div可能有多个对每一个进行操作
-      var length = e.currentTarget.dataset.pictures.length;               //  找大div下的图片有多少个
-      var row = Math.ceil(length / 3);      //  length/3向上取整 行数
-      var line = Math.ceil(length / row);  //   length/row向上取整 列数
-      //  var widthM = 26*line>46?46:26*line;  
-      var widthM = that.data.ww-20;
-      // 计算大的div的宽度，1张图时为26rem 其他为46rem
-      var widthX = (widthM / line).toFixed(2) - 6;
-      // 计算每张图片的宽 我的单位是rem 还有margin要计算在内
-      var margin = "3px";
-      that.setData({
-        imgCss: {
-          width: widthX + 'px',
-          height: widthX + 'px',
-          margin: margin
-        }
-      })
-    // }
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接
+      urls: urls // 需要预览的图片http链接列表
+    })
   }
+
 });
