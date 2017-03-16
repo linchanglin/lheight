@@ -1,11 +1,13 @@
 {
   "pages": [
-    "pages/profileShowInput/profileShowInput",
+    "pages/board/board",
     
     "pages/user/user",
     
+    "pages/profileShowInput/profileShowInput",
     
-    "pages/board/board",
+    
+    
     
     "pages/profileShow/profileShow",
     

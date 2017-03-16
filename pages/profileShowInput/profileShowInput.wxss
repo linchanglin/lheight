@@ -1,1 +1,47 @@
 /* pages/profileShowInput/profileShowInput.wxss */
+
+.weui-uploader__file_statuss {
+  position: relative;
+}
+/*.weui-uploader__file_statuss:before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}*/
+
+.weui-uploader__file-contentt {
+  position: absolute;
+  top: 7px;
+  left: 69px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #FFFFFF;
+}
+
+.weui-uploader__file {
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.weui-vcode-btnn {
+  display: inline-block;
+  height: 2.58823529em;
+  margin-left: 5px;
+  padding: 0 0.6em 0 0.7em;
+  border-left: 1px solid #E5E5E5;
+  line-height: 2.58823529em;
+  vertical-align: middle;
+  font-size: 17px;
+  color: #000;
+  white-space: nowrap;
+  width: 25px;
+}
+
+.page__bd {
+  padding-bottom: 20px;
+}

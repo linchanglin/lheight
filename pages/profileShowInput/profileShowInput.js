@@ -28,6 +28,19 @@ Page({
 
         isAgree: false
     },
+    deleteImage: function (e) {
+        let that = this;
+        let the_delete_image = e.currentTarget.dataset.image;
+        let new_files = [];
+        for (let value of that.data.files) {
+            if (the_delete_image != value) {
+                new_files.push(value)
+            }
+        }
+        that.setData({
+            files: new_files
+        })
+    },
     chooseImage: function (e) {
         var that = this;
         wx.chooseImage({

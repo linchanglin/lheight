@@ -30,6 +30,7 @@
   z-index: 99999999999999;
   /*border-radius: 10px;*/
   overflow: hidden;
+  border-radius:7px;
 }
 
 .banner {
