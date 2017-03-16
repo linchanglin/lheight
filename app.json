@@ -4,9 +4,11 @@
     
     "pages/user/user",
     
-    "pages/profileShow/profileShow",
     
     "pages/board/board",
+    
+    "pages/profileShow/profileShow",
+    
     
     "pages/index/index",
 

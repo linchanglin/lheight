@@ -1,5 +1,8 @@
 Page({
     data: {
+        files: [],
+
+
         showTopTips: false,
 
         radioItems: [

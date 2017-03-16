@@ -14,7 +14,10 @@
                 <block wx:for-items="{{files}}" wx:key="{{index}}">
                   <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
                     <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                <icon type="cancel" size="23"></icon>
+
                   </view>
+                  
                 </block>
                 <view class="weui-uploader__file">
                   <image class="weui-uploader__img" src="../images/pic_160.png" mode="aspectFill" />
@@ -55,7 +58,7 @@
               <view class="weui-label">真实姓名</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" />
+              <input class="weui-input" placeholder="请输入真实姓名"/>
             </view>
           </view>
         </view>
@@ -65,7 +68,7 @@
               <view class="weui-label">生日</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" />
+              <input class="weui-input" placeholder="请输入生日"/>
             </view>
           </view>
         </view>
@@ -75,7 +78,7 @@
               <view class="weui-label">身高</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" />
+              <input class="weui-input" placeholder="请输入身高"/>
             </view>
           </view>
         </view>
@@ -85,7 +88,7 @@
               <view class="weui-label">体重</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" />
+              <input class="weui-input" placeholder="请输入体重"/>
             </view>
           </view>
         </view>
@@ -95,7 +98,7 @@
               <view class="weui-label">故乡</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" />
+              <input class="weui-input" placeholder="请输入故乡"/>
             </view>
           </view>
         </view>
@@ -105,7 +108,7 @@
               <view class="weui-label">个性签名</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" />
+              <input class="weui-input" placeholder="请输入个性签名"/>
             </view>
           </view>
         </view>
@@ -119,7 +122,7 @@
               <view class="weui-label">学校</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" />
+              <input class="weui-input" placeholder="请输入学校"/>
             </view>
           </view>
         </view>
@@ -129,7 +132,7 @@
               <view class="weui-label">学校地址</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" />
+              <input class="weui-input" placeholder="请输入学校地址"/>
             </view>
           </view>
         </view>
@@ -139,7 +142,7 @@
               <view class="weui-label">专业</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" />
+              <input class="weui-input" placeholder="请输入专业"/>
             </view>
           </view>
         </view>
@@ -149,7 +152,7 @@
               <view class="weui-label">年级</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" />
+              <input class="weui-input" placeholder="请输入年级"/>
             </view>
           </view>
         </view>
