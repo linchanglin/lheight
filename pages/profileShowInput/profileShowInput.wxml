@@ -135,8 +135,8 @@
               <view class="weui-label">学校</view>
             </view>
             <view class="weui-cell__bd">
-              <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
-                <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+              <picker bindchange="bindCountryChange" value="{{collegeIndex}}" range="{{colleges}}">
+                <view class="weui-select weui-select_in-select-after">{{colleges[collegeIndex]}}</view>
               </picker>
             </view>
           </view>
@@ -157,8 +157,8 @@
               <view class="weui-label">年级</view>
             </view>
             <view class="weui-cell__bd">
-              <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
-                <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+              <picker bindchange="bindCountryChange" value="{{gradeIndex}}" range="{{grades}}">
+                <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex]}}</view>
               </picker>
             </view>
           </view>
@@ -181,8 +181,7 @@
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">
-              <textarea class="weui-textarea" placeholder="请输入性格" style="height: 3.3em" />
-              <view class="weui-textarea-counter">0/200</view>
+              <textarea class="weui-textarea" style="height: 3.3em" />
             </view>
           </view>
         </view>
@@ -190,8 +189,7 @@
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">
-              <textarea class="weui-textarea" placeholder="请输入爱好" style="height: 3.3em" />
-              <view class="weui-textarea-counter">0/200</view>
+              <textarea class="weui-textarea" style="height: 3.3em" />
             </view>
           </view>
         </view>
@@ -199,8 +197,7 @@
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">
-              <textarea class="weui-textarea" placeholder="请输入恋爱史" style="height: 3.3em" />
-              <view class="weui-textarea-counter">0/200</view>
+              <textarea class="weui-textarea" style="height: 3.3em" />
             </view>
           </view>
         </view>
@@ -208,8 +205,7 @@
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">
-              <textarea class="weui-textarea" placeholder="请输入择偶观" style="height: 3.3em" />
-              <view class="weui-textarea-counter">0/200</view>
+              <textarea class="weui-textarea" style="height: 3.3em" />
             </view>
           </view>
         </view>
