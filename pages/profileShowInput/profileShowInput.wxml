@@ -85,7 +85,7 @@
               <view class="weui-label">身高</view>
             </view>
             <view class="weui-cell__bd">
-              <input type="idcard" class="weui-input" placeholder="请输入身高" />
+              <input type="number" class="weui-input" placeholder="请输入身高" />
             </view>
             <view class="weui-cell__ft">
               <view class="weui-vcode-btnn">cm</view>
@@ -98,14 +98,37 @@
               <view class="weui-label">体重</view>
             </view>
             <view class="weui-cell__bd">
-              <input type="digit" class="weui-input" placeholder="请输入体重" />
+              <input type="number" class="weui-input" placeholder="请输入体重" />
             </view>
             <view class="weui-cell__ft">
               <view class="weui-vcode-btnn">kg</view>
             </view>
           </view>
         </view>
-        <view class="weui-cells weui-cells_after-title">
+
+        <!--<navigator url="../collegeInput/collegeInput" class="weui-cell weui-cell_access" hover-class="weui-cell_active">-->
+        <navigator url="../city_multi_page/city_multi_page" class="weui-cells weui-cells_after-title" hover-class="weui-cell_active">
+
+          <!--<view class="weui-cell__bd weui-cell_primary">
+            <view>我的学校</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">福州大学</view>-->
+          <view class="weui-cell weui-cell_input" style="padding-right: 0px">
+            <view class="weui-cell__hd">
+              <view class="weui-label">故乡</view>
+            </view>
+
+            <!--<view class="weui-cell__bd">
+              <input class="weui-select weui-select_in-select-after" value="{{user.hometown}}" placeholder="请选择故乡" />
+            </view>-->
+            <view class="weui-cell__bd">
+              <view class="weui-select weui-select_in-select-after">{{user.hometown}}</view>
+            </view>
+          </view>
+        </navigator>
+
+
+        <!--<view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
               <view class="weui-label">故乡</view>
@@ -114,7 +137,7 @@
               <input class="weui-input" placeholder="请输入故乡" />
             </view>
           </view>
-        </view>
+        </view>-->
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
@@ -163,13 +186,58 @@
             </view>
           </view>
         </view>
-        <view class="weui-cells weui-cells_after-title">
+
+        <!--<view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
               <view class="weui-label">学校地址</view>
             </view>
             <view class="weui-cell__bd">
               <input class="weui-input" placeholder="请输入学校地址" />
+            </view>
+          </view>
+        </view>-->
+      </view>
+    </view>
+    <view class="weui-panel">
+      <view class="weui-panel__bd">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">微信</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" placeholder="请输入微信" />
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">QQ</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input type="number" class="weui-input" placeholder="请输入QQ" />
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">微博</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" placeholder="请输入微博" />
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">电话</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input type="number" class="weui-input" placeholder="请输入电话" />
             </view>
           </view>
         </view>

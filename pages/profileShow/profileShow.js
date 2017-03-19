@@ -1,106 +1,48 @@
 Page({
-    data: {
-        showTopTips: false,
+  data: {
+    signature: "这一秒，无缘无份，只是在某个地点，擦身而过，也无意相互问好，就这样成为彼此生活中的匆匆过客。这一秒，时间指引你我各自离去；这一秒，距离割断思念如梦辗转。",
+    pictures: ['http://tnfs.tngou.net/img/ext/161223/7083a1fde72448a62e477c5aab0721c8.jpg',
+'http://tnfs.tngou.net/img/ext/161213/c5f1416b4feb857b8d711f83dc692885.jpg',
+'http://tnfs.tngou.net/img/ext/161209/6cc26c6f440c091e0cf78229a9642929.jpg',
+'http://tnfs.tngou.net/img/ext/161213/a94ead894d0d0e4e5b3b807626eeab4d.jpg']
+  },
+  onLoad: function () {
+    let that = this;
 
-        radioItems: [
-            {name: 'cell standard', value: '0'},
-            {name: 'cell standard', value: '1', checked: true}
-        ],
-        checkboxItems: [
-            {name: 'standard is dealt for u.', value: '0', checked: true},
-            {name: 'standard is dealicient for u.', value: '1'}
-        ],
-
-        date: "2016-09-01",
-        time: "12:01",
-
-        countryCodes: ["+86", "+80", "+84", "+87"],
-        countryCodeIndex: 0,
-
-        countries: ["中国", "美国", "英国"],
-        countryIndex: 0,
-
-        accounts: ["微信号", "QQ", "Email"],
-        accountIndex: 0,
-
-        isAgree: false
-    },
-    showTopTips: function(){
-        var that = this;
-        this.setData({
-            showTopTips: true
-        });
-        setTimeout(function(){
-            that.setData({
-                showTopTips: false
-            });
-        }, 3000);
-    },
-    radioChange: function (e) {
-        console.log('radio发生change事件，携带value值为：', e.detail.value);
-
-        var radioItems = this.data.radioItems;
-        for (var i = 0, len = radioItems.length; i < len; ++i) {
-            radioItems[i].checked = radioItems[i].value == e.detail.value;
-        }
-
-        this.setData({
-            radioItems: radioItems
-        });
-    },
-    checkboxChange: function (e) {
-        console.log('checkbox发生change事件，携带value值为：', e.detail.value);
-
-        var checkboxItems = this.data.checkboxItems, values = e.detail.value;
-        for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
-            checkboxItems[i].checked = false;
-
-            for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-                if(checkboxItems[i].value == values[j]){
-                    checkboxItems[i].checked = true;
-                    break;
-                }
-            }
-        }
-
-        this.setData({
-            checkboxItems: checkboxItems
-        });
-    },
-    bindDateChange: function (e) {
-        this.setData({
-            date: e.detail.value
+    wx.getSystemInfo({
+      success: (res) => {
+        let ww = res.windowWidth;
+        var length = 3;
+        var row = Math.ceil(length / 3);
+        var line = Math.ceil(length / row);
+        var widthM = ww - 20;
+        var widthX = (widthM / line).toFixed(2) - 6;
+        var margin = "3px";
+        that.setData({
+          imgCss: {
+            width: widthX + 'px',
+            height: widthX + 'px',
+            margin: margin
+          }
         })
-    },
-    bindTimeChange: function (e) {
-        this.setData({
-            time: e.detail.value
-        })
-    },
-    bindCountryCodeChange: function(e){
-        console.log('picker country code 发生选择改变，携带值为', e.detail.value);
+      }
+    })
+  },
 
-        this.setData({
-            countryCodeIndex: e.detail.value
-        })
-    },
-    bindCountryChange: function(e) {
-        console.log('picker country 发生选择改变，携带值为', e.detail.value);
+  previewImage: function (e) {
+    var that = this;
+    console.log('preview e', e);
+    var current = e.currentTarget.dataset.current;
+    // var urls = e.currentTarget.dataset.urls;
 
-        this.setData({
-            countryIndex: e.detail.value
-        })
-    },
-    bindAccountChange: function(e) {
-        console.log('picker account 发生选择改变，携带值为', e.detail.value);
-
-        this.setData({
-            accountIndex: e.detail.value
-        })
-    },
-    bindAgreeChange: function (e) {
-        this.setData({
-            isAgree: !!e.detail.value.length
-        });
-    }
-});
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接
+      urls: that.data.pictures// 需要预览的图片http链接列表
+    })
+  },
+  editProfileShow: function () {
+    wx.navigateTo({
+      url: '../profileShowInput/profileShowInput'
+    })
+  }
+})

@@ -1,16 +1,29 @@
 {
   "pages": [
+
+
+    "pages/user/user",
+
+    "pages/profileShow/profileShow",
+
+
+    
+    
+    
+    
     "pages/profileShowInput/profileShowInput",
+
+    "pages/city_multi_page/city_multi_page",
+    "pages/city_multi_page_city/city_multi_page_city",
+    "pages/city_multi_page_district/city_multi_page_district",
     
     "pages/board/board",
     
-    "pages/user/user",
     
     
     
     
     
-    "pages/profileShow/profileShow",
     
     
     "pages/index/index",
@@ -72,8 +85,8 @@
       {
         "text": "眼缘墙",
         "pagePath": "pages/picture/picture",
-        "iconPath": "pages/images/like.png",
-        "selectedIconPath": "pages/images/like_fill.png"
+        "iconPath": "pages/images/camera.png",
+        "selectedIconPath": "pages/images/camera_fill.png"
       },
       {
         "text": "发现",

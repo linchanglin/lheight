@@ -1,1 +1,82 @@
 /* pages/profileShow/profileShow.wxss */
+
+.placeholder{
+    margin: 5px;
+    padding: 0 10px;
+    text-align: left;
+    background-color: #EBEBEB;
+    height: 2.3em;
+    line-height: 2.3em;
+    /*color: #cfcfcf;*/
+}
+
+.profileShow_panel {
+    margin: 5px;
+    padding: 0 10px;
+    text-align: left;
+    background-color: #EBEBEB;
+    line-height: 150%;
+    /*line-height: 2.3em;*/
+    /*color: #cfcfcf;*/
+}
+
+.profileShow_cells {
+    padding: 10px 15px;
+}
+
+.profileShow_cell_left {
+    float: left;
+    /*width: 30px;*/
+    /*height: 30px;*/
+}
+.image_picture {
+  width: 30px;
+  height: 30px;
+}
+.image_picture_middle {
+  width: 32px;
+  height: 32px;
+}
+.image_picture_big {
+  width: 35px;
+  height: 35px;
+}
+
+.profileShow_cell_right {
+    /*position: absolute;*/
+    margin-left: 45px;
+}
+
+.profileShow_cell_hd {
+    color: #ff8140;
+    margin-bottom: 5px;
+    font-size: 19px;
+}
+
+.profileShow_cell_bd {
+    font-size: 16px;
+}
+
+.weui-uploader__file {
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.weui-panel {
+    margin-top: 10px;
+}
+
+.page__bd {
+    padding-bottom: 10px;
+}
+
+.signature {
+    position: absolute;
+    padding: 20px;
+    top: 40px;
+    text-align: center;
+    /*left: 90px;*/
+}
+
+

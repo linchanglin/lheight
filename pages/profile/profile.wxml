@@ -57,7 +57,7 @@
         </view>
       </view>
     </view>
-    <view class="weui-panel">
+    <!--<view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_small-appmsg">
           <view class="weui-cells weui-cells_in-small-appmsg">
@@ -73,16 +73,7 @@
               </view>
               <view class="weui-cell__ft weui-cell__ft_in-access">福州大学</view>
             </navigator>
-            <!--<view class="weui-cell weui-cell_input">
-              <view class="weui-cell__hd">
-                <view class="weui-label">c</view>
-              </view>
-              <view class="weui-cell__bd">
-                <picker value="{{collegeIndex}}" bindchange="bindCollegeChange" range="{{colleges}}">
-                  <view class="weui-input weui-cell__ft weui-cell__ft_in-access">{{colleges[collegeIndex]}}</view>
-                </picker>
-              </view>
-            </view>-->
+            
             <view class="weui-cell weui-cell_input">
               <view class="weui-cell__hd">
                 <view class="weui-label">我的生日</view>
@@ -93,16 +84,7 @@
                 </picker>
               </view>
             </view>
-            <!--<view class="weui-cell weui-cell_input">
-              <view class="weui-cell__hd">
-                <view class="weui-label">故乡</view>
-              </view>
-              <view class="weui-cell__bd">
-                <picker mode="date" value="{{date}}" bindchange="bindDateChange">
-                  <view class="weui-input weui-cell__ft weui-cell__ft_in-access">{{date}}</view>
-                </picker>
-              </view>
-            </view>-->
+          
             <navigator url="../signatureInput/signatureInput" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
               <view class="weui-cell__bd weui-cell_primary">
                 <view>个性签名</view>
@@ -112,6 +94,6 @@
           </view>
         </view>
       </view>
-    </view>
+    </view>-->
   </view>
 </view>
