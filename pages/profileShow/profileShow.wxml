@@ -201,8 +201,8 @@
         </view>
       </view>
     </view>
-    <view class="weui-btn-area" style="margin-bottom: 15px">
+    <!--<view class="weui-btn-area" style="margin-bottom: 15px">
       <button class="weui-btn" type="primary" bindtap="editProfileShow">编辑</button>
-    </view>
+    </view>-->
   </view>
 </view>

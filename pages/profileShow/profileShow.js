@@ -40,9 +40,9 @@ Page({
       urls: that.data.pictures// 需要预览的图片http链接列表
     })
   },
-  editProfileShow: function () {
-    wx.navigateTo({
-      url: '../profileShowInput/profileShowInput'
-    })
-  }
+  // editProfileShow: function () {
+  //   wx.navigateTo({
+  //     url: '../profileShowInput/profileShowInput'
+  //   })
+  // }
 })

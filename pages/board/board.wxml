@@ -43,7 +43,7 @@
         <image class="img" src="{{userInfo.avatarUrl}}"></image>
       </view>
       <text class="header-name" bindtap="goToProfileShow">小作宝</text>
-      <text class="header-time">{{article.updatetime}}</text>
+      <text class="header-time">1小时前 来自福州大学</text>
     </view>
     <view class="item-body">
       <navigator url="../comment/comment" hover-class="weui-cell_active">
