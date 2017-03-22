@@ -51,15 +51,21 @@
       </navigator>
       <view class="article-imgs" wx:if="{{article.pictures}}">
         <image wx:for="{{article.pictures}}" wx:for-item="picture" src="{{picture}}" data-current="{{picture}}" data-urls="{{article.pictures}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" bindtap="previewImage"></image>
-
-        <!--<image src="../images/m1.jpg" bindload="onImageLoad"></image>
-          <image src="../images/m2.jpg"></image>
-          <image src="../images/m4.jpg"></image>
-          <image src="../images/m1.jpg"></image>
-          <image src="../images/m2.jpg"></image>-->
       </view>
-
-      <!--<image class="body-img" wx:if="{{item.url}}" src="{{item.url}}"></image>-->
+    </view>
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="placeholder placeholder-comment">
+        <image class="image-comment" src="../images/comment.png"></image>
+        评论
+        </view>
+      </view>
+      <view class="weui-flex__item">
+        <view class="placeholder">
+        <image class="image-comment" src="../images/praise.png"></image>
+        赞
+        </view>
+      </view>
     </view>
   </view>
 </view>

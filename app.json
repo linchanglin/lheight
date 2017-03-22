@@ -1,6 +1,7 @@
 {
   "pages": [
 
+    "pages/board/board",
 
     "pages/user/user",
 
@@ -17,7 +18,6 @@
     "pages/city_multi_page_city/city_multi_page_city",
     "pages/city_multi_page_district/city_multi_page_district",
     
-    "pages/board/board",
     
     
     
