@@ -54,16 +54,20 @@
       </view>
     </view>
     <view class="weui-flex">
-      <view class="weui-flex__item">
+      <view class="weui-flex__item {{hoverClass}}" bindtap="navigatorToComment">
         <view class="placeholder placeholder-comment">
-        <image class="image-comment" src="../images/comment.png"></image>
-        评论
+          <image class="image-comment" src="../images/comment.png"></image>
+            评论
         </view>
       </view>
-      <view class="weui-flex__item">
-        <view class="placeholder">
-        <image class="image-comment" src="../images/praise.png"></image>
-        赞
+      <view class="weui-flex__item" bindtap="setRipple">
+        <view wx:if="{{length == 0}}" class="placeholder">
+          <image  class="image-comment  ripple {{rippleName}}" src="../images/praise.png"></image>
+          赞
+        </view>
+        <view wx:else class="placeholder">
+          <image class="image-comment  ripple {{rippleName}}" src="../images/praise_fill.png"></image>
+          {{length}}
         </view>
       </view>
     </view>

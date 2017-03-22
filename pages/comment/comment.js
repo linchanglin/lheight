@@ -49,21 +49,24 @@ Page({
         content: "九九八十一难，最难过的，其实是女儿国这一关，因为比起其他的艰难困苦来说，此时的唐僧是真的动心了，一句“来生若有缘分”道尽一切，只是为了心中崇高的理想，纵使心动也要断绝柔情继续西行。为国王惋惜，同时也对唐僧充满崇敬，尤其是了解了史上真实的唐玄奘以后，更是觉得此人了不起。"
       }
     ],
-    
+
   },
-  
+
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
+    // console.log(option.query)
+    console.log(222222)
 
-    let thata = this;
+    let that = this;
 
-        app.getUserInfo(function (userInfo) {
-            console.log('uerInfo', userInfo);
-            thata.setData({
-                userInfo: userInfo
-            })
-        })
-
-    
+    app.getUserInfo(function (userInfo) {
+      console.log('uerInfo', userInfo);
+      that.setData({
+        userInfo: userInfo
+      })
+    })
   },
+  onShow: function () {
+    console.log('111111');
+  }
 })

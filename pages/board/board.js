@@ -2,7 +2,7 @@ var app = getApp()
 
 Page({
   data: {
-    
+
     imgCss: {},
 
     userInfo: {},
@@ -10,15 +10,20 @@ Page({
     inputShowed: false,
     inputVal: "",
 
+    rippleName: "",
+
+    length: 0,
+    hoverClass: '',
+
     reqs: [{
       "content": "女生分手的原因有两个， 一个是：闺蜜看不上。另一个是：闺蜜看上了。",
       "hashId": "607ce18b4bed0d7b0012b66ed201fb08",
       "unixtime": 1418815439,
       "updatetime": "2014-12-17 19:23:59",
       "pictures": ['http://tnfs.tngou.net/img/ext/161223/7083a1fde72448a62e477c5aab0721c8.jpg',
-'http://tnfs.tngou.net/img/ext/161213/c5f1416b4feb857b8d711f83dc692885.jpg',
-'http://tnfs.tngou.net/img/ext/161209/6cc26c6f440c091e0cf78229a9642929.jpg',
-'http://tnfs.tngou.net/img/ext/161213/a94ead894d0d0e4e5b3b807626eeab4d.jpg']
+        'http://tnfs.tngou.net/img/ext/161213/c5f1416b4feb857b8d711f83dc692885.jpg',
+        'http://tnfs.tngou.net/img/ext/161209/6cc26c6f440c091e0cf78229a9642929.jpg',
+        'http://tnfs.tngou.net/img/ext/161213/a94ead894d0d0e4e5b3b807626eeab4d.jpg']
     },
 
     {
@@ -27,8 +32,8 @@ Page({
       "unixtime": 1418814837,
       "updatetime": "2014-12-17 19:13:57",
       "pictures": ['http://tnfs.tngou.net/img/ext/161223/7083a1fde72448a62e477c5aab0721c8.jpg',
-'http://tnfs.tngou.net/img/ext/161213/c5f1416b4feb857b8d711f83dc692885.jpg',
-'http://tnfs.tngou.net/img/ext/161209/6cc26c6f440c091e0cf78229a9642929.jpg']
+        'http://tnfs.tngou.net/img/ext/161213/c5f1416b4feb857b8d711f83dc692885.jpg',
+        'http://tnfs.tngou.net/img/ext/161209/6cc26c6f440c091e0cf78229a9642929.jpg']
     },
     {
       "content": "“老公，结婚前你不是常对我说，我是你的女神吗？” “老婆，现在你总该看出来，自从结婚后，我成了一个无神论者。”",
@@ -36,7 +41,7 @@ Page({
       "unixtime": 1418814837,
       "updatetime": "2014-12-17 19:13:57",
       "pictures": ['http://tnfs.tngou.net/img/ext/161223/7083a1fde72448a62e477c5aab0721c8.jpg',
-'http://tnfs.tngou.net/img/ext/161213/c5f1416b4feb857b8d711f83dc692885.jpg']
+        'http://tnfs.tngou.net/img/ext/161213/c5f1416b4feb857b8d711f83dc692885.jpg']
     },
     {
       "content": "昨天下班坐公交车回家，白天上班坐着坐多了想站一会儿， 就把座位让给了一个阿姨，阿姨道谢一番开始和我聊天，聊了挺多的。 后来我要下车了，阿姨热情的和我道别。 下车的一瞬间我回头看了一眼，只见那阿姨对着手机说：“儿子， 刚才遇见一个姑娘特不错，可惜长得不好看，不然我肯定帮你要号码！” 靠，阿姨你下车，我保证不打死你！",
@@ -152,9 +157,8 @@ Page({
     }]
   },
   onLoad: function () {
+    console.log('222324234234');
     let that = this;
-
-
 
     wx.getSystemInfo({
       success: (res) => {
@@ -182,6 +186,9 @@ Page({
         userInfo: userInfo
       })
     })
+  },
+  onShow: function () {
+    console.log(55555);
   },
   goToProfileShow: function () {
     console.log('hahhhhh');
@@ -219,6 +226,33 @@ Page({
       current: current, // 当前显示图片的http链接
       urls: urls // 需要预览的图片http链接列表
     })
+  },
+  setRipple: function () {
+    var that = this;
+    that.setData({
+      rippleName: "bounceIn"
+    });
+    if (that.data.length == 0) {
+      that.setData({
+        length: 1
+      })
+    } else {
+      that.setData({
+        length: 0
+      })
+    }
+    setTimeout(function () {
+
+      that.setData({
+        rippleName: ""
+      });
+    }, 1000)
+  },
+  navigatorToComment: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: '../comment/comment?id=22'
+    });
   }
 
 });
