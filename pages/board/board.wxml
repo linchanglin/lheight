@@ -46,23 +46,23 @@
       <text class="header-time">1小时前 来自福州大学</text>
     </view>
     <view class="item-body">
-      <navigator url="../comment/comment" hover-class="weui-cell_active">
+      <view bindtap="navigatorToComment" hover="true" hover-class="weui-cell_active">
         <text>{{article.content}}</text>
-      </navigator>
+      </view>
       <view class="article-imgs" wx:if="{{article.pictures}}">
         <image wx:for="{{article.pictures}}" wx:for-item="picture" src="{{picture}}" data-current="{{picture}}" data-urls="{{article.pictures}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" bindtap="previewImage"></image>
       </view>
     </view>
     <view class="weui-flex">
       <view class="weui-flex__item {{hoverClass}}" bindtap="navigatorToComment">
-        <view class="placeholder placeholder-comment">
+        <view class="placeholder">
           <image class="image-comment" src="../images/comment.png"></image>
-            评论
+          评论
         </view>
       </view>
       <view class="weui-flex__item" bindtap="setRipple">
         <view wx:if="{{length == 0}}" class="placeholder">
-          <image  class="image-comment  ripple {{rippleName}}" src="../images/praise.png"></image>
+          <image class="image-comment  ripple {{rippleName}}" src="../images/praise.png"></image>
           赞
         </view>
         <view wx:else class="placeholder">
@@ -71,5 +71,31 @@
         </view>
       </view>
     </view>
+  </view>
+</view>
+
+
+<view class="weui-tabbar">
+  <view class="weui-tabbar__item weui-bar__item_on">
+    <view style="display: inline-block;position: relative;">
+      <image src="../images/like.png" class="weui-tabbar__icon"></image>
+      <view class="weui-badge" style="position: absolute;top: -2px;right: -13px;">8</view>
+    </view>
+    <view class="weui-tabbar__label">微信</view>
+  </view>
+  <view class="weui-tabbar__item">
+    <image src="../images/like.png" alt="" class="weui-tabbar__icon"></image>
+    <view class="weui-tabbar__label">通讯录</view>
+  </view>
+  <view class="weui-tabbar__item">
+    <view style="display: inline-block;position: relative;">
+      <image src="../images/like.png" alt="" class="weui-tabbar__icon"></image>
+      <view class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></view>
+    </view>
+    <view class="weui-tabbar__label">发现</view>
+  </view>
+  <view class="weui-tabbar__item">
+    <image src="../images/like.png" class="weui-tabbar__icon"></image>
+    <view class="weui-tabbar__label">我</view>
   </view>
 </view>
