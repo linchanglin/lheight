@@ -1,0 +1,30 @@
+<template name="tabbar">
+  <view class="weui-tabbar">
+    <view class="weui-tabbar__item weui-bar__item_on" bindtap="switchTabToBoard">
+      <view style="display: inline-block;position: relative;">
+        <image src="../images/like.png" class="weui-tabbar__icon"></image>
+        <view class="weui-badge" style="position: absolute;top: -2px;right: -13px;">8</view>
+      </view>
+      <view class="weui-tabbar__label">表白墙</view>
+    </view>
+    <view class="weui-tabbar__item" bindtap="switchTabToPicture">
+      <view style="display: inline-block;position: relative;">
+        <image src="../images/camera.png" alt="" class="weui-tabbar__icon"></image>
+      </view>
+      <view class="weui-tabbar__label">眼缘墙</view>
+    </view>
+    <view class="weui-tabbar__item" bindtap="switchTabToFind">
+      <view style="display: inline-block;position: relative;">
+        <image src="../images/safari.png" alt="" class="weui-tabbar__icon"></image>
+        <view class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></view>
+      </view>
+      <view class="weui-tabbar__label">发现</view>
+    </view>
+    <view class="weui-tabbar__item" bindtap="switchTabToUser">
+      <view style="display: inline-block;position: relative;">
+        <image src="../images/my.png" class="weui-tabbar__icon"></image>
+      </view>
+      <view class="weui-tabbar__label">我</view>
+    </view>
+  </view>
+</template>

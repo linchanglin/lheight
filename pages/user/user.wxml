@@ -3,7 +3,7 @@
     <view class="weui-panel"></view>
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
-        <navigator url="../profile/profile" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <view class="weui-media-box weui-media-box_appmsg" hover="true" bindtap="navigateToProfile" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
           </view>
@@ -12,7 +12,7 @@
             <view class="weui-media-box__desc">{{userInfo.gender}}</view>
           </view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
+        </view>
       </view>
     </view>
     
@@ -44,7 +44,7 @@
     <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-cells weui-cells_after-title">
-          <navigator url="../profileShow/profileShow" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToProfileShow" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
               <image wx:if="{{userInfo.gender == 1}}" src="../images/actor_male.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
               <image wx:else="{{userInfo.gender !== 1}}" src="../images/actor_female.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
@@ -53,7 +53,7 @@
               <view style="display: inline-block; vertical-align: middle">详细信息</view>
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </navigator>
+          </view>
         </view>
       </view>
     </view>
@@ -61,7 +61,7 @@
     <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-cells weui-cells_after-title">
-          <navigator url="../profileShowInput/profileShowInput" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToProfileShowInput" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
               <image src="../images/edit_profileShow.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
             </view>
@@ -69,7 +69,7 @@
               <view style="display: inline-block; vertical-align: middle">修改信息</view>
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </navigator>
+          </view>
         </view>
       </view>
     </view>
@@ -77,7 +77,7 @@
     <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-cells weui-cells_after-title">
-          <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMyLove" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
               <image src="../images/lovestore.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
             </view>
@@ -86,7 +86,7 @@
               <view class="weui-badge" style="margin-left: 5px;">8</view>
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </navigator>
+          </view>
           
         </view>
       </view>
@@ -95,7 +95,7 @@
     <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-cells weui-cells_after-title">
-          <navigator url="../loveInput/loveInput" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToLoveInput" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
               <image src="../images/love.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
             </view>
@@ -103,7 +103,7 @@
               <view style="display: inline-block; vertical-align: middle">发表表白</view>
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </navigator>
+          </view>
         </view>
       </view>
     </view>

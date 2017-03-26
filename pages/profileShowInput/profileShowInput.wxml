@@ -280,7 +280,7 @@
       </view>
     </view>
     <view class="weui-btn-area">
-      <button class="weui-btn" type="primary" bindtap="showTopTips">保存</button>
+      <button class="weui-btn" type="primary" bindtap="saveProfileShow">保存</button>
     </view>
   </view>
 </view>

@@ -43,11 +43,11 @@ Page({
 
 
         provinceList: dataAPI.provinceList,
-    provinceShowStatus: true,
-    cityShowStatus: false,
-    districtShowStatus: false,
-    cityList: [],
-    districtList: []
+        provinceShowStatus: true,
+        cityShowStatus: false,
+        districtShowStatus: false,
+        cityList: [],
+        districtList: []
     },
     deleteImage: function (e) {
         let that = this;
@@ -111,6 +111,30 @@ Page({
         wx.previewImage({
             current: e.currentTarget.id, // 当前显示图片的http链接
             urls: this.data.files // 需要预览的图片http链接列表
+        })
+    },
+    saveProfileShow: function () {
+        let that = this;
+        
+        console.log('that.data.files');
+        console.log('that.data.files',that.data.files);
+        wx.uploadFile({
+          url: 'https://collhome.com/images/upload',
+          filePath: that.data.files[0],
+          name:'file',
+          formData: {
+              'wesecret': '123'
+          },
+          success: function(res){
+            console.log('res',res);
+          },
+          fail: function(res) {
+            console.log('fail.res',res);
+          },
+          complete: function (res) {
+              console.log('complete.res',res);
+          } 
+          
         })
     },
     showTopTips: function () {
@@ -196,47 +220,47 @@ Page({
 
 
     setProvice: function (e) {
-    var index = parseInt(e.currentTarget.dataset.index) ? parseInt(e.currentTarget.dataset.index) : 0;
-    console.log('选择省', index, this.data.provinceList[index]);
-    wx.setStorageSync('addressProvice', this.data.provinceList[index])
-    this.setData({
-      provinceShowStatus: false,
-      cityShowStatus: true,
-      districtShowStatus: false,
-      cityList: this.data.provinceList[index].children
-    });
-  },
-  setCity: function (e) {
-    var index = parseInt(e.currentTarget.dataset.index) ? parseInt(e.currentTarget.dataset.index) : 0;
-    console.log('选择市', index, this.data.cityList[index]);
-    wx.setStorageSync('addressCity', this.data.cityList[index])
-    this.setData({
-      provinceShowStatus: false,
-      cityShowStatus: false,
-      districtShowStatus: true,
-      districtList: this.data.cityList[index].children
-    });
-  },
-  setDistrict: function (e) {
-    var index = parseInt(e.currentTarget.dataset.index) ? parseInt(e.currentTarget.dataset.index) : 0;
-    console.log('选择区', index, this.data.districtList[index]);
-    wx.setStorageSync('addressDistrict', this.data.districtList[index])
-    var addressDetail = {};
-    console.log('修改前缓存地址省市区', addressDetail);
-    addressDetail.province = wx.getStorageSync('addressProvice').label;
-    addressDetail.city = wx.getStorageSync('addressCity').label;
-    addressDetail.district = wx.getStorageSync('addressDistrict').label;
-    console.log('修改后缓存地址省市区', addressDetail);
-    wx.setStorageSync('address', addressDetail);
-    this.setData({
-      provinceShowStatus: false,
-      cityShowStatus: false,
-      districtShowStatus: true
-    });
-    wx.showToast({
-      title: addressDetail.province + addressDetail.city + addressDetail.district,
-      icon: 'success',
-      duration: 3000
-    })
-  }
+        var index = parseInt(e.currentTarget.dataset.index) ? parseInt(e.currentTarget.dataset.index) : 0;
+        console.log('选择省', index, this.data.provinceList[index]);
+        wx.setStorageSync('addressProvice', this.data.provinceList[index])
+        this.setData({
+            provinceShowStatus: false,
+            cityShowStatus: true,
+            districtShowStatus: false,
+            cityList: this.data.provinceList[index].children
+        });
+    },
+    setCity: function (e) {
+        var index = parseInt(e.currentTarget.dataset.index) ? parseInt(e.currentTarget.dataset.index) : 0;
+        console.log('选择市', index, this.data.cityList[index]);
+        wx.setStorageSync('addressCity', this.data.cityList[index])
+        this.setData({
+            provinceShowStatus: false,
+            cityShowStatus: false,
+            districtShowStatus: true,
+            districtList: this.data.cityList[index].children
+        });
+    },
+    setDistrict: function (e) {
+        var index = parseInt(e.currentTarget.dataset.index) ? parseInt(e.currentTarget.dataset.index) : 0;
+        console.log('选择区', index, this.data.districtList[index]);
+        wx.setStorageSync('addressDistrict', this.data.districtList[index])
+        var addressDetail = {};
+        console.log('修改前缓存地址省市区', addressDetail);
+        addressDetail.province = wx.getStorageSync('addressProvice').label;
+        addressDetail.city = wx.getStorageSync('addressCity').label;
+        addressDetail.district = wx.getStorageSync('addressDistrict').label;
+        console.log('修改后缓存地址省市区', addressDetail);
+        wx.setStorageSync('address', addressDetail);
+        this.setData({
+            provinceShowStatus: false,
+            cityShowStatus: false,
+            districtShowStatus: true
+        });
+        wx.showToast({
+            title: addressDetail.province + addressDetail.city + addressDetail.district,
+            icon: 'success',
+            duration: 3000
+        })
+    }
 });

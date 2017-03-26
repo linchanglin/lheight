@@ -11,6 +11,7 @@
 
 
 @import 'style/weui.wxss';
+@import 'style/tabbar.wxss';
 
 page{
     background-color: #F8F8F8;

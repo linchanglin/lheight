@@ -1,64 +1,37 @@
 {
   "pages": [
-
-    "pages/board/board",
-
-    "pages/user/user",
-
-    "pages/profileShow/profileShow",
-
-
+    "pages/comment/comment",
     
-    
-    
+    "pages/myLove/myLove",
     
     "pages/profileShowInput/profileShowInput",
 
+
+    
+
+    "pages/board/board",
+    
+    
+    
+    
+    
+    "pages/commentInput/commentInput",
+    
+    "pages/chat/chat",
+    "pages/user/user",
+    "pages/profileShow/profileShow",
     "pages/city_multi_page/city_multi_page",
     "pages/city_multi_page_city/city_multi_page_city",
     "pages/city_multi_page_district/city_multi_page_district",
-    
-    
-    
-    
-    
-    
-    
-    
-    
     "pages/index/index",
-
-   "pages/picture/picture",
-    
-    
+    "pages/picture/picture",
     "pages/visiableInput/visiableInput",
     "pages/loveInput/loveInput",
-    
-
-
-    
-
-    "pages/comment/comment",
-
-
-
     "pages/test/breadtrip/breadtrip",
     "pages/message/message",
-    
-    "pages/chat/chat",
-    
-    
-    
-    
     "pages/find/find",
-    
-    
     "pages/profile/profile",
-    
-    
-
     "pages/realNameInput/realNameInput",
-    
     "pages/signatureInput/signatureInput",
     "pages/collegeInput/collegeInput",
     "pages/search/search",
@@ -70,7 +43,38 @@
     "navigationBarTitleText": "表白墙",
     "navigationBarTextStyle": "white"
   },
-  
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#09bb07",
+    "borderStyle": "white",
+    "backgroundColor": "#f5f5f5",
+    "list": [
+      {
+        "text": "表白墙",
+        "pagePath": "pages/board/board",
+        "iconPath": "pages/images/like.png",
+        "selectedIconPath": "pages/images/like_fill.png"
+      },
+      {
+        "text": "眼缘墙",
+        "pagePath": "pages/picture/picture",
+        "iconPath": "pages/images/camera.png",
+        "selectedIconPath": "pages/images/camera_fill.png"
+      },
+      {
+        "text": "发现",
+        "pagePath": "pages/find/find",
+        "iconPath": "pages/images/safari.png",
+        "selectedIconPath": "pages/images/safari_fill.png"
+      },
+      {
+        "text": "我",
+        "pagePath": "pages/user/user",
+        "iconPath": "pages/images/my.png",
+        "selectedIconPath": "pages/images/my_fill.png"
+      }
+    ]
+  },
   "networkTimeout": {
     "request": 10000,
     "connectSocket": 10000,

@@ -1,3 +1,4 @@
+
 <!--详情页-->
 <view class="container">
   <view class="c-top">
@@ -17,13 +18,16 @@
       </view>
       <view class="ti-bottom">
         <view>
-          <text class="iconfont icon-my"></text><text>牧民新歌</text>
+          <text class="iconfont icon-my"></text>
+          <text>牧民新歌</text>
         </view>
         <view>
-          <text class="iconfont icon-xihuan"></text><text>50,000喜欢</text>
+          <text class="iconfont icon-xihuan"></text>
+          <text>50,000喜欢</text>
         </view>
         <view>
-          <text class="iconfont icon-pinglun1"></text><text>1000+评论</text>
+          <text class="iconfont icon-pinglun1"></text>
+          <text>1000+评论</text>
         </view>
       </view>
     </view>
@@ -48,5 +52,19 @@
       </view>
     </view>
   </view>
-
+</view>
+<view class="weui-tabbar">
+  <navigator url="../commentInput/commentInput" hover-class="weui-cell_active" class="weui-tabbar__item">
+    <image class="image-comment" src="../images/comment.png"></image>
+    <view class="weui-tabbar__label">评论</view>
+  </navigator>
+  <view class="weui-tabbar__item" bindtap="setRipple">
+    <image wx:if="{{length == 0}}" class="image-comment  ripple {{rippleName}}" src="../images/praise.png"></image>
+    <image wx:else class="image-comment  ripple {{rippleName}}" src="../images/praise_fill.png"></image>
+    <view class="weui-tabbar__label">赞</view>
+  </view>
+  <view class="weui-tabbar__item" bindtap="deleteArticle">
+    <image class="image-comment" src="../images/delete.png"></image>
+    <view class="weui-tabbar__label" style="color: #ff0000">删除</view>
+  </view>
 </view>

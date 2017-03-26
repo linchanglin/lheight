@@ -1,6 +1,9 @@
 var app = getApp()
 Page({
   data: {
+    rippleName: "",
+    length: 0,
+
     detail:
     {
       title: "犯错-双管巴乌",
@@ -68,5 +71,38 @@ Page({
   },
   onShow: function () {
     console.log('111111');
+  },
+  setRipple: function () {
+    var that = this;
+    that.setData({
+      rippleName: "bounceIn"
+    });
+    if (that.data.length == 0) {
+      that.setData({
+        length: 1
+      })
+    } else {
+      that.setData({
+        length: 0
+      })
+    }
+    setTimeout(function () {
+
+      that.setData({
+        rippleName: ""
+      });
+    }, 1000)
+  },
+  deleteArticle: function () {
+    wx.showModal({
+      title: '提示',
+      content: '要删除这条表白吗？',
+      confirmColor: '#ff0000',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        }
+      }
+    })
   }
 })

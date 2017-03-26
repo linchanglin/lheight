@@ -66,8 +66,5 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
-  },
-
-
-
+  }
 });

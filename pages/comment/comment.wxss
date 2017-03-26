@@ -39,6 +39,7 @@ video {
   padding: 0 15px 8px 15px;
   color: #888;
 }
+
 .ti-content {
   border-top: 1px solid #f2f2f2;
   border-bottom: 1px solid #f2f2f2;
@@ -46,18 +47,22 @@ video {
   margin: 0 -15px 10px -15px;
   font-size: 16px;
 }
+
 .ti-bottom {
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
+
 .ti-bottom .c-u-img {
   width: 23px;
   height: 23px;
 }
+
 .t-info .iconfont {
   vertical-align: middle;
   margin-right: 5px;
 }
+
 .comments {
   margin-top: 10px;
 }
@@ -101,3 +106,64 @@ video {
   color: #888;
   font-size: 14px;
 }
+
+.weui-tabbar__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+}
+
+.image-comment {
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+}
+.weui-tabbar__label {
+  color: #000;
+  font-size: 16px;
+}
+
+
+.ripple {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.bounceIn {
+  animation-name: bounceIn;
+}
+
