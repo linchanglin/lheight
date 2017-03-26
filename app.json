@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/profileShowInput/profileShowInput",
+    
     "pages/comment/comment",
     
     "pages/myLove/myLove",
     
-    "pages/profileShowInput/profileShowInput",
 
 
     

@@ -119,11 +119,12 @@ Page({
         console.log('that.data.files');
         console.log('that.data.files',that.data.files);
         wx.uploadFile({
-          url: 'https://collhome.com/images/upload',
+          url: 'https://collhome.com/api/images/upload',
           filePath: that.data.files[0],
           name:'file',
           formData: {
-              'wesecret': '123'
+              'wesecret': 'eyJpdiI6InFmbFBwSFdRQjVYcHZ3WXhBZ21iUmc9PSIsInZhbHVlIjoiS1JFUzdkNGpEcVJ3Y3lWNlRMNTBnaGJRTHJtUFwvSkdEc0lyQUlZdHQ4c3FaMkVyNU9kUHA2aWwxaXJvNkl5VnEiLCJtYWMiOiIzMGRhOTY4MjcwYmMyNTYwZmY1OTY4MjZiODBlM2ZkMDkyMDlhNWE1YTE0NjM1ZTEzOTg2ZmRhNWVhOGI3NDY1In0=',
+              'content': 'content',
           },
           success: function(res){
             console.log('res',res);
