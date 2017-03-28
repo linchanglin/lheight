@@ -23,6 +23,26 @@ Page({
       current: e.currentTarget.id, // 当前显示图片的http链接
       urls: this.data.files // 需要预览的图片http链接列表
     })
+  },
+  chooseLocation: function () {
+    wx.chooseLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      success: function (res) {
+        console.log('ressssttttttttttt',res);
+        var latitude = res.latitude;
+        var longitude = res.longitude;
+        var name = res.name;
+        var address = res.address;
+
+        wx.openLocation({
+          latitude: latitude,
+          longitude: longitude,
+          name: name,
+          address: address,
+          scale: 28
+        })
+      }
+    })
   }
 
 })

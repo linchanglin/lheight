@@ -14,17 +14,17 @@ Page({
         })
     },
     onShow: function () {
-        let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
-        let userInfo = wx.getStorageSync('userInfo');
-        if (wesecret && userInfo) {
-            that.setData({
-                userInfo: userInfo,
-                wesecret: wesecret
-            })
-        } else {
-            that.signIn();
-        }
+        // let that = this;
+        // let wesecret = wx.getStorageSync('wesecret');
+        // let userInfo = wx.getStorageSync('userInfo');
+        // if (wesecret && userInfo) {
+        //     that.setData({
+        //         userInfo: userInfo,
+        //         wesecret: wesecret
+        //     })
+        // } else {
+        //     that.signIn();
+        // }
     },
     signIn: function () {
         let that = this;

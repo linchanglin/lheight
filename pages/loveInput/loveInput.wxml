@@ -6,7 +6,7 @@
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea class="weui-textarea" style="height: 6em" auto-focus/>
+            <textarea class="weui-textarea" style="height: 6em" placeholder="这一刻的想法..." auto-focus/>
 
             <!--<view class="weui-textarea-counter">0/140</view>-->
           </view>
@@ -62,7 +62,7 @@
     <view class="weui-panel">
       <view class="weui-panel__bd">-->
         <view class="weui-cells weui-cells_after-title">
-          <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view  class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="chooseLocation">
             <view class="weui-cell__hd">
               <image wx:if="{{userInfo.gender == 1}}" src="../images/location.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
               <image wx:else="{{userInfo.gender !== 1}}" src="../images/location_fill.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
@@ -71,7 +71,7 @@
               <view style="display: inline-block; vertical-align: middle">所在位置</view>
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </navigator>
+          </view>
         </view>
       </view>
     </view>
