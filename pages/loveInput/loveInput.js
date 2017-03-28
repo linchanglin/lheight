@@ -1,7 +1,22 @@
 // pages/loveInput/loveInput.js
 Page({
   data: {
-    files: []
+    files: [],
+    content: "",
+    location: {},
+    visiable: 0,
+    location_exist: 0
+
+  },
+  onShow: function () {
+    let that = this;
+    let value = wx.getStorageSync('visiable');
+    if (value) {
+        that.setData({
+          visiable: value
+        });
+        wx.removeStorageSync('visiable');
+    }
   },
   chooseImage: function (e) {
     var that = this;
@@ -25,23 +40,50 @@ Page({
     })
   },
   chooseLocation: function () {
+    let that = this;
     wx.chooseLocation({
       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
       success: function (res) {
-        console.log('ressssttttttttttt',res);
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        var name = res.name;
-        var address = res.address;
+        console.log('ressssttttttttttt', res);
+        
 
-        wx.openLocation({
-          latitude: latitude,
-          longitude: longitude,
-          name: name,
-          address: address,
-          scale: 28
+        that.setData({
+          location_exist: 1,
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude,
+            name: res.name,
+            address: res.address
+          }
         })
       }
+    })
+  },
+  bindContentInput: function(e) {
+     this.setData({
+      content: e.detail.value
+    })
+  },
+  saveLove: function () {
+    let that = this;
+    wx.uploadFile({
+      url: 'https://collhome.com/api/images/upload',
+      filePath: that.data.files[0],
+      name: 'file',
+      formData: {
+        'content': that.data.content,
+        'location': that.data.location,
+      },
+      success: function (res) {
+        console.log('res', res);
+      },
+      fail: function (res) {
+        console.log('fail.res', res);
+      },
+      complete: function (res) {
+        console.log('complete.res', res);
+      }
+
     })
   }
 

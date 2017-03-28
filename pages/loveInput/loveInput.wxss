@@ -1,1 +1,11 @@
 /* pages/loveInput/loveInput.wxss */
+
+/*.weui-uploader__file {
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}*/
+
+.border-top-none::before {
+    border-top:1rpx solid #fff;
+}

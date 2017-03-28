@@ -9,11 +9,9 @@ Page({
       { name: '私密', description: '所自己可见',value: '4' },
     ],
   },
-  onLoad: function (options) {
-    // 页面初始化 options为页面跳转所带来的参数
-  },
   radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value);
+    let value = e.detail.value;
+    wx.setStorageSync('visiable', value);
 
     var radioItems = this.data.radioItems;
     for (var i = 0, len = radioItems.length; i < len; ++i) {
@@ -24,21 +22,9 @@ Page({
       radioItems: radioItems
     });
 
-    setTimeout(function () {
+    // setTimeout(function () {
       wx.navigateBack();
 
-    }, 300)
-  },
-  onReady: function () {
-    // 页面渲染完成
-  },
-  onShow: function () {
-    // 页面显示
-  },
-  onHide: function () {
-    // 页面隐藏
-  },
-  onUnload: function () {
-    // 页面关闭
+    // }, 100)
   }
 })

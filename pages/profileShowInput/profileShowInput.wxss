@@ -22,11 +22,11 @@
   color: #FFFFFF;
 }
 
-.weui-uploader__file {
+/*.weui-uploader__file {
   float: left;
   margin-right: 5px;
   margin-bottom: 5px;
-}
+}*/
 
 .weui-vcode-btnn {
   display: inline-block;
