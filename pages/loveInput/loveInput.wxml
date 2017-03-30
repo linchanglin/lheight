@@ -4,7 +4,7 @@
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea class="weui-textarea" style="height: 6em" placeholder="这一刻的想法..." auto-focus bindinput="bindContentInput"/>
+            <textarea class="weui-textarea" style="height: 8em" placeholder="这一刻的想法..." auto-focus bindinput="bindContentInput"/>
           </view>
         </view>
         <view class="weui-cell border-top-none">
@@ -12,11 +12,16 @@
             <view class="weui-uploader">
               <view class="weui-uploader__bd">
                 <view class="weui-uploader__files" id="uploaderFiles">
+
                   <block wx:for-items="{{files}}" wx:key="{{index}}">
-                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                  <view class="weui-uploader__file weui-uploader__file_statuss">
+                    <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" id="{{item}}" mode="aspectFill" />
+                    <view class="weui-uploader__file-contentt">
+                      <icon type="cancel" size="23" data-image="{{item}}" bindtap="deleteImage"></icon>
                     </view>
-                  </block>
+                  </view>
+                </block>
+
                 </view>
                 <view class="weui-uploader__input-box">
                   <view class="weui-uploader__input" bindtap="chooseImage"></view>

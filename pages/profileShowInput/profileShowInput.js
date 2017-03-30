@@ -1,6 +1,5 @@
 import dataAPI from '../../utils/utils.js'
 
-
 Page({
     data: {
         user: {},
@@ -9,31 +8,8 @@ Page({
 
         showTopTips: false,
 
-        radioItems: [
-            { name: 'cell standard', value: '0' },
-            { name: 'cell standard', value: '1', checked: true }
-        ],
-        checkboxItems: [
-            { name: 'standard is dealt for u.', value: '0', checked: true },
-            { name: 'standard is dealicient for u.', value: '1' }
-        ],
-
-        date: "1997-07-07",
-        time: "12:01",
-
-        countryCodes: ["+86", "+80", "+84", "+87"],
-        countryCodeIndex: 0,
-
-        countries: ["中国", "美国", "英国"],
-        countryIndex: 0,
-
         colleges: ["福州大学", "福建师范大学", "福建师大协和学院", "福建医科大学", "福建中医药大学", "福建农林大学", "福建工程学院", "闽江学院", "江夏学院", "福州教育学院", "华南女子学院", "福州职业技术学院", "平潭海洋大学", "福州大学至诚学院", "福州大学阳光学院", "福建农林大学金山学院 ", "福建农林大学东方学院", "福建警察学院", "福州外语外贸学院"],
-        collegeIndex: 0,
         grades: ['2017级', '2016级', '2015级', '2014级', '2013级', '2017级研', '2016级研', '2015级研', '2014级研'],
-        gradeIndex: 0,
-
-        accounts: ["微信号", "QQ", "Email"],
-        accountIndex: 0,
 
         isAgree: false,
 
@@ -48,6 +24,16 @@ Page({
         districtShowStatus: false,
         cityList: [],
         districtList: []
+    },
+    onLoad: function () {
+        let that = this;
+
+        let wesecret = wx.getStorageSync('wesecret');
+        let userInfo = wx.getStorageSync('userInfo');
+        that.setData({
+            wesecret: wesecret,
+            userInfo: userInfo
+        })
     },
     deleteImage: function (e) {
         let that = this;
