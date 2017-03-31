@@ -1,261 +1,232 @@
 <view class="page">
   <view class="page__bd">
-    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
-    <view class="weui-cells">
-      <view class="weui-cell">
-        <view class="weui-cell__bd">
-          <view class="weui-uploader">
-            <view class="weui-uploader__hd">
-              <view class="weui-uploader__title">照片上传</view>
-              <view class="weui-uploader__info">{{files.length}}/9</view>
-            </view>
-            <view class="weui-uploader__bd">
-              <view class="weui-uploader__files" id="uploaderFiles">
-                <block wx:for-items="{{files}}" wx:key="{{index}}">
-                  <view class="weui-uploader__file weui-uploader__file_statuss">
-                    <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" id="{{item}}" mode="aspectFill" />
-                    <view class="weui-uploader__file-contentt">
-                      <icon type="cancel" size="23" data-image="{{item}}" bindtap="deleteImage"></icon>
+    <form bindsubmit="formSubmit">
+      <!--<view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>-->
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">照片上传</view>
+                <view class="weui-uploader__info">{{files.length}}/9</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                  <block wx:for-items="{{files}}" wx:key="{{index}}">
+                    <view class="weui-uploader__file weui-uploader__file_statuss">
+                      <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" id="{{item}}" mode="aspectFill" />
+                      <view class="weui-uploader__file-contentt">
+                        <icon type="cancel" size="23" data-image="{{item}}" bindtap="deleteImage"></icon>
+                      </view>
                     </view>
-                  </view>
-                </block>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box">
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
               </view>
-              <view class="weui-uploader__input-box">
-                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-panel">
+        <view class="weui-panel__bd">
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">姓名</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input name="realname" value="{{userInfo.realname}}" class="weui-input" placeholder="请输入姓名" />
+              </view>
+            </view>
+          </view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">生日</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker wx:if="{{birthday}}" name="birthday" mode="date" value="{{birthday}}" bindchange="bindBirthdayChange">
+                  <view class="weui-input">{{birthday}}</view>
+                </picker>
+                <picker wx:else name="birthday" mode="date" value="{{userInfo.birthday}}" bindchange="bindBirthdayChange">
+                  <view class="weui-input">{{userInfo.birthday}}</view>
+                </picker>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+          </view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">身高</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input name="height" value="{{userInfo.height}}" type="number" class="weui-input" placeholder="请输入身高" />
+              </view>
+              <view class="weui-cell__ft">
+                <view class="weui-vcode-btnn">cm</view>
+              </view>
+            </view>
+          </view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">体重</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input name="weight" value="{{userInfo.weight}}" type="number" class="weui-input" placeholder="请输入体重" />
+              </view>
+              <view class="weui-cell__ft">
+                <view class="weui-vcode-btnn">kg</view>
+              </view>
+            </view>
+          </view>
+          <navigator url="../city_multi_page/city_multi_page" class="weui-cells weui-cells_after-title" hover-class="weui-cell_active">
+            <view class="weui-cell weui-cell_input" style="padding-right: 0px">
+              <view class="weui-cell__hd">
+                <view class="weui-label">故乡</view>
+              </view>
+              <view class="weui-cell__bd">
+                <view wx:if="{{hometown}}" class="weui-select weui-select_in-select-after">{{hometown}}</view>
+                <view wx:else class="weui-select weui-select_in-select-after">{{userInfo.hometown}}</view>
+              </view>
+            </view>
+          </navigator>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">个性签名</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input name="signature" value="{{userInfo.signature}}" class="weui-input" placeholder="请输入个性签名" />
               </view>
             </view>
           </view>
         </view>
       </view>
-    </view>
-
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">姓名</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="请输入姓名" />
-            </view>
-          </view>
-        </view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">生日</view>
-            </view>
-            <view class="weui-cell__bd">
-              <picker mode="date" value="{{date}}" bindchange="bindDateChange">
-                <view class="weui-input">{{date}}</view>
-              </picker>
-            </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </view>
-        </view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">身高</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input type="number" class="weui-input" placeholder="请输入身高" />
-            </view>
-            <view class="weui-cell__ft">
-              <view class="weui-vcode-btnn">cm</view>
+      <view class="weui-panel">
+        <view class="weui-panel__bd">
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_select">
+              <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">学校</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker name="college" bindchange="bindCollegeChange" value="{{userInfo.college}}" range="{{colleges}}">
+                  <view class="weui-select weui-select_in-select-after">{{colleges[userInfo.college]}}</view>
+                </picker>
+              </view>
             </view>
           </view>
-        </view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">体重</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input type="number" class="weui-input" placeholder="请输入体重" />
-            </view>
-            <view class="weui-cell__ft">
-              <view class="weui-vcode-btnn">kg</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">专业</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input name="major" value="{{userInfo.major}}" class="weui-input" placeholder="请输入专业" />
+              </view>
             </view>
           </view>
-        </view>
-
-        <!--<navigator url="../collegeInput/collegeInput" class="weui-cell weui-cell_access" hover-class="weui-cell_active">-->
-        <navigator url="../city_multi_page/city_multi_page" class="weui-cells weui-cells_after-title" hover-class="weui-cell_active">
-
-          <!--<view class="weui-cell__bd weui-cell_primary">
-            <view>我的学校</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access">福州大学</view>-->
-          <view class="weui-cell weui-cell_input" style="padding-right: 0px">
-            <view class="weui-cell__hd">
-              <view class="weui-label">故乡</view>
-            </view>
-
-            <!--<view class="weui-cell__bd">
-              <input class="weui-select weui-select_in-select-after" value="{{user.hometown}}" placeholder="请选择故乡" />
-            </view>-->
-            <view class="weui-cell__bd">
-              <view class="weui-select weui-select_in-select-after">{{user.hometown}}</view>
-            </view>
-          </view>
-        </navigator>
-
-
-        <!--<view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">故乡</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="请输入故乡" />
-            </view>
-          </view>
-        </view>-->
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">个性签名</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="请输入个性签名" />
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_select">
+              <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">年级</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker name="grade" bindchange="bindGradeChange" value="{{userInfo.grade}}" range="{{grades}}">
+                  <view class="weui-select weui-select_in-select-after">{{grades[userInfo.grade]}}</view>
+                </picker>
+              </view>
             </view>
           </view>
         </view>
       </view>
-    </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_select">
-            <view class="weui-cell__hd weui-cell__hd_in-select-after">
-              <view class="weui-label">学校</view>
-            </view>
-            <view class="weui-cell__bd">
-              <picker bindchange="bindCountryChange" value="{{collegeIndex}}" range="{{colleges}}">
-                <view class="weui-select weui-select_in-select-after">{{colleges[collegeIndex]}}</view>
-              </picker>
+      <view class="weui-panel">
+        <view class="weui-panel__bd">
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">微信</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input name="wechat" value="{{userInfo.wechat}}" class="weui-input" placeholder="请输入微信" />
+              </view>
             </view>
           </view>
-        </view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">专业</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="请输入专业" />
-            </view>
-          </view>
-        </view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_select">
-            <view class="weui-cell__hd weui-cell__hd_in-select-after">
-              <view class="weui-label">年级</view>
-            </view>
-            <view class="weui-cell__bd">
-              <picker bindchange="bindCountryChange" value="{{gradeIndex}}" range="{{grades}}">
-                <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex]}}</view>
-              </picker>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">QQ</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input name="qq" value="{{userInfo.qq}}" type="number" class="weui-input" placeholder="请输入QQ" />
+              </view>
             </view>
           </view>
-        </view>
-
-        <!--<view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">学校地址</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="请输入学校地址" />
-            </view>
-          </view>
-        </view>-->
-      </view>
-    </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">微信</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="请输入微信" />
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">微博</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input name="weibo" value="{{userInfo.weibo}}" class="weui-input" placeholder="请输入微博" />
+              </view>
             </view>
           </view>
-        </view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">QQ</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input type="number" class="weui-input" placeholder="请输入QQ" />
-            </view>
-          </view>
-        </view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">微博</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="请输入微博" />
-            </view>
-          </view>
-        </view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">电话</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input type="number" class="weui-input" placeholder="请输入电话" />
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">电话</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input name="mobilePhone" value="{{userInfo.mobilePhone}}" type="number" class="weui-input" placeholder="请输入电话" />
+              </view>
             </view>
           </view>
         </view>
       </view>
-    </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="weui-cells__title">性格</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <textarea class="weui-textarea" style="height: 3.3em" />
+      <view class="weui-panel">
+        <view class="weui-panel__bd">
+          <view class="weui-cells__title">性格</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea name="character" value="{{userInfo.character}}" class="weui-textarea" style="height: 3.3em" confirm-type="done" />
+              </view>
             </view>
           </view>
-        </view>
-        <view class="weui-cells__title">爱好</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <textarea class="weui-textarea" style="height: 3.3em" />
+          <view class="weui-cells__title">爱好</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea name="hobby" value="{{userInfo.hobby}}" class="weui-textarea" style="height: 3.3em" />
+              </view>
             </view>
           </view>
-        </view>
-        <view class="weui-cells__title">恋爱史</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <textarea class="weui-textarea" style="height: 3.3em" />
+          <view class="weui-cells__title">恋爱史</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea name="love_history" value="{{userInfo.love_history}}" class="weui-textarea" style="height: 3.3em" />
+              </view>
             </view>
           </view>
-        </view>
-        <view class="weui-cells__title">择偶观</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <textarea class="weui-textarea" style="height: 3.3em" />
+          <view class="weui-cells__title">择偶观</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea name="love_selecting" value="{{userInfo.love_selecting}}" class="weui-textarea" style="height: 3.3em" />
+              </view>
             </view>
           </view>
         </view>
       </view>
-    </view>
-    <view class="weui-btn-area">
-      <button class="weui-btn" type="primary" bindtap="saveProfileShow">保存</button>
-    </view>
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" formType="submit">保存</button>
+      </view>
+    </form>
   </view>
 </view>

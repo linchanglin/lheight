@@ -107,7 +107,7 @@ Page({
           'visiable': that.data.visiable
         },
         success: function (res) {
-          console.log('res', res);
+          console.log('success.res', res);
           wx.showToast({
             title: '成功',
             icon: 'success',
