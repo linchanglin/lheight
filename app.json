@@ -2,12 +2,14 @@
   "pages": [
 
     "pages/board/board",
+    
+    "pages/loveInput/loveInput",
+
 
     "pages/profileShowInput/profileShowInput",
     
     "pages/user/user",
 
-    "pages/loveInput/loveInput",
 
     
     

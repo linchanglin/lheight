@@ -33,8 +33,8 @@
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="chooseLocation">
             <view class="weui-cell__hd">
-              <image wx:if="{{userInfo.gender == 1}}" src="../images/location.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
-              <image wx:else="{{userInfo.gender !== 1}}" src="../images/location_fill.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+              <image wx:if="{{location_exist == 0}}" src="../images/location.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+              <image wx:else src="../images/location_fill.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
             </view>
             <view class="weui-cell__bd">
               <view wx:if="{{location_exist == 0}}" style="display: inline-block; vertical-align: middle">所在位置</view>
@@ -50,8 +50,8 @@
         <view class="weui-cells weui-cells_after-title">
           <navigator url="../visiableInput/visiableInput" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
-              <image wx:if="{{userInfo.gender == 1}}" src="../images/global.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
-              <image wx:else="{{userInfo.gender !== 1}}" src="../images/global_fill.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+              <image wx:if="{{visiable == 0}}" src="../images/global.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+              <image wx:else src="../images/global_fill.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
             </view>
             <view class="weui-cell__bd">
               <view style="display: inline-block; vertical-align: middle">谁可以看</view>

@@ -176,6 +176,13 @@ image {
 }
 
 
+.weui-toptips_notice1 {
+  background-color:#FF8140;
+}
+.weui-toptips_notice2 {
+  background-color:#FFBA07;
+}
+
 
 
 
