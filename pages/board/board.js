@@ -10,6 +10,9 @@ Page({
 
     rippleName: "",
 
+    hoverClass: "weui-cell_active",
+    hover: false,
+
     length: 0,
 
     reqs: [{
@@ -170,13 +173,41 @@ Page({
       });
     }, 1000)
   },
-  navigatorToComment: function (e) {
+  navigateToLove: function (e) {
+    console.log('navigateToLove', e);
+
+    var that = this;
+
+    setTimeout(function () {
+      that.setData({
+        hoverClass: 'weui-cell_active'
+      })
+    }, 50)
+    setTimeout(function () {
+      that.setData({
+        hoverClass: ''
+      })
+    }, 450)
+    wx.navigateTo({
+      url: '../comment/comment?id=22'
+    });
+  },
+  navigateToComment: function (e) {
+    console.log('navigateToComment', e);
+
     var that = this;
     wx.navigateTo({
       url: '../comment/comment?id=22'
     });
   },
-  goToProfileShow: function () {
+  navigateToProfileShow: function (e) {
+    let that = this;
+that.setData({
+        hoverClass: ''
+      })
+
+    console.log('navigateToProfileShow', e);
+
     wx.navigateTo({
       url: '../profile/profile'
     })
@@ -202,7 +233,7 @@ Page({
       inputVal: e.detail.value
     });
   },
-  
+
 
 
 });
