@@ -46,7 +46,7 @@
 
     <view class="container">
       <block wx:for="{{reqs}}" wx:key="" wx:for-item="article">
-        <view class="list-item"  data-commentId="2" catchtap="navigateToLove" hover="true" hover-class="weui-cell_active">
+        <view class="list-item"  data-commentId="2" catchtap="navigateToLove">
           <view class="item-header">
             <view class="header-img" data-userId="1" catchtap="navigateToProfileShow">
               <image class="img" src="../images/m1.jpg"></image>
