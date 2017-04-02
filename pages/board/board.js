@@ -98,7 +98,7 @@ Page({
     }, 1000)
 
 
-    // that.load_loves();
+    that.load_loves();
 
 
     setTimeout(function () {
@@ -139,44 +139,6 @@ Page({
       })
     }
   },
-  // showTopTips: function () {
-  //   var that = this;
-  //   this.setData({
-  //     showTopTips: true
-  //   });
-  //   setTimeout(function () {
-  //     that.setData({
-  //       showTopTips: false
-  //     });
-  //   }, 3000);
-  // },
-  goToProfileShow: function () {
-    console.log('hahhhhh');
-    wx.navigateTo({
-      url: '../profile/profile'
-    })
-  },
-  showInput: function () {
-    this.setData({
-      inputShowed: true
-    });
-  },
-  hideInput: function () {
-    this.setData({
-      inputVal: "",
-      inputShowed: false
-    });
-  },
-  clearInput: function () {
-    this.setData({
-      inputVal: ""
-    });
-  },
-  inputTyping: function (e) {
-    this.setData({
-      inputVal: e.detail.value
-    });
-  },
   previewImage: function (e) {
     console.log('preview e', e);
     var current = e.currentTarget.dataset.current;
@@ -214,6 +176,33 @@ Page({
       url: '../comment/comment?id=22'
     });
   },
+  goToProfileShow: function () {
+    wx.navigateTo({
+      url: '../profile/profile'
+    })
+  },
+  showInput: function () {
+    this.setData({
+      inputShowed: true
+    });
+  },
+  hideInput: function () {
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+  },
+  clearInput: function () {
+    this.setData({
+      inputVal: ""
+    });
+  },
+  inputTyping: function (e) {
+    this.setData({
+      inputVal: e.detail.value
+    });
+  },
+  
 
 
 });

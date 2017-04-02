@@ -1,7 +1,7 @@
 <view class="page">
   <view class="page__bd">
-    <view class="weui-toptips weui-toptips_notice1" wx:if="{{showTopTips1}}">您有{{}}条表白未查看</view>
-    <view class="weui-toptips weui-toptips_notice2" wx:if="{{showTopTips2}}">更新了{{}}条表白</view>
+    <!--<view class="weui-toptips weui-toptips_notice1" wx:if="{{showTopTips1}}">您有{{}}条表白未查看</view>
+    <view class="weui-toptips weui-toptips_notice2" wx:if="{{showTopTips2}}">更新了{{}}条表白</view>-->
     <view class="weui-search-bar">
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
@@ -40,42 +40,52 @@
         </view>
       </navigator>
     </view>
+
+
+
+
     <view class="container">
-      <view class="list-item" wx:for="{{reqs}}" wx:key="" wx:for-item="article">
-        <view class="item-header">
-          <view class="header-img" bindtap="goToProfileShow">
-            <image class="img" src="{{userInfo.avatarUrl}}"></image>
+      <block wx:for="{{reqs}}" wx:key="" wx:for-item="article">
+        <view class="list-item"  hover="true" hover-class="weui-cell_active">
+          <view class="item-header">
+            <view class="header-img" bindtap="goToProfileShow">
+              <image class="img" src="../images/m1.jpg"></image>
+            </view>
+            <text class="header-name" bindtap="goToProfileShow">小作宝</text>
+            <text class="header-time">1小时前 来自福州大学</text>
           </view>
-          <text class="header-name" bindtap="goToProfileShow">小作宝</text>
-          <text class="header-time">1小时前 来自福州大学</text>
-        </view>
-        <view class="item-body">
-          <view class="article-content" bindtap="navigatorToComment" hover="true" hover-class="weui-cell_active">
-            <text>{{article.content}}</text>
-          </view>
-          <view class="article-imgs" wx:if="{{article.pictures}}">
-            <image wx:for="{{article.pictures}}" wx:for-item="picture" src="{{picture}}" data-current="{{picture}}" data-urls="{{article.pictures}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" bindtap="previewImage"></image>
-          </view>
-        </view>
-        <view class="weui-flex">
-          <view class="weui-flex__item line_right" bindtap="navigatorToComment" hover="true" hover-class="weui-cell_active">
-            <view class="placeholder">
-              <image class="image-comment" src="../images/comment.png"></image>
-              评论
+          <view class="item-body">
+            <view class="article-content">
+              <text>{{article.content}}</text>
+            </view>
+            <view class="article-imgs" wx:if="{{article.pictures}}">
+              <image wx:for="{{article.pictures}}" wx:for-item="picture" src="{{picture}}" data-current="{{picture}}" data-urls="{{article.pictures}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" bindtap="previewImage"></image>
             </view>
           </view>
-          <view class="weui-flex__item" bindtap="setRipple">
-            <view wx:if="{{length == 0}}" class="placeholder">
-              <image class="image-comment  ripple {{rippleName}}" src="../images/praise.png"></image>
-              赞
+          <view class="weui-flex">
+            <view class="weui-flex__item line_right" hover="true" hover-class="weui-cell_active">
+              <view class="placeholder">
+                <image class="image-comment" src="../images/comment.png"></image>
+                评论
+              </view>
             </view>
-            <view wx:else class="placeholder">
-              <image class="image-comment  ripple {{rippleName}}" src="../images/praise_fill.png"></image>
-              {{length}}
+            <view class="weui-flex__item" bindtap="setRipple">
+              <view wx:if="{{length == 0}}" class="placeholder">
+                <image class="image-comment  ripple {{rippleName}}" src="../images/praise.png"></image>
+                赞
+              </view>
+              <view wx:else class="placeholder">
+                <image class="image-comment  ripple {{rippleName}}" src="../images/praise_fill.png"></image>
+                {{length}}
+              </view>
             </view>
           </view>
         </view>
-      </view>
+      </block>
     </view>
+
+
+
+    
   </view>
 </view>

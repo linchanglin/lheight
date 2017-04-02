@@ -67,11 +67,10 @@ page {
 /*.article-content {
   padding: 8px 0;
 }*/
+
 .item-body {
   margin: 8px 0;
 }
-
-
 
 .list-item {
   background-color: #fff;
@@ -111,7 +110,6 @@ image {
   line-height: 35px;
   font-size: 14px;
   /*background-color: #F7F7FA;*/
-  
 }
 
 /*.placeholder-comment {
@@ -175,23 +173,19 @@ image {
   animation-name: bounceIn;
 }
 
-
 .weui-toptips_notice1 {
-  background-color:#FF8140;
+  background-color: #ff8140;
 }
+
 .weui-toptips_notice2 {
-  background-color:#FFBA07;
+  background-color: #ffba07;
 }
 
+.weui-toptips {
+  padding: 6.3px;
+  font-size: 16px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.weui-cell_active {
+  background-color: #ECECEC;
+}
