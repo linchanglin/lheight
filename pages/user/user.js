@@ -1,10 +1,7 @@
 // var app = getApp()
 
 Page({
-    data: {
-        wesecret: 'wesecret',
-        userInfo: 'userInfo'
-    },
+    data: {},
     onLoad: function () {
         let that = this;
 
@@ -46,6 +43,12 @@ Page({
                                                 iv: res.iv
                                             },
                                             success: function (res) {
+                                                console.log('res',  res)
+                                                console.log('res.data',  res.data)
+                                                console.log('typeof res.data',  typeof res.data)
+                                                console.log('post_return_data.data.wesecret', res_data.data.wesecret)
+                                                console.log('post_return_data.data.userInfo', res_data.data.userInfo)
+
                                                 wx.setStorageSync('wesecret', res.data.wesecret);
                                                 wx.setStorageSync('userInfo', res.data.userInfo);
                                                 that.setData({

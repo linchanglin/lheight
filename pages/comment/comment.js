@@ -58,16 +58,10 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     // console.log(option.query)
-    console.log(222222)
 
     let that = this;
 
-    app.getUserInfo(function (userInfo) {
-      console.log('uerInfo', userInfo);
-      that.setData({
-        userInfo: userInfo
-      })
-    })
+    
   },
   onShow: function () {
     console.log('111111');

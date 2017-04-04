@@ -62,7 +62,7 @@ Page({
       })
     }
 
-    // that.load_loves();
+    that.load_loves();
 
     wx.getSystemInfo({
       success: (res) => {
@@ -118,29 +118,39 @@ Page({
   load_loves: function () {
     let that = this;
 
-    if (that.data.wesecret) {
-      wx.request({
-        url: 'https://collhome.com/api/loves?wesecret=' + wesecret,
-        success: function (res) {
-          console.log(res.data)
+    wx.request({
+      url: 'https://collhome.com/api/loves?wesecret=eyJpdiI6ImJ1c2JBYXBnNkYzRktDMG1UWEJSNlE9PSIsInZhbHVlIjoidG1XdU1UbTc4R1hJaThLWm12MDlZNlo0NGtEUE1cL2t3cG5Kc01FYWg2NFwvbWtVM0xxRXdYUUpyaE9oS1wvYWhTZSIsIm1hYyI6IjVhY2JmYmY0NDlkOWU2ZjFmZGZjZjFkMmI4MGU4OWIxZmNhYTU5OTBhYzQwN2ZiYjc5NDM0YmE5NGI2NTMyYWUifQ==',
+      success: function (res) {
+        console.log('hahhaa',res.data)
 
-          that.setData({
-            loves: res.data
-          })
-        }
-      })
-    } else {
-      wx.request({
-        url: 'https://collhome.com/api/loves',
-        success: function (res) {
-          console.log(res.data)
+        that.setData({
+          loves: res.data
+        })
+      }
+    })
+    // if (that.data.wesecret) {
+    //   wx.request({
+    //     url: 'https://collhome.com/api/loves?wesecret=' + wesecret,
+    //     success: function (res) {
+    //       console.log(res.data)
 
-          that.setData({
-            loves: res.data
-          })
-        }
-      })
-    }
+    //       that.setData({
+    //         loves: res.data
+    //       })
+    //     }
+    //   })
+    // } else {
+    //   wx.request({
+    //     url: 'https://collhome.com/api/loves',
+    //     success: function (res) {
+    //       console.log(res.data)
+
+    //       that.setData({
+    //         loves: res.data
+    //       })
+    //     }
+    //   })
+    // }
   },
   previewImage: function (e) {
     console.log('preview e', e);
@@ -202,9 +212,9 @@ Page({
   },
   navigateToProfileShow: function (e) {
     let that = this;
-that.setData({
-        hoverClass: ''
-      })
+    that.setData({
+      hoverClass: ''
+    })
 
     console.log('navigateToProfileShow', e);
 

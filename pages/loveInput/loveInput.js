@@ -95,7 +95,8 @@ Page({
     let that = this;
 
     if (that.data.content.length > 0 || that.data.files.length > 0) {
-      let wesecret = wx.getStorageSync('wesecret');
+      // let wesecret = wx.getStorageSync('wesecret');
+      let wesecret = "eyJpdiI6ImJ1c2JBYXBnNkYzRktDMG1UWEJSNlE9PSIsInZhbHVlIjoidG1XdU1UbTc4R1hJaThLWm12MDlZNlo0NGtEUE1cL2t3cG5Kc01FYWg2NFwvbWtVM0xxRXdYUUpyaE9oS1wvYWhTZSIsIm1hYyI6IjVhY2JmYmY0NDlkOWU2ZjFmZGZjZjFkMmI4MGU4OWIxZmNhYTU5OTBhYzQwN2ZiYjc5NDM0YmE5NGI2NTMyYWUifQ==";
       wx.uploadFile({
         url: 'https://collhome.com/api/loves',
         filePath: that.data.files,
