@@ -7,16 +7,18 @@ Page({
 
         files: [],
         // showTopTips: false,
+
+        wesecret: 'eyJpdiI6IjF1aERabElnSTlVUXFRSTdWQ0NPVWc9PSIsInZhbHVlIjoiYWZNd0w1VlRDZ2hkNFpaaDB1eDZGc29HK0g3aFBzUEh3cXNxUVZXeFY5Ym9oVkp1ZlQzK05qZDVNXC9icnNYZVoiLCJtYWMiOiI2NDQ2YmUzNjkyNmRmOTI5ZWY0ZmQ2YWUwY2M2NzZiZGU4NGNlMjFlZGM5OGIzMzUxYzg1NGZlMzM1NDkwYmZiIn0='
     },
     onLoad: function () {
         let that = this;
 
-        let wesecret = wx.getStorageSync('wesecret');
-        let userInfo = wx.getStorageSync('userInfo');
-        that.setData({
-            wesecret: wesecret,
-            userInfo: userInfo
-        })
+        // let wesecret = wx.getStorageSync('wesecret');
+        // let userInfo = wx.getStorageSync('userInfo');
+        // that.setData({
+        //     wesecret: wesecret,
+        //     userInfo: userInfo
+        // })
     },
 
     onShow: function (e) {
@@ -109,12 +111,15 @@ Page({
         if (that.data.hometown) {
             submitData.hometown = that.data.hometown;
         } else {
-            submitData.hometown = that.data.userInfo.hometown;
+            if (that.data.userInfo) {
+                submitData.hometown = that.data.userInfo.hometown;
+            } else {
+                submitData.hometown = '';
+            }
         }
-        if (!submitData.hometown) {
-            submitData.hometown = '';
-        };
-        console.log("submitData",submitData);
+
+        console.log("submitData", submitData);
+        console.log("that.data.files", that.data.files);
         // return
         wx.uploadFile({
             url: 'https://collhome.com/api/users',

@@ -54,11 +54,9 @@ Page({
     let that = this;
 
     let wesecret = wx.getStorageSync('wesecret');
-    let userInfo = wx.getStorageSync('userInfo');
-    if (wesecret && userInfo) {
+    if (wesecret) {
       that.setData({
-        wesecret: wesecret,
-        userInfo: userInfo
+        wesecret: wesecret
       })
     }
 
@@ -119,7 +117,7 @@ Page({
     let that = this;
 
     wx.request({
-      url: 'https://collhome.com/api/loves?wesecret=eyJpdiI6ImJ1c2JBYXBnNkYzRktDMG1UWEJSNlE9PSIsInZhbHVlIjoidG1XdU1UbTc4R1hJaThLWm12MDlZNlo0NGtEUE1cL2t3cG5Kc01FYWg2NFwvbWtVM0xxRXdYUUpyaE9oS1wvYWhTZSIsIm1hYyI6IjVhY2JmYmY0NDlkOWU2ZjFmZGZjZjFkMmI4MGU4OWIxZmNhYTU5OTBhYzQwN2ZiYjc5NDM0YmE5NGI2NTMyYWUifQ==',
+      url: 'https://collhome.com/api/loves?wesecret=' + that.data.wesecret,
       success: function (res) {
         console.log('hahhaa',res.data)
 

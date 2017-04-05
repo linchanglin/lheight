@@ -8,6 +8,16 @@ Page({
     location_exist: 0
 
   },
+  onLoad: function () {
+    let that = this;
+
+    let wesecret = wx.getStorageSync('wesecret');
+    if (wesecret) {
+      that.setData({
+        wesecret: wesecret
+      })
+    }
+  },
   onShow: function () {
     let that = this;
     let value = wx.getStorageSync('visiable');
@@ -95,38 +105,77 @@ Page({
     let that = this;
 
     if (that.data.content.length > 0 || that.data.files.length > 0) {
-      // let wesecret = wx.getStorageSync('wesecret');
-      let wesecret = "eyJpdiI6ImJ1c2JBYXBnNkYzRktDMG1UWEJSNlE9PSIsInZhbHVlIjoidG1XdU1UbTc4R1hJaThLWm12MDlZNlo0NGtEUE1cL2t3cG5Kc01FYWg2NFwvbWtVM0xxRXdYUUpyaE9oS1wvYWhTZSIsIm1hYyI6IjVhY2JmYmY0NDlkOWU2ZjFmZGZjZjFkMmI4MGU4OWIxZmNhYTU5OTBhYzQwN2ZiYjc5NDM0YmE5NGI2NTMyYWUifQ==";
-      wx.uploadFile({
+
+      wx.request({
         url: 'https://collhome.com/api/loves',
-        filePath: that.data.files,
-        name: 'file',
-        formData: {
-          'wesecret': wesecret,
+        data: {
+          'wesecret': that.data.wesecret,
           'content': that.data.content,
           'location': that.data.location,
           'visiable': that.data.visiable
         },
+        method: 'POST',
         success: function (res) {
-          console.log('success.res', res);
+          console.log('res',res);
+          let love_id = res.data.love_id;
+
+          let successUp = 0; //成功个数
+          let failUp = 0; //失败个数
+          let length = that.data.files.length; //总共个数
+          let i = 0; //第几个
+          if (length > 0) {
+            that.saveLoveImage(love_id, that.data.files, successUp, failUp, i, length);
+          }
+        },
+        fail: function (res) {
+          console.log('fail res',res);
+          // fail
+        },
+        complete: function (res) {
+          // complete
+        }
+      })
+
+
+    }
+  },
+  saveLoveImage: function (love_id, files, successUp, failUp, i, length) {
+    let that = this;
+    wx.uploadFile({
+      url: 'https://collhome.com/api/loves/images',
+      filePath: that.data.files[i],
+      name: 'file',
+      formData: {
+        wesecret: that.data.wesecret,
+        post_id: love_id
+      },
+      success: function (res) {
+        console.log('success res',res);
+        successUp++;
+      },
+      fail: function (res) {
+        console.log('fail res', res);
+        failUp++;
+      },
+      complete: function (res) {
+        i++;
+        if (i == length) {
+          console.log('总共' + successUp + '张上传成功,' + failUp + '张上传失败！');
           wx.showToast({
             title: '成功',
             icon: 'success',
             duration: 1000
           });
-          setTimeout(function(){
+          setTimeout(function () {
             wx.navigateBack();
-          },1000)
-        },
-        fail: function (res) {
-          console.log('fail.res', res);
-        },
-        complete: function (res) {
-          console.log('complete.res', res);
+          }, 1000)
         }
+        else {  //递归调用uploadDIY函数
+          that.saveLoveImage(love_id, files, successUp, failUp, i, length);
+        }
+      }
 
-      })
-    }
+    })
   }
 
 })

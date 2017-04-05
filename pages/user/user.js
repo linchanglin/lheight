@@ -6,11 +6,9 @@ Page({
         let that = this;
 
         let wesecret = wx.getStorageSync('wesecret');
-        let userInfo = wx.getStorageSync('userInfo');
-        if (wesecret && userInfo) {
+        if (wesecret) {
             that.setData({
-                wesecret: wesecret,
-                userInfo: userInfo
+                wesecret: wesecret
             })
         } else {
             that.signIn();
@@ -34,29 +32,7 @@ Page({
                                     success: (res) => {
                                         console.log('res', res);
                                         console.log('code', code, 'encryptedData', res.encryptedData, 'iv', res.iv)
-                                        wx.request({
-                                            url: 'https://collhome.com/api/register',
-                                            method: 'POST',
-                                            data: {
-                                                code: code,
-                                                encryptedData: res.encryptedData,
-                                                iv: res.iv
-                                            },
-                                            success: function (res) {
-                                                console.log('res',  res)
-                                                console.log('res.data',  res.data)
-                                                console.log('typeof res.data',  typeof res.data)
-                                                console.log('post_return_data.data.wesecret', res_data.data.wesecret)
-                                                console.log('post_return_data.data.userInfo', res_data.data.userInfo)
-
-                                                wx.setStorageSync('wesecret', res.data.wesecret);
-                                                wx.setStorageSync('userInfo', res.data.userInfo);
-                                                that.setData({
-                                                    wesecret: res.data.wesecret,
-                                                    userInfo: res.data.userInfo
-                                                })
-                                            }
-                                        })
+                                        that.postRegister(code, res.encryptedData, res.iv);
                                     }
                                 })
                             } else {
@@ -68,9 +44,28 @@ Page({
             }
         })
     },
+    postRegister: function (code, encryptedData, iv) {
+        wx.request({
+            url: 'https://collhome.com/api/register',
+            method: 'POST',
+            data: {
+                code: code,
+                encryptedData: encryptedData,
+                iv: iv
+            },
+            success: function (res) {
+                console.log('res', res);
+
+                wx.setStorageSync('wesecret', res.data);
+                that.setData({
+                    wesecret: res.data,
+                })
+            }
+        })
+    },
     navigateToProfile: function () {
         let that = this;
-        if (that.data.wesecret && that.data.userInfo) {
+        if (that.data.wesecret) {
             wx.navigateTo({
                 url: '../profile/profile',
             })
@@ -80,7 +75,7 @@ Page({
     },
     navigateToProfileShow: function () {
         let that = this;
-        if (that.data.wesecret && that.data.userInfo) {
+        if (that.data.wesecret) {
             wx.navigateTo({
                 url: '../profileShow/profileShow',
             })
@@ -90,7 +85,7 @@ Page({
     },
     navigateToProfileShowInput: function () {
         let that = this;
-        if (that.data.wesecret && that.data.userInfo) {
+        if (that.data.wesecret) {
             wx.navigateTo({
                 url: '../profileShowInput/profileShowInput',
             })
@@ -100,7 +95,7 @@ Page({
     },
     navigateToMyLove: function () {
         let that = this;
-        if (that.data.wesecret && that.data.userInfo) {
+        if (that.data.wesecret) {
             wx.navigateTo({
                 url: '../myLove/myLove',
             })
@@ -110,7 +105,7 @@ Page({
     },
     navigateToLoveInput: function () {
         let that = this;
-        if (that.data.wesecret && that.data.userInfo) {
+        if (that.data.wesecret) {
             wx.navigateTo({
                 url: '../loveInput/loveInput',
             })
