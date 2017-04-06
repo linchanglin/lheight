@@ -1,15 +1,17 @@
 {
   "pages": [
 
+    "pages/board/board",
+
+    "pages/comment/comment",
+
     "pages/user/user",
 
     "pages/loveInput/loveInput",
 
 
-    "pages/board/board",
 
 
-    "pages/comment/comment",
 
     
 

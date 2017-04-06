@@ -45,21 +45,21 @@
 
 
     <view class="container">
-      <block wx:for="{{reqs}}" wx:key="" wx:for-item="article">
+      <block wx:for="{{loves}}" wx:key="{{}}" wx:for-item="love">
         <view class="list-item"  data-commentId="2" catchtap="navigateToLove">
           <view class="item-header">
             <view class="header-img" data-userId="1" catchtap="navigateToProfileShow">
-              <image class="img" src="../images/m1.jpg"></image>
+              <image class="img" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
             </view>
-            <text class="header-name" data-userId="1" catchtap="navigateToProfileShow">小作宝</text>
-            <text class="header-time">1小时前 来自福州大学</text>
+            <text class="header-name" data-userId="1" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
+            <text class="header-time">{{love.created_at}} 来自{{love.userInfo.college}}</text>
           </view>
           <view class="item-body">
             <view class="article-content">
-              <text>{{article.content}}</text>
+              <text>{{love.content}}</text>
             </view>
-            <view class="article-imgs" wx:if="{{article.pictures}}">
-              <image wx:for="{{article.pictures}}" wx:for-item="picture" src="{{picture}}" data-current="{{picture}}" data-urls="{{article.pictures}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
+            <view class="article-imgs" wx:if="{{love.images}}">
+              <image wx:for="{{love.images}}" wx:for-item="image" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
             </view>
           </view>
           <view class="weui-flex">

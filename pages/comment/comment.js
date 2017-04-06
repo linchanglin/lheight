@@ -56,12 +56,22 @@ Page({
   },
 
   onLoad: function (options) {
-    // 页面初始化 options为页面跳转所带来的参数
-    // console.log(option.query)
-
     let that = this;
 
-    
+    let wesecret = wx.getStorageSync('wesecret');
+    if (wesecret) {
+      that.setData({
+        wesecret: wesecret
+      })
+    }
+
+    wx.request({
+      url: 'https://collhome.com/api/loves/1/comments?wesecret=' + that.data.wesecret, 
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
+
   },
   onShow: function () {
     console.log('111111');
