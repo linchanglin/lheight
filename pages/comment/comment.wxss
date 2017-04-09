@@ -1,66 +1,101 @@
-/* pages/details/detail.wxss */
-
 .container {
-  /*padding-bottom: 45px;*/
+  margin-top: 10px;
 }
 
-.c-top {
-  width: 100%;
+.item-header {
+  overflow: hidden;
 }
 
-.c-video-img {
-  width: 100%;
-  height: 240px;
-  background-color: #000;
+.header-img {
+  float: left;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+  margin-top: 2px;
 }
 
-video {
+.img {
   width: 100%;
   height: 100%;
 }
 
-.i-img {
-  width: 100%;
-  height: 100%;
-}
-
-.t-info {
-  background-color: #fff;
-  padding: 8px 15px;
-  display: flex;
-  flex-direction: column;
-}
-
-.ti-top {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin: 0 -15px;
-  padding: 0 15px 8px 15px;
-  color: #888;
-}
-
-.ti-content {
-  border-top: 1px solid #f2f2f2;
-  border-bottom: 1px solid #f2f2f2;
-  padding: 8px 15px;
-  margin: 0 -15px 10px -15px;
+.header-name {
+  /*display: block;*/
   font-size: 16px;
+  color: #ff8140;
 }
 
-.ti-bottom {
-  display: flex;
-  justify-content: space-between;
+.header-time {
+  display: block;
+  font-size: 14px;
+  color: #9e9e9e;
 }
 
-.ti-bottom .c-u-img {
-  width: 23px;
-  height: 23px;
+.scroll-box {
+  height: 700px;
+  background-color: #eee;
 }
 
-.t-info .iconfont {
+/*.article-content {
+  padding: 8px 0;
+}*/
+
+.item-body {
+  margin: 8px 0;
+}
+
+.list-item {
+  background-color: #fff;
+  margin: 10px 0 3px 0;
+  padding: 10px;
+  color: #000;
+  font-size: 16px;
+  line-height: 150%;
+  /*border-bottom: 3px solid #e7e7e7;*/
+}
+
+.body-img {
+  margin-top: 8px;
+  display: block;
+  width: 100%;
+}
+
+.article-imgs {
+  display: inline-block;
+  height: auto;
+  margin: 3px 0;
+}
+
+image {
+  float: left;
+}
+
+.item-body, .list-item {
+  padding-bottom: 1.5px;
+}
+
+.placeholder {
+  /*margin: 5px;*//*padding: 0 10px;*/
+  text-align: center;
+  /*background-color: #EBEBEB;*/
+  height: 35px;
+  line-height: 35px;
+  font-size: 14px;
+  /*background-color: #F7F7FA;*/
+}
+
+/*.placeholder-comment {
+  border-right: 1px solid #cfcfcf;
+}*/
+
+.image-comment {
+  width: 20px;
+  height: 20px;
   vertical-align: middle;
-  margin-right: 5px;
+  float: none;
 }
 
 .comments {
@@ -105,6 +140,11 @@ video {
 .item .time {
   color: #888;
   font-size: 14px;
+}
+
+.weui-flex {
+  background-color: #fff;
+  padding: 3px 0;
 }
 
 .weui-tabbar__item {

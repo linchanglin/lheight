@@ -1,19 +1,36 @@
 // pages/commentInput/commentInput.js
 Page({
-  data:{},
-  onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
+  data: {},
+  onLoad: function (options) {
+    console.log('options', options)
+    let that = this;
+    that.setData({
+      love_id: options.love_id
+    })
+
+    let wesecret = wx.getStorageSync('wesecret');
+    that.setData({
+      wesecret: wesecret
+    })
   },
-  onReady:function(){
-    // 页面渲染完成
+  bindContentInput: function (e) {
+    this.setData({
+      content: e.detail.value
+    })
   },
-  onShow:function(){
-    // 页面显示
-  },
-  onHide:function(){
-    // 页面隐藏
-  },
-  onUnload:function(){
-    // 页面关闭
+  confirmInput: function () {
+    let that = this;
+    wx.request({
+      url: 'https://collhome.com/api/loves/' + that.data.love_id + '/comments',
+      method: 'POST',
+      data: {
+        wesecret: that.data.wesecret,
+        content: that.data.content
+      },
+      success: function (res) {
+        console.log(res.data)
+        wx.navigateBack()
+      }
+    })
   }
 })

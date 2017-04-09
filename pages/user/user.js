@@ -10,9 +10,24 @@ Page({
             that.setData({
                 wesecret: wesecret
             })
+            that.getUserInfo(wesecret);
         } else {
             that.signIn();
         }
+    },
+    getUserInfo: function (wesecret) {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/api/user?wesecret=' + wesecret,
+
+            success: function (res) {
+                console.log('userInfo', res.data)
+
+                that.setData({
+                    userInfo: res.data.data
+                })
+            }
+        })
     },
     signIn: function () {
         let that = this;
@@ -45,6 +60,8 @@ Page({
         })
     },
     postRegister: function (code, encryptedData, iv) {
+        let that = this;
+
         wx.request({
             url: 'https://collhome.com/api/register',
             method: 'POST',
@@ -60,6 +77,8 @@ Page({
                 that.setData({
                     wesecret: res.data,
                 })
+
+                that.getUserInfo(res.data);
             }
         })
     },

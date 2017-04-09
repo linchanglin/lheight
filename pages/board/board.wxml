@@ -46,37 +46,43 @@
 
     <view class="container">
       <block wx:for="{{loves}}" wx:key="{{}}" wx:for-item="love">
-        <view class="list-item"  data-commentId="2" catchtap="navigateToLove">
+        <view class="list-item"  data-loveId="{{love.id}}" catchtap="navigateToLove">
           <view class="item-header">
-            <view class="header-img" data-userId="1" catchtap="navigateToProfileShow">
+            <view class="header-img" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
               <image class="img" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
             </view>
-            <text class="header-name" data-userId="1" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
+            <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
             <text class="header-time">{{love.created_at}} 来自{{love.userInfo.college}}</text>
           </view>
           <view class="item-body">
             <view class="article-content">
               <text>{{love.content}}</text>
             </view>
-            <view class="article-imgs" wx:if="{{love.images}}">
+            <view class="article-imgs" wx:if="{{love.images.length > 0}}">
               <image wx:for="{{love.images}}" wx:for-item="image" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
             </view>
           </view>
           <view class="weui-flex">
-            <view class="weui-flex__item" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
-              <view class="placeholder">
+            <view class="weui-flex__item" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
+              <view wx:if="{{love.if_my_comment == 0}}" class="placeholder">
                 <image class="image-comment" src="../images/comment.png"></image>
-                评论
+                <text wx:if="{{love.comment_nums == 0}}" style="padding-left: 5px">评论</text>
+                <text wx:else style="padding-left: 5px">{{comment_nums}}</text>
+              </view>
+              <view wx:else class="placeholder">
+                <image class="image-comment" src="../images/comment.png"></image>
+                <text style="padding-left: 5px">{{comment_nums}}</text>
               </view>
             </view>
-            <view class="weui-flex__item" catchtap="setRipple">
-              <view wx:if="{{length == 0}}" class="placeholder">
+            <view class="weui-flex__item" data-loveId="{{love.id}}" catchtap="praiseLove">
+              <view wx:if="{{love.if_my_praise == 0}}" class="placeholder">
                 <image class="image-comment  ripple {{rippleName}}" src="../images/praise.png"></image>
-                赞
+                <text wx:if="{{love.praise_nums == 0}}" style="padding-left: 5px">喜欢</text>
+                <text wx:else style="padding-left: 5px">{{praise_nums}}</text>
               </view>
               <view wx:else class="placeholder">
                 <image class="image-comment  ripple {{rippleName}}" src="../images/praise_fill.png"></image>
-                {{length}}
+                <text style="padding-left: 5px">{{praise_nums}}</text>
               </view>
             </view>
           </view>

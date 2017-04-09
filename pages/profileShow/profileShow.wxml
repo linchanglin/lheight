@@ -24,25 +24,28 @@
                 个人
               </view>
               <view class="profileShow_cell_bd">
-                上官燕
+                {{userInfo.realname}}
               </view>
               <view class="profileShow_cell_bd">
-                1997-07-07
+                {{userInfo.gender}}
               </view>
               <view class="profileShow_cell_bd">
-                19 岁
+                {{userInfo.birthday}}
               </view>
               <view class="profileShow_cell_bd">
-                天蝎座
+                {{userInfo.age}}
               </view>
               <view class="profileShow_cell_bd">
-                166 cm
+                {{userInfo.constellation}}
+              </view>
+              <view wx:if="{{userInfo.height}}" class="profileShow_cell_bd">
+                {{userInfo.height}} cm
+              </view>
+              <view wx:if="{{userInfo.weight}}" class="profileShow_cell_bd">
+                {{userInfo.weight}} kg
               </view>
               <view class="profileShow_cell_bd">
-                45 kg
-              </view>
-              <view class="profileShow_cell_bd">
-                福建省福州市鼓楼区
+                {{userInfo.hometown}}
               </view>
             </view>
           </view>
@@ -61,7 +64,7 @@
                 照片
               </view>
               <view class="profileShow_cell_bd">
-                <block wx:for-items="{{pictures}}" wx:key="{{index}}">
+                <block wx:for-items="{{userInfo.pictures}}" wx:key="{{index}}">
                   <view class="weui-uploader__file weui-uploader__file_statuss">
                     <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" data-current="{{item}}" id="{{item}}" mode="aspectFill" />       
                   </view>
@@ -84,13 +87,13 @@
                 学校
               </view>
               <view class="profileShow_cell_bd">
-                福州大学
+                {{userInfo.college_name}}
               </view>
               <view class="profileShow_cell_bd">
-                工商管理专业（会计方向）
+                {{userInfo.major}}
               </view>
               <view class="profileShow_cell_bd">
-                2015级
+                {{userInfo.grade_name}}
               </view>
             </view>
           </view>
@@ -109,16 +112,16 @@
                 社交
               </view>
               <view class="profileShow_cell_bd">
-                微信: 123456
+                微信: {{userInfo.wechat}}
               </view>
               <view class="profileShow_cell_bd">
-                QQ: 123456
+                QQ: {{userInfo.qq}}
               </view>
               <view class="profileShow_cell_bd">
-                微博: 123456
+                微博: {{userInfo.weibo}}
               </view>
               <view class="profileShow_cell_bd">
-                电话: 123456
+                电话: {{userInfo.mobilePhone}}
               </view>
             </view>
           </view>
@@ -137,7 +140,7 @@
                 性格
               </view>
               <view class="profileShow_cell_bd">
-                或许缘分并没让我们想这么多，就这样巧然相遇，然后在彼此生活中轻轻留下印记谁和谁的相遇能是一场意外，在你看来的很远，其实有时候就是那些年，很快的，或许就在那不经意间。你不知道，我的那些以玩笑说出来的话，往往才是最真挚的表达，转身过后错过的也就失去了，再想得到却发现缘分已被用完，便在一秒后，你成了路过，我成了过客，然后只剩下这一秒前，见证我们曾遇到过，都注定过，何必再放弃了。
+                {{userInfo.character}}
               </view>
             </view>
           </view>
@@ -156,7 +159,7 @@
                 爱好
               </view>
               <view class="profileShow_cell_bd">
-                或许缘分并没让我们想这么多，就这样巧然相遇，然后在彼此生活中轻轻留下印记谁和谁的相遇能是一场意外，在你看来的很远，其实有时候就是那些年，很快的，或许就在那不经意间。你不知道，我的那些以玩笑说出来的话，往往才是最真挚的表达，转身过后错过的也就失去了，再想得到却发现缘分已被用完，便在一秒后，你成了路过，我成了过客，然后只剩下这一秒前，见证我们曾遇到过，都注定过，何必再放弃了。
+                {{userInfo.hobby}}
               </view>
             </view>
           </view>
@@ -175,7 +178,7 @@
                 恋爱史
               </view>
               <view class="profileShow_cell_bd">
-                或许缘分并没让我们想这么多，就这样巧然相遇，然后在彼此生活中轻轻留下印记谁和谁的相遇能是一场意外，在你看来的很远，其实有时候就是那些年，很快的，或许就在那不经意间。你不知道，我的那些以玩笑说出来的话，往往才是最真挚的表达，转身过后错过的也就失去了，再想得到却发现缘分已被用完，便在一秒后，你成了路过，我成了过客，然后只剩下这一秒前，见证我们曾遇到过，都注定过，何必再放弃了。
+                {{userInfo.love_history}}
               </view>
             </view>
           </view>
@@ -194,7 +197,7 @@
                 择偶观
               </view>
               <view class="profileShow_cell_bd">
-                或许缘分并没让我们想这么多，就这样巧然相遇，然后在彼此生活中轻轻留下印记谁和谁的相遇能是一场意外，在你看来的很远，其实有时候就是那些年，很快的，或许就在那不经意间。你不知道，我的那些以玩笑说出来的话，往往才是最真挚的表达，转身过后错过的也就失去了，再想得到却发现缘分已被用完，便在一秒后，你成了路过，我成了过客，然后只剩下这一秒前，见证我们曾遇到过，都注定过，何必再放弃了。
+                {{userInfo.love_selecting}}
               </view>
             </view>
           </view>

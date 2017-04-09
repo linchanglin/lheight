@@ -14,7 +14,7 @@ Page({
     hover: false,
 
     length: 0,
-    
+
   },
   onLoad: function () {
     let that = this;
@@ -83,13 +83,16 @@ Page({
     let that = this;
 
     if (that.data.wesecret) {
+      console.log('that.data.wesecret', that.data.wesecret);
       wx.request({
         url: 'https://collhome.com/api/loves?wesecret=' + that.data.wesecret,
         success: function (res) {
           console.log(res.data)
 
+          let loves = res.data.data;
+
           that.setData({
-            loves: res.data.data
+            loves: loves
           })
         }
       })
@@ -99,8 +102,10 @@ Page({
         success: function (res) {
           console.log(res.data)
 
+          let loves = res.data.data;
+
           that.setData({
-            loves: res.data.data
+            loves: loves
           })
         }
       })
@@ -116,7 +121,7 @@ Page({
       urls: urls // 需要预览的图片http链接列表
     })
   },
-  setRipple: function () {
+  praiseLove: function () {
     var that = this;
     that.setData({
       rippleName: "bounceIn"
@@ -139,41 +144,53 @@ Page({
   },
   navigateToLove: function (e) {
     console.log('navigateToLove', e);
+    let love_id = e.currentTarget.dataset.loveid;
+    console.log('love_id', love_id);
 
     var that = this;
 
-    setTimeout(function () {
-      that.setData({
-        hoverClass: 'weui-cell_active'
-      })
-    }, 50)
-    setTimeout(function () {
-      that.setData({
-        hoverClass: ''
-      })
-    }, 450)
+    // setTimeout(function () {
+    //   that.setData({
+    //     hoverClass: 'weui-cell_active'
+    //   })
+    // }, 50)
+    // setTimeout(function () {
+    //   that.setData({
+    //     hoverClass: ''
+    //   })
+    // }, 450)
     wx.navigateTo({
-      url: '../comment/comment?id=22'
+      url: '../comment/comment?love_id=' + love_id
     });
   },
   navigateToComment: function (e) {
     console.log('navigateToComment', e);
+    let love_id = e.currentTarget.dataset.loveid;
+    let comment_nums = e.currentTarget.dataset.commentnums;
 
     var that = this;
-    wx.navigateTo({
-      url: '../comment/comment?id=22'
-    });
+    if (comment_nums == 0) {
+      wx.navigateTo({
+        url: '../commentInput/commentInput?love_id=' + love_id
+      });
+    } else {
+      wx.navigateTo({
+        url: '../comment/comment?love_id=' + love_id
+      });
+    }
   },
   navigateToProfileShow: function (e) {
+    console.log('navigateToProfileShow', e);
+
     let that = this;
     that.setData({
       hoverClass: ''
     })
 
-    console.log('navigateToProfileShow', e);
+    let user_id = e.currentTarget.dataset.userid;
 
     wx.navigateTo({
-      url: '../profile/profile'
+      url: '../profileShow/profileShow?user_id=' + user_id
     })
   },
   showInput: function () {

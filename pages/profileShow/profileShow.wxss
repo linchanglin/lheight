@@ -57,11 +57,11 @@
     font-size: 16px;
 }
 
-.weui-uploader__file {
+/*.weui-uploader__file {
   float: left;
   margin-right: 5px;
   margin-bottom: 5px;
-}
+}*/
 
 .weui-panel {
     margin-top: 10px;

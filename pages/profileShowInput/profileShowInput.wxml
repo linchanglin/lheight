@@ -1,6 +1,7 @@
 <view class="page">
   <view class="page__bd">
     <form bindsubmit="formSubmit">
+
       <!--<view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>-->
       <view class="weui-cells">
         <view class="weui-cell">
@@ -42,16 +43,25 @@
             </view>
           </view>
           <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_select">
+              <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">性别</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker name="college" bindchange="bindGenderChange" value="{{genderIndex}}" range="{{genders}}">
+                  <view class="weui-select weui-select_in-select-after">{{genders[genderIndex]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+          <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
               <view class="weui-cell__hd">
                 <view class="weui-label">生日</view>
               </view>
               <view class="weui-cell__bd">
-                <picker wx:if="{{birthday}}" name="birthday" mode="date" value="{{birthday}}" bindchange="bindBirthdayChange">
-                  <view class="weui-input">{{birthday}}</view>
-                </picker>
-                <picker wx:else name="birthday" mode="date" value="{{userInfo.birthday}}" bindchange="bindBirthdayChange">
-                  <view class="weui-input">{{userInfo.birthday}}</view>
+                <picker name="birthday" mode="date" value="{{birthdayIndex}}" bindchange="bindBirthdayChange" start="1980-01-01" end="2010-01-01">
+                  <view class="weui-input">{{birthdayIndex}}</view>
                 </picker>
               </view>
               <view class="weui-cell__ft weui-cell__ft_in-access"></view>
@@ -114,8 +124,8 @@
                 <view class="weui-label">学校</view>
               </view>
               <view class="weui-cell__bd">
-                <picker name="college" bindchange="bindCollegeChange" value="{{userInfo.college}}" range="{{colleges}}">
-                  <view class="weui-select weui-select_in-select-after">{{colleges[userInfo.college]}}</view>
+                <picker name="college" bindchange="bindCollegeChange" value="{{collegeIndex}}" range="{{colleges}}">
+                  <view class="weui-select weui-select_in-select-after">{{colleges[collegeIndex]}}</view>
                 </picker>
               </view>
             </view>
@@ -136,8 +146,8 @@
                 <view class="weui-label">年级</view>
               </view>
               <view class="weui-cell__bd">
-                <picker name="grade" bindchange="bindGradeChange" value="{{userInfo.grade}}" range="{{grades}}">
-                  <view class="weui-select weui-select_in-select-after">{{grades[userInfo.grade]}}</view>
+                <picker name="grade" bindchange="bindGradeChange" value="{{gradeIndex}}" range="{{grades}}">
+                  <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex]}}</view>
                 </picker>
               </view>
             </view>
@@ -194,7 +204,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="character" value="{{userInfo.character}}" class="weui-textarea" style="height: 3.3em" confirm-type="done" />
+                <textarea name="character" value="{{userInfo.character}}" class="weui-textarea" style="height: 6em" confirm-type="done" />
               </view>
             </view>
           </view>
@@ -202,7 +212,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="hobby" value="{{userInfo.hobby}}" class="weui-textarea" style="height: 3.3em" />
+                <textarea name="hobby" value="{{userInfo.hobby}}" class="weui-textarea" style="height: 6em" />
               </view>
             </view>
           </view>
@@ -210,7 +220,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="love_history" value="{{userInfo.love_history}}" class="weui-textarea" style="height: 3.3em" />
+                <textarea name="love_history" value="{{userInfo.love_history}}" class="weui-textarea" style="height: 6em" />
               </view>
             </view>
           </view>
@@ -218,7 +228,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="love_selecting" value="{{userInfo.love_selecting}}" class="weui-textarea" style="height: 3.3em" />
+                <textarea name="love_selecting" value="{{userInfo.love_selecting}}" class="weui-textarea" style="height: 6em" />
               </view>
             </view>
           </view>

@@ -1,11 +1,23 @@
 {
   "pages": [
 
-    "pages/board/board",
-
     "pages/comment/comment",
 
     "pages/user/user",
+
+    "pages/profileShow/profileShow",
+
+
+    "pages/board/board",
+
+
+    "pages/profileShowInput/profileShowInput",
+
+
+
+
+
+
 
     "pages/loveInput/loveInput",
 
@@ -16,10 +28,8 @@
     
 
 
-    "pages/profileShowInput/profileShowInput",
     
 
-    "pages/comment/comment",
     
     "pages/myLove/myLove",
     
@@ -35,7 +45,6 @@
     "pages/commentInput/commentInput",
     
     "pages/chat/chat",
-    "pages/profileShow/profileShow",
     "pages/city_multi_page/city_multi_page",
     "pages/city_multi_page_city/city_multi_page_city",
     "pages/city_multi_page_district/city_multi_page_district",

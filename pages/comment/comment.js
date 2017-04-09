@@ -1,4 +1,3 @@
-var app = getApp()
 Page({
   data: {
     rippleName: "",
@@ -17,9 +16,14 @@ Page({
     },
     comments: [
       {
-        uName: "😝雨碎江南",
-        time: "2016-12-11",
-        content: "九九八十一难，最难过的，其实是女儿国这一关，因为比起其他的艰难困苦来说，此时的唐僧是真的动心了，一句“来生若有缘分”道尽一切，只是为了心中崇高的理想，纵使心动也要断绝柔情继续西行。为国王惋惜，同时也对唐僧充满崇敬，尤其是了解了史上真实的唐玄奘以后，更是觉得此人了不起。"
+        id: 1,
+        content: "九九八十一难，最难过的，其实是女儿国这一关。",
+        userInfo: {
+          id: 1,
+          nickName: "雨碎江南",
+          avatarUrl: 'http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI7hsTibhnpQPxN0eJPoiaNpPq0HSQzG9XpvmicjAjr0x5f1GcNd7LpHoXMgiadUbd4ibn46HibM5FMXBow/0',
+        },
+        created_at: "2016-12-11",
       },
       {
         uName: "张珊珊",
@@ -56,7 +60,15 @@ Page({
   },
 
   onLoad: function (options) {
+    console.log('options', options)
     let that = this;
+    // that.setData({
+    //   love_id: options.love_id
+    // })
+    that.setData({
+      love_id: 13
+    })
+
 
     let wesecret = wx.getStorageSync('wesecret');
     if (wesecret) {
@@ -65,16 +77,60 @@ Page({
       })
     }
 
-    wx.request({
-      url: 'https://collhome.com/api/loves/1/comments?wesecret=' + that.data.wesecret, 
-      success: function (res) {
-        console.log(res.data)
+    that.load_love();
+
+    wx.getSystemInfo({
+      success: (res) => {
+        let ww = res.windowWidth;
+        var length = 3;
+        var row = Math.ceil(length / 3);
+        var line = Math.ceil(length / row);
+        var widthM = ww - 20;
+        var widthX = (widthM / line).toFixed(2) - 6;
+        var margin = "3px";
+        that.setData({
+          imgCss: {
+            width: widthX + 'px',
+            height: widthX + 'px',
+            margin: margin
+          }
+        })
       }
     })
-
   },
   onShow: function () {
     console.log('111111');
+  },
+  load_love: function () {
+    let that = this;
+    if (that.data.wesecret) {
+      wx.request({
+        url: 'https://collhome.com/api/loves/' + that.data.love_id + '/comments?wesecret=' + that.data.wesecret,
+        success: function (res) {
+          console.log('love', res.data)
+          let love = res.data.data.love;
+          let comments = res.data.data.comments;
+          that.setData({
+            love: love,
+            comments: comments
+          })
+        }
+      })
+    } else {
+      wx.request({
+        url: 'https://collhome.com/api/loves/' + that.data.love_id + '/comments',
+        success: function (res) {
+          console.log('love', res.data)
+          let love = res.data.data.love;
+          let comments = res.data.data.comments;
+
+          that.setData({
+            love: love,
+            comments: comments
+          })
+        }
+      })
+    }
   },
   setRipple: function () {
     var that = this;
