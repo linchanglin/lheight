@@ -1,7 +1,6 @@
 <view class="page">
   <view class="page__bd">
-
-    <!--love-->
+   <!--love-->
     <view class="container">
       <view class="list-item" data-loveId="{{love.id}}" catchtap="navigateToLove">
         <view class="item-header">
@@ -48,7 +47,7 @@
 
     <!--评论列表-->
     <view class="comments">
-      <view class="item touch-active" wx:for="{{comments}}" wx:for-item="comment" wx:key="{{comment.id}}">
+      <view class="item touch-active" wx:for="{{comments}}" wx:for-item="comment" wx:key="{{comment.id}}" >
         <view class="i-left">
           <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}"></image>
         </view>
@@ -57,7 +56,9 @@
             <text class="u-name">{{comment.userInfo.nickName}}</text>
             <text class="time">{{comment.created_at}}</text>
           </view>
-          <text class="header-time">{{comment.created_at}}</text>
+            <text class="time">{{comment.created_at}}</text>
+          
+          
 
           <!--评论内容-->
           <view class="content">
@@ -66,10 +67,9 @@
         </view>
       </view>
     </view>
-
     <!--tabbar-->
     <view class="weui-tabbar">
-      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToComment">
+      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToComment" >
         <image class="image-comment" src="../images/comment.png"></image>
         <view class="weui-tabbar__label">评论</view>
       </view>
