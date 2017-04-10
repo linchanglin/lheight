@@ -66,23 +66,23 @@
             <view class="weui-flex__item" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
               <view wx:if="{{love.if_my_comment == 0}}" class="placeholder">
                 <image class="image-comment" src="../images/comment.png"></image>
-                <text wx:if="{{love.comment_nums == 0}}" style="padding-left: 5px">评论</text>
-                <text wx:else style="padding-left: 5px">{{comment_nums}}</text>
+                <text wx:if="{{love.comment_nums == 0}}">评论</text>
+                <text wx:else>{{comment_nums}}</text>
               </view>
               <view wx:else class="placeholder">
                 <image class="image-comment" src="../images/comment.png"></image>
-                <text style="padding-left: 5px">{{comment_nums}}</text>
+                <text>{{comment_nums}}</text>
               </view>
             </view>
             <view class="weui-flex__item" data-loveId="{{love.id}}" catchtap="praiseLove">
               <view wx:if="{{love.if_my_praise == 0}}" class="placeholder">
                 <image class="image-comment  ripple {{rippleName}}" src="../images/praise.png"></image>
-                <text wx:if="{{love.praise_nums == 0}}" style="padding-left: 5px">喜欢</text>
-                <text wx:else style="padding-left: 5px">{{praise_nums}}</text>
+                <text wx:if="{{love.praise_nums == 0}}">喜欢</text>
+                <text wx:else>{{praise_nums}}</text>
               </view>
               <view wx:else class="placeholder">
                 <image class="image-comment  ripple {{rippleName}}" src="../images/praise_fill.png"></image>
-                <text style="padding-left: 5px">{{praise_nums}}</text>
+                <text>{{praise_nums}}</text>
               </view>
             </view>
           </view>

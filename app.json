@@ -1,6 +1,8 @@
 {
   "pages": [
 
+    "pages/board/board",
+
     "pages/comment/comment",
 
     "pages/user/user",
@@ -8,7 +10,6 @@
     "pages/profileShow/profileShow",
 
 
-    "pages/board/board",
 
 
     "pages/profileShowInput/profileShowInput",

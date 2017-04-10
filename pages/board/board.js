@@ -123,6 +123,8 @@ Page({
   },
   praiseLove: function () {
     var that = this;
+    // if()
+
     that.setData({
       rippleName: "bounceIn"
     });
@@ -193,6 +195,8 @@ Page({
       url: '../profileShow/profileShow?user_id=' + user_id
     })
   },
+
+
   showInput: function () {
     this.setData({
       inputShowed: true

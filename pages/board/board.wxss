@@ -123,6 +123,9 @@ image {
   float: none;
 }
 
+.weui-flex text {
+  padding-left: 5px;
+}
 /*.weui-flex {
   border-top: 1px solid #EDECF2;
 }
