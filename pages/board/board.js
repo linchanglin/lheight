@@ -172,6 +172,7 @@ Page({
     let love_if_my_praise = e.currentTarget.dataset.loveifmypraise;
     let that = this;
 
+
     if (that.data.wesecret) {
       let praise;
       if (love_if_my_praise == 0) {
@@ -187,9 +188,10 @@ Page({
           praise: praise
         },
         success: function (res) {
-          console.log(res.data)
+          console.log('1231654', res.data)
 
-          for (let value of that.data.loves) {
+          let old_loves = that.data.loves;
+          for (let value of old_loves) {
             if (value.id == love_id) {
               value.praise_nums = parseInt(value.praise_nums);
               if (love_if_my_praise == 0) {
@@ -199,13 +201,27 @@ Page({
                 value.if_my_praise = 0
                 value.praise_nums--
               }
-
             }
           }
-
           that.setData({
-            loves: loves
+            loves: old_loves
           })
+          that.setData({
+            selected_love_id: love_id
+          })
+          setTimeout(function () {
+
+            that.setData({
+              rippleName: "bounceIn"
+            });
+          }, 3000)
+
+          setTimeout(function () {
+            that.setData({
+              rippleName: ""
+            });
+          }, 6000)
+
         }
       })
 
@@ -213,9 +229,8 @@ Page({
       that.signIn();
     }
 
-    that.setData({
-      rippleName: "bounceIn"
-    });
+
+
     if (that.data.length == 0) {
       that.setData({
         length: 1
@@ -225,12 +240,7 @@ Page({
         length: 0
       })
     }
-    setTimeout(function () {
 
-      that.setData({
-        rippleName: ""
-      });
-    }, 1000)
   },
   signIn: function () {
     let that = this;
