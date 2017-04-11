@@ -68,7 +68,7 @@
 
     <!--tabbar-->
     <view class="weui-tabbar">
-      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToComment">
+      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToCommentInput">
         <image class="image-comment" src="../images/comment.png"></image>
         <view class="weui-tabbar__label">评论</view>
       </view>

@@ -132,7 +132,7 @@ Page({
       urls: urls // 需要预览的图片http链接列表
     })
   },
-  navigateToComment: function () {
+  navigateToCommentInput: function () {
     let that = this;
     wx.navigateTo({
       url: '../commentInput/commentInput?love_id' + that.data.love_id
