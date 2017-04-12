@@ -274,6 +274,19 @@ Page({
       url: '../profileShow/profileShow?user_id=' + user_id
     })
   },
+  navigateToLocation: function (e) {
+    console.log('location',e);
+    let location = e.currentTarget.dataset.location;
+
+    console.log('location',location);
+
+    wx.openLocation({
+      name: location.name,
+      address: location.address,
+      latitude: location.latitude,
+      longitude: location.longitude,
+    })
+  },
 
 
   showInput: function () {

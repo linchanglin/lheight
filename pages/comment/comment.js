@@ -1,53 +1,5 @@
 Page({
-  data: {
-    rippleName: "",
-    length: 0,
-
-
-    comments: [
-      {
-        id: 1,
-        content: "九九八十一难，最难过的，其实是女儿国这一关。",
-        userInfo: {
-          id: 1,
-          nickName: "雨碎江南",
-          avatarUrl: 'http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI7hsTibhnpQPxN0eJPoiaNpPq0HSQzG9XpvmicjAjr0x5f1GcNd7LpHoXMgiadUbd4ibn46HibM5FMXBow/0',
-        },
-        created_at: "2016-12-11",
-      },
-      {
-        id: 2,
-        content: "音乐不分年纪，不过令人开心的是你们也不会年轻太久。",
-        userInfo: {
-          id: 2,
-          nickName: "张珊珊",
-          avatarUrl: 'http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI7hsTibhnpQPxN0eJPoiaNpPq0HSQzG9XpvmicjAjr0x5f1GcNd7LpHoXMgiadUbd4ibn46HibM5FMXBow/0',
-        },
-        created_at: "2016-12-10",
-      },
-      {
-        id: 3,
-        content: "看的时候还很小，不太明白里面的故事，长大后才发现西游记里水太深了。",
-        userInfo: {
-          id: 3,
-          nickName: "麦田的守望者",
-          avatarUrl: 'http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI7hsTibhnpQPxN0eJPoiaNpPq0HSQzG9XpvmicjAjr0x5f1GcNd7LpHoXMgiadUbd4ibn46HibM5FMXBow/0',
-        },
-        created_at: "2016-12-10",
-      },
-      {
-        id: 4,
-        content: "想起，小时候，父亲教我这首歌的样子。",
-        userInfo: {
-          id: 4,
-          nickName: "沃德天·娜么帥",
-          avatarUrl: 'http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI7hsTibhnpQPxN0eJPoiaNpPq0HSQzG9XpvmicjAjr0x5f1GcNd7LpHoXMgiadUbd4ibn46HibM5FMXBow/0',
-        },
-        created_at: "2016-12-10",
-      }
-    ],
-
-  },
+  data: {},
 
   onLoad: function (options) {
     console.log('options', options)
@@ -152,26 +104,113 @@ Page({
       url: '../profileShow/profileShow?user_id=' + user_id
     })
   },
-  setRipple: function () {
-    var that = this;
-    that.setData({
-      rippleName: "bounceIn"
-    });
-    if (that.data.length == 0) {
-      that.setData({
-        length: 1
+  navigateToLocation: function (e) {
+    console.log('location', e);
+    let location = e.currentTarget.dataset.location;
+
+    console.log('location', location);
+
+    wx.openLocation({
+      name: location.name,
+      address: location.address,
+      latitude: location.latitude,
+      longitude: location.longitude,
+    })
+  },
+  praiseLove: function (e) {
+    console.log('praiseLove e', e);
+    let love_id = e.currentTarget.dataset.loveid;
+    let love_if_my_praise = e.currentTarget.dataset.loveifmypraise;
+    let that = this;
+
+
+    if (that.data.wesecret) {
+      let praise;
+      if (love_if_my_praise == 0) {
+        praise == 1;
+      } else {
+        praise == 0;
+      }
+      wx.request({
+        url: 'https://collhome.com/api/loves/' + love_id + '/praises',
+        method: 'POST',
+        data: {
+          wesecret: that.data.wesecret,
+          praise: praise
+        },
+        success: function (res) {
+          console.log('1231654', res.data)
+
+          let old_love = that.data.love;
+          old_love.praise_nums = parseInt(old_love.praise_nums);
+          if (love_if_my_praise == 0) {
+            old_love.if_my_praise = 1;
+            old_love.praise_nums++
+          } else {
+            old_love.if_my_praise = 0
+            old_love.praise_nums--
+          }
+          that.setData({
+            love: old_love,
+            selected_love_id: love_id
+          })
+
+        }
       })
     } else {
-      that.setData({
-        length: 0
-      })
+      that.signIn();
     }
-    setTimeout(function () {
+  },
+  signIn: function () {
+    let that = this;
+    wx.showModal({
+      title: '提示',
+      content: '您还未登录呢，立即使用微信登录!',
+      confirmText: '确定',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
 
-      that.setData({
-        rippleName: ""
-      });
-    }, 1000)
+          wx.login({
+            success: (res) => {
+              const code = res.code
+              if (code) {
+                wx.getUserInfo({
+                  success: (res) => {
+                    console.log('res', res);
+                    console.log('code', code, 'encryptedData', res.encryptedData, 'iv', res.iv)
+                    that.postRegister(code, res.encryptedData, res.iv);
+                  }
+                })
+              } else {
+                console.log('获取用户登录态失败！' + res.errMsg)
+              }
+            }
+          });
+        }
+      }
+    })
+  },
+  postRegister: function (code, encryptedData, iv) {
+    let that = this;
+
+    wx.request({
+      url: 'https://collhome.com/api/register',
+      method: 'POST',
+      data: {
+        code: code,
+        encryptedData: encryptedData,
+        iv: iv
+      },
+      success: function (res) {
+        console.log('res', res);
+
+        wx.setStorageSync('wesecret', res.data);
+        that.setData({
+          wesecret: res.data,
+        })
+      }
+    })
   },
   deleteArticle: function () {
     wx.showModal({

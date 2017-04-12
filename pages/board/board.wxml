@@ -60,18 +60,12 @@
             </view>
           </view>
           
-          <view class="weui-flex">
-            <view class="weui-flex__item" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
-              <view class="placeholder">
-                <image wx:if="{{love.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
-                <image wx:if="{{love.if_my_comment == 1}}" class="image-comment" src="../images/comment_fill.png"></image>
-                <text wx:if="{{love.comment_nums == 0}}">评论</text>
-                <text wx:if="{{love.comment_nums !== 0}}">{{love.comment_nums}}</text>
+          <view class="weui-flex" wx:if="{{love.location.name}}">
+            <view class="weui-flex__item" data-location="{{love.location}}" catchtap="navigateToLocation">
+              <view class="placeholder" style="float: left">
+                <image class="image-comment" style="height: 20px"src="../images/location_fill1.png"></image>
+                <text>{{love.location.name}}</text>
               </view>
-
-            </view>
-            <view class="weui-flex__item">
-              
             </view>
           </view>
 
