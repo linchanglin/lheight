@@ -8,12 +8,8 @@ Page({
     inputShowed: false,
     inputVal: "",
 
-    rippleName: "",
 
-    hoverClass: "weui-cell_active",
-    hover: false,
 
-    length: 0,
 
   },
   onLoad: function () {
@@ -128,17 +124,16 @@ Page({
     console.log('love_id', love_id);
 
     var that = this;
+    that.setData({
+      item_selected_love_id: love_id
+    })
 
-    // setTimeout(function () {
-    //   that.setData({
-    //     hoverClass: 'weui-cell_active'
-    //   })
-    // }, 50)
-    // setTimeout(function () {
-    //   that.setData({
-    //     hoverClass: ''
-    //   })
-    // }, 450)
+    setTimeout(function () {
+      that.setData({
+        item_selected_love_id: ''
+      })
+    }, 450)
+
     wx.navigateTo({
       url: '../comment/comment?love_id=' + love_id
     });
@@ -204,43 +199,15 @@ Page({
             }
           }
           that.setData({
-            loves: old_loves
-          })
-          that.setData({
+            loves: old_loves,
             selected_love_id: love_id
           })
-          setTimeout(function () {
-
-            that.setData({
-              rippleName: "bounceIn"
-            });
-          }, 3000)
-
-          setTimeout(function () {
-            that.setData({
-              rippleName: ""
-            });
-          }, 6000)
 
         }
       })
-
     } else {
       that.signIn();
     }
-
-
-
-    if (that.data.length == 0) {
-      that.setData({
-        length: 1
-      })
-    } else {
-      that.setData({
-        length: 0
-      })
-    }
-
   },
   signIn: function () {
     let that = this;
