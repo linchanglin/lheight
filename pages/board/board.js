@@ -7,10 +7,6 @@ Page({
 
     inputShowed: false,
     inputVal: "",
-
-
-
-
   },
   onLoad: function () {
     let that = this;
@@ -45,6 +41,17 @@ Page({
   },
   onShow: function () {
     let that = this;
+
+    if (!that.data.wesecret) {
+      let wesecret = wx.getStorageSync('wesecret');
+      if (wesecret) {
+        that.setData({
+          wesecret: wesecret
+        })
+        that.load_loves();
+      }
+    }
+
     that.setData({
       showTopTips1: true
     })
@@ -275,16 +282,28 @@ Page({
     })
   },
   navigateToLocation: function (e) {
-    console.log('location',e);
+    console.log('location', e);
     let location = e.currentTarget.dataset.location;
 
-    console.log('location',location);
+    console.log('location111', location);
 
     wx.openLocation({
-      name: location.name,
-      address: location.address,
-      latitude: location.latitude,
-      longitude: location.longitude,
+      // name: location.name,
+      // address: location.address,
+      // latitude: parseFloat(location.latitude),
+      // longitude: parseFloat(location.longitude),
+
+      name: location.latitude,
+      address: location.longitude,
+      latitude: parseFloat(location.name),
+      longitude: parseFloat(location.address),
+      scale: 28,
+      success: function (res) {
+        console.log('openLocation success', res);
+      },
+      fail: function (res) {
+        console.log('openLocation fail', res);
+      }
     })
   },
 

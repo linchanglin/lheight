@@ -46,30 +46,23 @@ Page({
 
   load_user: function (user_id) {
     let that = this;
-
+    let url;
     if (user_id) {
-      wx.request({
-        url: 'https://collhome.com/api/users/' + user_id,
-        success: function (res) {
-          console.log('user with user_id', res.data)
-
-          that.setData({
-            userInfo: res.data.data
-          })
-        }
-      })
+      url = 'https://collhome.com/api/users/' + user_id
     } else {
-      wx.request({
-        url: 'https://collhome.com/api/user?wesecret=' + that.data.wesecret,
-        success: function (res) {
-          console.log('user with wesecret', res.data)
-
-          that.setData({
-            userInfo: res.data.data
-          })
-        }
-      })
+      url = 'https://collhome.com/api/user?wesecret=' + that.data.wesecret
     }
+
+    wx.request({
+      url: url,
+      success: function (res) {
+        console.log('user', res.data)
+
+        that.setData({
+          userInfo: res.data.data
+        })
+      }
+    })
   },
 
   previewImage: function (e) {

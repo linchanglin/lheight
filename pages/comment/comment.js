@@ -17,6 +17,9 @@ Page({
       that.setData({
         wesecret: wesecret
       })
+
+      that.load_userInfo();
+
     }
 
     that.load_love();
@@ -74,6 +77,19 @@ Page({
       })
     }
   },
+  load_userInfo: function () {
+    var that = this;
+    wx.request({
+      url: 'https://collhome.com/api/user?wesecret=' + that.data.wesecret,
+      success: function (res) {
+        console.log('user with wesecret', res.data)
+
+        that.setData({
+          userInfo: res.data.data
+        })
+      }
+    })
+  },
   previewImage: function (e) {
     console.log('preview e', e);
     var current = e.currentTarget.dataset.current;
@@ -86,20 +102,21 @@ Page({
   },
   navigateToCommentInput: function () {
     let that = this;
-    wx.navigateTo({
-      url: '../commentInput/commentInput?love_id' + that.data.love_id
-    })
+    if (that.data.wesecret) {
+      wx.navigateTo({
+        url: '../commentInput/commentInput?love_id' + that.data.love_id
+      })
+    } else {
+      that.signIn();
+    }
+
   },
   navigateToProfileShow: function (e) {
     console.log('navigateToProfileShow', e);
 
     let that = this;
-    that.setData({
-      hoverClass: ''
-    })
 
     let user_id = e.currentTarget.dataset.userid;
-
     wx.navigateTo({
       url: '../profileShow/profileShow?user_id=' + user_id
     })
@@ -113,8 +130,9 @@ Page({
     wx.openLocation({
       name: location.name,
       address: location.address,
-      latitude: location.latitude,
-      longitude: location.longitude,
+      latitude: parseFloat(location.latitude),
+      longitude: parseFloat(location.longitude),
+      scale: 28
     })
   },
   praiseLove: function (e) {
@@ -209,17 +227,28 @@ Page({
         that.setData({
           wesecret: res.data,
         })
+        that.load_userInfo();
       }
     })
   },
   deleteArticle: function () {
+    let that = this;
     wx.showModal({
-      title: '提示',
-      content: '要删除这条表白吗？',
+      title: '删除',
+      content: '您要删除这条表白吗？',
       confirmColor: '#ff0000',
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定')
+
+          wx.request({
+            url: 'https://collhome.com/api/loves/' + that.data.love_id + '?wesecret=' + that.data.wesecret,
+            method: 'DELETE',
+            success: function (res) {
+              console.log(res.data)
+              wx.navigateBack()
+            }
+          })
         }
       }
     })
