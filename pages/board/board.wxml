@@ -42,7 +42,7 @@
       </navigator>
     </view>-->
     <view class="container">
-      <block wx:for="{{loves}}" wx:key="{{}}" wx:for-item="love">
+      <block wx:for="{{loves}}" wx:for-item="love" wx:key="id" >
         <view class="list-item {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" data-loveId="{{love.id}}" catchtap="navigateToLove">
           <view class="item-header">
             <view class="header-img" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
@@ -56,7 +56,7 @@
               <text>{{love.content}}</text>
             </view>
             <view class="article-imgs" wx:if="{{love.images.length > 0}}">
-              <image wx:for="{{love.images}}" wx:for-item="image" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
+              <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
             </view>
           </view>
           

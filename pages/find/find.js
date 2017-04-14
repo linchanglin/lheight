@@ -8,15 +8,18 @@ Page({
     sliderLeft: 0,
 
 
-    markers: [{
-      iconPath: "/pages/images/m1.jpg",
+    markers: [
+      {
+      // iconPath: "/pages/images/m1.jpg",
+      // iconPath: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI7hsTibhnpQPxN0eJPoiaNpPq0HSQzG9XpvmicjAjr0x5f1GcNd7LpHoXMgiadUbd4ibn46HibM5FMXBow/0",
       id: 0,
       latitude: 26.0597592181,
       longitude: 119.1977521459,
       width: 50,
       height: 70,
       title: '刘亦菲'
-    }],
+    }
+    ],
     controls: [{
       id: 1,
       iconPath: '/pages/images/m2.jpg',

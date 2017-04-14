@@ -1,16 +1,16 @@
 <view style="display:none">
-  <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.img}}" bindload="onImageLoad"></image>
+  <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.pictures[0]}}" bindload="onImageLoad"></image>
 </view>
 <scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="loadImages">
   <view style="width:100%">
     <view class="img_item">
       <view wx:for="{{col1}}" wx:key="id">
-        <image src="{{item.img}}" style="width:100%;height:{{item.height}}px" data-imgUrl="{{item.img}}" bindtap="showGoodsDetail"></image>
+        <image src="{{item.pictures[0]}}" style="width:100%;height:{{item.height}}px" data-userId="{{item.id}}" data-imgUrl="{{item.pictures}}" bindtap="showGoodsDetail"></image>
       </view>
     </view>
     <view class="img_item">
       <view wx:for="{{col2}}" wx:key="id">
-        <image src="{{item.img}}" style="width:100%;height:{{item.height}}px" bindtap="showGoodsDetail"></image>
+        <image src="{{item.pictures[0]}}" style="width:100%;height:{{item.height}}px" data-imgUrl="{{item.pictures}}" bindtap="showGoodsDetail"></image>
       </view>
     </view>
   </view>
@@ -22,26 +22,19 @@
     <view class="mask" bindtap="hideGoodsDetail"></view>
     <view class="goodsdetail ripple {{showName}}">
       <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="500">
-        <swiper-item>
-          <image src="{{imgUrl}}" mode="aspectFit"></image>
-        </swiper-item>
-        <swiper-item>
-          <image src="{{imgUrl}}" mode="aspectFit"></image>
-        </swiper-item>
-        <swiper-item>
-          <image src="{{imgUrl}}" mode="aspectFit"></image>
+        <swiper-item wx:for="{{imgUrl}}" wx:key="*this">
+          <image src="{{item}}" mode="aspectFit"></image>
         </swiper-item>
       </swiper>
-      <view class="title1">小作宝</view>
-      <view class="title2">福州大学</view>
-      <view class="title3">点赞数：99
-        <image src="/imgs/shop/star.jpg"></image>
-        <image src="/imgs/shop/star.jpg"></image>
+      <view class="title1">{{userInfo.nickName}}</view>
+      <view class="title2">{{userInfo.college_name}}</view>
+      <!--<view class="title3">{{}} 岁-->
+      <view class="title3">未知 岁
       </view>
+      <!--</view>-->
       <view class="title4">
-        <!--<view class="title5">¥{{goods[id].price}}</view>-->
         <view class="title6" bindtap="hideGoodsDetail">返回</view>
-        <view class="title6" bindtap="../profileShow/profileShow" data-id="{{id}}">查看资料</view>
+        <view class="title6" bindtap="navigateToProfileShow" data-userId="{{userInfo.id}}">查看资料</view>
       </view>
     </view>
   </view>

@@ -288,15 +288,10 @@ Page({
     console.log('location111', location);
 
     wx.openLocation({
-      // name: location.name,
-      // address: location.address,
-      // latitude: parseFloat(location.latitude),
-      // longitude: parseFloat(location.longitude),
-
-      name: location.latitude,
-      address: location.longitude,
-      latitude: parseFloat(location.name),
-      longitude: parseFloat(location.address),
+      name: location.name,
+      address: location.address,
+      latitude: parseFloat(location.latitude),
+      longitude: parseFloat(location.longitude),
       scale: 28,
       success: function (res) {
         console.log('openLocation success', res);

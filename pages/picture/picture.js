@@ -16,6 +16,10 @@ Page({
     },
 
     onLoad: function () {
+        let that = this;
+
+        that.load_pictures();
+
         wx.getSystemInfo({
             success: (res) => {
                 let ww = res.windowWidth;
@@ -23,17 +27,32 @@ Page({
                 let imgWidth = ww * 0.48;
                 let scrollH = wh;
 
-                this.setData({
+                that.setData({
                     scrollH: scrollH,
                     imgWidth: imgWidth
                 });
 
-                this.loadImages();
+                // that.loadImages();
+                that.load_pictures();
             }
         })
     },
 
+    load_pictures: function () {
+        let that = this;
+
+        wx.request({
+            url: 'https://collhome.com/api/pictures',
+            success: function (res) {
+                console.log(res.data)
+                that.setData({
+                    images: res.data.data
+                })
+            }
+        })
+    },
     onImageLoad: function (e) {
+        console.log('e', e);
         let imageId = e.currentTarget.id;
         let oImgW = e.detail.width;         //图片原始宽度
         let oImgH = e.detail.height;        //图片原始高度
@@ -44,16 +63,24 @@ Page({
         let images = this.data.images;
         let imageObj = null;
 
+        console.log('imgHeight', imgHeight);
+        console.log('images', images);
+        console.log('imageId', imageId);
+
         for (let i = 0; i < images.length; i++) {
             let img = images[i];
-            if (img.id === imageId) {
+            if (img.id == imageId) {
                 imageObj = img;
                 break;
             }
         }
 
+        console.log('imageObj', imageObj);
+
         if (imageObj)
             imageObj.height = imgHeight;
+
+        console.log('imageObj1', imageObj);
 
         let loadingCount = this.data.loadingCount - 1;
         let col1 = this.data.col1;
@@ -67,6 +94,9 @@ Page({
             col2.push(imageObj);
         }
 
+        console.log('col1', col1);
+        console.log('col2', col2);
+
         let data = {
             loadingCount: loadingCount,
             col1: col1,
@@ -77,6 +107,7 @@ Page({
             data.images = [];
         }
 
+        console.log('data col1 col2', data);
         this.setData(data);
     },
 
@@ -106,7 +137,10 @@ Page({
 
     //显示隐藏商品详情弹窗
     showGoodsDetail: function (e) {
+        console.log('e', e);
         console.log('e', e.target.dataset.imgurl);
+
+        this.load_user(e.target.dataset.userid);
 
         this.setData({
             showGoodsDetail: !this.data.showGoodsDetail,
@@ -115,6 +149,20 @@ Page({
             imgUrl: e.target.dataset.imgurl,
             showName: 'zoomIn'
         });
+    },
+    load_user: function (user_id) {
+        let that = this;
+
+        wx.request({
+            url: 'https://collhome.com/api/users/' + user_id,
+            success: function (res) {
+                console.log('user', res.data)
+
+                that.setData({
+                    userInfo: res.data.data
+                })
+            }
+        })
     },
     hideGoodsDetail: function () {
         // showGoodsDetail: false,
@@ -128,6 +176,13 @@ Page({
             that.setData({
                 showGoodsDetail: false,
             })
-        },600)
+        }, 600)
+    },
+    navigateToProfileShow: function(e) {
+        console.log('eee',e);
+        let user_id = e.target.dataset.userid;
+        wx.navigateTo({
+          url: '../profileShow/profileShow?user_id=' + user_id,
+        })
     }
 })

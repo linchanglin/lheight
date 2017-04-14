@@ -16,7 +16,7 @@
             <text>{{love.content}}</text>
           </view>
           <view class="article-imgs" wx:if="{{love.images.length > 0}}">
-            <image wx:for="{{love.images}}" wx:for-item="image" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
+            <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
           </view>
         </view>
         <view class="weui-flex" wx:if="{{love.location.name}}">
@@ -50,7 +50,7 @@
 
     <!--评论列表-->
     <view class="comments">
-      <view class="item touch-active" wx:for="{{comments}}" wx:for-item="comment" wx:key="{{comment.id}}">
+      <view class="item touch-active" wx:for="{{comments}}" wx:for-item="comment" wx:key="id">
         <view class="i-left">
           <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
         </view>
