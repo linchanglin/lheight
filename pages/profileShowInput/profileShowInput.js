@@ -160,8 +160,29 @@ Page({
             }
         }
 
+
         console.log("submitData", submitData);
         console.log("that.data.files", that.data.files);
+
+        if (submitData.gender == '' || submitData.birthday == '' || submitData.college == '') {
+            console.log('sss',submitData.gender,submitData.birthday,submitData.college)
+            wx.showModal({
+                title: '提示',
+                content: '性别 生日 学校 为必填项呢！',
+                showCancel: false,
+                success: function (res) {
+                    if (res.confirm) {
+                        console.log('用户点击确定')
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }
+                }
+            })
+
+            return
+        }
+
+
 
         wx.request({
             url: 'https://collhome.com/api/users',

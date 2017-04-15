@@ -63,56 +63,46 @@ Page({
       showTopTips1: false,
     });
 
-    setTimeout(function () {
-      wx.stopPullDownRefresh();
-    }, 1000)
-
-
-    that.load_loves();
-
+    that.load_loves('pulldown');
 
     setTimeout(function () {
       that.setData({
         showTopTips2: true
       });
     }, 1000);
+
     setTimeout(function () {
       that.setData({
         showTopTips2: false
       });
     }, 2500);
   },
-  load_loves: function () {
+
+  // 需要调整
+  load_loves: function (pulldown) {
     let that = this;
-
+    let url;
     if (that.data.wesecret) {
-      console.log('that.data.wesecret', that.data.wesecret);
-      wx.request({
-        url: 'https://collhome.com/api/loves?wesecret=' + that.data.wesecret,
-        success: function (res) {
-          console.log(res.data)
-
-          let loves = res.data.data;
-
-          that.setData({
-            loves: loves
-          })
-        }
-      })
+      url = 'https://collhome.com/api/loves?wesecret=' + that.data.wesecret
     } else {
-      wx.request({
-        url: 'https://collhome.com/api/loves',
-        success: function (res) {
-          console.log(res.data)
-
-          let loves = res.data.data;
-
-          that.setData({
-            loves: loves
-          })
-        }
-      })
+      url: 'https://collhome.com/api/loves'
     }
+    wx.request({
+      url: url,
+      success: function (res) {
+        console.log(res.data)
+        let loves = res.data.data;
+        that.setData({
+          loves: loves
+        })
+
+        if (pulldown) {
+          wx.stopPullDownRefresh();
+          console.log('pulllllll');
+        }
+      }
+    })
+
   },
   previewImage: function (e) {
     console.log('preview e', e);
