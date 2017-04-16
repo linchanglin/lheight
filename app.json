@@ -1,19 +1,10 @@
 {
   "pages": [
-
     "pages/board/board",
-
     "pages/user/user",
-    
-    "pages/find/find",
-
-
     "pages/profileShowInput/profileShowInput",
-    
+    "pages/find/find",
     "pages/picture/picture",
-    
-    
-    
     "pages/comment/comment",
     "pages/profileShow/profileShow",
     "pages/loveInput/loveInput",

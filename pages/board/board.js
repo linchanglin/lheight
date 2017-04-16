@@ -52,6 +52,12 @@ Page({
       }
     }
 
+    let loves_need_refresh = wx.getStorageSync('loves_need_refresh')
+    if (loves_need_refresh) {
+      that.load_loves();
+      wx.removeStorageSync('loves_need_refresh')
+    }
+
     that.setData({
       showTopTips1: true
     })

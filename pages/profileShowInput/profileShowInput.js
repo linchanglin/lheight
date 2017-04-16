@@ -7,6 +7,7 @@ Page({
         genders: ['男', '女'],
 
         files: [],
+        old_files: [],
         // showTopTips: false,
 
     },
@@ -24,6 +25,10 @@ Page({
             success: function (res) {
                 console.log(res.data)
                 let userInfo = res.data.data;
+                userInfo.gender--;
+                userInfo.college--;
+                userInfo.grade--;
+
                 that.setData({
                     userInfo: userInfo
                 })
@@ -41,6 +46,12 @@ Page({
                 })
                 that.setData({
                     gradeIndex: userInfo.grade
+                })
+                that.setData({
+                    files: userInfo.pictures
+                })
+                that.setData({
+                    old_files: userInfo.pictures
                 })
             }
         })
@@ -107,8 +118,27 @@ Page({
                 new_files.push(value)
             }
         }
+        if(that.contains(that.data.old_files,the_delete_image)) {
+            that.deleteUserPicture(the_delete_image)
+        }
+
         that.setData({
             files: new_files
+        })
+    },
+    deleteUserPicture: function (picture) {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/api/delete/user/picture',
+            method: 'POST',
+            data: {
+                wesecret: that.data.wesecret,
+                picture: picture
+            },
+            success: function (res) {
+                console.log(res.data)
+                console.log('delete user picture',picture)
+            }
         })
     },
     bindGenderChange: function (e) {
@@ -138,17 +168,10 @@ Page({
         let that = this;
         let submitData = e.detail.value;
 
-        if (that.data.genderIndex == 0) {
-            submitData.gender = 1
-        } else if (that.data.genderIndex == 1) {
-            submitData.gender = 2
-        } else {
-            submitData.gender = 0
-        }
-
+        submitData.gender = parseInt(submitData.gender) + 1;
+        submitData.college = parseInt(submitData.college) + 1;
+        submitData.grade = parseInt(submitData.grade) + 1;
         submitData.birthday = that.data.birthdayIndex;
-        submitData.college = that.data.collegeIndex;
-        submitData.grade = that.data.gradeIndex;
 
         if (that.data.hometown) {
             submitData.hometown = that.data.hometown;
@@ -165,7 +188,7 @@ Page({
         console.log("that.data.files", that.data.files);
 
         if (submitData.gender == '' || submitData.birthday == '' || submitData.college == '') {
-            console.log('sss',submitData.gender,submitData.birthday,submitData.college)
+            console.log('sss', submitData.gender, submitData.birthday, submitData.college)
             wx.showModal({
                 title: '提示',
                 content: '性别 生日 学校 为必填项呢！',
@@ -194,12 +217,19 @@ Page({
             success: function (res) {
                 console.log('res', res);
 
+                let upload_files = [];
+                for (let value of that.data.files) {
+                    if (!that.contains(that.data.old_files,value)) {
+                        upload_files.push(value)
+                    }
+                }
+
                 let successUp = 0; //成功个数
                 let failUp = 0; //失败个数
-                let length = that.data.files.length; //总共个数
+                let length = upload_files.length; //总共个数
                 let i = 0; //第几个
                 if (length > 0) {
-                    that.saveUserPicture(that.data.files, successUp, failUp, i, length);
+                    that.saveUserPicture(upload_files, successUp, failUp, i, length);
                 }
             },
             fail: function (res) {
@@ -211,11 +241,19 @@ Page({
             }
         })
     },
-    saveUserPicture: function (files, successUp, failUp, i, length) {
+    contains: function (array, element) {
+        for (let value of array) {
+            if ( element == value) {
+                return true;
+            }
+        }
+        return false;
+    },
+    saveUserPicture: function (upload_files, successUp, failUp, i, length) {
         let that = this;
         wx.uploadFile({
             url: 'https://collhome.com/api/users/pictures',
-            filePath: that.data.files[i],
+            filePath: upload_files[i],
             name: 'file',
             formData: {
                 wesecret: that.data.wesecret,
@@ -242,7 +280,7 @@ Page({
                     }, 1000)
                 }
                 else {  //递归调用uploadDIY函数
-                    that.saveUserPicture(files, successUp, failUp, i, length);
+                    that.saveUserPicture(upload_files, successUp, failUp, i, length);
                 }
             }
 

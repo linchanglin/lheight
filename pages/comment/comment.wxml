@@ -9,7 +9,7 @@
             <image class="img" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
           </view>
           <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
-          <text class="header-time">{{love.created_at}} 来自{{love.userInfo.college}}</text>
+          <text class="header-time">{{love.created_at}}  来自 {{love.userInfo.college}}</text>
         </view>
         <view class="item-body">
           <view class="article-content">

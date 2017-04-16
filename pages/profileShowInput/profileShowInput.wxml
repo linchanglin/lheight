@@ -44,7 +44,7 @@
           </view>
 
           <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_select {{ genderIndex == '' ? 'weui-cell_warn' : ''}}">
+            <view class="weui-cell weui-cell_select {{ genderIndex === '' ? 'weui-cell_warn' : ''}}">
               <view class="weui-cell__hd weui-cell__hd_in-select-after">
                 <view class="weui-label">性别</view>
               </view>
@@ -56,12 +56,12 @@
             </view>
           </view>
           <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_input {{ birthdayIndex == '' ? 'weui-cell_warn' : ''}}">
+            <view class="weui-cell weui-cell_input {{ birthdayIndex === '' ? 'weui-cell_warn' : ''}}">
               <view class="weui-cell__hd">
                 <view class="weui-label">生日</view>
               </view>
               <view class="weui-cell__bd">
-                <picker name="birthday" mode="date" value="{{birthdayIndex}}" bindchange="bindBirthdayChange" start="1980-01-01" end="2010-01-01">
+                <picker name="birthday" mode="date" value="{{birthdayIndex}}" bindchange="bindBirthdayChange" start="1988-01-01" end="2002-01-01">
                   <view class="weui-input">{{birthdayIndex}}</view>
                 </picker>
               </view>
@@ -120,7 +120,7 @@
       <view class="weui-panel">
         <view class="weui-panel__bd">
           <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_select {{ collegeIndex == '' ? 'weui-cell_warn' : ''}}">
+            <view class="weui-cell weui-cell_select {{ collegeIndex === '' ? 'weui-cell_warn' : ''}}">
               <view class="weui-cell__hd weui-cell__hd_in-select-after">
                 <view class="weui-label">学校</view>
               </view>

@@ -30,7 +30,7 @@
               <!--<view wx:if="{{userInfo.gender == 0}}" class="weui-cell__ft">未知</view>
               <view wx:elif="{{userInfo.gender == 1}}" class="weui-cell__ft">男</view>
               <view wx:else class="weui-cell__ft">女</view>-->
-              <view class="weui-cell__ft">{{userInfo.gender}}</view>
+              <view class="weui-cell__ft">{{userInfo.gender_name}}</view>
             </view>
             <view class="weui-cell weui-cell_access">
               <view class="weui-cell__bd">

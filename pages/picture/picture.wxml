@@ -28,8 +28,7 @@
       </swiper>
       <view class="title1">{{userInfo.nickName}}</view>
       <view class="title2">{{userInfo.college_name}}</view>
-      <!--<view class="title3">{{}} 岁-->
-      <view class="title3">未知 岁
+      <view class="title3">{{userInfo.age}} 岁
       </view>
       <!--</view>-->
       <view class="title4">

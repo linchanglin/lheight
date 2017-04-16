@@ -73,7 +73,7 @@ Page({
 
     wx.previewImage({
       current: current, // 当前显示图片的http链接
-      urls: that.data.pictures// 需要预览的图片http链接列表
+      urls: that.data.userInfo.pictures// 需要预览的图片http链接列表
     })
   },
   // editProfileShow: function () {

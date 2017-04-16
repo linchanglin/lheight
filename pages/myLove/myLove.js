@@ -156,8 +156,15 @@ Page({
     }]
   },
   onLoad: function () {
-    console.log('222324234234');
     let that = this;
+    let wesecret = wx.getStorageSync('wesecret');
+
+    wx.request({
+      url: 'https://collhome.com/api/myLoves?wesecret=' + wesecret,
+      success: function (res) {
+        console.log('myLoves', res.data)
+      }
+    })
 
     wx.getSystemInfo({
       success: (res) => {
@@ -253,6 +260,6 @@ Page({
       url: '../comment/comment?id=22'
     });
   },
-  
+
 
 });

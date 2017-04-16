@@ -242,10 +242,15 @@ Page({
           console.log('用户点击确定')
 
           wx.request({
-            url: 'https://collhome.com/api/loves/' + that.data.love_id + '?wesecret=' + that.data.wesecret,
-            method: 'DELETE',
+            url: 'https://collhome.com/api/delete/love',
+            method: 'POST',
+            data: {
+              wesecret: that.data.wesecret,
+              love_id: that.data.love_id
+            },
             success: function (res) {
-              console.log(res.data)
+              console.log('delete love success',res.data)
+              wx.setStorageSync('loves_need_refresh', 1);
               wx.navigateBack()
             }
           })

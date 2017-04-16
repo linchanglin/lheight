@@ -3,7 +3,7 @@ var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 Page({
   data: {
     tabs: ["热门", "本校", "附近"],
-    activeIndex: 2,
+    activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
 
@@ -97,7 +97,7 @@ Page({
     wx.request({
       url: url,
       success: function (res) {
-        console.log(res.data)
+        console.log('lovessss',res.data.data)
         let loves = res.data.data;
         that.setData({
           loves: loves
