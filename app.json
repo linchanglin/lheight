@@ -1,18 +1,21 @@
 {
   "pages": [
+    "pages/board/board",
+    
     "pages/user/user",
+    
+    "pages/myLove/myLove",
+    
     
     "pages/find/find",
     
     
     "pages/profileShow/profileShow",
     
-    "pages/board/board",
     "pages/profileShowInput/profileShowInput",
     "pages/picture/picture",
     "pages/comment/comment",
     "pages/loveInput/loveInput",
-    "pages/myLove/myLove",
     "pages/commentInput/commentInput",
     "pages/chat/chat",
     "pages/city_multi_page/city_multi_page",

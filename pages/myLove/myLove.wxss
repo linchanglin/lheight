@@ -1,6 +1,6 @@
 page {
-  /*background-color: #eee;*/
-  background-color: #fbf7ed;
+  /*background-color: #eee;*//*background-color: #fbf7ed;*/
+  background-color: #edecf2;
 }
 
 .list-item:first-child {
@@ -74,12 +74,18 @@ page {
 
 .list-item {
   background-color: #fff;
-  margin: 10px 0;
+  margin: 10px 0 1px 0;
   padding: 10px;
   color: #000;
   font-size: 16px;
   line-height: 150%;
-  border-bottom: 3px solid #e7e7e7;
+  /*border-bottom: 3px solid #e7e7e7;*/
+}
+
+.weui-flex {
+  background-color: #fff;
+  /*padding: 3px 0;*/
+  padding: 0;
 }
 
 .body-img {
@@ -126,6 +132,7 @@ image {
 .weui-flex text {
   padding-left: 5px;
 }
+
 /*.weui-flex {
   border-top: 1px solid #EDECF2;
 }
@@ -197,34 +204,13 @@ image {
   padding-bottom: 0px;
 }
 
-
-
-
-
-
-
 .header-readNums {
-   float: right;
+  float: right;
 }
 
 button[size="mini"] {
-display:inline-block;
-line-height:2;
-font-size:13px;
-padding:0 8px;
-
+  display: inline-block;
+  line-height: 2;
+  font-size: 13px;
+  padding: 0 8px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
