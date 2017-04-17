@@ -1,7 +1,7 @@
 <view class="page">
   <view class="page__bd">
-    <image style="width: 100%; opacity:0.5" mode="aspectFill" src="../images/meet.jpeg"></image>
-    <view class="signature" >{{signature}}</view>
+    <image style="width: 100%; opacity:1" mode="aspectFill" src="../images/meet.jpeg"></image>
+    <!--<view class="signature" >{{userInfo.signature}}</view>-->
     
     <!--<view class="weui-panel">
       <view class="weui-panel__bd">
@@ -46,6 +46,9 @@
               </view>
               <view class="profileShow_cell_bd">
                 {{userInfo.hometown}}
+              </view>
+              <view class="profileShow_cell_bd">
+                {{userInfo.signature}}
               </view>
             </view>
           </view>
