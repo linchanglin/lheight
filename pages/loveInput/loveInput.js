@@ -116,7 +116,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log('res',res);
+          console.log('res', res);
           let love_id = res.data.love_id;
 
           let successUp = 0; //成功个数
@@ -125,10 +125,12 @@ Page({
           let i = 0; //第几个
           if (length > 0) {
             that.saveLoveImage(love_id, that.data.files, successUp, failUp, i, length);
+          } else {
+            that.switchTabToBoardWithSuccess();
           }
         },
         fail: function (res) {
-          console.log('fail res',res);
+          console.log('fail res', res);
           // fail
         },
         complete: function (res) {
@@ -150,7 +152,7 @@ Page({
         post_id: love_id
       },
       success: function (res) {
-        console.log('success res',res);
+        console.log('success res', res);
         successUp++;
       },
       fail: function (res) {
@@ -161,21 +163,26 @@ Page({
         i++;
         if (i == length) {
           console.log('总共' + successUp + '张上传成功,' + failUp + '张上传失败！');
-          wx.showToast({
-            title: '成功',
-            icon: 'success',
-            duration: 1000
-          });
-          setTimeout(function () {
-            wx.navigateBack();
-          }, 1000)
+          that.switchTabToBoardWithSuccess();
         }
         else {  //递归调用uploadDIY函数
           that.saveLoveImage(love_id, files, successUp, failUp, i, length);
         }
       }
-
     })
+  },
+  switchTabToBoardWithSuccess: function () {
+    wx.showToast({
+      title: '成功',
+      icon: 'success',
+      duration: 1000
+    });
+    wx.setStorageSync('loves_need_refresh', 1);
+    setTimeout(function () {
+      wx.switchTab({
+        url: '/pages/board/board'
+      })
+    }, 1000)
   }
 
 })

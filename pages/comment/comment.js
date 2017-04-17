@@ -44,38 +44,43 @@ Page({
     })
   },
   onShow: function () {
-    console.log('111111');
-  },
-  load_love: function () {
     let that = this;
-    if (that.data.wesecret) {
-      wx.request({
-        url: 'https://collhome.com/api/loves/' + that.data.love_id + '/comments?wesecret=' + that.data.wesecret,
-        success: function (res) {
-          console.log('love', res.data)
-          let love = res.data.data.love;
-          let comments = res.data.data.comments;
-          that.setData({
-            love: love,
-            comments: comments
-          })
-        }
-      })
-    } else {
-      wx.request({
-        url: 'https://collhome.com/api/loves/' + that.data.love_id + '/comments',
-        success: function (res) {
-          console.log('love', res.data)
-          let love = res.data.data.love;
-          let comments = res.data.data.comments;
-
-          that.setData({
-            love: love,
-            comments: comments
-          })
-        }
-      })
+    let love_need_refresh = wx.getStorageSync('love_need_refresh')
+    if (love_need_refresh) {
+      that.load_love();
+      wx.removeStorageSync('love_need_refresh')
     }
+  },
+  onPullDownRefresh: function () {
+    let that = this;
+
+    that.load_love('pulldown');
+  },
+  load_love: function (pulldown) {
+    let that = this;
+    let url;
+    if (that.data.wesecret) {
+      url = 'https://collhome.com/api/loves/' + that.data.love_id + '/comments?wesecret=' + that.data.wesecret
+    } else {
+      url = 'https://collhome.com/api/loves/' + that.data.love_id + '/comments'
+    }
+    wx.request({
+      url: url,
+      success: function (res) {
+        console.log('love', res.data)
+        let love = res.data.data.love;
+        let comments = res.data.data.comments;
+        that.setData({
+          love: love,
+          comments: comments
+        })
+
+        if (pulldown) {
+          wx.stopPullDownRefresh();
+          console.log('pulllllll');
+        }
+      }
+    })
   },
   load_userInfo: function () {
     var that = this;
@@ -104,7 +109,7 @@ Page({
     let that = this;
     if (that.data.wesecret) {
       wx.navigateTo({
-        url: '../commentInput/commentInput?love_id' + that.data.love_id
+        url: '../commentInput/commentInput?love_id=' + that.data.love_id
       })
     } else {
       that.signIn();
@@ -131,8 +136,8 @@ Page({
       name: location.name,
       address: location.address,
       latitude: parseFloat(location.latitude),
-      longitude: parseFloat(location.longitude),
-      scale: 28
+      longitude: parseFloat(location.longitude)
+      // scale: 28
     })
   },
   praiseLove: function (e) {
@@ -157,8 +162,6 @@ Page({
           praise: praise
         },
         success: function (res) {
-          console.log('1231654', res.data)
-
           let old_love = that.data.love;
           old_love.praise_nums = parseInt(old_love.praise_nums);
           if (love_if_my_praise == 0) {
@@ -172,7 +175,7 @@ Page({
             love: old_love,
             selected_love_id: love_id
           })
-
+          wx.setStorageSync('loves_need_refresh', 1);
         }
       })
     } else {
@@ -249,7 +252,7 @@ Page({
               love_id: that.data.love_id
             },
             success: function (res) {
-              console.log('delete love success',res.data)
+              console.log('delete love success', res.data)
               wx.setStorageSync('loves_need_refresh', 1);
               wx.navigateBack()
             }

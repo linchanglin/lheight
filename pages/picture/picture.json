@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "眼缘墙"
+    "navigationBarTitleText": "眼缘墙",
+    "enablePullDownRefresh": true
 }

@@ -15,6 +15,14 @@ Page({
             that.signIn();
         }
     },
+    onShow: function () {
+        let that = this;
+        let user_need_refresh = wx.getStorageSync('user_need_refresh')
+        if (user_need_refresh) {
+            that.getUserInfo(that.data.wesecret);
+            wx.removeStorageSync('user_need_refresh')
+        }
+    },
     getUserInfo: function (wesecret) {
         let that = this;
         wx.request({
@@ -125,11 +133,30 @@ Page({
     navigateToLoveInput: function () {
         let that = this;
         if (that.data.wesecret) {
-            wx.navigateTo({
-                url: '../loveInput/loveInput',
-            })
+            if (that.data.userInfo.college === '') {
+                that.showNoCollegeModal();
+            } else {
+                wx.navigateTo({
+                    url: '../loveInput/loveInput',
+                })
+            }
         } else {
             that.signIn();
         }
-    }
+    },
+    showNoCollegeModal: function () {
+        let that = this;
+        wx.showModal({
+            title: '未知学校',
+            content: '发表表白需要知道您的学校呢，请去 修改信息 -> 学校 选择您的学校！',
+            showCancel: false,
+            success: function (res) {
+                if (res.confirm) {
+                    console.log('用户点击确定')
+                } else if (res.cancel) {
+                    console.log('用户点击取消')
+                }
+            }
+        })
+    },
 });

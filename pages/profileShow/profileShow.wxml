@@ -111,16 +111,16 @@
               <view class="profileShow_cell_hd">
                 社交
               </view>
-              <view class="profileShow_cell_bd">
+              <view class="profileShow_cell_bd" wx:if="{{userInfo.wechat}}">
                 微信: {{userInfo.wechat}}
               </view>
-              <view class="profileShow_cell_bd">
+              <view class="profileShow_cell_bd" wx:if="{{userInfo.qq}}">
                 QQ: {{userInfo.qq}}
               </view>
-              <view class="profileShow_cell_bd">
+              <view class="profileShow_cell_bd" wx:if="{{userInfo.weibo}}">
                 微博: {{userInfo.weibo}}
               </view>
-              <view class="profileShow_cell_bd">
+              <view class="profileShow_cell_bd" wx:if="{{userInfo.mobilePhone}}">
                 电话: {{userInfo.mobilePhone}}
               </view>
             </view>

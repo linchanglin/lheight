@@ -10,5 +10,7 @@
         </view>
       </view>
     </view>
+
+    <button class="weui-btn" type="primary" bindtap="confirmInput">保存</button>
   </view>
 </view>

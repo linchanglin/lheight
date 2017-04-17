@@ -25,9 +25,15 @@ Page({
             success: function (res) {
                 console.log(res.data)
                 let userInfo = res.data.data;
-                userInfo.gender--;
-                userInfo.college--;
-                userInfo.grade--;
+                if (userInfo.gender !== '') {
+                    userInfo.gender--;
+                }
+                if (userInfo.college !== '') {
+                    userInfo.college--;
+                }
+                if (userInfo.grade !== '') {
+                    userInfo.grade--;
+                }
 
                 that.setData({
                     userInfo: userInfo
@@ -118,7 +124,7 @@ Page({
                 new_files.push(value)
             }
         }
-        if(that.contains(that.data.old_files,the_delete_image)) {
+        if (that.contains(that.data.old_files, the_delete_image)) {
             that.deleteUserPicture(the_delete_image)
         }
 
@@ -137,7 +143,7 @@ Page({
             },
             success: function (res) {
                 console.log(res.data)
-                console.log('delete user picture',picture)
+                console.log('delete user picture', picture)
             }
         })
     },
@@ -219,7 +225,7 @@ Page({
 
                 let upload_files = [];
                 for (let value of that.data.files) {
-                    if (!that.contains(that.data.old_files,value)) {
+                    if (!that.contains(that.data.old_files, value)) {
                         upload_files.push(value)
                     }
                 }
@@ -230,6 +236,8 @@ Page({
                 let i = 0; //第几个
                 if (length > 0) {
                     that.saveUserPicture(upload_files, successUp, failUp, i, length);
+                } else {
+                    that.navigateBackWithSuccess();
                 }
             },
             fail: function (res) {
@@ -243,7 +251,7 @@ Page({
     },
     contains: function (array, element) {
         for (let value of array) {
-            if ( element == value) {
+            if (element == value) {
                 return true;
             }
         }
@@ -270,14 +278,7 @@ Page({
                 i++;
                 if (i == length) {
                     console.log('总共' + successUp + '张上传成功,' + failUp + '张上传失败！');
-                    wx.showToast({
-                        title: '成功',
-                        icon: 'success',
-                        duration: 1000
-                    });
-                    setTimeout(function () {
-                        wx.navigateBack();
-                    }, 1000)
+                    that.navigateBackWithSuccess();
                 }
                 else {  //递归调用uploadDIY函数
                     that.saveUserPicture(upload_files, successUp, failUp, i, length);
@@ -285,6 +286,18 @@ Page({
             }
 
         })
+    },
+    navigateBackWithSuccess: function () {
+        wx.setStorageSync('user_need_refresh', 1);
+
+        wx.showToast({
+            title: '成功',
+            icon: 'success',
+            duration: 1000
+        });
+        setTimeout(function () {
+            wx.navigateBack();
+        }, 1000)
     },
     // showTopTips: function () {
     //     var that = this;

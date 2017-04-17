@@ -86,13 +86,15 @@ Page({
 
   // 需要调整
   load_loves: function (pulldown) {
+    console.log('load_lovesssssssssssssss');
     let that = this;
     let url;
     if (that.data.wesecret) {
       url = 'https://collhome.com/api/loves?wesecret=' + that.data.wesecret
     } else {
-      url: 'https://collhome.com/api/loves'
+      url = 'https://collhome.com/api/loves'
     }
+    console.log('urllllllll',url);
     wx.request({
       url: url,
       success: function (res) {
@@ -288,7 +290,7 @@ Page({
       address: location.address,
       latitude: parseFloat(location.latitude),
       longitude: parseFloat(location.longitude),
-      scale: 28,
+      // scale: 18,
       success: function (res) {
         console.log('openLocation success', res);
       },

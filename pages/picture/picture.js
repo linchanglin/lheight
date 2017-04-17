@@ -4,7 +4,7 @@ let col2H = 0;
 Page({
 
     data: {
-        scrollH: 0,
+        // scrollH: 0,
         imgWidth: 0,
         loadingCount: 0,
         images: [],
@@ -18,17 +18,15 @@ Page({
     onLoad: function () {
         let that = this;
 
-        that.load_pictures();
-
         wx.getSystemInfo({
             success: (res) => {
                 let ww = res.windowWidth;
                 let wh = res.windowHeight;
                 let imgWidth = ww * 0.48;
-                let scrollH = wh;
+                // let scrollH = wh;
 
                 that.setData({
-                    scrollH: scrollH,
+                    // scrollH: scrollH,
                     imgWidth: imgWidth
                 });
 
@@ -37,8 +35,28 @@ Page({
             }
         })
     },
+    onPullDownRefresh: function () {
+        let that = this;
 
-    load_pictures: function () {
+        that.setData({
+            showTopTips1: false,
+        });
+
+        that.load_pictures('pulldown');
+
+        setTimeout(function () {
+            that.setData({
+                showTopTips2: true
+            });
+        }, 1000);
+
+        setTimeout(function () {
+            that.setData({
+                showTopTips2: false
+            });
+        }, 2500);
+    },
+    load_pictures: function (pulldown) {
         let that = this;
 
         wx.request({
@@ -48,6 +66,11 @@ Page({
                 that.setData({
                     images: res.data.data
                 })
+
+                if (pulldown) {
+                    wx.stopPullDownRefresh();
+                    console.log('pulllllll');
+                }
             }
         })
     },
@@ -138,7 +161,8 @@ Page({
     //显示隐藏商品详情弹窗
     showGoodsDetail: function (e) {
         console.log('e', e);
-        console.log('e', e.target.dataset.imgurl);
+        console.log('e.target.dataset.imgurl', e.target.dataset.imgurl);
+        console.log('e.target.dataset.userid', e.target.dataset.userid);
 
         this.load_user(e.target.dataset.userid);
 
@@ -176,13 +200,13 @@ Page({
             that.setData({
                 showGoodsDetail: false,
             })
-        }, 600)
+        }, 500)
     },
-    navigateToProfileShow: function(e) {
-        console.log('eee',e);
+    navigateToProfileShow: function (e) {
+        console.log('eee', e);
         let user_id = e.target.dataset.userid;
         wx.navigateTo({
-          url: '../profileShow/profileShow?user_id=' + user_id,
+            url: '../profileShow/profileShow?user_id=' + user_id,
         })
     }
 })
