@@ -2,11 +2,13 @@
   "pages": [
     "pages/user/user",
     
+    "pages/find/find",
+    
+    
     "pages/profileShow/profileShow",
     
     "pages/board/board",
     "pages/profileShowInput/profileShowInput",
-    "pages/find/find",
     "pages/picture/picture",
     "pages/comment/comment",
     "pages/loveInput/loveInput",

@@ -67,11 +67,10 @@ page {
 /*.article-content {
   padding: 8px 0;
 }*/
+
 .item-body {
   margin: 8px 0;
 }
-
-
 
 .list-item {
   background-color: #fff;
@@ -111,7 +110,6 @@ image {
   line-height: 35px;
   font-size: 14px;
   /*background-color: #F7F7FA;*/
-  
 }
 
 /*.placeholder-comment {
@@ -125,6 +123,9 @@ image {
   float: none;
 }
 
+.weui-flex text {
+  padding-left: 5px;
+}
 /*.weui-flex {
   border-top: 1px solid #EDECF2;
 }
@@ -174,6 +175,30 @@ image {
 .bounceIn {
   animation-name: bounceIn;
 }
+
+.weui-toptips_notice1 {
+  background-color: #ff8140;
+}
+
+.weui-toptips_notice2 {
+  background-color: #ffba07;
+}
+
+.weui-toptips {
+  padding: 6.3px;
+  font-size: 16px;
+}
+
+.weui-cell_active {
+  background-color: #ececec;
+}
+
+.page__bd {
+  padding-bottom: 0px;
+}
+
+
+
 
 
 
