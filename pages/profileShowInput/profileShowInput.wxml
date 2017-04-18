@@ -236,7 +236,8 @@
         </view>
       </view>
       <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" formType="submit">保存</button>
+        <button wx:if="{{save_loading}}" class="weui-btn" type="primary" loading="true" disabled="true">保存中</button>
+        <button wx:else class="weui-btn" type="primary" formType="submit">保存</button>
       </view>
     </form>
   </view>

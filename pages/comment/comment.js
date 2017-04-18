@@ -175,7 +175,8 @@ Page({
             love: old_love,
             selected_love_id: love_id
           })
-          wx.setStorageSync('loves_need_refresh', 1);
+          wx.setStorageSync('board_loves_need_refresh', 1);
+          wx.setStorageSync('my_loves_need_refresh', 1);
         }
       })
     } else {
@@ -253,7 +254,10 @@ Page({
             },
             success: function (res) {
               console.log('delete love success', res.data)
-              wx.setStorageSync('loves_need_refresh', 1);
+              wx.setStorageSync('board_loves_need_refresh', 1);
+              wx.setStorageSync('hot_loves_need_refresh', 1);
+              wx.setStorageSync('college_loves_need_refresh', 1);
+              wx.setStorageSync('my_loves_need_refresh', 1);
               wx.navigateBack()
             }
           })

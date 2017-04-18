@@ -20,7 +20,7 @@ Page({
   },
   confirmInput: function () {
     let that = this;
-    console.log('confirmInput    that.data.love_id',that.data.love_id);
+    console.log('confirmInput    that.data.love_id', that.data.love_id);
     wx.request({
       url: 'https://collhome.com/api/loves/' + that.data.love_id + '/comments',
       method: 'POST',
@@ -29,9 +29,10 @@ Page({
         content: that.data.content
       },
       success: function (res) {
-        console.log('post comment',res.data)
+        console.log('post comment', res.data)
         wx.setStorageSync('love_need_refresh', 1);
-        wx.setStorageSync('loves_need_refresh', 1);
+        wx.setStorageSync('board_loves_need_refresh', 1);
+        wx.setStorageSync('my_loves_need_refresh', 1);
         wx.navigateBack()
       }
     })

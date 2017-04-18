@@ -5,8 +5,8 @@ Page({
     content: "",
     location: {},
     visiable: 0,
-    location_exist: 0
-
+    location_exist: 0,
+    save_loading: false
   },
   onLoad: function () {
     let that = this;
@@ -103,7 +103,9 @@ Page({
   },
   saveLove: function () {
     let that = this;
-
+    that.setData({
+      save_loading: true
+    })
     if (that.data.content.length > 0 || that.data.files.length > 0) {
 
       wx.request({
@@ -172,12 +174,16 @@ Page({
     })
   },
   switchTabToBoardWithSuccess: function () {
+    let that = this;
+    that.setData({
+      save_loading: false
+    })
+    wx.setStorageSync('board_loves_need_refresh', 1);
     wx.showToast({
       title: '成功',
       icon: 'success',
       duration: 1000
     });
-    wx.setStorageSync('loves_need_refresh', 1);
     setTimeout(function () {
       wx.switchTab({
         url: '/pages/board/board'

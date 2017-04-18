@@ -34,7 +34,7 @@
 
         <!--</view>-->
         <view class="title4">
-          <view class="title6" bindtap="hideGoodsDetail">返回</view>
+          <!--<view class="title6" bindtap="hideGoodsDetail">返回</view>-->
           <view class="title6" bindtap="navigateToProfileShow" data-userId="{{userInfo.id}}">查看资料</view>
         </view>
       </view>

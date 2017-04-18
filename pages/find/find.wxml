@@ -76,7 +76,7 @@
                         <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
                       </view>
                     </view>
-                    <view class="weui-flex" wx:if="{{love.location.name}}">
+                    <view class="weui-flex {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" wx:if="{{love.location.name}}">
                       <view class="weui-flex__item" data-location="{{love.location}}" catchtap="navigateToLocation">
                         <view class="placeholder" style="float: left">
                           <image class="image-comment" style="height: 20px" src="../images/location_fill1.png"></image>
@@ -85,7 +85,7 @@
                       </view>
                     </view>
                   </view>
-                  <view class="weui-flex">
+                  <view class="weui-flex {{love.id == item_selected_love_id ? 'weui-cell_active':''}}">
                     <view class="weui-flex__item" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
                       <view class="placeholder">
                         <image wx:if="{{love.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
@@ -178,7 +178,7 @@
                         <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
                       </view>
                     </view>
-                    <view class="weui-flex" wx:if="{{love.location.name}}">
+                    <view class="weui-flex {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" wx:if="{{love.location.name}}">
                       <view class="weui-flex__item" data-location="{{love.location}}" catchtap="navigateToLocation">
                         <view class="placeholder" style="float: left">
                           <image class="image-comment" style="height: 20px" src="../images/location_fill1.png"></image>
@@ -187,7 +187,7 @@
                       </view>
                     </view>
                   </view>
-                  <view class="weui-flex">
+                  <view class="weui-flex {{love.id == item_selected_love_id ? 'weui-cell_active':''}}">
                     <view class="weui-flex__item" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
                       <view class="placeholder">
                         <image wx:if="{{love.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
@@ -215,7 +215,7 @@
           </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-          <map id="map" longitude="119.1977521459" latitude="26.0597592181" scale="14" bindcontroltap="controltap" markers="{{loves}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: 100vh;"></map>
+          <map id="map" longitude="119.1977521459" latitude="26.0597592181" scale="14" bindcontroltap="controltap" markers="{{loves}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: {{mapHeight}}px;"></map>
         </view>
       </view>
     </view>

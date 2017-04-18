@@ -52,10 +52,10 @@ Page({
       }
     }
 
-    let loves_need_refresh = wx.getStorageSync('loves_need_refresh')
-    if (loves_need_refresh) {
+    let my_loves_need_refresh = wx.getStorageSync('my_loves_need_refresh')
+    if (my_loves_need_refresh) {
       that.load_loves();
-      wx.removeStorageSync('loves_need_refresh')
+      wx.removeStorageSync('my_loves_need_refresh')
     }
 
     that.setData({
@@ -89,7 +89,7 @@ Page({
     console.log('load_lovesssssssssssssss');
     let that = this;
     let url = 'https://collhome.com/api/myLoves?wesecret=' + that.data.wesecret
-    console.log('urllllllll',url);
+    console.log('urllllllll', url);
     wx.request({
       url: url,
       success: function (res) {
@@ -202,7 +202,7 @@ Page({
             loves: old_loves,
             selected_love_id: love_id
           })
-
+          wx.setStorageSync('board_loves_need_refresh', 1);
         }
       })
     } else {

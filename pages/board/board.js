@@ -52,10 +52,10 @@ Page({
       }
     }
 
-    let loves_need_refresh = wx.getStorageSync('loves_need_refresh')
-    if (loves_need_refresh) {
+    let board_loves_need_refresh = wx.getStorageSync('board_loves_need_refresh')
+    if (board_loves_need_refresh) {
       that.load_loves();
-      wx.removeStorageSync('loves_need_refresh')
+      wx.removeStorageSync('board_loves_need_refresh')
     }
 
     that.setData({
@@ -207,7 +207,6 @@ Page({
             loves: old_loves,
             selected_love_id: love_id
           })
-
         }
       })
     } else {

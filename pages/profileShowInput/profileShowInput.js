@@ -10,6 +10,8 @@ Page({
         old_files: [],
         // showTopTips: false,
 
+        save_loading: false
+
     },
     onLoad: function () {
         let that = this;
@@ -172,6 +174,10 @@ Page({
     formSubmit: function (e) {
         console.log('e', e.detail.value)
         let that = this;
+        that.setData({
+            save_loading: true
+        })
+
         let submitData = e.detail.value;
 
         submitData.gender = parseInt(submitData.gender) + 1;
@@ -288,7 +294,13 @@ Page({
         })
     },
     navigateBackWithSuccess: function () {
+        let that = this;
+        that.setData({
+            save_loading: false
+        })
+
         wx.setStorageSync('user_need_refresh', 1);
+        wx.setStorageSync('board_loves_need_refresh', 1);
 
         wx.showToast({
             title: '成功',

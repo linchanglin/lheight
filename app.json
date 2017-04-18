@@ -2,20 +2,24 @@
   "pages": [
     "pages/board/board",
     
+    "pages/loveInput/loveInput",
+    
+    "pages/find/find",
+    
+    "pages/picture/picture",
+    
+    
     "pages/user/user",
     
     "pages/myLove/myLove",
     
     
-    "pages/find/find",
     
     
     "pages/profileShow/profileShow",
     
     "pages/profileShowInput/profileShowInput",
-    "pages/picture/picture",
     "pages/comment/comment",
-    "pages/loveInput/loveInput",
     "pages/commentInput/commentInput",
     "pages/chat/chat",
     "pages/city_multi_page/city_multi_page",

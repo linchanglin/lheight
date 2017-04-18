@@ -1,4 +1,6 @@
 {
     "navigationBarTitleText": "眼缘墙",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#f8f8f8",
+    "backgroundTextStyle": "dark"
 }

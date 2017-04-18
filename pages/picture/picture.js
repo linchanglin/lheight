@@ -12,7 +12,7 @@ Page({
         col2: [],
         page: 1,
 
-        imgUrl: "",
+        imgUrl: [],
     },
 
     onLoad: function () {
@@ -183,7 +183,7 @@ Page({
                 console.log('user', res.data)
 
                 that.setData({
-                    userInfo: res.data.data
+                    userInfo: res.data.data,
                 })
             }
         })
@@ -199,8 +199,9 @@ Page({
         setTimeout(function () {
             that.setData({
                 showGoodsDetail: false,
+                imgUrl: []
             })
-        }, 500)
+        }, 300)
     },
     navigateToProfileShow: function (e) {
         console.log('eee', e);

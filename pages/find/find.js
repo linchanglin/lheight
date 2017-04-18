@@ -6,7 +6,6 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-
   },
   onLoad: function () {
     var that = this;
@@ -20,9 +19,11 @@ Page({
 
     wx.getSystemInfo({
       success: function (res) {
+        console.log('systemInfo',res);
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
+          mapHeight: res.windowHeight - 51
         });
       }
     });
@@ -295,7 +296,7 @@ Page({
             loves: old_loves,
             selected_love_id: love_id
           })
-
+          wx.setStorageSync('board_loves_need_refresh', 1);
         }
       })
     } else {

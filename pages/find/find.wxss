@@ -4,6 +4,7 @@ page {
 }
 .weui-navbar {
   background-color: white;
+  /*position: fixed;*/
 }
 
 .list-item:first-child {
