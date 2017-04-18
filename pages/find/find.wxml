@@ -10,7 +10,7 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+        <view class="weui-tab__content" wx:if="{{activeIndex == 0}}">
           <view class="page">
             <view class="page__bd">
 
@@ -112,7 +112,7 @@
             </view>
           </view>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+        <view class="weui-tab__content"  wx:if="{{activeIndex == 1}}">
           <view class="page">
             <view class="page__bd">
 
@@ -214,7 +214,7 @@
             </view>
           </view>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+        <view class="weui-tab__content" wx:if="{{activeIndex == 2}}">
           <map id="map" longitude="119.1977521459" latitude="26.0597592181" scale="14" bindcontroltap="controltap" markers="{{loves}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: {{mapHeight}}px;"></map>
         </view>
       </view>
