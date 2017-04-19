@@ -174,9 +174,6 @@ Page({
     formSubmit: function (e) {
         console.log('e', e.detail.value)
         let that = this;
-        that.setData({
-            save_loading: true
-        })
 
         let submitData = e.detail.value;
 
@@ -195,11 +192,10 @@ Page({
             }
         }
 
-
         console.log("submitData", submitData);
         console.log("that.data.files", that.data.files);
 
-        if (submitData.gender == '' || submitData.birthday == '' || submitData.college == '') {
+        if (submitData.gender === '' || submitData.birthday === '' || submitData.college === '') {
             console.log('sss', submitData.gender, submitData.birthday, submitData.college)
             wx.showModal({
                 title: '提示',
@@ -215,9 +211,11 @@ Page({
             })
 
             return
+        } else {
+            that.setData({
+                save_loading: true
+            })
         }
-
-
 
         wx.request({
             url: 'https://collhome.com/api/users',

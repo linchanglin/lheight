@@ -103,10 +103,12 @@ Page({
   },
   saveLove: function () {
     let that = this;
-    that.setData({
-      save_loading: true
-    })
+
     if (that.data.content.length > 0 || that.data.files.length > 0) {
+      
+      that.setData({
+        save_loading: true
+      })
 
       wx.request({
         url: 'https://collhome.com/api/loves',
