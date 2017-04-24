@@ -6,7 +6,11 @@ Page({
     location: {},
     visiable: 0,
     location_exist: 0,
-    save_loading: false
+    save_loading: false,
+
+
+    colleges: ["福州大学", "福建师范大学", "福建师大协和学院", "福建医科大学", "福建中医药大学", "福建农林大学", "福建工程学院", "闽江学院", "江夏学院", "福州教育学院", "华南女子学院", "福州职业技术学院", "平潭海洋大学", "福州大学至诚学院", "福州大学阳光学院", "福建农林大学金山学院 ", "福建农林大学东方学院", "福建警察学院", "福州外语外贸学院"],
+    collegeIndex: 0
   },
   onLoad: function () {
     let that = this;
@@ -78,6 +82,11 @@ Page({
       files: new_files
     })
   },
+  bindCollegeChange: function (e) {
+        this.setData({
+            collegeIndex: e.detail.value
+        })
+    },
   chooseLocation: function () {
     let that = this;
     wx.chooseLocation({
@@ -117,7 +126,7 @@ Page({
           'content': that.data.content,
           'location': that.data.location,
           'visiable': that.data.visiable,
-          'user_id': 1
+          'user_id': parseInt(that.data.collegeIndex) + 1
         },
         method: 'POST',
         success: function (res) {
@@ -187,11 +196,6 @@ Page({
       icon: 'success',
       duration: 1000
     });
-    setTimeout(function () {
-      wx.switchTab({
-        url: '/pages/board/board'
-      })
-    }, 1000)
   }
 
 })
