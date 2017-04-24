@@ -1,0 +1,24 @@
+/* pages/virtualLoveInput/virtualLoveInput.wxss */
+
+/*.weui-uploader__file {
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}*/
+
+.border-top-none::before {
+    border-top:1rpx solid #fff;
+}
+
+.weui-uploader__file-contentt {
+  position: absolute;
+  top: 7px;
+  left: 69px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #FFFFFF;
+}
+
+.weui-uploader__file_statuss {
+  position: relative;
+}

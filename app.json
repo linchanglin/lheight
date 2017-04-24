@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/virtualLoveInput/virtualLoveInput",
+
     "pages/board/board",
     "pages/find/find",
     "pages/loveInput/loveInput",
