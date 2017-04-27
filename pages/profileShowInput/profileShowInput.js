@@ -179,7 +179,9 @@ Page({
 
         submitData.gender = parseInt(submitData.gender) + 1;
         submitData.college = parseInt(submitData.college) + 1;
-        submitData.grade = parseInt(submitData.grade) + 1;
+        if (submitData.grade != '') {
+            submitData.grade = parseInt(submitData.grade) + 1;
+        }
         submitData.birthday = that.data.birthdayIndex;
 
         if (that.data.hometown) {
