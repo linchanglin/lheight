@@ -19,7 +19,7 @@ Page({
 
     wx.getSystemInfo({
       success: function (res) {
-        console.log('systemInfo',res);
+        console.log('systemInfo', res);
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
@@ -48,7 +48,12 @@ Page({
     })
   },
   onShow: function () {
+    console.log('onShow');
     let that = this;
+
+    wx.showLoading({
+      title: '加载中',
+    })
 
     if (that.data.wesecret) {
       that.load_user();
@@ -64,30 +69,10 @@ Page({
       }
     }
   },
-  onPullDownRefresh: function () {
-    let that = this;
-
-    that.setData({
-      showTopTips1: false,
-    });
-
-    that.load_loves('pulldown');
-
-    setTimeout(function () {
-      that.setData({
-        showTopTips2: true
-      });
-    }, 1000);
-
-    setTimeout(function () {
-      that.setData({
-        showTopTips2: false
-      });
-    }, 2500);
-  },
   load_user: function () {
     let that = this;
-    let url = 'https://collhome.com/api/user?wesecret=' + that.data.wesecret
+    console.log("that.data.wesecret", that.data.wesecret);
+    let url = 'https://collhome.com/apis/user?wesecret=' + that.data.wesecret;
 
     wx.request({
       url: url,
@@ -108,28 +93,31 @@ Page({
       wx.removeStorageSync('loves_need_refresh')
     }
   },
-  load_loves: function (pulldown) {
+  load_loves: function (parameter) {
     let that = this;
     let activeIndex = that.data.activeIndex
 
     let url;
     if (that.data.wesecret) {
       if (activeIndex == 0) {
-        url = 'https://collhome.com/api/hotLoves?wesecret=' + that.data.wesecret;
+        url = 'https://collhome.com/apis/hotLoves?wesecret=' + that.data.wesecret;
       } else if (activeIndex == 1) {
-        console.log('that.userInfo00000000000', that.data.userInfo);
+        console.log('that.userInfo', that.data.userInfo);
         if (that.data.userInfo.college == '') {
+          that.setData({
+            loves: []
+          })
           that.showNoCollegeModal();
           return
         } else {
-          url = 'https://collhome.com/api/collegeLoves?wesecret=' + that.data.wesecret;
+          url = 'https://collhome.com/apis/collegeLoves?wesecret=' + that.data.wesecret;
         }
       } else {
-        url = 'https://collhome.com/api/locationLoves?wesecret=' + that.data.wesecret;
+        url = 'https://collhome.com/apis/locationLoves?wesecret=' + that.data.wesecret;
       }
     } else {
       if (activeIndex == 0) {
-        url = 'https://collhome.com/api/hotLoves';
+        url = 'https://collhome.com/apis/hotLoves';
       } else if (activeIndex == 1) {
         that.setData({
           loves: []
@@ -137,29 +125,28 @@ Page({
         that.showNoCollegeModal();
         return
       } else {
-        url = 'https://collhome.com/api/locationLoves';
+        url = 'https://collhome.com/apis/locationLoves';
       }
     }
 
     wx.request({
       url: url,
       success: function (res) {
-        console.log('lovessss',res.data.data)
+        console.log('lovessss', res.data.data)
         let loves = res.data.data;
         that.setData({
           loves: loves
         })
 
-        if (pulldown) {
-          wx.stopPullDownRefresh();
-          console.log('pulllllll');
-        }
+        wx.hideLoading()
       }
     })
 
   },
 
   showNoCollegeModal: function () {
+    wx.hideLoading()
+
     let that = this;
     wx.showModal({
       title: '未知学校',
@@ -176,6 +163,11 @@ Page({
   },
   tabClick: function (e) {
     let that = this;
+
+    wx.showLoading({
+      title: '加载中',
+    })
+
     that.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
@@ -201,7 +193,7 @@ Page({
 
 
 
- previewImage: function (e) {
+  previewImage: function (e) {
     console.log('preview e', e);
     var current = e.currentTarget.dataset.current;
     var urls = e.currentTarget.dataset.urls;
@@ -270,7 +262,7 @@ Page({
         praise == 0;
       }
       wx.request({
-        url: 'https://collhome.com/api/loves/' + love_id + '/praises',
+        url: 'https://collhome.com/apis/loves/' + love_id + '/praises',
         method: 'POST',
         data: {
           wesecret: that.data.wesecret,
@@ -337,7 +329,7 @@ Page({
     let that = this;
 
     wx.request({
-      url: 'https://collhome.com/api/register',
+      url: 'https://collhome.com/apis/register',
       method: 'POST',
       data: {
         code: code,

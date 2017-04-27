@@ -1,13 +1,19 @@
 {
   "pages": [
-    "pages/board/board",
-    
-    "pages/virtualLoveInput/virtualLoveInput",
-
-    "pages/find/find",
-    "pages/loveInput/loveInput",
-    "pages/picture/picture",
     "pages/user/user",
+    
+    "pages/find/find",
+    
+    
+    
+    "pages/picture/picture",
+    
+    "pages/board/board",
+    "pages/virtualLoveInput/virtualLoveInput",
+    
+    
+
+    "pages/loveInput/loveInput",
     "pages/myLove/myLove",
     "pages/profileShow/profileShow",
     "pages/profileShowInput/profileShowInput",

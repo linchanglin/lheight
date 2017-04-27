@@ -30,8 +30,11 @@ Page({
                     imgWidth: imgWidth
                 });
 
+                wx.showLoading({
+                    title: '加载中',
+                })
                 // that.loadImages();
-                that.load_pictures();
+                that.load_pictures('onLoad');
             }
         })
     },
@@ -56,20 +59,41 @@ Page({
             });
         }, 2500);
     },
-    load_pictures: function (pulldown) {
+    load_pictures: function (parameter) {
         let that = this;
 
         wx.request({
-            url: 'https://collhome.com/api/pictures',
+            url: 'https://collhome.com/apis/pictures',
             success: function (res) {
-                console.log(res.data)
+                console.log('pictures',res.data.data);
+
+                let pictures = res.data.data;
                 that.setData({
-                    images: res.data.data
+                    images: pictures
                 })
 
-                if (pulldown) {
-                    wx.stopPullDownRefresh();
-                    console.log('pulllllll');
+                if (!pictures || pictures.length == 0) {
+                    wx.showModal({
+                        // title: '提示',
+                        showCancel: false,
+                        content: '没有照片',
+                        success: function (res) {
+                            if (res.confirm) {
+                                console.log('用户点击确定')
+                            } else if (res.cancel) {
+                                console.log('用户点击取消')
+                            }
+                        }
+                    })
+                }
+
+
+                if (parameter) {
+                    if (parameter == 'pulldown') {
+                        wx.stopPullDownRefresh();
+                    } else if (parameter == 'onLoad') {
+                        wx.hideLoading()
+                    }
                 }
             }
         })
@@ -134,27 +158,27 @@ Page({
         this.setData(data);
     },
 
-    loadImages: function () {
-        var that = this
-        wx.showToast({
-            title: '拼命加载中...',
-            icon: 'loading',
-            duration: 2000
-        })
-        wx.request({
-            url: 'https://api.getweapp.com/vendor/tngou/tnfs/api/list?page=' + this.data.page,
-            success: function (res) {
-                console.log('res', res);
-                wx.hideToast()
-                that.setData({
-                    loadingCount: res.data.tngou.length,
-                    images: res.data.tngou,
-                    page: that.data.page + 1
-                })
-            }
-        })
+    // loadImages: function () {
+    //     var that = this
+    //     wx.showToast({
+    //         title: '拼命加载中...',
+    //         icon: 'loading',
+    //         duration: 2000
+    //     })
+    //     wx.request({
+    //         url: 'https://api.getweapp.com/vendor/tngou/tnfs/api/list?page=' + this.data.page,
+    //         success: function (res) {
+    //             console.log('res', res);
+    //             wx.hideToast()
+    //             that.setData({
+    //                 loadingCount: res.data.tngou.length,
+    //                 images: res.data.tngou,
+    //                 page: that.data.page + 1
+    //             })
+    //         }
+    //     })
 
-    },
+    // },
 
 
 
@@ -178,7 +202,7 @@ Page({
         let that = this;
 
         wx.request({
-            url: 'https://collhome.com/api/users/' + user_id,
+            url: 'https://collhome.com/apis/users/' + user_id,
             success: function (res) {
                 console.log('user', res.data)
 

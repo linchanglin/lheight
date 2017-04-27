@@ -88,7 +88,7 @@ Page({
   load_loves: function (pulldown) {
     console.log('load_lovesssssssssssssss');
     let that = this;
-    let url = 'https://collhome.com/api/myLoves?wesecret=' + that.data.wesecret
+    let url = 'https://collhome.com/apis/myLoves?wesecret=' + that.data.wesecret
     console.log('urllllllll', url);
     wx.request({
       url: url,
@@ -176,7 +176,7 @@ Page({
         praise == 0;
       }
       wx.request({
-        url: 'https://collhome.com/api/loves/' + love_id + '/praises',
+        url: 'https://collhome.com/apis/loves/' + love_id + '/praises',
         method: 'POST',
         data: {
           wesecret: that.data.wesecret,
@@ -243,7 +243,7 @@ Page({
     let that = this;
 
     wx.request({
-      url: 'https://collhome.com/api/register',
+      url: 'https://collhome.com/apis/register',
       method: 'POST',
       data: {
         code: code,

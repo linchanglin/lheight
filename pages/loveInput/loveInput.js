@@ -111,7 +111,7 @@ Page({
       })
 
       wx.request({
-        url: 'https://collhome.com/api/loves',
+        url: 'https://collhome.com/apis/loves',
         data: {
           'wesecret': that.data.wesecret,
           'content': that.data.content,
@@ -148,7 +148,7 @@ Page({
   saveLoveImage: function (love_id, files, successUp, failUp, i, length) {
     let that = this;
     wx.uploadFile({
-      url: 'https://collhome.com/api/loves/images',
+      url: 'https://collhome.com/apis/loves/images',
       filePath: that.data.files[i],
       name: 'file',
       formData: {

@@ -18,7 +18,11 @@ Page({
       })
     }
 
-    that.load_loves();
+    wx.showLoading({
+      title: '加载中',
+    })
+    
+    that.load_loves('onLoad');
 
     wx.getSystemInfo({
       success: (res) => {
@@ -85,28 +89,46 @@ Page({
   },
 
   // 需要调整
-  load_loves: function (pulldown) {
+  load_loves: function (parameter) {
     console.log('load_lovesssssssssssssss');
     let that = this;
     let url;
     if (that.data.wesecret) {
-      url = 'https://collhome.com/api/loves?wesecret=' + that.data.wesecret
+      url = 'https://collhome.com/apis/loves?wesecret=' + that.data.wesecret
     } else {
-      url = 'https://collhome.com/api/loves'
+      url = 'https://collhome.com/apis/loves'
     }
-    console.log('urllllllll',url);
+    console.log('urllllllll', url);
     wx.request({
       url: url,
       success: function (res) {
-        console.log(res.data)
+        console.log('loves', res.data);
         let loves = res.data.data;
         that.setData({
           loves: loves
         })
 
-        if (pulldown) {
-          wx.stopPullDownRefresh();
-          console.log('pulllllll');
+        if (!loves  || loves.length == 0) {
+          wx.showModal({
+            // title: '提示',
+            showCancel: false,
+            content: '没有表白',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        }
+
+        if (parameter) {
+          if (parameter == 'pulldown') {
+            wx.stopPullDownRefresh();
+          } else if (parameter == 'onLoad') {
+            wx.hideLoading()
+          }
         }
       }
     })
@@ -181,7 +203,7 @@ Page({
         praise == 0;
       }
       wx.request({
-        url: 'https://collhome.com/api/loves/' + love_id + '/praises',
+        url: 'https://collhome.com/apis/loves/' + love_id + '/praises',
         method: 'POST',
         data: {
           wesecret: that.data.wesecret,
@@ -247,7 +269,7 @@ Page({
     let that = this;
 
     wx.request({
-      url: 'https://collhome.com/api/register',
+      url: 'https://collhome.com/apis/register',
       method: 'POST',
       data: {
         code: code,

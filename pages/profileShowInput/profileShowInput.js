@@ -22,7 +22,7 @@ Page({
         })
 
         wx.request({
-            url: 'https://collhome.com/api/user?wesecret=' + wesecret,
+            url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
 
             success: function (res) {
                 console.log(res.data)
@@ -137,7 +137,7 @@ Page({
     deleteUserPicture: function (picture) {
         let that = this;
         wx.request({
-            url: 'https://collhome.com/api/delete/user/picture',
+            url: 'https://collhome.com/apis/delete/user/picture',
             method: 'POST',
             data: {
                 wesecret: that.data.wesecret,
@@ -218,7 +218,7 @@ Page({
         }
 
         wx.request({
-            url: 'https://collhome.com/api/users',
+            url: 'https://collhome.com/apis/users',
             data: {
                 'wesecret': that.data.wesecret,
                 'userInfo': submitData,
@@ -264,7 +264,7 @@ Page({
     saveUserPicture: function (upload_files, successUp, failUp, i, length) {
         let that = this;
         wx.uploadFile({
-            url: 'https://collhome.com/api/users/pictures',
+            url: 'https://collhome.com/apis/users/pictures',
             filePath: upload_files[i],
             name: 'file',
             formData: {
