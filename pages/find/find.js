@@ -139,6 +139,22 @@ Page({
         })
 
         wx.hideLoading()
+
+        if (!loves || loves.length == 0) {
+          wx.showModal({
+            // title: '提示',
+            showCancel: false,
+            content: '没有表白',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        }
+
       }
     })
 

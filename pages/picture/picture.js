@@ -65,12 +65,20 @@ Page({
         wx.request({
             url: 'https://collhome.com/apis/pictures',
             success: function (res) {
-                console.log('pictures',res.data.data);
+                console.log('pictures', res.data.data);
 
                 let pictures = res.data.data;
                 that.setData({
                     images: pictures
                 })
+
+                if (parameter) {
+                    if (parameter == 'pulldown') {
+                        wx.stopPullDownRefresh();
+                    } else if (parameter == 'onLoad') {
+                        wx.hideLoading()
+                    }
+                }
 
                 if (!pictures || pictures.length == 0) {
                     wx.showModal({
@@ -87,14 +95,6 @@ Page({
                     })
                 }
 
-
-                if (parameter) {
-                    if (parameter == 'pulldown') {
-                        wx.stopPullDownRefresh();
-                    } else if (parameter == 'onLoad') {
-                        wx.hideLoading()
-                    }
-                }
             }
         })
     },

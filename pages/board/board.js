@@ -21,7 +21,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    
+
     that.load_loves('onLoad');
 
     wx.getSystemInfo({
@@ -108,7 +108,15 @@ Page({
           loves: loves
         })
 
-        if (!loves  || loves.length == 0) {
+        if (parameter) {
+          if (parameter == 'pulldown') {
+            wx.stopPullDownRefresh();
+          } else if (parameter == 'onLoad') {
+            wx.hideLoading()
+          }
+        }
+
+        if (!loves || loves.length == 0) {
           wx.showModal({
             // title: '提示',
             showCancel: false,
@@ -123,13 +131,6 @@ Page({
           })
         }
 
-        if (parameter) {
-          if (parameter == 'pulldown') {
-            wx.stopPullDownRefresh();
-          } else if (parameter == 'onLoad') {
-            wx.hideLoading()
-          }
-        }
       }
     })
 

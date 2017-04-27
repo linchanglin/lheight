@@ -18,7 +18,10 @@ Page({
       })
     }
 
-    that.load_loves();
+    wx.showLoading({
+      title: '加载中',
+    })
+    that.load_loves('onLoad');
 
     wx.getSystemInfo({
       success: (res) => {
@@ -85,7 +88,7 @@ Page({
   },
 
   // 需要调整
-  load_loves: function (pulldown) {
+  load_loves: function (parameter) {
     console.log('load_lovesssssssssssssss');
     let that = this;
     let url = 'https://collhome.com/apis/myLoves?wesecret=' + that.data.wesecret
@@ -99,10 +102,30 @@ Page({
           loves: loves
         })
 
-        if (pulldown) {
-          wx.stopPullDownRefresh();
-          console.log('pulllllll');
+        if (parameter) {
+          if (parameter == 'pulldown') {
+            wx.stopPullDownRefresh();
+          } else if (parameter == 'onLoad') {
+            wx.hideLoading()
+          }
         }
+        
+        if (!loves || loves.length == 0) {
+          wx.showModal({
+            // title: '提示',
+            showCancel: false,
+            content: '没有表白',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        }
+
+
       }
     })
 
