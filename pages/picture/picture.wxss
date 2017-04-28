@@ -30,7 +30,7 @@
   z-index: 99999999999999;
   /*border-radius: 10px;*/
   overflow: hidden;
-  border-radius:7px;
+  border-radius: 7px;
 }
 
 .banner {
@@ -44,75 +44,66 @@
   border-radius: 10px 10px 0 0;
 }
 
-.goodsdetail .title1 {
-  padding: 10rpx 20rpx;
+.banner_bottom {
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  padding: 10rpx 0;
+}
+
+.title1 {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
   color: #fff;
-  font-size: 36rpx;
-}
-
-.goodsdetail .title2 {
-  padding: 5rpx 20rpx;
-  color: #fff;
-  font-size: 24rpx;
-}
-
-.goodsdetail .title3 {
-  padding: 5rpx 20rpx;
-  color: #fff;
-  font-size: 24rpx;
-}
-
-.goodsdetail .title3 image {
-  width: 24rpx;
-  height: 24rpx;
-}
-
-.goodsdetail .title4 {
-  width: 100%;
-  position: absolute;
-  bottom: 20rpx;
-  color: #fff;
-}
-
-.goodsdetail .title5 {
-  width: 50%;
-  float: left;
-  font-size: 36rpx;
-  margin-left: 20rpx;
-  font-size: 36rpx;
-}
-
-.goodsdetail .title6 {
-  /*width: 200rpx;*/
-  /*height: 80rpx;*/
   font-size: 30rpx;
-  /*line-height: 80rpx;*/
-  float: right;
-  /*background: #393939;*/
-  /*color: #fff;*/
-  color: #09bb07;
-  text-align: center;
-  margin-right: 20rpx;
-  /*border-radius: 5px;*/
+  margin-left: 20rpx;
 }
 
-/*.goodsdetail .title7{height:80rpx;font-size: 24rpx;float:right;color:#4a4a4a;text-align:center;margin-right:30rpx;border-radius:5px;}
+.title2 {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  color: #fff;
+  font-size: 24rpx;
+  margin-left: 20rpx;
+}
 
+.title3 {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
 
-.goodsdetail .title7 .reduce,
-.goodsdetail .title7 .add{font-size: 50rpx;background: #feb70f;width: 50rpx;height: 50rpx;text-align: center;border-radius: 50%;float:left;line-height:50rpx;}
-.goodsdetail .title7 .num{float:left;width:50rpx;line-height:50rpx;text-align: center;margin: 0 10rpx;}*/
+.title4 {
+  display: flex;
+  color: #fff;
+  align-items: flex-end;
+  margin-left: 20rpx;
+  font-size: 24rpx;
+}
 
+.title5 {
+  display: flex;
+  color: #09bb07;
+  align-items: flex-end;
+  margin-right: 20rpx;
+  font-size: 30rpx;
+}
+
+.title6 {
+  flex: 0.5;
+}
 
 .ripple {
-	animation-duration: 0.5s;
-	animation-fill-mode: both;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
 }
 
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale3d(.3, .3, .3);
+    transform: scale3d(0.3, 0.3, 0.3);
   }
 
   50% {
@@ -122,7 +113,6 @@
 
 .zoomIn {
   animation-name: zoomIn;
-
   /*animation-duration: 1s;
 	animation-fill-mode: both;*/
 }
@@ -134,7 +124,7 @@
 
   50% {
     opacity: 0;
-    transform: scale3d(.3, .3, .3);
+    transform: scale3d(0.3, 0.3, 0.3);
   }
 
   to {
@@ -144,7 +134,6 @@
 
 .zoomOut {
   animation-name: zoomOut;
-
   /*animation-duration: 1s;
 	animation-fill-mode: both;*/
 }
