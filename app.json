@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/picture/picture",
+    
     "pages/user/user",
     
     "pages/find/find",
     
     
     
-    "pages/picture/picture",
     
     "pages/board/board",
     "pages/virtualLoveInput/virtualLoveInput",

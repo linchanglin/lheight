@@ -10,6 +10,10 @@ Page({
   onLoad: function () {
     var that = this;
 
+    wx.showLoading({
+      title: '加载中',
+    })
+
     let wesecret = wx.getStorageSync('wesecret');
     if (wesecret) {
       that.setData({
@@ -50,10 +54,6 @@ Page({
   onShow: function () {
     console.log('onShow');
     let that = this;
-
-    wx.showLoading({
-      title: '加载中',
-    })
 
     if (that.data.wesecret) {
       that.load_user();
@@ -179,10 +179,6 @@ Page({
   },
   tabClick: function (e) {
     let that = this;
-
-    wx.showLoading({
-      title: '加载中',
-    })
 
     that.setData({
       sliderOffset: e.currentTarget.offsetLeft,
