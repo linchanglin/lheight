@@ -2,7 +2,6 @@
   <view class="page__bd">
     <view class="weui-panel"></view>
     <view class="weui-panel weui-panel_access">
-      <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
       <view class="weui-cells weui-cells_after-title">
         <radio-group bindchange="radioChange">
           <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="{{item.value}}">

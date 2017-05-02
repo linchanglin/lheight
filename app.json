@@ -1,5 +1,22 @@
 {
   "pages": [
+    "pages/board/board",
+    
+    "pages/loveInput/loveInput",
+    
+    "pages/videoUrlInput/videoUrlInput",
+
+    
+    "pages/virtualLoveInput/virtualLoveInput",
+    
+    
+    "pages/profileShowInput/profileShowInput",
+    
+    
+    
+    
+    
+    
     "pages/user/user",
     
     "pages/picture/picture",
@@ -10,15 +27,11 @@
     
     
     
-    "pages/board/board",
-    "pages/virtualLoveInput/virtualLoveInput",
     
     
 
-    "pages/loveInput/loveInput",
     "pages/myLove/myLove",
     "pages/profileShow/profileShow",
-    "pages/profileShowInput/profileShowInput",
     "pages/comment/comment",
     "pages/commentInput/commentInput",
     "pages/chat/chat",

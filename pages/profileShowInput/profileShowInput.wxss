@@ -50,3 +50,11 @@
   color: #000;
   font-size: 17px;
 }
+
+.page__bd {
+  padding-bottom: 0px;
+}
+
+.weui-btn-area {
+  margin: 20px 15px ;
+}

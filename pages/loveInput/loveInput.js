@@ -6,6 +6,8 @@ Page({
     location: {},
     visiable: 0,
     location_exist: 0,
+    nickname: false,
+    videoUrl_exist: 0,
     save_loading: false
   },
   onLoad: function () {
@@ -20,12 +22,20 @@ Page({
   },
   onShow: function () {
     let that = this;
-    let value = wx.getStorageSync('visiable');
-    if (value) {
+    let visiable = wx.getStorageSync('visiable');
+    if (visiable) {
       that.setData({
-        visiable: value
+        visiable: visiable
       });
       wx.removeStorageSync('visiable');
+    }
+    let video_url = wx.getStorageSync('video_url');
+    if (video_url) {
+      that.setData({
+        videoUrl_exist: 1,
+        video_url: video_url
+      });
+      wx.removeStorageSync('video_url');
     }
   },
   chooseImage: function (e) {
@@ -101,11 +111,46 @@ Page({
       content: e.detail.value
     })
   },
+  switchChange: function (e) {
+    console.log("switchChange e", e);
+    let that = this;
+
+    let value = e.detail.value;
+    if (value) {
+      that.setData({
+        nickname: true
+      })
+    } else {
+      that.setData({
+        nickname: false
+      })
+    }
+  },
+  navigateToVideoUrlInput: function () {
+    let that = this;
+
+    let url;
+    let video_url = that.data.video_url;
+    if (video_url) {
+      url = `../videoUrlInput/videoUrlInput?video_url=${video_url}`
+    } else {
+      url = "../videoUrlInput/videoUrlInput";
+    }
+    wx.navigateTo({
+      url: url,
+    })
+  },
+  navigateToVisiableInput: function () {
+    let that = this;
+    wx.navigateTo({
+      url: `../visiableInput/visiableInput?visiable=${that.data.visiable}`
+    })
+  },
   saveLove: function () {
     let that = this;
 
     if (that.data.content.length > 0 || that.data.files.length > 0) {
-      
+
       that.setData({
         save_loading: true
       })

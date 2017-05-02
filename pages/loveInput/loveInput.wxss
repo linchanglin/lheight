@@ -7,7 +7,11 @@
 }*/
 
 .border-top-none::before {
-    border-top:1rpx solid #fff;
+  border-top: 1rpx solid #fff;
+}
+
+.border-bottom-none::after {
+  border-bottom: 0px;
 }
 
 .weui-uploader__file-contentt {
@@ -15,10 +19,29 @@
   top: 7px;
   left: 69px;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  color: #FFFFFF;
+  transform: translate(-50%, -50%);
+  color: #fff;
 }
 
 .weui-uploader__file_statuss {
   position: relative;
+}
+
+.iconfront {
+  margin-right: 10px;
+  vertical-align: middle;
+  width: 25px;
+  height: 25px;
+}
+
+.weui-cells__title {
+  margin-top: 0px;
+}
+
+.page__bd {
+  padding-bottom: 0px;
+}
+
+.weui-btn-area {
+  margin: 20px 15px ;
 }

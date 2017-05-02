@@ -9,6 +9,20 @@ Page({
       { name: '私密', description: '所自己可见',value: '4' },
     ],
   },
+  onLoad: function (option) {
+    console.log('option',option);
+    let visiable = option.visiable;
+
+    var radioItems = this.data.radioItems;
+    for (var i = 0, len = radioItems.length; i < len; ++i) {
+      radioItems[i].checked = radioItems[i].value == visiable;
+    }
+
+    this.setData({
+      radioItems: radioItems
+    });
+
+  },
   radioChange: function (e) {
     let value = e.detail.value;
     wx.setStorageSync('visiable', value);

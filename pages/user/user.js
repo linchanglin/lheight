@@ -10,6 +10,9 @@ Page({
             that.setData({
                 wesecret: wesecret
             })
+            wx.showLoading({
+                title: '加载中',
+            })
             that.getUserInfo(wesecret);
         } else {
             that.signIn();
@@ -34,6 +37,8 @@ Page({
                 that.setData({
                     userInfo: res.data.data
                 })
+
+                wx.hideLoading()
             }
         })
     },
