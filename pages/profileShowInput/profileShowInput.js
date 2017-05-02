@@ -2,16 +2,12 @@ import dataAPI from '../../utils/utils.js'
 
 Page({
     data: {
-        colleges: ["福州大学", "福建师范大学", "福建师大协和学院", "福建医科大学", "福建中医药大学", "福建农林大学", "福建工程学院", "闽江学院", "江夏学院", "福州教育学院", "华南女子学院", "福州职业技术学院", "平潭海洋大学", "福州大学至诚学院", "福州大学阳光学院", "福建农林大学金山学院 ", "福建农林大学东方学院", "福建警察学院", "福州外语外贸学院"],
-        grades: ['2017级', '2016级', '2015级', '2014级', '2013级', '2017级研', '2016级研', '2015级研', '2014级研'],
         genders: ['男', '女'],
-
         files: [],
         old_files: [],
+        save_loading: false,
+        
         // showTopTips: false,
-
-        save_loading: false
-
     },
     onLoad: function () {
         let that = this;
@@ -22,8 +18,26 @@ Page({
         })
 
         wx.request({
-            url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
+          url: 'https://collhome.com/apis/colleges',
+          success: function(res){
+              console.log('colleges res',res);
+              that.setData({
+                  colleges: res.data.data
+              })
+          }
+        })
+        wx.request({
+          url: 'https://collhome.com/apis/grades',
+          success: function(res){
+              console.log('grades res',res);
+              that.setData({
+                  grades: res.data.data
+              })
+          }
+        })
 
+        wx.request({
+            url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
             success: function (res) {
                 console.log(res.data)
                 let userInfo = res.data.data;

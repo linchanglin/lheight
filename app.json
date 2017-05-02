@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/user/user",
+    
     "pages/picture/picture",
     
-    "pages/user/user",
     
     "pages/find/find",
     
