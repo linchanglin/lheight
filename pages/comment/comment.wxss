@@ -108,6 +108,7 @@ image {
 }
 
 .content {
+  margin: 0 0 12px 0;
   word-break: break-all;
   font-size: 15px;
 }
@@ -115,13 +116,14 @@ image {
 .item {
   display: flex;
   position: relative;
-  padding: 15px;
+  padding: 12px 10px 0;
   background-color: #fff;
-  margin-bottom: 1px;
+  /*margin-bottom: 1px;*/
 }
 
 .i-right {
   width: 100%;
+  border-bottom: 1px solid #edecf2;
 }
 
 .c-u-img {
@@ -152,8 +154,17 @@ image {
   height: 20px;
 }
 
+.comment_content {
+  margin: 5px 0 8px 0;
+}
 
-
+.comment_reply {
+  color: #66c;
+  font-size: 13px;
+  padding: 3px 8px;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
 
 .weui-flex {
   background-color: #fff;

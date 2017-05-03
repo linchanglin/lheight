@@ -140,6 +140,26 @@ Page({
       // scale: 28
     })
   },
+  navigateToReply: function (e) {
+    console.log('navigateToReply', e);
+    let love_id = e.currentTarget.dataset.loveid;
+    console.log('love_id', love_id);
+
+    var that = this;
+    that.setData({
+      item_selected_love_id: love_id
+    })
+
+    setTimeout(function () {
+      that.setData({
+        item_selected_love_id: ''
+      })
+    }, 450)
+return
+    wx.navigateTo({
+      url: '../comment/comment?love_id=' + love_id
+    });
+  },
   praiseLove: function (e) {
     console.log('praiseLove e', e);
     let love_id = e.currentTarget.dataset.loveid;
