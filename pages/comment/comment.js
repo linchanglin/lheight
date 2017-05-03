@@ -165,7 +165,7 @@ Page({
     }, 450)
 
     wx.navigateTo({
-      url: '../reply/reply?comment_id=' + comment_id
+      url: `../reply/reply?comment_id=${comment_id}`
     });
   },
   praiseLove: function (e) {

@@ -3,6 +3,8 @@
     "pages/comment/comment",
     "pages/commentInput/commentInput",
 
+    "pages/reply/reply",
+
     
     "pages/board/board",
     "pages/loveInput/loveInput",
