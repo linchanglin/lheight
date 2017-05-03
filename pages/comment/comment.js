@@ -140,6 +140,22 @@ Page({
       // scale: 28
     })
   },
+  showCommentActionSheet: function (e) {
+    console.log('showCommentActionSheet', e);
+    let nickname = e.currentTarget.dataset.commentusernickname;
+    let content = e.currentTarget.dataset.commentcontent;
+    let comment = `${nickname}: ${content}`
+    wx.showActionSheet({
+      itemList: [comment, '回复', '举报', '删除'],
+      // itemColor: '#ff0000',
+      success: function (res) {
+        console.log(res.tapIndex)
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
   navigateToReplys: function (e) {
     console.log('navigateToReplys', e);
     let comment_id = e.currentTarget.dataset.commentid;
@@ -166,6 +182,15 @@ Page({
 
     wx.navigateTo({
       url: `../reply/reply?comment_id=${comment_id}`
+    });
+  },
+  navigateToReplyInput: function (e) {
+    console.log('navigateToReplyInput e', e);
+
+    let comment_id = e.currentTarget.dataset.commentid;
+    let user_id = e.currentTarget.dataset.userid;
+    wx.navigateTo({
+      url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
     });
   },
   praiseLove: function (e) {

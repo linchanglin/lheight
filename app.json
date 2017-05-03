@@ -1,9 +1,12 @@
 {
   "pages": [
     "pages/comment/comment",
+    
+    "pages/reply/reply",
+    "pages/replyInput/replyInput",
+    
     "pages/commentInput/commentInput",
 
-    "pages/reply/reply",
 
     
     "pages/board/board",

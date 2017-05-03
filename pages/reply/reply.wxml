@@ -1,2 +1,34 @@
-<!--pages/reply/reply.wxml-->
-<text>pages/reply/reply.wxml</text>
+<view class="page">
+  <view class="page__bd">
+
+    <!--评论列表-->
+    <view class="comments">
+      <view class="item touch-active" wx:for="{{comments}}" wx:for-item="comment" wx:key="id">
+        <view class="i-left">
+          <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
+        </view>
+        <view class="i-right">
+          <view class="top">
+            <view>
+              <view class="u-name" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow">{{comment.userInfo.nickName}}</view>
+              <view class="time">{{comment.created_at}}</view>
+            </view>
+            <view style="font-size: 13px;">
+              <image class="image-comment" style="width: 18px; height: 18px" src="../images/praise.png"></image>
+              <text>{{love.praise_nums}}</text>
+              <image class="image-comment" style="margin-left: 10px;width: 18px; height: 18px" src="../images/comment.png"></image>
+            </view>
+          </view>
+
+          <!--评论内容-->
+          <view class="content">
+            <view class="comment_content">{{comment.content}}</view>
+            <view class="comment_reply" data-commentId="{{comment.id}}"  bindtap="navigateToReplys">
+              <text class="{{comment.id == item_selected_comment_id ? 'comment_reply_hover_class':''}}" style="padding: 2px; border-radius: 5px" data-commentId="{{comment.id}}" catchtap="navigateToReply">共12条回复 ></text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
