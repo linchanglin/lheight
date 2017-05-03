@@ -161,9 +161,12 @@ image {
 .comment_reply {
   color: #66c;
   font-size: 13px;
-  padding: 3px 8px;
+  padding: 5px 8px;
   background-color: #f8f8f8;
-  border-radius: 3px;
+  border-radius: 5px;
+}
+.comment_reply_hover_class {
+  background-color: #BBBBBB
 }
 
 .weui-flex {

@@ -11,7 +11,7 @@ Page({
     that.setData({
       love_id: 1
     })
-  
+
     let wesecret = wx.getStorageSync('wesecret');
     if (wesecret) {
       that.setData({
@@ -140,24 +140,32 @@ Page({
       // scale: 28
     })
   },
+  navigateToReplys: function (e) {
+    console.log('navigateToReplys', e);
+    let comment_id = e.currentTarget.dataset.commentid;
+
+    wx.navigateTo({
+      url: `../reply/reply?comment_id=${comment_id}`
+    });
+  },
   navigateToReply: function (e) {
     console.log('navigateToReply', e);
-    let love_id = e.currentTarget.dataset.loveid;
-    console.log('love_id', love_id);
+    let comment_id = e.target.dataset.commentid;
+    console.log('comment_id', comment_id);
 
     var that = this;
     that.setData({
-      item_selected_love_id: love_id
+      item_selected_comment_id: comment_id
     })
 
     setTimeout(function () {
       that.setData({
-        item_selected_love_id: ''
+        item_selected_comment_id: ''
       })
     }, 450)
-return
+
     wx.navigateTo({
-      url: '../comment/comment?love_id=' + love_id
+      url: '../reply/reply?comment_id=' + comment_id
     });
   },
   praiseLove: function (e) {

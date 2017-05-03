@@ -70,8 +70,8 @@
           <!--评论内容-->
           <view class="content">
             <view class="comment_content">{{comment.content}}</view>
-            <view class="comment_reply" bindtap="navigateToReply">
-              <text class="{{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentId="{{comment.id}}" catchtap="navigateToReply">共12条回复  ></text>
+            <view class="comment_reply" data-commentId="{{comment.id}}"  bindtap="navigateToReplys">
+              <text class="{{comment.id == item_selected_comment_id ? 'comment_reply_hover_class':''}}" style="padding: 2px; border-radius: 5px" data-commentId="{{comment.id}}" catchtap="navigateToReply">共12条回复 ></text>
             </view>
           </view>
         </view>
