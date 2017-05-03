@@ -9,7 +9,7 @@
             <image class="img" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
           </view>
           <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
-          <text class="header-time">{{love.created_at}}  来自 {{love.userInfo.college}}</text>
+          <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
         </view>
         <view class="item-body">
           <view class="article-content">
@@ -56,9 +56,13 @@
         </view>
         <view class="i-right">
           <view class="top">
-            <text class="u-name" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow">{{comment.userInfo.nickName}}</text>
-            <text class="time">{{comment.created_at}}</text>
+            <view class="u-name" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow">{{comment.userInfo.nickName}}</view>
+            <view>
+              <image class="image-comment" src="../images/comment.png"></image>
+              <image class="image-comment" src="../images/praise.png"></image>
+            </view>
           </view>
+          <view class="time">{{comment.created_at}}</view>
 
           <!--评论内容-->
           <view class="content">
