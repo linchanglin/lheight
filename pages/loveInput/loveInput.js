@@ -8,7 +8,7 @@ Page({
     location_exist: 0,
     nickname: false,
     videoUrl_exist: 0,
-    save_loading: false
+    save_loading: 0
   },
   onLoad: function () {
     let that = this;
@@ -41,7 +41,7 @@ Page({
   chooseImage: function (e) {
     var that = this;
     wx.chooseImage({
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
@@ -53,8 +53,22 @@ Page({
         that.setData({
           files: that.data.files.concat(res.tempFilePaths)
         });
+
+        that.set_loading_status();
       }
     })
+  },
+  set_loading_status: function () {
+    let that = this;
+    if (that.data.content.length > 0 || that.data.files.length > 0) {
+      that.setData({
+        save_loading: 1
+      })
+    } else {
+      that.setData({
+        save_loading: 0
+      })
+    }
   },
   openAlertPictureTooMany: function () {
     wx.showModal({
@@ -87,6 +101,7 @@ Page({
     that.setData({
       files: new_files
     })
+    that.set_loading_status();
   },
   chooseLocation: function () {
     let that = this;
@@ -107,9 +122,12 @@ Page({
     })
   },
   bindContentInput: function (e) {
-    this.setData({
+    let that = this;
+    that.setData({
       content: e.detail.value
     })
+
+    that.set_loading_status();
   },
   switchChange: function (e) {
     console.log("switchChange e", e);
@@ -152,7 +170,7 @@ Page({
     if (that.data.content.length > 0 || that.data.files.length > 0) {
 
       that.setData({
-        save_loading: true
+        save_loading: 2
       })
 
       wx.request({
@@ -223,7 +241,7 @@ Page({
   switchTabToBoardWithSuccess: function () {
     let that = this;
     that.setData({
-      save_loading: false
+      save_loading: 1
     })
     wx.setStorageSync('board_loves_need_refresh', 1);
     wx.showToast({
