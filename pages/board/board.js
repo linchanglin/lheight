@@ -185,7 +185,7 @@ Page({
 
     } else {
       wx.navigateTo({
-        url: '../comment/comment?love_id=' + love_id
+        url: `../comment/comment?love_id=${love_id}&scroll=scroll_comments`
       });
     }
   },

@@ -1,8 +1,16 @@
 {
   "pages": [
+    "pages/comment/comment",
+    
+    "pages/test/breadtrip/breadtrip",
+    
     "pages/board/board",
     
-    "pages/comment/comment",
+    
+    
+    
+    
+    
     
     "pages/reply/reply",
     "pages/replyInput/replyInput",
@@ -26,7 +34,6 @@
     "pages/city_multi_page_district/city_multi_page_district",
     "pages/index/index",
     "pages/visiableInput/visiableInput",
-    "pages/test/breadtrip/breadtrip",
     "pages/message/message",
     "pages/profile/profile",
     "pages/realNameInput/realNameInput",

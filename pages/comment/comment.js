@@ -4,9 +4,15 @@ Page({
   onLoad: function (options) {
     console.log('options', options)
     let that = this;
-    // that.setData({
-    //   love_id: options.love_id
-    // })
+    that.setData({
+      love_id: options.love_id,
+    })
+    let scroll = options.scroll;
+    if (scroll) {
+      that.setData({
+        scroll: scroll,
+      })
+    }
 
     that.setData({
       love_id: 1
