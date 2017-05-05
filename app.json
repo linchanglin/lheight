@@ -1,7 +1,9 @@
 {
   "pages": [
-
     "pages/board/board",
+    
+    "pages/user/user",
+
     "pages/comment/comment",
     
     "pages/test/breadtrip/breadtrip",
@@ -24,7 +26,6 @@
     "pages/videoUrlInput/videoUrlInput",
     "pages/virtualLoveInput/virtualLoveInput",
     "pages/profileShowInput/profileShowInput",
-    "pages/user/user",
     "pages/picture/picture",
     "pages/find/find",
     "pages/myLove/myLove",

@@ -205,7 +205,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="character" value="{{userInfo.character}}" class="weui-textarea" style="height: 6em" confirm-type="done" />
+                <textarea name="character" value="{{userInfo.character}}" class="weui-textarea" style="height: 6em" maxlength="-1"  />
               </view>
             </view>
           </view>
@@ -213,7 +213,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="hobby" value="{{userInfo.hobby}}" class="weui-textarea" style="height: 6em" />
+                <textarea name="hobby" value="{{userInfo.hobby}}" class="weui-textarea" style="height: 6em" maxlength="-1" />
               </view>
             </view>
           </view>
@@ -221,7 +221,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="love_history" value="{{userInfo.love_history}}" class="weui-textarea" style="height: 6em" />
+                <textarea name="love_history" value="{{userInfo.love_history}}" class="weui-textarea" style="height: 6em" maxlength="-1" />
               </view>
             </view>
           </view>
@@ -229,7 +229,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="love_selecting" value="{{userInfo.love_selecting}}" class="weui-textarea" style="height: 6em" />
+                <textarea name="love_selecting" value="{{userInfo.love_selecting}}" class="weui-textarea" style="height: 6em" maxlength="-1" />
               </view>
             </view>
           </view>

@@ -5,7 +5,7 @@
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea class="weui-textarea" value="{{video_url}}" auto-height="true" bindinput="bindContentInput" bindconfirm="confirmInput" auto-focus />
+            <textarea class="weui-textarea" value="{{video_url}}" maxlength="-1" auto-height="true" bindinput="bindContentInput" bindconfirm="confirmInput" auto-focus />
           </view>
         </view>
       </view>

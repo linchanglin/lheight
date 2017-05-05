@@ -1,38 +1,29 @@
-let order = ['red', 'yellow', 'blue', 'green', 'red']
-
 Page({
   data: {},
 
   onLoad: function (options) {
     console.log('options', options)
     let that = this;
+    let love_id = options.love_id;
 
-
-
+    that.setData({
+      love_id: love_id
+    })
+    let scroll = options.scroll;
+    if (scroll) {
+      that.setData({
+        scroll: scroll
+      })
+    }
 
     wx.getSystemInfo({
       success: (res) => {
         let wh = res.windowHeight;
         that.setData({
-          wh: wh -45
+          wh: wh - 45
         })
       }
     })
-
-    that.setData({
-      love_id: options.love_id,
-    })
-    let scroll = options.scroll;
-    if (scroll) {
-      that.setData({
-        scroll: scroll,
-      })
-    }
-
-
-
-
-
 
     that.setData({
       love_id: 1
@@ -70,8 +61,9 @@ Page({
     })
   },
   onReady: function () {
-    this.setData({
-      toView: 'yellow'
+    let that = this;
+    that.setData({
+      toView: that.data.scroll
     })
   },
   onShow: function () {

@@ -145,20 +145,20 @@ Page({
       urls: urls // 需要预览的图片http链接列表
     })
   },
-  // touchstart_love: function (e) {
-  //   console.log('touchstart_love', e);
-  //   let love_id = e.currentTarget.dataset.loveid;
-  //   var that = this;
-  //   that.setData({
-  //     item_selected_love_id: love_id
-  //   })
-  // },
-  // touchend_love: function (e) {
-  //   let that = this;
-  //   that.setData({
-  //     item_selected_love_id: ''
-  //   })
-  // },
+  longtap_love: function (e) {
+    console.log('longtap_love', e);
+    let love_id = e.currentTarget.dataset.loveid;
+    var that = this;
+    that.setData({
+      item_selected_love_id: love_id
+    })
+  },
+  touchmove_love: function (e) {
+    let that = this;
+    that.setData({
+      item_selected_love_id: ''
+    })
+  },
   navigateToLove: function (e) {
     console.log('navigateToLove', e);
     let love_id = e.currentTarget.dataset.loveid;
@@ -198,7 +198,7 @@ Page({
 
     } else {
       wx.navigateTo({
-        url: `../comment/comment?love_id=${love_id}&scroll=scroll_comments`
+        url: `../comment/comment?love_id=${love_id}&scroll=scroll_to_comments`
       });
     }
   },

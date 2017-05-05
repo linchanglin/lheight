@@ -4,7 +4,7 @@
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea class="weui-textarea" style="height: 8em" placeholder="这一刻的想法..." auto-focus bindinput="bindContentInput"/>
+            <textarea class="weui-textarea" style="height: 8em" maxlength="-1" placeholder="这一刻的想法..." auto-focus bindinput="bindContentInput"/>
           </view>
         </view>
         <view class="weui-cell border-top-none">

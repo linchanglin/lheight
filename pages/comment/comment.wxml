@@ -1,11 +1,7 @@
 <view class="page">
   <view class="page__bd">
 
-    <!--<scroll-view scroll-y="true" style="height: {{wh}}px" scroll-with-animation="true" scroll-into-view="{{toView}}">
-      <view id="red" style="height: 900px ;background-color: red">什</view>
-      <view id="yellow" style="height: 900px;background-color: yellow">什么</view>
-      <view id="blue" style="height: 900px;background-color: blue">什么鬼</view>
-    </scroll-view>-->
+    <scroll-view scroll-y="true" style="height: {{wh}}px" scroll-with-animation="" scroll-into-view="{{toView}}">
 
     <!--love-->
     <view class="container">
@@ -55,7 +51,7 @@
     </view>
 
     <!--评论列表-->
-    <view class="comments" id="scrollsss">
+    <view class="comments" id="scroll_to_comments">
       <block wx:for="{{comments}}" wx:for-item="comment" wx:key="id">
         <view class="item touch-active" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentContent="{{comment.content}}" catchtap="showCommentActionSheet">
           <view class="i-left">
@@ -85,6 +81,8 @@
         </view>
       </block>
     </view>
+
+    </scroll-view>
 
     <!--tabbar-->
     <view class="weui-tabbar">
