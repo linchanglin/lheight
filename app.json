@@ -1,10 +1,11 @@
 {
   "pages": [
+
+    "pages/board/board",
     "pages/comment/comment",
     
     "pages/test/breadtrip/breadtrip",
     
-    "pages/board/board",
     
     
     
