@@ -1,87 +1,88 @@
 <view class="page">
   <view class="page__bd">
-
     <scroll-view scroll-y="true" style="height: {{wh}}px" scroll-with-animation="" scroll-into-view="{{toView}}">
 
-    <!--love-->
-    <view class="container">
-      <view class="list-item">
-        <view class="item-header">
-          <view class="header-img" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
-            <image class="img" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
+      <!--love-->
+      <view class="container">
+        <view class="list-item">
+          <view class="item-header">
+            <view class="header-img" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
+              <image class="img" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
+            </view>
+            <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
+            <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
           </view>
-          <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
-          <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
+          <view class="item-body">
+            <view class="article-content">
+              <text>{{love.content}}</text>
+            </view>
+            <view class="article-imgs" wx:if="{{love.images.length > 0}}">
+              <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
+            </view>
+          </view>
+          <view class="weui-flex" wx:if="{{love.location.name}}">
+            <view class="weui-flex__item" data-location="{{love.location}}" catchtap="navigateToLocation">
+              <view class="placeholder" style="float: left">
+                <image class="image-comment" style="height: 20px" src="../images/location_fill1.png"></image>
+                <text>{{love.location.name}}</text>
+              </view>
+            </view>
+          </view>
         </view>
-        <view class="item-body">
-          <view class="article-content">
-            <text>{{love.content}}</text>
+        <view class="weui-flex">
+          <view class="weui-flex__item">
+            <view class="placeholder" hover="true" hover-class="weui-cell_active" catchtap="navigateToCommentInput">
+              <image wx:if="{{love.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
+              <image wx:if="{{love.if_my_comment == 1}}" class="image-comment" src="../images/comment_fill.png"></image>
+              <text wx:if="{{love.comment_nums == 0}}">评论</text>
+              <text wx:if="{{love.comment_nums !== 0}}">{{love.comment_nums}}</text>
+            </view>
           </view>
-          <view class="article-imgs" wx:if="{{love.images.length > 0}}">
-            <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
-          </view>
-        </view>
-        <view class="weui-flex" wx:if="{{love.location.name}}">
-          <view class="weui-flex__item" data-location="{{love.location}}" catchtap="navigateToLocation">
-            <view class="placeholder" style="float: left">
-              <image class="image-comment" style="height: 20px" src="../images/location_fill1.png"></image>
-              <text>{{love.location.name}}</text>
+          <view class="weui-flex__item">
+            <view class="placeholder" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
+              <image wx:if="{{love.if_my_praise == 0}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
+              <image wx:if="{{love.if_my_praise == 1}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
+              <text wx:if="{{love.praise_nums == 0}}">喜欢</text>
+              <text wx:if="{{love.praise_nums !== 0}}">{{love.praise_nums}}</text>
             </view>
           </view>
         </view>
       </view>
-      <view class="weui-flex">
-        <view class="weui-flex__item">
-          <view class="placeholder" hover="true" hover-class="weui-cell_active" catchtap="navigateToCommentInput">
-            <image wx:if="{{love.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
-            <image wx:if="{{love.if_my_comment == 1}}" class="image-comment" src="../images/comment_fill.png"></image>
-            <text wx:if="{{love.comment_nums == 0}}">评论</text>
-            <text wx:if="{{love.comment_nums !== 0}}">{{love.comment_nums}}</text>
+
+      <!--评论列表-->
+      <view class="comments" id="scroll_to_comments">
+        <block wx:for="{{comments}}" wx:for-item="comment" wx:key="id">
+          <view class="item touch-active" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentContent="{{comment.content}}" catchtap="showCommentActionSheet">
+            <view class="i-left">
+              <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
+            </view>
+            <view class="i-right">
+              <view class="top">
+                <view>
+                  <view class="u-name" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow">{{comment.userInfo.nickName}}</view>
+                  <view class="time">{{comment.created_at}}</view>
+                </view>
+                <view style="font-size: 13px;">
+                  <image wx:if="{{comment.if_my_praise == 0}}" class="image-comment ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" style="width: 18px; height: 18px" src="../images/praise.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}"
+                  catchtap="praiseComment"></image>
+                  <image wx:if="{{comment.if_my_praise == 1}}" class="image-comment ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" style="width: 18px; height: 18px" src="../images/praise_fill.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}"
+                  catchtap="praiseComment"></image>
+                  <text wx:if="{{comment.praise_nums > 0}}">{{comment.praise_nums}}</text>
+                  <image class="image-comment" style="margin-left: 10px;width: 18px; height: 18px" src="../images/comment.png" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput"></image>
+                </view>
+              </view>
+
+              <!--评论内容-->
+              <view class="content">
+                <view class="comment_content">{{comment.content}}</view>
+                <view wx:if="{{comment.comment_nums > 0}}" class="comment_reply" data-commentId="{{comment.id}}" catchtap="navigateToReplys">
+                  <text class="{{comment.id == item_selected_comment_id ? 'comment_reply_hover_class':''}}" style="padding: 2px; border-radius: 5px" data-commentId="{{comment.id}}" catchtap="navigateToReply">共{{comment.comment_nums}}条回复 ></text>
+                </view>
+              </view>
+            </view>
           </view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="placeholder" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
-            <image wx:if="{{love.if_my_praise == 0}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
-            <image wx:if="{{love.if_my_praise == 1}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
-            <text wx:if="{{love.praise_nums == 0}}">喜欢</text>
-            <text wx:if="{{love.praise_nums !== 0}}">{{love.praise_nums}}</text>
-          </view>
-        </view>
+        </block>
       </view>
-    </view>
-
-    <!--评论列表-->
-    <view class="comments" id="scroll_to_comments">
-      <block wx:for="{{comments}}" wx:for-item="comment" wx:key="id">
-        <view class="item touch-active" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentContent="{{comment.content}}" catchtap="showCommentActionSheet">
-          <view class="i-left">
-            <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
-          </view>
-          <view class="i-right">
-            <view class="top">
-              <view>
-                <view class="u-name" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow">{{comment.userInfo.nickName}}</view>
-                <view class="time">{{comment.created_at}}</view>
-              </view>
-              <view style="font-size: 13px;">
-                <image class="image-comment" style="width: 18px; height: 18px" src="../images/praise.png"></image>
-                <text>{{love.praise_nums}}</text>
-                <image class="image-comment" style="margin-left: 10px;width: 18px; height: 18px" src="../images/comment.png" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput"></image>
-              </view>
-            </view>
-
-            <!--评论内容-->
-            <view class="content">
-              <view class="comment_content">{{comment.content}}</view>
-              <view wx:if="{{comment.comment_nums >= 0}}" class="comment_reply" data-commentId="{{comment.id}}" catchtap="navigateToReplys">
-                <text class="{{comment.id == item_selected_comment_id ? 'comment_reply_hover_class':''}}" style="padding: 2px; border-radius: 5px" data-commentId="{{comment.id}}" catchtap="navigateToReply">共{{comment.comment_nums}}条回复 ></text>
-              </view>
-            </view>
-          </view>
-        </view>
-      </block>
-    </view>
-
     </scroll-view>
 
     <!--tabbar-->

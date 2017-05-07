@@ -2,9 +2,13 @@
   "pages": [
     "pages/board/board",
     
+    "pages/reply/reply",
+    
+    "pages/comment/comment",
+    
+    
     "pages/user/user",
 
-    "pages/comment/comment",
     
     "pages/test/breadtrip/breadtrip",
     
@@ -15,7 +19,6 @@
     
     
     
-    "pages/reply/reply",
     "pages/replyInput/replyInput",
     
     "pages/commentInput/commentInput",

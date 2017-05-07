@@ -81,12 +81,12 @@ Page({
   },
   load_love: function (pulldown) {
     let that = this;
-    let url;
-    if (that.data.wesecret) {
-      url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments?wesecret=' + that.data.wesecret
-    } else {
-      url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments'
-    }
+    let url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments';
+    // if (that.data.wesecret) {
+    //   url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments?wesecret=' + that.data.wesecret
+    // } else {
+    //   url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments'
+    // }
     wx.request({
       url: url,
       success: function (res) {
@@ -226,9 +226,9 @@ Page({
     if (that.data.wesecret) {
       let praise;
       if (love_if_my_praise == 0) {
-        praise == 1;
+        praise = 1;
       } else {
-        praise == 0;
+        praise = 0;
       }
       wx.request({
         url: 'https://collhome.com/apis/loves/' + love_id + '/praises',
@@ -253,6 +253,53 @@ Page({
           })
           wx.setStorageSync('board_loves_need_refresh', 1);
           wx.setStorageSync('my_loves_need_refresh', 1);
+        }
+      })
+    } else {
+      that.signIn();
+    }
+  },
+  praiseComment: function (e) {
+    console.log('praiseComment e', e);
+    console.log('this.data.comments', this.data.comments);
+    let that = this
+    let comment_id = e.currentTarget.dataset.commentid;
+    let comment_if_my_praise = e.currentTarget.dataset.commentifmypraise;
+
+    if (that.data.wesecret) {
+      let praise;
+      if (comment_if_my_praise == 0) {
+        praise = 1;
+      } else {
+        praise = 0;
+      }
+      wx.request({
+        url: `https://collhome.com/apis/comments/${comment_id}/praises`,
+        method: 'POST',
+        data: {
+          wesecret: that.data.wesecret,
+          praise: praise
+        },
+        success: function (res) {
+          let old_comments = that.data.comments;
+          for (let comment of old_comments) {
+            if (old_comment.id == comment_id) {
+              old_comment.praise_nums = parseInt(old_comment.praise_nums);
+
+              if (comment_if_my_praise == 0) {
+                old_comment.if_my_praise = 1;
+                old_comment.praise_nums++
+              } else {
+                old_comment.if_my_praise = 0
+                old_comment.praise_nums--
+              }
+
+              that.setData({
+                love: old_love,
+                selected_love_id: love_id
+              })
+            }
+          }
         }
       })
     } else {

@@ -1,6 +1,12 @@
 
 Page({
   data: {
+    page: 1,
+    search: '',
+    reach_bottom: false,
+    page_no_data: false,
+
+
     showTopTips1: false,
     showTopTips2: false,
 
@@ -68,7 +74,11 @@ Page({
   },
   onPullDownRefresh: function () {
     let that = this;
-
+    that.setData({
+      page: 1,
+      reach_bottom: false,
+      page_no_data: false,
+    })
     that.setData({
       showTopTips1: false,
     });
@@ -87,26 +97,68 @@ Page({
       });
     }, 2500);
   },
+  upper:function () {
+console.log('upper');
+  },
+  lower: function () {
+console.log('lower')
+  },
+  onPullDownRefresh: function() {
+console.log('onPullDownRefresh')
+  },
+  onReachBottom: function () {
+    let that = this;
+    console.log('onReachBottom')
+    if (!that.data.page_no_data) {
+      that.setData({
+        reach_bottom: true,
+        page_no_data: false,
+        page: that.data.page + 1
+      })
+      setTimeout(function () {
+        that.load_loves('add_page')
+
+      }, 2000)
+    }
+  },
 
   // 需要调整
   load_loves: function (parameter) {
-    console.log('load_lovesssssssssssssss');
     let that = this;
+    let page = that.data.page;
+    let search = that.data.search;
+    let wesecret = that.data.wesecret;
     let url;
-    if (that.data.wesecret) {
-      url = 'https://collhome.com/apis/loves?wesecret=' + that.data.wesecret
+    if (wesecret) {
+      url = `https://collhome.com/apis/loves?page=${page}&search=${search}&wesecret=${wesecret}`
     } else {
-      url = 'https://collhome.com/apis/loves'
+      url = `https://collhome.com/apis/loves?page=${page}&search=${search}&wesecret=`
     }
-    console.log('urllllllll', url);
     wx.request({
       url: url,
       success: function (res) {
         console.log('loves', res.data);
         let loves = res.data.data;
-        that.setData({
-          loves: loves
-        })
+        if (parameter && parameter == 'add_page') {
+          let new_loves = that.data.loves.concat(loves);
+          that.setData({
+            loves: new_loves
+          })
+          that.setData({
+            reach_bottom: false
+          })
+          console.log("loves.length", loves.length)
+          if (loves.length == 0) {
+            that.setData({
+              page_no_data: true
+            })
+          }
+        } else {
+          that.setData({
+            loves: loves
+          })
+        }
+
 
         if (parameter) {
           if (parameter == 'pulldown') {
@@ -116,7 +168,7 @@ Page({
           }
         }
 
-        if (!loves || loves.length == 0) {
+        if (!that.data.loves || that.data.loves.length == 0) {
           wx.showModal({
             // title: '提示',
             showCancel: false,

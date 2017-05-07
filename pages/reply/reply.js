@@ -4,12 +4,29 @@ Page({
   onLoad: function (options) {
     console.log('options', options)
     let that = this;
-    // that.setData({
-    //   love_id: options.love_id
-    // })
+    let comment_id = options.comment_id;
 
     that.setData({
-      love_id: 1
+      comment_id: comment_id
+    })
+    let scroll = options.scroll;
+    if (scroll) {
+      that.setData({
+        scroll: scroll
+      })
+    }
+
+    wx.getSystemInfo({
+      success: (res) => {
+        let wh = res.windowHeight;
+        that.setData({
+          wh: wh - 45
+        })
+      }
+    })
+
+    that.setData({
+      comment_id: 1
     })
 
     let wesecret = wx.getStorageSync('wesecret');
@@ -22,25 +39,12 @@ Page({
 
     }
 
-    that.load_love();
-
-    wx.getSystemInfo({
-      success: (res) => {
-        let ww = res.windowWidth;
-        var length = 3;
-        var row = Math.ceil(length / 3);
-        var line = Math.ceil(length / row);
-        var widthM = ww - 20;
-        var widthX = (widthM / line).toFixed(2) - 6;
-        var margin = "3px";
-        that.setData({
-          imgCss: {
-            width: widthX + 'px',
-            height: widthX + 'px',
-            margin: margin
-          }
-        })
-      }
+    that.load_comment();
+  },
+  onReady: function () {
+    let that = this;
+    that.setData({
+      toView: that.data.scroll
     })
   },
   onShow: function () {
@@ -56,23 +60,18 @@ Page({
 
     that.load_love('pulldown');
   },
-  load_love: function (pulldown) {
+  load_comment: function (pulldown) {
     let that = this;
-    let url;
-    if (that.data.wesecret) {
-      url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments?wesecret=' + that.data.wesecret
-    } else {
-      url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments'
-    }
+    let comment_id = that.data.comment_id;
+    let url = `https://collhome.com/apis/comments/${comment_id}/comments`
+    
     wx.request({
       url: url,
       success: function (res) {
-        console.log('love', res.data)
-        let love = res.data.data.love;
-        let comments = res.data.data.comments;
+        console.log('comment', res.data.data)
+        let comment = res.data.data;
         that.setData({
-          love: love,
-          comments: comments
+          comment: comment,
         })
 
         if (pulldown) {
@@ -140,6 +139,22 @@ Page({
       // scale: 28
     })
   },
+  showCommentActionSheet: function (e) {
+    console.log('showCommentActionSheet', e);
+    let nickname = e.currentTarget.dataset.commentusernickname;
+    let content = e.currentTarget.dataset.commentcontent;
+    let comment = `${nickname}: ${content}`
+    wx.showActionSheet({
+      itemList: [comment, '回复', '举报', '删除'],
+      // itemColor: '#ff0000',
+      success: function (res) {
+        console.log(res.tapIndex)
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
   navigateToReplys: function (e) {
     console.log('navigateToReplys', e);
     let comment_id = e.currentTarget.dataset.commentid;
@@ -168,6 +183,15 @@ Page({
       url: `../reply/reply?comment_id=${comment_id}`
     });
   },
+  navigateToReplyInput: function (e) {
+    console.log('navigateToReplyInput e', e);
+
+    let comment_id = e.currentTarget.dataset.commentid;
+    let user_id = e.currentTarget.dataset.userid;
+    wx.navigateTo({
+      url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+    });
+  },
   praiseLove: function (e) {
     console.log('praiseLove e', e);
     let love_id = e.currentTarget.dataset.loveid;
@@ -178,9 +202,9 @@ Page({
     if (that.data.wesecret) {
       let praise;
       if (love_if_my_praise == 0) {
-        praise == 1;
+        praise = 1;
       } else {
-        praise == 0;
+        praise = 0;
       }
       wx.request({
         url: 'https://collhome.com/apis/loves/' + love_id + '/praises',
@@ -205,6 +229,53 @@ Page({
           })
           wx.setStorageSync('board_loves_need_refresh', 1);
           wx.setStorageSync('my_loves_need_refresh', 1);
+        }
+      })
+    } else {
+      that.signIn();
+    }
+  },
+  praiseComment: function (e) {
+    console.log('praiseComment e', e);
+    console.log('this.data.comments', this.data.comments);
+    let that = this
+    let comment_id = e.currentTarget.dataset.commentid;
+    let comment_if_my_praise = e.currentTarget.dataset.commentifmypraise;
+
+    if (that.data.wesecret) {
+      let praise;
+      if (comment_if_my_praise == 0) {
+        praise = 1;
+      } else {
+        praise = 0;
+      }
+      wx.request({
+        url: `https://collhome.com/apis/comments/${comment_id}/praises`,
+        method: 'POST',
+        data: {
+          wesecret: that.data.wesecret,
+          praise: praise
+        },
+        success: function (res) {
+          let old_comments = that.data.comments;
+          for (let comment of old_comments) {
+            if (old_comment.id == comment_id) {
+              old_comment.praise_nums = parseInt(old_comment.praise_nums);
+
+              if (comment_if_my_praise == 0) {
+                old_comment.if_my_praise = 1;
+                old_comment.praise_nums++
+              } else {
+                old_comment.if_my_praise = 0
+                old_comment.praise_nums--
+              }
+
+              that.setData({
+                love: old_love,
+                selected_love_id: love_id
+              })
+            }
+          }
         }
       })
     } else {

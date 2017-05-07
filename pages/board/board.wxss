@@ -1,7 +1,6 @@
 page {
-  /*background-color: #eee;*/
-  /*background-color: #fbf7ed;*/
-  background-color: #edecf2
+  /*background-color: #eee;*//*background-color: #fbf7ed;*/
+  background-color: #edecf2;
 }
 
 .list-item:first-child {
@@ -133,6 +132,7 @@ image {
 .weui-flex text {
   padding-left: 5px;
 }
+
 /*.weui-flex {
   border-top: 1px solid #EDECF2;
 }
@@ -202,4 +202,29 @@ image {
 
 .page__bd {
   padding-bottom: 0px;
+}
+
+.weui-loadmore {
+  margin: 25px 0 0;
+  font-size: 16px;
+}
+
+.reach_loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+.page_no_data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px 0 0;
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
 }
