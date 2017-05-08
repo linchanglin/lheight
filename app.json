@@ -5,18 +5,9 @@
     "pages/board/board",
     
     
+    
     "pages/comment/comment",
-    
-    
-    
-    
     "pages/chat/chat",
-    
-    
-    
-    
-    
-
     "pages/user/user",
     "pages/test/breadtrip/breadtrip",
     "pages/replyInput/replyInput",

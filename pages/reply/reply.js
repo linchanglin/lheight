@@ -55,12 +55,7 @@ Page({
       wx.removeStorageSync('love_need_refresh')
     }
   },
-  onPullDownRefresh: function () {
-    let that = this;
-
-    that.load_love('pulldown');
-  },
-  load_comment: function (pulldown) {
+  load_comment: function () {
     let that = this;
     let comment_id = that.data.comment_id;
     let url = `https://collhome.com/apis/comments/${comment_id}/comments`
@@ -73,11 +68,6 @@ Page({
         that.setData({
           comment: comment,
         })
-
-        if (pulldown) {
-          wx.stopPullDownRefresh();
-          console.log('pulllllll');
-        }
       }
     })
   },

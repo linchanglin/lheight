@@ -16,9 +16,9 @@
               </view>
               <view style="font-size: 13px;">
                 <image wx:if="{{comment.if_my_praise == 0}}" class="image-comment ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" style="width: 18px; height: 18px" src="../images/praise.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}"
-                catchtap="praiseComment"></image>
+                  catchtap="praiseComment"></image>
                 <image wx:if="{{comment.if_my_praise == 1}}" class="image-comment ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" style="width: 18px; height: 18px" src="../images/praise_fill.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}"
-                catchtap="praiseComment"></image>
+                  catchtap="praiseComment"></image>
                 <text wx:if="{{comment.praise_nums > 0}}">{{comment.praise_nums}}</text>
                 <image class="image-comment" style="margin-left: 10px;width: 18px; height: 18px" src="../images/comment.png" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput"></image>
               </view>
@@ -45,9 +45,9 @@
                 </view>
                 <view style="font-size: 13px;">
                   <image wx:if="{{comment.if_my_praise == 0}}" class="image-comment ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" style="width: 18px; height: 18px" src="../images/praise.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}"
-                  catchtap="praiseComment"></image>
+                    catchtap="praiseComment"></image>
                   <image wx:if="{{comment.if_my_praise == 1}}" class="image-comment ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" style="width: 18px; height: 18px" src="../images/praise_fill.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}"
-                  catchtap="praiseComment"></image>
+                    catchtap="praiseComment"></image>
                   <text wx:if="{{comment.praise_nums > 0}}">{{comment.praise_nums}}</text>
                 </view>
               </view>
@@ -61,8 +61,8 @@
         </block>
       </view>
     </scroll-view>
-    <view class="sendMessage">
-      <input class="inputMsg" placeholder="回复评论"/>
+    <view class="sendReply">
+      <textarea placeholder="回复评论" auto-height="true" fixed="true" maxlength="-1" class="inputReply" value="{{inputReply}}" cursor-spacing="50" bindconfirm="sendReply" />
     </view>
   </view>
 </view>
