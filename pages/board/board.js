@@ -2,7 +2,6 @@
 Page({
   data: {
     page: 1,
-    search: '',
     reach_bottom: false,
     page_no_data: false,
 
@@ -16,6 +15,15 @@ Page({
   },
   onLoad: function () {
     let that = this;
+
+    wx.getSystemInfo({
+      success: (res) => {
+        let wh = res.windowHeight;
+        that.setData({
+          wh: wh - 45
+        })
+      }
+    })
 
     let wesecret = wx.getStorageSync('wesecret');
     if (wesecret) {
@@ -73,6 +81,8 @@ Page({
     })
   },
   onPullDownRefresh: function () {
+    console.log('onPullDownRefresh')
+
     let that = this;
     that.setData({
       page: 1,
@@ -97,15 +107,6 @@ Page({
       });
     }, 2500);
   },
-  upper:function () {
-console.log('upper');
-  },
-  lower: function () {
-console.log('lower')
-  },
-  onPullDownRefresh: function() {
-console.log('onPullDownRefresh')
-  },
   onReachBottom: function () {
     let that = this;
     console.log('onReachBottom')
@@ -115,10 +116,7 @@ console.log('onPullDownRefresh')
         page_no_data: false,
         page: that.data.page + 1
       })
-      setTimeout(function () {
-        that.load_loves('add_page')
-
-      }, 2000)
+      that.load_loves('add_page')
     }
   },
 
@@ -126,7 +124,7 @@ console.log('onPullDownRefresh')
   load_loves: function (parameter) {
     let that = this;
     let page = that.data.page;
-    let search = that.data.search;
+    let search = that.data.inputVal;
     let wesecret = that.data.wesecret;
     let url;
     if (wesecret) {
@@ -160,10 +158,17 @@ console.log('onPullDownRefresh')
         }
 
 
+        // if (parameter) {
+        //   if (parameter == 'pulldown') {
+        //     wx.stopPullDownRefresh();
+        //   } else if (parameter == 'onLoad') {
+        //     wx.hideLoading()
+        //   }
+        // }
+
         if (parameter) {
-          if (parameter == 'pulldown') {
+          if (parameter == 'pulldown' || parameter == 'onLoad') {
             wx.stopPullDownRefresh();
-          } else if (parameter == 'onLoad') {
             wx.hideLoading()
           }
         }
@@ -389,27 +394,36 @@ console.log('onPullDownRefresh')
 
 
   showInput: function () {
-    this.setData({
+    let that = this;
+    that.setData({
       inputShowed: true
     });
   },
   hideInput: function () {
-    this.setData({
+    let that = this;
+    that.setData({
       inputVal: "",
       inputShowed: false
     });
   },
   clearInput: function () {
-    this.setData({
+    let that = this;
+    that.setData({
       inputVal: ""
     });
   },
   inputTyping: function (e) {
-    this.setData({
+    let that = this;
+    that.setData({
       inputVal: e.detail.value
     });
   },
-
-
+  searchInputConfirm: function (e) {
+    let that = this;
+    that.setData({
+      page: 1
+    })
+    that.load_loves();
+  }
 
 });

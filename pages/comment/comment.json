@@ -1,6 +1,4 @@
 {
     "navigationBarTitleText": "正文",
-    "enablePullDownRefresh": true,
-    "backgroundColor": "#f8f8f8",
-    "backgroundTextStyle": "dark"
+    "backgroundColor": "#edecf2"
 }

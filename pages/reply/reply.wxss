@@ -72,8 +72,9 @@ page {
   background-color: #f8f8f8;
   border-radius: 5px;
 }
+
 .comment_reply_hover_class {
-  background-color: #BBBBBB
+  background-color: #bbb;
 }
 
 .ripple {
@@ -116,4 +117,24 @@ page {
 
 .bounceIn {
   animation-name: bounceIn;
+}
+
+.sendMessage {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  /*background-color: #ececec;*/
+  background-color: #edecf2;
+}
+
+.inputMsg {
+  flex: 2;
+  padding: 3px 6px;
+  background-color: #ffffff;
+  font-size: 14px;
+  border-radius: 5px;
 }

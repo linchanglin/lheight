@@ -74,19 +74,9 @@ Page({
       wx.removeStorageSync('love_need_refresh')
     }
   },
-  onPullDownRefresh: function () {
-    let that = this;
-
-    that.load_love('pulldown');
-  },
-  load_love: function (pulldown) {
+  load_love: function () {
     let that = this;
     let url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments';
-    // if (that.data.wesecret) {
-    //   url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments?wesecret=' + that.data.wesecret
-    // } else {
-    //   url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments'
-    // }
     wx.request({
       url: url,
       success: function (res) {
@@ -97,11 +87,6 @@ Page({
           love: love,
           comments: comments
         })
-
-        if (pulldown) {
-          wx.stopPullDownRefresh();
-          console.log('pulllllll');
-        }
       }
     })
   },

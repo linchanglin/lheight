@@ -1,30 +1,26 @@
 {
   "pages": [
+    "pages/reply/reply",
+    
     "pages/board/board",
     
-    "pages/reply/reply",
     
     "pages/comment/comment",
     
     
+    
+    
+    "pages/chat/chat",
+    
+    
+    
+    
+    
+
     "pages/user/user",
-
-    
     "pages/test/breadtrip/breadtrip",
-    
-    
-    
-    
-    
-    
-    
-    
     "pages/replyInput/replyInput",
-    
     "pages/commentInput/commentInput",
-
-
-    
     "pages/loveInput/loveInput",
     "pages/videoUrlInput/videoUrlInput",
     "pages/virtualLoveInput/virtualLoveInput",
@@ -33,7 +29,6 @@
     "pages/find/find",
     "pages/myLove/myLove",
     "pages/profileShow/profileShow",
-    "pages/chat/chat",
     "pages/city_multi_page/city_multi_page",
     "pages/city_multi_page_city/city_multi_page_city",
     "pages/city_multi_page_district/city_multi_page_district",
@@ -48,10 +43,11 @@
     "pages/logs/logs"
   ],
   "window": {
-    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#353535",
     "navigationBarTitleText": "表白墙",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F8F8F8",
+    "backgroundTextStyle": "light"
   },
   "tabBar": {
     "color": "#000000",
