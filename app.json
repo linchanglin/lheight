@@ -1,8 +1,15 @@
 {
   "pages": [
+    "pages/board/board",
+    
     "pages/reply/reply",
     
-    "pages/board/board",
+    "pages/profileShowInput/profileShowInput",
+    
+    "pages/loveInput/loveInput",
+    
+    
+    
     
     
     
@@ -12,10 +19,8 @@
     "pages/test/breadtrip/breadtrip",
     "pages/replyInput/replyInput",
     "pages/commentInput/commentInput",
-    "pages/loveInput/loveInput",
     "pages/videoUrlInput/videoUrlInput",
     "pages/virtualLoveInput/virtualLoveInput",
-    "pages/profileShowInput/profileShowInput",
     "pages/picture/picture",
     "pages/find/find",
     "pages/myLove/myLove",

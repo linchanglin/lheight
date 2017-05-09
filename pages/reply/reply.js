@@ -65,8 +65,12 @@ Page({
       success: function (res) {
         console.log('comment', res.data.data)
         let comment = res.data.data;
+        let replies = comment.comment_comments;
+        let last_reply_id = replies[replies.length -1].comment_id;
+        console.log('last_reply_id',last_reply_id)
         that.setData({
           comment: comment,
+          last_reply_id: last_reply_id
         })
       }
     })

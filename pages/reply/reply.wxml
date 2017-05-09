@@ -8,7 +8,7 @@
           <view class="i-left">
             <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
           </view>
-          <view class="i-right" style="border-bottom:0px solid #edecf2;">
+          <view class="i-right no_border_bottom">
             <view class="top">
               <view>
                 <view class="u-name" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow">{{comment.userInfo.nickName}}</view>
@@ -37,7 +37,7 @@
             <view class="i-left">
               <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
             </view>
-            <view class="i-right">
+            <view class="i-right {{last_reply_id == comment.comment_id ? 'no_border_bottom': ''}}">
               <view class="top">
                 <view>
                   <view class="u-name" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow">{{comment.userInfo.nickName}}</view>

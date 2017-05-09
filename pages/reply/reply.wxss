@@ -133,7 +133,11 @@ page {
 
 .inputReply {
   flex: 2;
-  background-color: #ffffff;
+  background-color: #fff;
   font-size: 16px;
   border-radius: 5px;
+}
+
+.no_border_bottom {
+  border-bottom: 0px solid #edecf2;
 }
