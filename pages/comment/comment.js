@@ -152,14 +152,15 @@ Page({
     },
     showCommentActionSheet: function (e) {
         let that = this;
-        
+
         console.log('showCommentActionSheet', e);
-        console.log('that.datauserInfo',that.data.userInfo);
+        console.log('that.datauserInfo', that.data.userInfo);
         if (that.data.wesecret) {
             let user_id = e.currentTarget.dataset.commentuserid
-            let nickname = e.currentTarget.dataset.commentusernickname;
-            let content = e.currentTarget.dataset.commentcontent;
-            let comment = `${nickname}: ${content}`;
+            let user_nickname = e.currentTarget.dataset.commentusernickname;
+            let comment_id = e.currentTarget.dataset.commentid;
+            let comment_content = e.currentTarget.dataset.commentcontent;
+            let comment = `${user_nickname}: ${comment_content}`;
             let itemList;
             if (that.data.userInfo.id == user_id) {
                 itemList = [comment, '回复', '举报', '删除'];
@@ -170,6 +171,25 @@ Page({
                 itemList: itemList,
                 success: function (res) {
                     console.log(res.tapIndex)
+
+                    let index = res.tapIndex;
+                    if (index == 1) {
+                        wx.navigateTo({
+                            url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+                        });
+                    } else if (index == 2) {
+
+                    } else if (index == 3) {
+                        wx.showActionSheet({
+                            itemList: ['删除评论'],
+                            itemColor: '#ff0000',
+                            success: function (res) {
+                                if (res.tapIndex == 0) {
+                                    that.deleteComment(comment_id);
+                                }
+                            }
+                        })
+                    }
                 },
                 fail: function (res) {
                     console.log(res.errMsg)
@@ -178,6 +198,25 @@ Page({
         } else {
             that.signIn();
         }
+    },
+    deleteComment: function (comment_id) {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/apis/delete/comment',
+            method: 'POST',
+            data: {
+                wesecret: that.data.wesecret,
+                comment_id: comment_id
+            },
+            success: function (res) {
+                console.log('delete comment success', res.data)
+                wx.setStorageSync('board_loves_need_refresh', 1);
+                wx.setStorageSync('hot_loves_need_refresh', 1);
+                wx.setStorageSync('college_loves_need_refresh', 1);
+                wx.setStorageSync('my_loves_need_refresh', 1);
+                that.load_love();
+            }
+        })
     },
     navigateToReplys: function (e) {
         console.log('navigateToReplys', e);
