@@ -13,6 +13,9 @@ page {
 .comments {
   padding-top: 8px;
 }
+.replies {
+  padding-top: 8px;
+}
 
 .content {
   margin: 0 0 12px 0;
@@ -20,12 +23,24 @@ page {
   font-size: 15px;
 }
 
+.replies .content {
+  margin: 0 0 8px 0;
+  word-break: break-all;
+  font-size: 14px;
+}
+
 .item {
   display: flex;
   position: relative;
   padding: 12px 15px 0;
   background-color: #fff;
-  /*margin-bottom: 1px;*/
+}
+
+.replies .item {
+  display: flex;
+  position: relative;
+  padding: 8px 15px 0 17px;
+  background-color: #fff;
 }
 
 .i-right {
@@ -40,6 +55,14 @@ page {
   margin-right: 8px;
 }
 
+.replies .c-u-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+
 .item .top {
   display: flex;
   justify-content: space-between;
@@ -51,9 +74,19 @@ page {
   font-size: 14px;
 }
 
+.replies .item .u-name {
+  color: deepskyblue;
+  font-size: 13px;
+}
+
 .item .time {
   color: #888;
   font-size: 12px;
+}
+
+.replies .item .time {
+  color: #888;
+  font-size: 11px;
 }
 
 .comment_icon_right {
@@ -63,6 +96,10 @@ page {
 
 .comment_content {
   margin: 5px 0 8px 0;
+}
+
+.replies .comment_content {
+  margin: 3px 0 0 0;
 }
 
 .comment_reply {

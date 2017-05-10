@@ -165,8 +165,9 @@ image {
   background-color: #f8f8f8;
   border-radius: 5px;
 }
+
 .comment_reply_hover_class {
-  background-color: #BBBBBB
+  background-color: #bbb;
 }
 
 .weui-flex {
@@ -243,4 +244,8 @@ image {
 
 .bounceIn {
   animation-name: bounceIn;
+}
+
+.no_border_bottom {
+  border-bottom: 0px solid #edecf2;
 }
