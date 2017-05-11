@@ -2,19 +2,37 @@
   "pages": [
     "pages/comment/comment",
     
+    "pages/badReportInput/badReportInput",
+    
     "pages/reply/reply",
     
     
+    "pages/board/board",
+    
+    
+    "pages/loveInput/loveInput",
     
     
     
     
-    
+    "pages/profileShowInput/profileShowInput",
     
     "pages/user/user",
-    "pages/board/board",
-    "pages/profileShowInput/profileShowInput",
-    "pages/loveInput/loveInput",
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     "pages/chat/chat",
     "pages/test/breadtrip/breadtrip",
     "pages/replyInput/replyInput",

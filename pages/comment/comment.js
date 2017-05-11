@@ -178,7 +178,15 @@ Page({
                             url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
                         });
                     } else if (index == 2) {
-
+                        let comment_contentt;
+                        if (comment_content.length > 50) {
+                            comment_contentt = ':  ' + comment_content.substring(0, 50) + '...';
+                        } else {
+                            comment_contentt = ':  ' + comment_content;
+                        }
+                        wx.navigateTo({
+                            url: `../badReportInput/badReportInput?user_id=${user_id}&user_nickname=${user_nickname}&comment_id=${comment_id}&comment_content=${comment_contentt}`
+                        })
                     } else if (index == 3) {
                         wx.showActionSheet({
                             itemList: ['删除评论'],
@@ -248,12 +256,17 @@ Page({
     },
     navigateToReplyInput: function (e) {
         console.log('navigateToReplyInput e', e);
-
-        let comment_id = e.currentTarget.dataset.commentid;
-        let user_id = e.currentTarget.dataset.userid;
-        wx.navigateTo({
-            url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
-        });
+        let that = this;
+        if (that.data.wesecret) {
+            let comment_id = e.currentTarget.dataset.commentid;
+            let user_id = e.currentTarget.dataset.userid;
+            wx.navigateTo({
+                url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+            });
+        }
+        else {
+            that.signIn();
+        }
     },
     praiseLove: function (e) {
         console.log('praiseLove e', e);
