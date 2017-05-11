@@ -7,3 +7,21 @@
 .weui-btn-area {
   margin: 20px 15px;
 }
+
+.badReportFrom {
+  font-size: 15px;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 8px 15px 16px;
+}
+
+.badReportFromNone {
+  font-size: 15px;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 8px 15px;
+}

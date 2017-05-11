@@ -25,27 +25,23 @@ Page({
             }
         })
 
-        that.setData({
-            comment_id: 1
-        })
-
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             that.setData({
                 wesecret: wesecret
             })
-
             that.load_userInfo();
-
         }
 
         that.load_comment();
     },
     onReady: function () {
         let that = this;
-        that.setData({
-            toView: that.data.scroll
-        })
+        setTimeout(function () {
+            that.setData({
+                toView: that.data.scroll
+            })
+        }, 100)
     },
     onShow: function () {
         let that = this;

@@ -6,11 +6,36 @@ Page({
     onLoad: function (options) {
         console.log('badReportInput  options', options)
         let that = this;
+        if (options.love_id) {
+            that.setData({
+                badReport_id: options.love_id,
+                badReport_content: options.love_content,
+                badReportFrom: '的表白：',
+                badReportFrom_id: 1
+            })
+        } else if (options.comment_id) {
+            that.setData({
+                badReport_id: options.comment_id,
+                badReport_content: options.comment_content,
+                badReportFrom: '的评论：',
+                badReportFrom_id: 2
+            })
+        } else if (options.reply_id) {
+            that.setData({
+                badReport_id: options.reply_id,
+                badReport_content: options.reply_content,
+                badReportFrom: '的回复：',
+                badReportFrom_id: 3
+            })
+        } else {
+            that.setData({
+                badReportFrom: '',
+                badReportFrom_id: 0
+            })
+        }
         that.setData({
             objectUser_id: options.user_id,
             objectUser_nickname: options.user_nickname,
-            comment_id: options.comment_id,
-            comment_content: options.comment_content
         })
 
         let wesecret = wx.getStorageSync('wesecret');
@@ -68,22 +93,36 @@ Page({
     },
     submitBadReport: function () {
         let that = this;
-        console.log('confirmInput    that.data.comment_id', that.data.comment_id);
 
-        let comment_id = that.data.comment_id;
+        let url;
+        let badReportFrom_id = that.data.badReportFrom_id;
+        let badReport_id = that.data.badReport_id;
+        if (badReportFrom_id == 1) {
+            url = `https://collhome.com/apis/badReports/love/${badReport_id}`
+        } else if (badReportFrom_id == 2) {
+            url = `https://collhome.com/apis/badReports/comment/${badReport_id}`
+        } else if (badReportFrom_id == 3) {
+            url = `https://collhome.com/apis/badReports/reply/${badReport_id}`
+        } else {
+            url = `https://collhome.com/apis/badReports/user/${objectUser_id}`
+        }
         wx.request({
-            url: `https://collhome.com/apis/comments/${comment_id}/replies`,
+            url: url,
             method: 'POST',
             data: {
                 wesecret: that.data.wesecret,
-                content: that.data.content,
-                objectUser_id: that.data.objectUser_id
+                badReport_type: that.data.index,
+                badReport_content: that.data.content
             },
             success: function (res) {
-                console.log('post reply', res.data)
-                wx.setStorageSync('love_need_refresh', 1);
-                wx.setStorageSync('comment_need_refresh', 1);
-                wx.navigateBack()
+                wx.showToast({
+                    title: '成功',
+                    icon: 'success',
+                    duration: 1000
+                });
+                setTimeout(function () {
+                    wx.navigateBack()
+                }, 1000)
             }
         })
     }

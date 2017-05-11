@@ -29,6 +29,9 @@
             <view class="header-img" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
               <image class="img" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
             </view>
+              <button class="weui-btn mini-btn" type="default" size="mini" hover-class="none">
+                <text class="header-time" style="color: #000">11111{{love.read_nums}} 阅读</text>
+              </button>
             <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
             <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
           </view>

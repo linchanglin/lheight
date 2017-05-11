@@ -1,7 +1,6 @@
 <view class="page">
   <view class="page__bd">
     <scroll-view scroll-y="true" style="height: {{wh}}px" scroll-with-animation="" scroll-into-view="{{toView}}">
-
       <!--love-->
       <view class="container">
         <view class="list-item">

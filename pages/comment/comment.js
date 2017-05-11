@@ -25,10 +25,6 @@ Page({
             }
         })
 
-        that.setData({
-            love_id: 1
-        })
-
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             that.setData({
@@ -62,9 +58,11 @@ Page({
     },
     onReady: function () {
         let that = this;
-        that.setData({
-            toView: that.data.scroll
-        })
+        setTimeout(function() {
+            that.setData({
+                toView: that.data.scroll
+            })
+        },100) 
     },
     onShow: function () {
         let that = this;
