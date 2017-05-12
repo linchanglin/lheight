@@ -407,7 +407,7 @@ Page({
             }
         })
     },
-    deleteArticle: function () {
+    deleteLove: function () {
         let that = this;
         wx.showModal({
             title: '删除',

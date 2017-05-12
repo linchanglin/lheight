@@ -96,7 +96,7 @@
         <image wx:if="{{love.if_my_praise == 1}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
         <view class="weui-tabbar__label">喜欢</view>
       </view>
-      <view class="weui-tabbar__item" wx:if="{{wesecret && love.userInfo.id == userInfo.id}}" catchtap="deleteArticle">
+      <view class="weui-tabbar__item" wx:if="{{wesecret && love.userInfo.id == userInfo.id}}" catchtap="deleteLove">
         <image class="image-comment" src="../images/delete.png"></image>
         <view class="weui-tabbar__label" style="color: #ff0000">删除</view>
       </view>

@@ -192,6 +192,82 @@ Page({
     })
 
   },
+  showLoveActionSheet: function (e) {
+      let that = this;
+
+      console.log('showLoveActionSheet', e);
+      console.log('that.datauserInfo', that.data.userInfo);
+      if (that.data.wesecret) {
+          let user_id = e.currentTarget.dataset.loveuserid
+          let user_nickname = e.currentTarget.dataset.loveusernickname;
+          let love_id = e.currentTarget.dataset.loveid;
+          let love_content = e.currentTarget.dataset.lovecontent;
+          let love = `${user_nickname}: ${love_content}`;
+          let itemList;
+          if (that.data.userInfo.id == user_id) {
+              itemList = [love, '评论', '举报', '删除'];
+          } else {
+              itemList = [love, '评论', '举报']
+          }
+          wx.showActionSheet({
+              itemList: itemList,
+              success: function (res) {
+                  console.log(res.tapIndex)
+
+                  let index = res.tapIndex;
+                  if (index == 1) {
+                      wx.navigateTo({
+                          url: `../replyInput/replyInput?love_id=${love_id}&user_id=${user_id}`
+                      });
+                  } else if (index == 2) {
+                      let love_contentt;
+                      if (love_content.length > 50) {
+                          love_contentt = ':  ' + love_content.substring(0, 50) + '...';
+                      } else {
+                          love_contentt = ':  ' + love_content;
+                      }
+                      wx.navigateTo({
+                          url: `../badReportInput/badReportInput?user_id=${user_id}&user_nickname=${user_nickname}&love_id=${love_id}&love_content=${love_contentt}`
+                      })
+                  } else if (index == 3) {
+                      wx.showActionSheet({
+                          itemList: ['删除表白'],
+                          itemColor: '#ff0000',
+                          success: function (res) {
+                              if (res.tapIndex == 0) {
+                                  that.deleteLove(love_id);
+                              }
+                          }
+                      })
+                  }
+              },
+              fail: function (res) {
+                  console.log(res.errMsg)
+              }
+          })
+      } else {
+          that.signIn();
+      }
+  },
+  deleteLove: function (love_id) {
+      let that = this;
+      wx.request({
+          url: 'https://collhome.com/apis/delete/love',
+          method: 'POST',
+          data: {
+              wesecret: that.data.wesecret,
+              love_id: love_id
+          },
+          success: function (res) {
+              console.log('delete love success', res.data)
+              wx.setStorageSync('board_loves_need_refresh', 1);
+              wx.setStorageSync('hot_loves_need_refresh', 1);
+              wx.setStorageSync('college_loves_need_refresh', 1);
+              wx.setStorageSync('my_loves_need_refresh', 1);
+              that.load_love();
+          }
+      })
+  },
   previewImage: function (e) {
     console.log('preview e', e);
     var current = e.currentTarget.dataset.current;
