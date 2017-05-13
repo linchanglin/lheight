@@ -1,14 +1,15 @@
+import common from '../../utils/common.js';
+
 Page({
     data: {},
-
     onLoad: function (options) {
         console.log('options', options)
         let that = this;
         let love_id = options.love_id;
-
         that.setData({
             love_id: love_id
         })
+
         let scroll = options.scroll;
         if (scroll) {
             that.setData({
@@ -24,16 +25,6 @@ Page({
                 })
             }
         })
-
-        let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
-            that.setData({
-                wesecret: wesecret
-            })
-
-            that.load_userInfo();
-
-        }
 
         that.load_love();
 
@@ -58,11 +49,11 @@ Page({
     },
     onReady: function () {
         let that = this;
-        setTimeout(function() {
+        setTimeout(function () {
             that.setData({
                 toView: that.data.scroll
             })
-        },100) 
+        }, 100)
     },
     onShow: function () {
         let that = this;
@@ -81,7 +72,12 @@ Page({
                 console.log('love', res.data)
                 let love = res.data.data.love;
                 let comments = res.data.data.comments;
-                let last_comment_id = comments[comments.length - 1].id;
+                let last_comment_id;
+                if (comments.length > 0) {
+                    last_comment_id = comments[comments.length - 1].id;
+                } else {
+                    last_comment_id = 0;
+                }
                 that.setData({
                     love: love,
                     comments: comments,
@@ -90,18 +86,44 @@ Page({
             }
         })
     },
-    load_userInfo: function () {
-        var that = this;
-        wx.request({
-            url: 'https://collhome.com/apis/user?wesecret=' + that.data.wesecret,
-            success: function (res) {
-                console.log('user with wesecret', res.data)
-
-                that.setData({
-                    userInfo: res.data.data
-                })
+    showLoveActionSheet: function (e) {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        let my_userInfo = wx.getStorageSync('my_userInfo');
+        if (wesecret) {
+            if (my_userInfo) {
+                common.showLoveActionSheet(e).then((love_id) => {
+                    console.log('delete love_id', love_id)
+                    wx.navigateBack()
+                });
+            } else {
+                common.get_my_userInfo(wesecret);
             }
-        })
+        } else {
+            common.signIn();
+        }
+    },
+    showCommentActionSheet: function (e) {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        let my_userInfo = wx.getStorageSync('my_userInfo');
+        if (wesecret) {
+            if (my_userInfo) {
+                common.showCommentActionSheet(e).then((comment_id) => {
+                    console.log('delete comment_id', comment_id)
+                    let love_id = that.data.love_id;
+                    wx.setStorageSync('board_loves_need_refresh', love_id);
+                    wx.setStorageSync('hot_loves_need_refresh', love_id);
+                    wx.setStorageSync('college_loves_need_refresh', love_id);
+                    wx.setStorageSync('my_loves_need_refresh', love_id);
+                    that.load_love();
+                });
+            } else {
+                common.get_my_userInfo(wesecret);
+            }
+        } else {
+            common.signIn();
+        }
     },
     previewImage: function (e) {
         console.log('preview e', e);
@@ -113,22 +135,9 @@ Page({
             urls: urls // 需要预览的图片http链接列表
         })
     },
-    navigateToCommentInput: function () {
-        let that = this;
-        if (that.data.wesecret) {
-            wx.navigateTo({
-                url: '../commentInput/commentInput?love_id=' + that.data.love_id
-            })
-        } else {
-            that.signIn();
-        }
-
-    },
     navigateToProfileShow: function (e) {
         console.log('navigateToProfileShow', e);
-
         let that = this;
-
         let user_id = e.currentTarget.dataset.userid;
         wx.navigateTo({
             url: '../profileShow/profileShow?user_id=' + user_id
@@ -137,9 +146,6 @@ Page({
     navigateToLocation: function (e) {
         console.log('location', e);
         let location = e.currentTarget.dataset.location;
-
-        console.log('location', location);
-
         wx.openLocation({
             name: location.name,
             address: location.address,
@@ -148,86 +154,9 @@ Page({
             // scale: 28
         })
     },
-    showCommentActionSheet: function (e) {
-        let that = this;
-
-        console.log('showCommentActionSheet', e);
-        console.log('that.datauserInfo', that.data.userInfo);
-        if (that.data.wesecret) {
-            let user_id = e.currentTarget.dataset.commentuserid
-            let user_nickname = e.currentTarget.dataset.commentusernickname;
-            let comment_id = e.currentTarget.dataset.commentid;
-            let comment_content = e.currentTarget.dataset.commentcontent;
-            let comment = `${user_nickname}: ${comment_content}`;
-            let itemList;
-            if (that.data.userInfo.id == user_id) {
-                itemList = [comment, '回复', '举报', '删除'];
-            } else {
-                itemList = [comment, '回复', '举报']
-            }
-            wx.showActionSheet({
-                itemList: itemList,
-                success: function (res) {
-                    console.log(res.tapIndex)
-
-                    let index = res.tapIndex;
-                    if (index == 1) {
-                        wx.navigateTo({
-                            url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
-                        });
-                    } else if (index == 2) {
-                        let comment_contentt;
-                        if (comment_content.length > 50) {
-                            comment_contentt = ':  ' + comment_content.substring(0, 50) + '...';
-                        } else {
-                            comment_contentt = ':  ' + comment_content;
-                        }
-                        wx.navigateTo({
-                            url: `../badReportInput/badReportInput?user_id=${user_id}&user_nickname=${user_nickname}&comment_id=${comment_id}&comment_content=${comment_contentt}`
-                        })
-                    } else if (index == 3) {
-                        wx.showActionSheet({
-                            itemList: ['删除评论'],
-                            itemColor: '#ff0000',
-                            success: function (res) {
-                                if (res.tapIndex == 0) {
-                                    that.deleteComment(comment_id);
-                                }
-                            }
-                        })
-                    }
-                },
-                fail: function (res) {
-                    console.log(res.errMsg)
-                }
-            })
-        } else {
-            that.signIn();
-        }
-    },
-    deleteComment: function (comment_id) {
-        let that = this;
-        wx.request({
-            url: 'https://collhome.com/apis/delete/comment',
-            method: 'POST',
-            data: {
-                wesecret: that.data.wesecret,
-                comment_id: comment_id
-            },
-            success: function (res) {
-                console.log('delete comment success', res.data)
-                wx.setStorageSync('board_loves_need_refresh', 1);
-                wx.setStorageSync('hot_loves_need_refresh', 1);
-                wx.setStorageSync('college_loves_need_refresh', 1);
-                wx.setStorageSync('my_loves_need_refresh', 1);
-                that.load_love();
-            }
-        })
-    },
     navigateToReplys: function (e) {
         console.log('navigateToReplys', e);
         let comment_id = e.currentTarget.dataset.commentid;
-
         wx.navigateTo({
             url: `../reply/reply?comment_id=${comment_id}`
         });
@@ -236,12 +165,10 @@ Page({
         console.log('navigateToReply', e);
         let comment_id = e.target.dataset.commentid;
         console.log('comment_id', comment_id);
-
-        var that = this;
+        let that = this;
         that.setData({
             item_selected_comment_id: comment_id
         })
-
         setTimeout(function () {
             that.setData({
                 item_selected_comment_id: ''
@@ -252,10 +179,22 @@ Page({
             url: `../reply/reply?comment_id=${comment_id}`
         });
     },
+    navigateToCommentInput: function () {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            wx.navigateTo({
+                url: '../commentInput/commentInput?love_id=' + that.data.love_id
+            })
+        } else {
+            common.signIn();
+        }
+    },
     navigateToReplyInput: function (e) {
         console.log('navigateToReplyInput e', e);
         let that = this;
-        if (that.data.wesecret) {
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
             let comment_id = e.currentTarget.dataset.commentid;
             let user_id = e.currentTarget.dataset.userid;
             wx.navigateTo({
@@ -263,7 +202,7 @@ Page({
             });
         }
         else {
-            that.signIn();
+            common.signIn();
         }
     },
     praiseLove: function (e) {
@@ -271,8 +210,8 @@ Page({
         let love_id = e.currentTarget.dataset.loveid;
         let love_if_my_praise = e.currentTarget.dataset.loveifmypraise;
         let that = this;
-
-        if (that.data.wesecret) {
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
             let praise;
             if (love_if_my_praise == 0) {
                 praise = 1;
@@ -283,7 +222,7 @@ Page({
                 url: 'https://collhome.com/apis/loves/' + love_id + '/praises',
                 method: 'POST',
                 data: {
-                    wesecret: that.data.wesecret,
+                    wesecret: wesecret,
                     praise: praise
                 },
                 success: function (res) {
@@ -305,7 +244,7 @@ Page({
                 }
             })
         } else {
-            that.signIn();
+            common.signIn();
         }
     },
     praiseComment: function (e) {
@@ -314,8 +253,8 @@ Page({
         let that = this
         let comment_id = e.currentTarget.dataset.commentid;
         let comment_if_my_praise = e.currentTarget.dataset.commentifmypraise;
-
-        if (that.data.wesecret) {
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
             let praise;
             if (comment_if_my_praise == 0) {
                 praise = 1;
@@ -326,7 +265,7 @@ Page({
                 url: `https://collhome.com/apis/comments/${comment_id}/praises`,
                 method: 'POST',
                 data: {
-                    wesecret: that.data.wesecret,
+                    wesecret: wesecret,
                     praise: praise
                 },
                 success: function (res) {
@@ -352,89 +291,8 @@ Page({
                 }
             })
         } else {
-            that.signIn();
+            common.signIn();
         }
     },
-    signIn: function () {
-        let that = this;
-        wx.showModal({
-            title: '提示',
-            content: '您还未登录呢，立即使用微信登录!',
-            confirmText: '确定',
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-
-                    wx.login({
-                        success: (res) => {
-                            const code = res.code
-                            if (code) {
-                                wx.getUserInfo({
-                                    success: (res) => {
-                                        console.log('res', res);
-                                        console.log('code', code, 'encryptedData', res.encryptedData, 'iv', res.iv)
-                                        that.postRegister(code, res.encryptedData, res.iv);
-                                    }
-                                })
-                            } else {
-                                console.log('获取用户登录态失败！' + res.errMsg)
-                            }
-                        }
-                    });
-                }
-            }
-        })
-    },
-    postRegister: function (code, encryptedData, iv) {
-        let that = this;
-
-        wx.request({
-            url: 'https://collhome.com/apis/register',
-            method: 'POST',
-            data: {
-                code: code,
-                encryptedData: encryptedData,
-                iv: iv
-            },
-            success: function (res) {
-                console.log('res', res);
-
-                wx.setStorageSync('wesecret', res.data);
-                that.setData({
-                    wesecret: res.data,
-                })
-                that.load_userInfo();
-            }
-        })
-    },
-    deleteLove: function () {
-        let that = this;
-        wx.showModal({
-            title: '删除',
-            content: '您要删除这条表白吗？',
-            confirmColor: '#ff0000',
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-
-                    wx.request({
-                        url: 'https://collhome.com/apis/delete/love',
-                        method: 'POST',
-                        data: {
-                            wesecret: that.data.wesecret,
-                            love_id: that.data.love_id
-                        },
-                        success: function (res) {
-                            console.log('delete love success', res.data)
-                            wx.setStorageSync('board_loves_need_refresh', 1);
-                            wx.setStorageSync('hot_loves_need_refresh', 1);
-                            wx.setStorageSync('college_loves_need_refresh', 1);
-                            wx.setStorageSync('my_loves_need_refresh', 1);
-                            wx.navigateBack()
-                        }
-                    })
-                }
-            }
-        })
-    }
+ 
 })

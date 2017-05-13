@@ -8,6 +8,7 @@
             <view class="header-img" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
               <image class="img" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
             </view>
+            <image style="float: right;width: 18px;height: 18px; padding: 0 5px 6px" src="../images/down.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickName}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}"  catchtap="showLoveActionSheet"></image>
             <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
             <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
           </view>
@@ -49,7 +50,7 @@
       </view>
 
       <!--评论列表-->
-      <view class="comments" id="scroll_to_comments">
+      <view wx:if="{{comments.length > 0}}" class="comments" id="scroll_to_comments">
         <block wx:for="{{comments}}" wx:for-item="comment" wx:key="id">
           <view class="item touch-active" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}" catchtap="showCommentActionSheet">
             <view class="i-left">
@@ -99,6 +100,10 @@
       <view class="weui-tabbar__item" wx:if="{{wesecret && love.userInfo.id == userInfo.id}}" catchtap="deleteLove">
         <image class="image-comment" src="../images/delete.png"></image>
         <view class="weui-tabbar__label" style="color: #ff0000">删除</view>
+      </view>
+      <view class="weui-tabbar__item" wx:if="{{wesecret && love.userInfo.id == userInfo.id}}" catchtap="deleteLove">
+        <image class="image-comment" src="../images/badReport.png"></image>
+        <view class="weui-tabbar__label" style="color: #ffbe00">举报</view>
       </view>
     </view>
   </view>

@@ -1,4 +1,6 @@
-<view class="page">
+<import src="../../utils/common.wxml" />
+<template is="comment_and_reply_input" />
+<!--<view class="page">
   <view class="page__bd">
     <view class="weui-panel"></view>
     <view class="weui-panel weui-panel_access">
@@ -13,4 +15,4 @@
 
     <button class="weui-btn" type="primary" bindtap="confirmInput">保存</button>
   </view>
-</view>
+</view>-->

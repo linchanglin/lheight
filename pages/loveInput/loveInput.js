@@ -185,6 +185,9 @@ Page({
         success: function (res) {
           console.log('res', res);
           let love_id = res.data.love_id;
+          that.setData({
+              love_id: love_id
+          })
 
           let successUp = 0; //成功个数
           let failUp = 0; //失败个数
@@ -243,7 +246,7 @@ Page({
     that.setData({
       save_loading: 1
     })
-    wx.setStorageSync('board_loves_need_refresh', 1);
+    wx.setStorageSync('board_loves_need_refresh_create_love', that.data.love_id);
     wx.showToast({
       title: '成功',
       icon: 'success',

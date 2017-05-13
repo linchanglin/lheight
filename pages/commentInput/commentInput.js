@@ -30,9 +30,9 @@ Page({
       },
       success: function (res) {
         console.log('post comment', res.data)
-        wx.setStorageSync('love_need_refresh', 1);
-        wx.setStorageSync('board_loves_need_refresh', 1);
-        wx.setStorageSync('my_loves_need_refresh', 1);
+        wx.setStorageSync('love_need_refresh', that.data.love_id);
+        wx.setStorageSync('board_loves_need_refresh', that.data.love_id);
+        wx.setStorageSync('my_loves_need_refresh', that.data.love_id);
         wx.navigateBack()
       }
     })

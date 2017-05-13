@@ -32,7 +32,7 @@
               <!--<button class="weui-btn mini-btn" type="default" size="mini" hover-class="none">
                 <text class="header-time" style="color: #000">11111{{love.read_nums}} 阅读</text>
               </button>-->
-              <image style="float: right;width: 18px;height: 18px; padding: 0 0 6px 20px" src="../images/down.png" catchtap="showLoveActionSheet"></image>
+              <image style="float: right;width: 18px;height: 18px; padding: 0 5px 6px" src="../images/down.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickName}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}"  catchtap="showLoveActionSheet"></image>
             <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
             <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
           </view>

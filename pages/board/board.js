@@ -1,4 +1,4 @@
-import common from '../../utils/common.js'
+import common from '../../utils/common.js';
 
 Page({
     data: {
@@ -19,9 +19,9 @@ Page({
 
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
-          that.setData({
-            wesecret: wesecret
-          })
+            that.setData({
+                wesecret: wesecret
+            })
         }
 
         wx.showLoading({
@@ -64,12 +64,60 @@ Page({
 
         let board_loves_need_refresh = wx.getStorageSync('board_loves_need_refresh')
         if (board_loves_need_refresh) {
-            that.load_loves();
+            that.load_refresh_loves(board_loves_need_refresh);
             wx.removeStorageSync('board_loves_need_refresh')
         }
+        let board_loves_need_refresh_delete_love = wx.getStorageSync('board_loves_need_refresh_delete_love')
+        if (board_loves_need_refresh_delete_love) {
+            that.load_refresh_loves_delete_love(board_loves_need_refresh_delete_love);
+            wx.removeStorageSync('board_loves_need_refresh_delete_love')
+        }
+        let board_loves_need_refresh_create_love = wx.getStorageSync('board_loves_need_refresh_create_love')
+        if (board_loves_need_refresh_create_love) {
+            that.onPullDownRefresh();
+            wx.removeStorageSync('board_loves_need_refresh_create_love')
+        }
+        
 
         that.setData({
             showTopTips1: true
+        })
+    },
+    load_refresh_loves: function (need_refresh_love_id) {
+        let that = this;
+        wx.request({
+            url: `https://collhome.com/apis/loves/${need_refresh_love_id}/comments`,
+            success: function (res) {
+                console.log("load_refresh_loves res", res.data.data)
+                let the_refresh_love = res.data.data.love;
+                let old_loves = that.data.loves;
+                for (let old_love of old_loves) {
+                    if (old_love.id == need_refresh_love_id) {
+                        old_love.praise_nums = the_refresh_love.praise_nums;
+                        old_love.comment_nums = the_refresh_love.comment_nums;
+                        old_love.if_my_comment = the_refresh_love.if_my_comment;
+                        old_love.if_my_praise = the_refresh_love.if_my_praise;
+                    }
+                }
+                console.log('load_refresh_loves old_loves', old_loves);
+                that.setData({
+                    loves: old_loves
+                })
+            }
+        })
+    },
+    load_refresh_loves_delete_love: function (love_id) {
+        let that = this;
+        let old_loves = that.data.loves;
+        let new_loves = [];
+        for (let old_love of old_loves) {
+            if (old_love.id != love_id) {
+                new_loves.push(old_love)
+            }
+        }
+        console.log('load_refresh_loves_delete_love new_loves', new_loves);
+        that.setData({
+            loves: new_loves
         })
     },
     onPullDownRefresh: function () {
@@ -133,6 +181,7 @@ Page({
                     console.log("loves.length", loves.length)
                     if (loves.length == 0) {
                         that.setData({
+                            reach_bottom: false,
                             page_no_data: true
                         })
                     } else {
@@ -149,23 +198,12 @@ Page({
                         loves: loves
                     })
                 }
-
-
-                // if (parameter) {
-                //   if (parameter == 'pulldown') {
-                //     wx.stopPullDownRefresh();
-                //   } else if (parameter == 'onLoad') {
-                //     wx.hideLoading()
-                //   }
-                // }
-
                 if (parameter) {
                     if (parameter == 'pulldown' || parameter == 'onLoad') {
                         wx.stopPullDownRefresh();
                         wx.hideLoading()
                     }
                 }
-
                 if (!that.data.loves || that.data.loves.length == 0) {
                     wx.showModal({
                         // title: '提示',
@@ -186,80 +224,21 @@ Page({
 
     },
     showLoveActionSheet: function (e) {
-        console.log('showLoveActionSheet', e);
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
+        let my_userInfo = wx.getStorageSync('my_userInfo');
         if (wesecret) {
-            let user_id = e.currentTarget.dataset.loveuserid
-            let user_nickname = e.currentTarget.dataset.loveusernickname;
-            let love_id = e.currentTarget.dataset.loveid;
-            let love_content = e.currentTarget.dataset.lovecontent;
-            let love = `${user_nickname}: ${love_content}`;
-            let itemList;
-            if (that.data.userInfo.id == user_id) {
-                itemList = [love, '评论', '举报', '删除'];
+            if (my_userInfo) {
+                common.showLoveActionSheet(e).then((love_id) => {
+                    console.log('delete love_id', love_id)
+                    that.load_refresh_loves_delete_love(love_id);
+                });
             } else {
-                itemList = [love, '评论', '举报']
+                common.get_my_userInfo(wesecret);
             }
-            wx.showActionSheet({
-                itemList: itemList,
-                success: function (res) {
-                    console.log(res.tapIndex)
-
-                    let index = res.tapIndex;
-                    if (index == 1) {
-                        wx.navigateTo({
-                            url: `../replyInput/replyInput?love_id=${love_id}&user_id=${user_id}`
-                        });
-                    } else if (index == 2) {
-                        let love_contentt;
-                        if (love_content.length > 50) {
-                            love_contentt = ':  ' + love_content.substring(0, 50) + '...';
-                        } else {
-                            love_contentt = ':  ' + love_content;
-                        }
-                        wx.navigateTo({
-                            url: `../badReportInput/badReportInput?user_id=${user_id}&user_nickname=${user_nickname}&love_id=${love_id}&love_content=${love_contentt}`
-                        })
-                    } else if (index == 3) {
-                        wx.showActionSheet({
-                            itemList: ['删除表白'],
-                            itemColor: '#ff0000',
-                            success: function (res) {
-                                if (res.tapIndex == 0) {
-                                    that.deleteLove(love_id);
-                                }
-                            }
-                        })
-                    }
-                },
-                fail: function (res) {
-                    console.log(res.errMsg)
-                }
-            })
         } else {
             common.signIn();
         }
-    },
-    deleteLove: function (love_id) {
-        let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
-        wx.request({
-            url: 'https://collhome.com/apis/delete/love',
-            method: 'POST',
-            data: {
-                wesecret: wesecret,
-                love_id: love_id
-            },
-            success: function (res) {
-                console.log('delete love success', res.data)
-                wx.setStorageSync('board_loves_need_refresh', 1);
-                wx.setStorageSync('hot_loves_need_refresh', 1);
-                wx.setStorageSync('college_loves_need_refresh', 1);
-                wx.setStorageSync('my_loves_need_refresh', 1);
-                that.load_love();
-            }
-        })
     },
     previewImage: function (e) {
         console.log('preview e', e);
@@ -373,57 +352,6 @@ Page({
             common.signIn();
         }
     },
-    //   signIn: function () {
-    //     let that = this;
-    //     wx.showModal({
-    //       title: '提示',
-    //       content: '您还未登录呢，立即使用微信登录!',
-    //       confirmText: '确定',
-    //       success: function (res) {
-    //         if (res.confirm) {
-    //           console.log('用户点击确定')
-
-    //           wx.login({
-    //             success: (res) => {
-    //               const code = res.code
-    //               if (code) {
-    //                 wx.getUserInfo({
-    //                   success: (res) => {
-    //                     console.log('res', res);
-    //                     console.log('code', code, 'encryptedData', res.encryptedData, 'iv', res.iv)
-    //                     that.postRegister(code, res.encryptedData, res.iv);
-    //                   }
-    //                 })
-    //               } else {
-    //                 console.log('获取用户登录态失败！' + res.errMsg)
-    //               }
-    //             }
-    //           });
-    //         }
-    //       }
-    //     })
-    //   },
-    //   postRegister: function (code, encryptedData, iv) {
-    //     let that = this;
-
-    //     wx.request({
-    //       url: 'https://collhome.com/apis/register',
-    //       method: 'POST',
-    //       data: {
-    //         code: code,
-    //         encryptedData: encryptedData,
-    //         iv: iv
-    //       },
-    //       success: function (res) {
-    //         console.log('res', res);
-
-    //         wx.setStorageSync('wesecret', res.data);
-    //         that.setData({
-    //           wesecret: res.data,
-    //         })
-    //       }
-    //     })
-    //   },
     navigateToProfileShow: function (e) {
         console.log('navigateToProfileShow', e);
 
