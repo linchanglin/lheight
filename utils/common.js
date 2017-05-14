@@ -219,7 +219,37 @@ function praiseLove(e) {
                 praise: praise
             },
             success: function (res) {
+                console.log('praiseLove success res', res)
+                console.log('praise', praise)
                 resolve(love_id);
+            }
+        })
+    })
+}
+
+function praiseComment(e) {
+    console.log('praiseComment e', e);
+    return new Promise((resolve, reject) => {
+        let comment_id = e.currentTarget.dataset.commentid;
+        let comment_if_my_praise = e.currentTarget.dataset.commentifmypraise;
+        let praise;
+        if (comment_if_my_praise == 0) {
+            praise = 1;
+        } else {
+            praise = 0;
+        }
+        let wesecret = wx.getStorageSync('wesecret');
+        wx.request({
+            url: `https://collhome.com/apis/comments/${comment_id}/praises`,
+            method: 'POST',
+            data: {
+                wesecret: wesecret,
+                praise: praise
+            },
+            success: function (res) {
+                console.log('praiseComment success res', res)
+                console.log('praise', praise)
+                resolve(comment_id);      
             }
         })
     })
@@ -230,5 +260,6 @@ module.exports = {
     get_my_userInfo: get_my_userInfo,
     showLoveActionSheet: showLoveActionSheet,
     showCommentActionSheet: showCommentActionSheet,
-    praiseLove: praiseLove
+    praiseLove: praiseLove,
+    praiseComment: praiseComment
 }

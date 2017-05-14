@@ -223,6 +223,16 @@ Page({
         })
 
     },
+    previewImage: function (e) {
+        console.log('preview e', e);
+        var current = e.currentTarget.dataset.current;
+        var urls = e.currentTarget.dataset.urls;
+
+        wx.previewImage({
+            current: current, // 当前显示图片的http链接
+            urls: urls // 需要预览的图片http链接列表
+        })
+    },
     showLoveActionSheet: function (e) {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -240,15 +250,33 @@ Page({
             common.signIn();
         }
     },
-    previewImage: function (e) {
-        console.log('preview e', e);
-        var current = e.currentTarget.dataset.current;
-        var urls = e.currentTarget.dataset.urls;
-
-        wx.previewImage({
-            current: current, // 当前显示图片的http链接
-            urls: urls // 需要预览的图片http链接列表
-        })
+    praiseLove: function (e) {
+        let love_if_my_praise = e.currentTarget.dataset.loveifmypraise;
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            common.praiseLove(e).then((love_id) => {
+                let old_loves = that.data.loves;
+                for (let value of old_loves) {
+                    if (value.id == love_id) {
+                        value.praise_nums = parseInt(value.praise_nums);
+                        if (love_if_my_praise == 0) {
+                            value.if_my_praise = 1;
+                            value.praise_nums++
+                        } else {
+                            value.if_my_praise = 0
+                            value.praise_nums--
+                        }
+                    }
+                }
+                that.setData({
+                    loves: old_loves,
+                    selected_love_id: love_id
+                })
+            });
+        } else {
+            common.signIn();
+        }
     },
     longtap_love: function (e) {
         console.log('longtap_love', e);
@@ -303,53 +331,6 @@ Page({
             wx.navigateTo({
                 url: `../comment/comment?love_id=${love_id}&scroll=scroll_to_comments`
             });
-        }
-    },
-    praiseLove: function (e) {
-        console.log('praiseLove e', e);
-        let love_id = e.currentTarget.dataset.loveid;
-        let love_if_my_praise = e.currentTarget.dataset.loveifmypraise;
-
-        let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
-            let praise;
-            if (love_if_my_praise == 0) {
-                praise == 1;
-            } else {
-                praise == 0;
-            }
-            wx.request({
-                url: 'https://collhome.com/apis/loves/' + love_id + '/praises',
-                method: 'POST',
-                data: {
-                    wesecret: wesecret,
-                    praise: praise
-                },
-                success: function (res) {
-                    console.log('1231654', res.data)
-
-                    let old_loves = that.data.loves;
-                    for (let value of old_loves) {
-                        if (value.id == love_id) {
-                            value.praise_nums = parseInt(value.praise_nums);
-                            if (love_if_my_praise == 0) {
-                                value.if_my_praise = 1;
-                                value.praise_nums++
-                            } else {
-                                value.if_my_praise = 0
-                                value.praise_nums--
-                            }
-                        }
-                    }
-                    that.setData({
-                        loves: old_loves,
-                        selected_love_id: love_id
-                    })
-                }
-            })
-        } else {
-            common.signIn();
         }
     },
     navigateToProfileShow: function (e) {
