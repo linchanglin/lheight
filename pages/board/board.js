@@ -90,9 +90,9 @@ Page({
     let that = this;
     let url;
     if (that.data.wesecret) {
-      url = 'https://collhome.com/api/loves?wesecret=' + that.data.wesecret
+      url = 'https://collhome.com/shangongyuan/api/loves?wesecret=' + that.data.wesecret
     } else {
-      url = 'https://collhome.com/api/loves'
+      url = 'https://collhome.com/shangongyuan/api/loves'
     }
     console.log('urllllllll',url);
     wx.request({
@@ -181,7 +181,7 @@ Page({
         praise == 0;
       }
       wx.request({
-        url: 'https://collhome.com/api/loves/' + love_id + '/praises',
+        url: 'https://collhome.com/shangongyuan/api/loves/' + love_id + '/praises',
         method: 'POST',
         data: {
           wesecret: that.data.wesecret,
@@ -247,7 +247,7 @@ Page({
     let that = this;
 
     wx.request({
-      url: 'https://collhome.com/api/register',
+      url: 'https://collhome.com/shangongyuan/api/register',
       method: 'POST',
       data: {
         code: code,

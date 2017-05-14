@@ -22,7 +22,7 @@ Page({
     let that = this;
     console.log('confirmInput    that.data.love_id', that.data.love_id);
     wx.request({
-      url: 'https://collhome.com/api/loves/' + that.data.love_id + '/comments',
+      url: 'https://collhome.com/shangongyuan/api/loves/' + that.data.love_id + '/comments',
       method: 'POST',
       data: {
         wesecret: that.data.wesecret,

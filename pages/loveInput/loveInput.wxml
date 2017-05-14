@@ -57,7 +57,7 @@
               <view style="display: inline-block; vertical-align: middle">谁可以看</view>
             </view>
             <view wx:if="{{visiable == 0}}" class="weui-cell__ft weui-cell__ft_in-access">公开</view>
-            <view wx:elif="{{visiable == 1}}" class="weui-cell__ft weui-cell__ft_in-access">仅本校</view>
+            <view wx:elif="{{visiable == 1}}" class="weui-cell__ft weui-cell__ft_in-access">仅本校区</view>
             <view wx:elif="{{visiable == 2}}" class="weui-cell__ft weui-cell__ft_in-access">仅男生</view>
             <view wx:elif="{{visiable == 3}}" class="weui-cell__ft weui-cell__ft_in-access">仅女生</view>
             <view wx:elif="{{visiable == 4}}" class="weui-cell__ft weui-cell__ft_in-access">私密</view>

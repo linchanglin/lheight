@@ -44,9 +44,9 @@ Page({
     let that = this;
     let url;
     if (user_id) {
-      url = 'https://collhome.com/api/users/' + user_id
+      url = 'https://collhome.com/shangongyuan/api/users/' + user_id
     } else {
-      url = 'https://collhome.com/api/user?wesecret=' + that.data.wesecret
+      url = 'https://collhome.com/shangongyuan/api/user?wesecret=' + that.data.wesecret
     }
 
     wx.request({

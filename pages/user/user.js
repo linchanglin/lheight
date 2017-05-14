@@ -26,7 +26,7 @@ Page({
     getUserInfo: function (wesecret) {
         let that = this;
         wx.request({
-            url: 'https://collhome.com/api/user?wesecret=' + wesecret,
+            url: 'https://collhome.com/shangongyuan/api/user?wesecret=' + wesecret,
 
             success: function (res) {
                 console.log('userInfo', res.data)
@@ -71,7 +71,7 @@ Page({
         let that = this;
 
         wx.request({
-            url: 'https://collhome.com/api/register',
+            url: 'https://collhome.com/shangongyuan/api/register',
             method: 'POST',
             data: {
                 code: code,
@@ -147,8 +147,8 @@ Page({
     showNoCollegeModal: function () {
         let that = this;
         wx.showModal({
-            title: '未知学校',
-            content: '发表表白需要知道您的学校呢，请去 修改信息 -> 学校 选择您的学校！',
+            title: '未知校区',
+            content: '发表表白需要知道您的校区呢，请去 修改信息 -> 校区 选择您的校区！',
             showCancel: false,
             success: function (res) {
                 if (res.confirm) {

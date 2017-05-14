@@ -122,7 +122,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_select {{ collegeIndex === '' ? 'weui-cell_warn' : ''}}">
               <view class="weui-cell__hd weui-cell__hd_in-select-after">
-                <view class="weui-label">学校</view>
+                <view class="weui-label">校区</view>
               </view>
               <view class="weui-cell__bd">
                 <picker name="college" bindchange="bindCollegeChange" value="{{collegeIndex}}" range="{{colleges}}">

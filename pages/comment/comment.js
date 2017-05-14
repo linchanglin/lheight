@@ -60,9 +60,9 @@ Page({
     let that = this;
     let url;
     if (that.data.wesecret) {
-      url = 'https://collhome.com/api/loves/' + that.data.love_id + '/comments?wesecret=' + that.data.wesecret
+      url = 'https://collhome.com/shangongyuan/api/loves/' + that.data.love_id + '/comments?wesecret=' + that.data.wesecret
     } else {
-      url = 'https://collhome.com/api/loves/' + that.data.love_id + '/comments'
+      url = 'https://collhome.com/shangongyuan/api/loves/' + that.data.love_id + '/comments'
     }
     wx.request({
       url: url,
@@ -85,7 +85,7 @@ Page({
   load_userInfo: function () {
     var that = this;
     wx.request({
-      url: 'https://collhome.com/api/user?wesecret=' + that.data.wesecret,
+      url: 'https://collhome.com/shangongyuan/api/user?wesecret=' + that.data.wesecret,
       success: function (res) {
         console.log('user with wesecret', res.data)
 
@@ -155,7 +155,7 @@ Page({
         praise == 0;
       }
       wx.request({
-        url: 'https://collhome.com/api/loves/' + love_id + '/praises',
+        url: 'https://collhome.com/shangongyuan/api/loves/' + love_id + '/praises',
         method: 'POST',
         data: {
           wesecret: that.data.wesecret,
@@ -217,7 +217,7 @@ Page({
     let that = this;
 
     wx.request({
-      url: 'https://collhome.com/api/register',
+      url: 'https://collhome.com/shangongyuan/api/register',
       method: 'POST',
       data: {
         code: code,
@@ -246,7 +246,7 @@ Page({
           console.log('用户点击确定')
 
           wx.request({
-            url: 'https://collhome.com/api/delete/love',
+            url: 'https://collhome.com/shangongyuan/api/delete/love',
             method: 'POST',
             data: {
               wesecret: that.data.wesecret,

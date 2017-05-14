@@ -2,7 +2,7 @@ import dataAPI from '../../utils/utils.js'
 
 Page({
     data: {
-        colleges: ["福州大学", "福建师范大学", "福建师大协和学院", "福建医科大学", "福建中医药大学", "福建农林大学", "福建工程学院", "闽江学院", "江夏学院", "福州教育学院", "华南女子学院", "福州职业技术学院", "平潭海洋大学", "福州大学至诚学院", "福州大学阳光学院", "福建农林大学金山学院 ", "福建农林大学东方学院", "福建警察学院", "福州外语外贸学院"],
+        colleges: ['上济北校区','济南校区'],
         grades: ['2017级', '2016级', '2015级', '2014级', '2013级', '2017级研', '2016级研', '2015级研', '2014级研'],
         genders: ['男', '女'],
 
@@ -22,7 +22,7 @@ Page({
         })
 
         wx.request({
-            url: 'https://collhome.com/api/user?wesecret=' + wesecret,
+            url: 'https://collhome.com/shangongyuan/api/user?wesecret=' + wesecret,
 
             success: function (res) {
                 console.log(res.data)
@@ -137,7 +137,7 @@ Page({
     deleteUserPicture: function (picture) {
         let that = this;
         wx.request({
-            url: 'https://collhome.com/api/delete/user/picture',
+            url: 'https://collhome.com/shangongyuan/api/delete/user/picture',
             method: 'POST',
             data: {
                 wesecret: that.data.wesecret,
@@ -199,7 +199,7 @@ Page({
             console.log('sss', submitData.gender, submitData.birthday, submitData.college)
             wx.showModal({
                 title: '提示',
-                content: '性别 生日 学校 为必填项呢！',
+                content: '性别 生日 校区 为必填项呢！',
                 showCancel: false,
                 success: function (res) {
                     if (res.confirm) {
@@ -218,7 +218,7 @@ Page({
         }
 
         wx.request({
-            url: 'https://collhome.com/api/users',
+            url: 'https://collhome.com/shangongyuan/api/users',
             data: {
                 'wesecret': that.data.wesecret,
                 'userInfo': submitData,
@@ -264,7 +264,7 @@ Page({
     saveUserPicture: function (upload_files, successUp, failUp, i, length) {
         let that = this;
         wx.uploadFile({
-            url: 'https://collhome.com/api/users/pictures',
+            url: 'https://collhome.com/shangongyuan/api/users/pictures',
             filePath: upload_files[i],
             name: 'file',
             formData: {

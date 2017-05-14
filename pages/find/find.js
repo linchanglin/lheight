@@ -2,7 +2,7 @@ var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
   data: {
-    tabs: ["热门", "本校", "附近"],
+    tabs: ["热门", "本校区", "附近"],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
@@ -87,7 +87,7 @@ Page({
   },
   load_user: function () {
     let that = this;
-    let url = 'https://collhome.com/api/user?wesecret=' + that.data.wesecret
+    let url = 'https://collhome.com/shangongyuan/api/user?wesecret=' + that.data.wesecret
 
     wx.request({
       url: url,
@@ -115,21 +115,21 @@ Page({
     let url;
     if (that.data.wesecret) {
       if (activeIndex == 0) {
-        url = 'https://collhome.com/api/hotLoves?wesecret=' + that.data.wesecret;
+        url = 'https://collhome.com/shangongyuan/api/hotLoves?wesecret=' + that.data.wesecret;
       } else if (activeIndex == 1) {
         console.log('that.userInfo00000000000', that.data.userInfo);
         if (that.data.userInfo.college == '') {
           that.showNoCollegeModal();
           return
         } else {
-          url = 'https://collhome.com/api/collegeLoves?wesecret=' + that.data.wesecret;
+          url = 'https://collhome.com/shangongyuan/api/collegeLoves?wesecret=' + that.data.wesecret;
         }
       } else {
-        url = 'https://collhome.com/api/locationLoves?wesecret=' + that.data.wesecret;
+        url = 'https://collhome.com/shangongyuan/api/locationLoves?wesecret=' + that.data.wesecret;
       }
     } else {
       if (activeIndex == 0) {
-        url = 'https://collhome.com/api/hotLoves';
+        url = 'https://collhome.com/shangongyuan/api/hotLoves';
       } else if (activeIndex == 1) {
         that.setData({
           loves: []
@@ -137,7 +137,7 @@ Page({
         that.showNoCollegeModal();
         return
       } else {
-        url = 'https://collhome.com/api/locationLoves';
+        url = 'https://collhome.com/shangongyuan/api/locationLoves';
       }
     }
 
@@ -162,8 +162,8 @@ Page({
   showNoCollegeModal: function () {
     let that = this;
     wx.showModal({
-      title: '未知学校',
-      content: '您尚未选择您的学校呢，请去 我 -> 修改信息 -> 学校 选择您的学校！',
+      title: '未知校区',
+      content: '您尚未选择您的校区呢，请去 我 -> 修改信息 -> 校区 选择您的校区！',
       showCancel: false,
       success: function (res) {
         if (res.confirm) {
@@ -270,7 +270,7 @@ Page({
         praise == 0;
       }
       wx.request({
-        url: 'https://collhome.com/api/loves/' + love_id + '/praises',
+        url: 'https://collhome.com/shangongyuan/api/loves/' + love_id + '/praises',
         method: 'POST',
         data: {
           wesecret: that.data.wesecret,
@@ -337,7 +337,7 @@ Page({
     let that = this;
 
     wx.request({
-      url: 'https://collhome.com/api/register',
+      url: 'https://collhome.com/shangongyuan/api/register',
       method: 'POST',
       data: {
         code: code,

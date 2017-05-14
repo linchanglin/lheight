@@ -87,7 +87,7 @@
             </view>
             <view class="profileShow_cell_right">
               <view class="profileShow_cell_hd">
-                学校
+                校区
               </view>
               <view class="profileShow_cell_bd">
                 {{userInfo.college_name}}

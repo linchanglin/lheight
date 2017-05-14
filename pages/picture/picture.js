@@ -60,7 +60,7 @@ Page({
         let that = this;
 
         wx.request({
-            url: 'https://collhome.com/api/pictures',
+            url: 'https://collhome.com/shangongyuan/api/pictures',
             success: function (res) {
                 console.log(res.data)
                 that.setData({
@@ -178,7 +178,7 @@ Page({
         let that = this;
 
         wx.request({
-            url: 'https://collhome.com/api/users/' + user_id,
+            url: 'https://collhome.com/shangongyuan/api/users/' + user_id,
             success: function (res) {
                 console.log('user', res.data)
 

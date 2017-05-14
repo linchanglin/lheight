@@ -9,7 +9,7 @@ Page({
     save_loading: false,
 
 
-    colleges: ["福州大学", "福建师范大学", "福建师大协和学院", "福建医科大学", "福建中医药大学", "福建农林大学", "福建工程学院", "闽江学院", "江夏学院", "福州教育学院", "华南女子学院", "福州职业技术学院", "平潭海洋大学", "福州大学至诚学院", "福州大学阳光学院", "福建农林大学金山学院 ", "福建农林大学东方学院", "福建警察学院", "福州外语外贸学院"],
+    colleges: ['上济北校区','济南校区'],
     collegeIndex: 0
   },
   onLoad: function () {
@@ -120,7 +120,7 @@ Page({
       })
 
       wx.request({
-        url: 'https://collhome.com/api/virtual/loves',
+        url: 'https://collhome.com/shangongyuan/api/virtual/loves',
         data: {
           // 'wesecret': that.data.wesecret,
           'content': that.data.content,
@@ -158,7 +158,7 @@ Page({
   saveLoveImage: function (love_id, files, successUp, failUp, i, length) {
     let that = this;
     wx.uploadFile({
-      url: 'https://collhome.com/api/virtual/loves/images',
+      url: 'https://collhome.com/shangongyuan/api/virtual/loves/images',
       filePath: that.data.files[i],
       name: 'file',
       formData: {
