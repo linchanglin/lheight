@@ -9,7 +9,7 @@ Page({
     save_loading: false,
 
 
-    colleges: ['上济北校区','济南校区'],
+    colleges: ['济北校区','济南校区'],
     collegeIndex: 0
   },
   onLoad: function () {

@@ -215,7 +215,7 @@
           </view>
         </view>
         <view class="weui-tab__content" wx:if="{{activeIndex == 2}}">
-          <map id="map" longitude="119.1977521459" latitude="26.0597592181" scale="14" bindcontroltap="controltap" markers="{{loves}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: {{mapHeight}}px;"></map>
+          <map id="map" longitude="116.7112612724" latitude="36.7955654443" scale="14" bindcontroltap="controltap" markers="{{loves}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: {{mapHeight}}px;"></map>
         </view>
       </view>
     </view>
