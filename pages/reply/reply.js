@@ -1,11 +1,11 @@
+import common from '../../utils/common.js';
+
 Page({
     data: {},
-
     onLoad: function (options) {
         console.log('options', options)
         let that = this;
         let comment_id = options.comment_id;
-
         that.setData({
             comment_id: comment_id
         })
@@ -24,14 +24,6 @@ Page({
                 })
             }
         })
-
-        let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
-            that.setData({
-                wesecret: wesecret
-            })
-            that.load_userInfo();
-        }
 
         that.load_comment();
     },
@@ -72,19 +64,6 @@ Page({
             }
         })
     },
-    load_userInfo: function () {
-        var that = this;
-        wx.request({
-            url: 'https://collhome.com/apis/user?wesecret=' + that.data.wesecret,
-            success: function (res) {
-                console.log('user with wesecret', res.data)
-
-                that.setData({
-                    userInfo: res.data.data
-                })
-            }
-        })
-    },
     previewImage: function (e) {
         console.log('preview e', e);
         var current = e.currentTarget.dataset.current;
@@ -95,41 +74,16 @@ Page({
             urls: urls // 需要预览的图片http链接列表
         })
     },
-    navigateToCommentInput: function () {
-        let that = this;
-        if (that.data.wesecret) {
-            wx.navigateTo({
-                url: '../commentInput/commentInput?love_id=' + that.data.love_id
-            })
-        } else {
-            that.signIn();
-        }
-
-    },
     navigateToProfileShow: function (e) {
         console.log('navigateToProfileShow', e);
-
         let that = this;
-
         let user_id = e.currentTarget.dataset.userid;
         wx.navigateTo({
             url: '../profileShow/profileShow?user_id=' + user_id
         })
     },
-    navigateToLocation: function (e) {
-        console.log('location', e);
-        let location = e.currentTarget.dataset.location;
 
-        console.log('location', location);
-
-        wx.openLocation({
-            name: location.name,
-            address: location.address,
-            latitude: parseFloat(location.latitude),
-            longitude: parseFloat(location.longitude)
-            // scale: 28
-        })
-    },
+    // 。。。就差这个了
     showReplyActionSheet: function (e) {
         console.log('showReplyActionSheet', e);
         let nickname = e.currentTarget.dataset.replyusernickname;
@@ -146,96 +100,53 @@ Page({
             }
         })
     },
-    navigateToReplys: function (e) {
-        console.log('navigateToReplys', e);
-        let comment_id = e.currentTarget.dataset.commentid;
-
-        wx.navigateTo({
-            url: `../reply/reply?comment_id=${comment_id}`
-        });
-    },
-    navigateToReply: function (e) {
-        console.log('navigateToReply', e);
-        let comment_id = e.target.dataset.commentid;
-        console.log('comment_id', comment_id);
-
-        var that = this;
-        that.setData({
-            item_selected_comment_id: comment_id
-        })
-
-        setTimeout(function () {
-            that.setData({
-                item_selected_comment_id: ''
-            })
-        }, 450)
-
-        wx.navigateTo({
-            url: `../reply/reply?comment_id=${comment_id}`
-        });
-    },
     navigateToReplyInput: function (e) {
         console.log('navigateToReplyInput e', e);
-
-        let comment_id = e.currentTarget.dataset.commentid;
-        let user_id = e.currentTarget.dataset.userid;
-        wx.navigateTo({
-            url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
-        });
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            let comment_id = e.currentTarget.dataset.commentid;
+            let user_id = e.currentTarget.dataset.userid;
+            wx.navigateTo({
+                url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+            });
+        } else {
+            common.signIn();
+        }
     },
     praiseComment: function (e) {
-        console.log('praiseComment e', e);
-        console.log('this.data.comment', this.data.comment);
-        let that = this
-        let comment_id = e.currentTarget.dataset.commentid;
         let comment_if_my_praise = e.currentTarget.dataset.commentifmypraise;
-
-        if (that.data.wesecret) {
-            let praise;
-            if (comment_if_my_praise == 0) {
-                praise = 1;
-            } else {
-                praise = 0;
-            }
-            wx.request({
-                url: `https://collhome.com/apis/comments/${comment_id}/praises`,
-                method: 'POST',
-                data: {
-                    wesecret: that.data.wesecret,
-                    praise: praise
-                },
-                success: function (res) {
-                    let old_comment = that.data.comment;
-                    old_comment.praise_nums = parseInt(old_comment.praise_nums);
-
-                    if (comment_if_my_praise == 0) {
-                        old_comment.if_my_praise = 1;
-                        old_comment.praise_nums++
-                    } else {
-                        old_comment.if_my_praise = 0
-                        old_comment.praise_nums--
-                    }
-
-                    that.setData({
-                        comment: old_comment,
-                        selected_comment_id: comment_id
-                    })
-
-                    wx.setStorageSync('love_need_refresh', 1);
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            common.praiseComment(e).then((comment_id) => {
+                let old_comment = that.data.comment;
+                old_comment.praise_nums = parseInt(old_comment.praise_nums);
+                if (comment_if_my_praise == 0) {
+                    old_comment.if_my_praise = 1;
+                    old_comment.praise_nums++
+                } else {
+                    old_comment.if_my_praise = 0
+                    old_comment.praise_nums--
                 }
-            })
+                that.setData({
+                    comment: old_comment,
+                    selected_comment_id: comment_id
+                })
+                wx.setStorageSync('love_need_refresh', comment_id);
+            });
         } else {
-            that.signIn();
+            common.signIn();
         }
     },
     praiseReply: function (e) {
         console.log('praiseReply e', e);
-        console.log('this.data.replies', this.data.replies);
         let that = this
         let reply_id = e.currentTarget.dataset.replyid;
         let reply_if_my_praise = e.currentTarget.dataset.replyifmypraise;
 
-        if (that.data.wesecret) {
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
             let praise;
             if (reply_if_my_praise == 0) {
                 praise = 1;
@@ -246,7 +157,7 @@ Page({
                 url: `https://collhome.com/apis/replies/${reply_id}/praises`,
                 method: 'POST',
                 data: {
-                    wesecret: that.data.wesecret,
+                    wesecret: wesecret,
                     praise: praise
                 },
                 success: function (res) {
@@ -272,89 +183,7 @@ Page({
                 }
             })
         } else {
-            that.signIn();
+            common.signIn();
         }
-    },
-    signIn: function () {
-        let that = this;
-        wx.showModal({
-            title: '提示',
-            content: '您还未登录呢，立即使用微信登录!',
-            confirmText: '确定',
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-
-                    wx.login({
-                        success: (res) => {
-                            const code = res.code
-                            if (code) {
-                                wx.getUserInfo({
-                                    success: (res) => {
-                                        console.log('res', res);
-                                        console.log('code', code, 'encryptedData', res.encryptedData, 'iv', res.iv)
-                                        that.postRegister(code, res.encryptedData, res.iv);
-                                    }
-                                })
-                            } else {
-                                console.log('获取用户登录态失败！' + res.errMsg)
-                            }
-                        }
-                    });
-                }
-            }
-        })
-    },
-    postRegister: function (code, encryptedData, iv) {
-        let that = this;
-
-        wx.request({
-            url: 'https://collhome.com/apis/register',
-            method: 'POST',
-            data: {
-                code: code,
-                encryptedData: encryptedData,
-                iv: iv
-            },
-            success: function (res) {
-                console.log('res', res);
-
-                wx.setStorageSync('wesecret', res.data);
-                that.setData({
-                    wesecret: res.data,
-                })
-                that.load_userInfo();
-            }
-        })
-    },
-    deleteArticle: function () {
-        let that = this;
-        wx.showModal({
-            title: '删除',
-            content: '您要删除这条表白吗？',
-            confirmColor: '#ff0000',
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-
-                    wx.request({
-                        url: 'https://collhome.com/apis/delete/love',
-                        method: 'POST',
-                        data: {
-                            wesecret: that.data.wesecret,
-                            love_id: that.data.love_id
-                        },
-                        success: function (res) {
-                            console.log('delete love success', res.data)
-                            wx.setStorageSync('board_loves_need_refresh', 1);
-                            wx.setStorageSync('hot_loves_need_refresh', 1);
-                            wx.setStorageSync('college_loves_need_refresh', 1);
-                            wx.setStorageSync('my_loves_need_refresh', 1);
-                            wx.navigateBack()
-                        }
-                    })
-                }
-            }
-        })
     }
 })

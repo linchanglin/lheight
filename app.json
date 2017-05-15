@@ -1,8 +1,9 @@
 {
     "pages": [
+        "pages/board/board",
+        
         "pages/user/user",
         
-        "pages/board/board",
         "pages/message/message",
         "pages/comment/comment",
         "pages/badReportInput/badReportInput",
