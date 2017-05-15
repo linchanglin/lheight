@@ -16,74 +16,22 @@
       </view>
       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
     </view>
-    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>实时搜索文本</view>
-        </view>
-      </navigator>
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>实时搜索文本</view>
-        </view>
-      </navigator>
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>实时搜索文本</view>
-        </view>
-      </navigator>
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>实时搜索文本</view>
-        </view>
-      </navigator>
-    </view>
+    
+
+
+
     <view class="weui-cells weui-cells_after-title">
-
-
-        <navigator url="../chat/chat" class="weui-cell">
+        <view class="weui-cell" bindtap="navigateToChat" hover="true" hover-class="weui-cell_active">
           <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-            <image src="../images/pic_160.png" style="width: 50px; height: 50px; display: block" />
+            <image src="../images/pic_160.png" style="width: 50px; height: 50px; display: block;border-radius: 5px" />
             <view class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</view>
           </view>
           <view class="weui-cell__bd">
             <view>联系人名称</view>
             <view style="font-size: 13px;color: #888888;">摘要信息</view>
           </view>
-        </navigator>
-      <!--</navigator>-->
-
-
-      <view class="weui-cell">
-        <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-          <image src="../images/pic_160.png" style="width: 50px; height: 50px; display: block" />
-          <view class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</view>
         </view>
-        <view class="weui-cell__bd">
-          <view>联系人名称</view>
-          <view style="font-size: 13px;color: #888888;">摘要信息</view>
-        </view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-          <image src="../images/pic_160.png" style="width: 50px; height: 50px; display: block" />
-          <view class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</view>
-        </view>
-        <view class="weui-cell__bd">
-          <view>联系人名称</view>
-          <view style="font-size: 13px;color: #888888;">摘要信息</view>
-        </view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-          <image src="../images/pic_160.png" style="width: 50px; height: 50px; display: block" />
-          <view class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</view>
-        </view>
-        <view class="weui-cell__bd" bindtap="handleTap1">
-          <view>联系人名称</view>
-          <view style="font-size: 13px;color: #888888;">摘要信息</view>
-        </view>
-      </view>
+     
     </view>
   </view>
 </view>

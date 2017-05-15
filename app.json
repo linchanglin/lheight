@@ -1,12 +1,14 @@
 {
     "pages": [
+        "pages/user/user",
+        
         "pages/board/board",
+        "pages/message/message",
         "pages/comment/comment",
         "pages/badReportInput/badReportInput",
         "pages/reply/reply",
         "pages/loveInput/loveInput",
         "pages/profileShowInput/profileShowInput",
-        "pages/user/user",
         "pages/chat/chat",
         "pages/test/breadtrip/breadtrip",
         "pages/replyInput/replyInput",
@@ -22,7 +24,6 @@
         "pages/city_multi_page_district/city_multi_page_district",
         "pages/index/index",
         "pages/visiableInput/visiableInput",
-        "pages/message/message",
         "pages/profile/profile",
         "pages/realNameInput/realNameInput",
         "pages/signatureInput/signatureInput",

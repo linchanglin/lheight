@@ -40,7 +40,11 @@ Page({
                 })
             }
         })
+    },
+    navigateToChat: function (e) {
+       wx.navigateTo({
+           url: '../chat/chat',
+       })
     }
-
 
 });

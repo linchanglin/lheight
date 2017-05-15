@@ -135,6 +135,16 @@ Page({
             that.signIn();
         }
     },
+    navigateToMessage: function () {
+        let that = this;
+        if (that.data.wesecret) {
+            wx.navigateTo({
+                url: '../message/message',
+            })
+        } else {
+            that.signIn();
+        }
+    },
     navigateToLoveInput: function () {
         let that = this;
         if (that.data.wesecret) {
