@@ -59,6 +59,12 @@ Page({
             });
         }, 2500);
     },
+    onShareAppMessage: function () {
+        return {
+            title: '眼缘墙',
+            path: '/pages/picture/picture'
+        }
+    },
     load_pictures: function (parameter) {
         let that = this;
 

@@ -63,6 +63,14 @@ Page({
             wx.removeStorageSync('love_need_refresh')
         }
     },
+    onShareAppMessage: function () {
+        let that = this;
+        let love_id = that.data.love_id;
+        return {
+            title: '表白',
+            path: `/pages/comment/comment?love_id=${love_id}`
+        }
+    },
     load_love: function () {
         let that = this;
         let url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments';

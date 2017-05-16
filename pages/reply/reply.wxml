@@ -33,7 +33,7 @@
       </view>
       <view class="replies">
         <block wx:for="{{replies}}" wx:for-item="reply" wx:key="id">
-          <view class="item touch-active" data-replyUserNickName="{{reply.userInfo.nickName}}" data-replyContent="{{reply.content}}" catchtap="showReplyActionSheet">
+          <view class="item touch-active"  data-replyUserId="{{reply.userInfo.id}}" data-replyUserNickName="{{reply.userInfo.nickName}}" data-replytId="{{reply.id}}" data-replyContent="{{reply.content}}" catchtap="showReplyActionSheet">
             <view class="i-left">
               <image class="c-u-img" src="{{reply.userInfo.avatarUrl}}" data-userId="{{reply.userInfo.id}}" catchtap="navigateToProfileShow"></image>
             </view>
@@ -54,7 +54,11 @@
 
               <!--评论内容-->
               <view class="content">
-                <view class="comment_content">{{reply.content}}</view>
+                <view  wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}"   class="comment_content">
+                <text>回复</text>
+                <text style="color: #66c">@{{reply.objectUserInfo.nickName}}</text><text>:  {{reply.content}}</text>
+                </view>
+                 <view wx:else class="comment_content">{{reply.content}}</view>
               </view>
             </view>
           </view>

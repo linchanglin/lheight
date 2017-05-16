@@ -69,6 +69,12 @@ Page({
       }
     }
   },
+  onShareAppMessage: function () {
+      return {
+          title: '发现',
+          path: '/pages/find/find'
+      }
+  },
   load_user: function () {
     let that = this;
     console.log("that.data.wesecret", that.data.wesecret);

@@ -199,6 +199,74 @@ function showCommentActionSheet(e) {
     })
 }
 
+function showReplyActionSheet(e, comment_id) {
+    console.log('showReplyActionSheet', e);
+    return new Promise((resolve, reject) => {
+        let user_id = e.currentTarget.dataset.replyuserid
+        let user_nickname = e.currentTarget.dataset.replyusernickname;
+        let reply_id = e.currentTarget.dataset.replyid;
+        let reply_content = e.currentTarget.dataset.replycontent;
+        let reply = `${user_nickname}: ${reply_content}`;
+        let itemList;
+
+        let my_userInfo = wx.getStorageSync('my_userInfo');
+
+        if (my_userInfo.id == user_id) {
+            itemList = [reply, '回复', '举报', '删除'];
+        } else {
+            itemList = [reply, '回复', '举报']
+        }
+        wx.showActionSheet({
+            itemList: itemList,
+            success: function (res) {
+                console.log(res.tapIndex)
+
+                let index = res.tapIndex;
+                if (index == 1) {
+                    wx.navigateTo({
+                        url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+                    });
+                } else if (index == 2) {
+                    let reply_contentt;
+                    if (reply_content.length > 50) {
+                        reply_contentt = ':  ' + reply_content.substring(0, 50) + '...';
+                    } else {
+                        reply_contentt = ':  ' + reply_content;
+                    }
+                    wx.navigateTo({
+                        url: `../badReportInput/badReportInput?user_id=${user_id}&user_nickname=${user_nickname}&reply_id=${reply_id}&reply_content=${reply_contentt}`
+                    })
+                } else if (index == 3) {
+                    wx.showActionSheet({
+                        itemList: ['删除评论'],
+                        itemColor: '#ff0000',
+                        success: function (res) {
+                            if (res.tapIndex == 0) {
+                                let wesecret = wx.getStorageSync('wesecret');
+                                wx.request({
+                                    url: 'https://collhome.com/apis/delete/reply',
+                                    method: 'POST',
+                                    data: {
+                                        wesecret: wesecret,
+                                        reply_id: reply_id
+                                    },
+                                    success: function (res) {
+                                        console.log('delete reply success', res.data)
+                                        resolve(reply_id);
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+            },
+            fail: function (res) {
+                console.log(res.errMsg)
+            }
+        })
+    })
+}
+
 function praiseLove(e) {
     console.log('praiseLove e', e);
     return new Promise((resolve, reject) => {
@@ -249,7 +317,7 @@ function praiseComment(e) {
             success: function (res) {
                 console.log('praiseComment success res', res)
                 console.log('praise', praise)
-                resolve(comment_id);      
+                resolve(comment_id);
             }
         })
     })
@@ -260,6 +328,7 @@ module.exports = {
     get_my_userInfo: get_my_userInfo,
     showLoveActionSheet: showLoveActionSheet,
     showCommentActionSheet: showCommentActionSheet,
+    showReplyActionSheet: showReplyActionSheet,
     praiseLove: praiseLove,
     praiseComment: praiseComment
 }

@@ -82,23 +82,24 @@ Page({
             url: '../profileShow/profileShow?user_id=' + user_id
         })
     },
-
-    // 。。。就差这个了
     showReplyActionSheet: function (e) {
-        console.log('showReplyActionSheet', e);
-        let nickname = e.currentTarget.dataset.replyusernickname;
-        let content = e.currentTarget.dataset.replycontent;
-        let reply = `${nickname}: ${content}`
-        wx.showActionSheet({
-            itemList: [reply, '回复', '举报', '删除'],
-            // itemColor: '#ff0000',
-            success: function (res) {
-                console.log(res.tapIndex)
-            },
-            fail: function (res) {
-                console.log(res.errMsg)
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        let my_userInfo = wx.getStorageSync('my_userInfo');
+        let comment_id = that.data.comment_id;
+        if (wesecret) {
+            if (my_userInfo) {
+                common.showReplyActionSheet(e, comment_id).then((reply_id) => {
+                    console.log('delete reply_id', reply_id)
+                    wx.setStorageSync('love_need_refresh', reply_id);
+                    that.load_comment();
+                });
+            } else {
+                common.get_my_userInfo(wesecret);
             }
-        })
+        } else {
+            common.signIn();
+        }
     },
     navigateToReplyInput: function (e) {
         console.log('navigateToReplyInput e', e);

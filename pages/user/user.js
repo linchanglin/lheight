@@ -26,6 +26,12 @@ Page({
             wx.removeStorageSync('user_need_refresh')
         }
     },
+    onShareAppMessage: function () {
+        return {
+            title: '我',
+            path: '/pages/user/user'
+        }
+    },
     getUserInfo: function (wesecret) {
         let that = this;
         wx.request({

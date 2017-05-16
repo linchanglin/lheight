@@ -159,8 +159,12 @@ Page({
             that.load_loves('add_page')
         }
     },
-
-    // 需要调整
+    onShareAppMessage: function () {
+        return {
+            title: '表白墙',
+            path: '/pages/board/board'
+        }
+    },
     load_loves: function (parameter) {
         let that = this;
         let page = that.data.page;
