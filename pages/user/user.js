@@ -1,52 +1,18 @@
-// var app = getApp()
+import common from '../../utils/common.js';
 
 Page({
     data: {},
     onLoad: function () {
         let that = this;
-
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             that.setData({
                 wesecret: wesecret
             })
-            wx.showLoading({
-                title: '加载中',
-            })
             that.getUserInfo(wesecret);
         } else {
             that.signIn();
         }
-    },
-    onShow: function () {
-        let that = this;
-        let user_need_refresh = wx.getStorageSync('user_need_refresh')
-        if (user_need_refresh) {
-            that.getUserInfo(that.data.wesecret);
-            wx.removeStorageSync('user_need_refresh')
-        }
-    },
-    onShareAppMessage: function () {
-        return {
-            title: '我',
-            path: '/pages/user/user'
-        }
-    },
-    getUserInfo: function (wesecret) {
-        let that = this;
-        wx.request({
-            url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
-
-            success: function (res) {
-                console.log('userInfo', res.data)
-
-                that.setData({
-                    userInfo: res.data.data
-                })
-
-                wx.hideLoading()
-            }
-        })
     },
     signIn: function () {
         let that = this;
@@ -82,7 +48,7 @@ Page({
         let that = this;
 
         wx.request({
-            url: 'https://collhome.com/apis/register',
+            url: 'https://collhome.com/api/register',
             method: 'POST',
             data: {
                 code: code,
@@ -91,69 +57,103 @@ Page({
             },
             success: function (res) {
                 console.log('res', res);
-
                 wx.setStorageSync('wesecret', res.data);
                 that.setData({
                     wesecret: res.data,
                 })
-
                 that.getUserInfo(res.data);
             }
         })
     },
+    getUserInfo: function (wesecret) {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/api/user?wesecret=' + wesecret,
+            success: function (res) {
+                console.log('userInfo', res.data.data)
+                wx.setStorageSync('my_userInfo', res.data.data);
+                that.setData({
+                    userInfo: res.data.data
+                })
+            }
+        })
+    },
+    onShow: function () {
+        let that = this;
+        let user_need_refresh = wx.getStorageSync('user_need_refresh')
+        if (user_need_refresh) {
+            let my_userInfo = wx.getStorageSync('my_userInfo');
+            that.setData({
+                userInfo: my_userInfo
+            })
+            wx.removeStorageSync('user_need_refresh')
+        }
+    },
+    onShareAppMessage: function () {
+        return {
+            title: '我',
+            path: '/pages/user/user'
+        }
+    },
     navigateToProfile: function () {
         let that = this;
-        if (that.data.wesecret) {
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
             wx.navigateTo({
                 url: '../profile/profile',
             })
         } else {
-            that.signIn();
+            common.signIn();
         }
     },
     navigateToProfileShow: function () {
         let that = this;
-        if (that.data.wesecret) {
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
             wx.navigateTo({
                 url: '../profileShow/profileShow',
             })
         } else {
-            that.signIn();
+            common.signIn();
         }
     },
-    navigateToProfileShowInput: function () {
-        let that = this;
-        if (that.data.wesecret) {
-            wx.navigateTo({
-                url: '../profileShowInput/profileShowInput',
-            })
-        } else {
-            that.signIn();
-        }
-    },
+    // navigateToProfileShowInput: function () {
+    //     let that = this;
+    //     let wesecret = wx.getStorageSync('wesecret');
+    //     if (wesecret) {
+    //         wx.navigateTo({
+    //             url: '../profileShowInput/profileShowInput',
+    //         })
+    //     } else {
+    //         common.signIn();
+    //     }
+    // },
     navigateToMyLove: function () {
         let that = this;
-        if (that.data.wesecret) {
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
             wx.navigateTo({
                 url: '../myLove/myLove',
             })
         } else {
-            that.signIn();
+            common.signIn();
         }
     },
     navigateToMessage: function () {
         let that = this;
-        if (that.data.wesecret) {
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
             wx.navigateTo({
                 url: '../message/message',
             })
         } else {
-            that.signIn();
+            common.signIn();
         }
     },
     navigateToLoveInput: function () {
         let that = this;
-        if (that.data.wesecret) {
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
             if (that.data.userInfo.college === '') {
                 that.showNoCollegeModal();
             } else {
@@ -162,7 +162,7 @@ Page({
                 })
             }
         } else {
-            that.signIn();
+            common.signIn();
         }
     },
     showNoCollegeModal: function () {

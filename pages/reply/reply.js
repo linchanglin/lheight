@@ -5,8 +5,10 @@ Page({
     onLoad: function (options) {
         console.log('options', options)
         let that = this;
+        let love_id = options.love_id;
         let comment_id = options.comment_id;
         that.setData({
+            love_id: love_id,
             comment_id: comment_id
         })
         let scroll = options.scroll;
@@ -81,6 +83,29 @@ Page({
         wx.navigateTo({
             url: '../profileShow/profileShow?user_id=' + user_id
         })
+    },
+    showCommentActionSheet: function (e) {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        let my_userInfo = wx.getStorageSync('my_userInfo');
+        let love_id = that.data.love_id;
+        if (wesecret) {
+            if (my_userInfo) {
+                common.showCommentActionSheet(e).then((comment_id) => {
+                    console.log('delete comment_id', comment_id)
+                    wx.setStorageSync('love_need_refresh', comment_id);
+                    wx.setStorageSync('board_loves_need_refresh', love_id);
+                    wx.setStorageSync('hot_loves_need_refresh', love_id);
+                    wx.setStorageSync('college_loves_need_refresh', love_id);
+                    wx.setStorageSync('my_loves_need_refresh', love_id);
+                    wx.navigateBack();
+                });
+            } else {
+                common.get_my_userInfo(wesecret);
+            }
+        } else {
+            common.signIn();
+        }
     },
     showReplyActionSheet: function (e) {
         let that = this;

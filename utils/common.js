@@ -238,7 +238,7 @@ function showReplyActionSheet(e, comment_id) {
                     })
                 } else if (index == 3) {
                     wx.showActionSheet({
-                        itemList: ['删除评论'],
+                        itemList: ['删除回复'],
                         itemColor: '#ff0000',
                         success: function (res) {
                             if (res.tapIndex == 0) {

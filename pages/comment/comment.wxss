@@ -186,66 +186,9 @@ image {
   font-size: 13px;
 }
 
-.weui-tabbar__item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 7px 0;
-}
-
-.weui-tabbar .image-comment {
-  width: 26px;
-  height: 26px;
-  margin-right: 5px;
-}
-
-.weui-tabbar__label {
-  color: #000;
-  font-size: 17px;
-}
-
-.ripple {
-  animation-duration: 1s;
-  animation-fill-mode: both;
-}
-
-@keyframes bounceIn {
-  from, 20%, 40%, 60%, 80%, to {
-    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-  }
-
-  0% {
-    opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
-
-  20% {
-    transform: scale3d(1.1, 1.1, 1.1);
-  }
-
-  40% {
-    transform: scale3d(0.9, 0.9, 0.9);
-  }
-
-  60% {
-    opacity: 1;
-    transform: scale3d(1.03, 1.03, 1.03);
-  }
-
-  80% {
-    transform: scale3d(0.97, 0.97, 0.97);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-.bounceIn {
-  animation-name: bounceIn;
-}
-
 .no_border_bottom {
   border-bottom: 0px solid #edecf2;
 }
+
+@import "../../utils/common_css/weui-tabbar.wxss";
+@import "../../utils/common_css/ripple-bounceIn.wxss";

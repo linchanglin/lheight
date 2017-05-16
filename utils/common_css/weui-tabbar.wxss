@@ -1,0 +1,17 @@
+.weui-tabbar__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 0;
+}
+
+.weui-tabbar .image-comment {
+  width: 26px;
+  height: 26px;
+  margin-right: 5px;
+}
+
+.weui-tabbar__label {
+  color: #000;
+  font-size: 17px;
+}

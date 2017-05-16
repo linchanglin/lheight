@@ -219,16 +219,19 @@ Page({
     },
     navigateToReplys: function (e) {
         console.log('navigateToReplys', e);
+        let that = this;
+        let love_id = that.data.love_id;
         let comment_id = e.currentTarget.dataset.commentid;
         wx.navigateTo({
-            url: `../reply/reply?comment_id=${comment_id}`
+            url: `../reply/reply?love_id=${love_id}&comment_id=${comment_id}`
         });
     },
     navigateToReply: function (e) {
         console.log('navigateToReply', e);
+        let that = this;
+        let love_id = that.data.love_id;
         let comment_id = e.target.dataset.commentid;
         console.log('comment_id', comment_id);
-        let that = this;
         that.setData({
             item_selected_comment_id: comment_id
         })
@@ -237,9 +240,8 @@ Page({
                 item_selected_comment_id: ''
             })
         }, 450)
-
         wx.navigateTo({
-            url: `../reply/reply?comment_id=${comment_id}`
+            url: `../reply/reply?love_id=${love_id}&comment_id=${comment_id}`
         });
     },
     navigateToCommentInput: function () {

@@ -114,49 +114,18 @@ page {
   background-color: #bbb;
 }
 
-.ripple {
-  animation-duration: 1s;
-  animation-fill-mode: both;
-}
 
-@keyframes bounceIn {
-  from, 20%, 40%, 60%, 80%, to {
-    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-  }
 
-  0% {
-    opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
 
-  20% {
-    transform: scale3d(1.1, 1.1, 1.1);
-  }
+@import "../../utils/common_css/weui-tabbar.wxss";
+@import "../../utils/common_css/ripple-bounceIn.wxss";
 
-  40% {
-    transform: scale3d(0.9, 0.9, 0.9);
-  }
 
-  60% {
-    opacity: 1;
-    transform: scale3d(1.03, 1.03, 1.03);
-  }
 
-  80% {
-    transform: scale3d(0.97, 0.97, 0.97);
-  }
 
-  to {
-    opacity: 1;
-    transform: scale3d(1, 1, 1);
-  }
-}
 
-.bounceIn {
-  animation-name: bounceIn;
-}
 
-.sendReply {
+/*.sendReply {
   display: flex;
   position: fixed;
   bottom: 0;
@@ -164,7 +133,6 @@ page {
   right: 0;
   padding: 10px;
   border-top: 1px solid #ccc;
-  /*background-color: #ececec;*/
   background-color: #edecf2;
 }
 
@@ -173,7 +141,7 @@ page {
   background-color: #fff;
   font-size: 16px;
   border-radius: 5px;
-}
+}*/
 
 .no_border_bottom {
   border-bottom: 0px solid #edecf2;

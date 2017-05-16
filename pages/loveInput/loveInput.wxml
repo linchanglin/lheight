@@ -40,8 +40,6 @@
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
           </view>
-        </view>
-        <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="chooseLocation">
             <view class="weui-cell__hd">
               <image wx:if="{{location_exist == 0}}" src="../images/location.png" class="iconfront"></image>
@@ -53,10 +51,47 @@
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
           </view>
+          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active"  bindtap="navigateToVisiableInput">
+            <view class="weui-cell__hd">
+              <image wx:if="{{visiable == 0}}" src="../images/global.png" class="iconfront"></image>
+              <image wx:else src="../images/global_fill.png" class="iconfront"></image>
+            </view>
+            <view class="weui-cell__bd">
+              <view style="display: inline-block; vertical-align: middle">谁可以看</view>
+            </view>
+            <view wx:if="{{visiable == 0}}" class="weui-cell__ft weui-cell__ft_in-access">公开</view>
+            <view wx:elif="{{visiable == 1}}" class="weui-cell__ft weui-cell__ft_in-access">仅本校</view>
+            <view wx:elif="{{visiable == 2}}" class="weui-cell__ft weui-cell__ft_in-access">仅男生</view>
+            <view wx:elif="{{visiable == 3}}" class="weui-cell__ft weui-cell__ft_in-access">仅女生</view>
+            <view wx:elif="{{visiable == 4}}" class="weui-cell__ft weui-cell__ft_in-access">私密</view>
+          </view>
+          <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__hd">
+              <image wx:if="{{nickname == false}}" src="../images/nickname.png" class="iconfront"></image>
+              <image wx:else src="../images/nickname_fill.png" class="iconfront"></image>
+            </view>
+            <view class="weui-cell__bd">是否匿名</view>
+            <view class="weui-cell__ft">
+              <switch bindchange="switchChange" />
+            </view>
+          </view>
         </view>
+        <!--<view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="chooseLocation">
+            <view class="weui-cell__hd">
+              <image wx:if="{{location_exist == 0}}" src="../images/location.png" class="iconfront"></image>
+              <image wx:else src="../images/location_fill.png" class="iconfront"></image>
+            </view>
+            <view class="weui-cell__bd">
+              <view wx:if="{{location_exist == 0}}" style="display: inline-block; vertical-align: middle">所在位置</view>
+              <view wx:else style="display: inline-block; vertical-align: middle">{{location.name}}</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>
+        </view>-->
       </view>
     </view>
-    <view class="weui-panel">
+    <!--<view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active"  bindtap="navigateToVisiableInput">
@@ -91,7 +126,7 @@
           </view>
         </view>
       </view>
-    </view>
+    </view>-->
     <view wx:if="{{nickname == true}}" class="weui-cells__title">提示：此表白将以您学校表白君的名义发表。</view>
     <view class="weui-btn-area">
       <button wx:if="{{save_loading == 0}}" class="weui-btn" type="primary" disabled="true">提交</button>
