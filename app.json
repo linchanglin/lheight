@@ -1,16 +1,23 @@
 {
     "pages": [
         "pages/profileShow/profileShow",
+        
+        "pages/board/board",
+        
+        
+        
+        "pages/comment/comment",
+        
+        
+        "pages/test/breadtrip/breadtrip",
+        
         "pages/user/user",
         "pages/loveInput/loveInput",
-        "pages/board/board",
         "pages/message/message",
-        "pages/comment/comment",
         "pages/badReportInput/badReportInput",
         "pages/reply/reply",
         "pages/profileShowInput/profileShowInput",
         "pages/chat/chat",
-        "pages/test/breadtrip/breadtrip",
         "pages/replyInput/replyInput",
         "pages/commentInput/commentInput",
         "pages/videoUrlInput/videoUrlInput",

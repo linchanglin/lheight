@@ -1,11 +1,40 @@
 <view class="page">
   <view class="page__bd">
-    <view style="width: 100%; height: 200px;display: flex; justify-content: center; align-items: center;">
-      <image style="position: absolute;border:  2px solid #fff;z-index: 500;width: 70px; height: 70px;border-radius: 50%" mode="aspectFill" src="{{userInfo.avatarUrl}}"></image>
-      <image style="width: 100%; opacity:1" mode="aspectFill" src="../images/meet.jpeg"></image>
+
+    <image style="position: fixed;top: 0;left: 0; z-index; -1;height: 210px;width: 100%; opacity:1" mode="aspectFill" src="../images/meet.jpeg"></image>
+
+    <view style="position: absolute; top: 0; width: 100%;height: 210px;display: flex; justify-content: center;align-items: center">
+      <view style="">
+        <image style="position: relative;z-index: 500; border:  2px solid #fff;width: 70px; height: 70px;border-radius: 50%" mode="aspectFill" src="{{userInfo.avatarUrl}}"></image>
+        <view style="display: block;position: relative;">{{userInfo.nickName}}</view>
+        <view>喜欢 99</view>
+      </view>
     </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
+    <view class="weui-panel" style="position: relative; top: 210px; width: 100%; margin: 0 0  45px;background-color: #edecf2">
+      <view class="weui-panel__bd" style="background-color: #ffffff">
+        <view class="profileShow_cells">
+          <view class="profileShow_cell">
+            <view class="profileShow_cell_left">
+              <image class="image_picture_middle" mode="aspectFit" src="../images/picture_fill.png"></image>
+            </view>
+            <view class="profileShow_cell_right">
+              <view class="profileShow_cell_hd">
+                照片
+              </view>
+              <view class="profileShow_cell_bd">
+                <view class="display: flex; justify-content: flex-start">
+
+                  <block wx:for-items="{{userInfo.pictures}}" wx:key="*this">
+                    <image style="width: 79px; height: 79px; padding: 1px;" src="{{item}}" bindtap="previewImage" data-current="{{item}}" id="{{item}}" mode="aspectFill" />
+                  </block>
+                </view>
+
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-panel__bd new_panel_bd">
         <view class="profileShow_cells">
           <view class="profileShow_cell">
             <view class="profileShow_cell_left">
@@ -46,32 +75,8 @@
           </view>
         </view>
       </view>
-    </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="profileShow_cells">
-          <view class="profileShow_cell">
-            <view class="profileShow_cell_left">
-              <image class="image_picture_middle" mode="aspectFit" src="../images/picture_fill.png"></image>
-            </view>
-            <view class="profileShow_cell_right">
-              <view class="profileShow_cell_hd">
-                照片
-              </view>
-              <view class="profileShow_cell_bd">
-                <block wx:for-items="{{userInfo.pictures}}" wx:key="{{index}}">
-                  <view class="weui-uploader__file weui-uploader__file_statuss">
-                    <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" data-current="{{item}}" id="{{item}}" mode="aspectFill" />
-                  </view>
-                </block>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
+
+      <view class="weui-panel__bd new_panel_bd">
         <view class="profileShow_cells">
           <view class="profileShow_cell">
             <view class="profileShow_cell_left">
@@ -94,9 +99,8 @@
           </view>
         </view>
       </view>
-    </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
+
+      <view class="weui-panel__bd new_panel_bd">
         <view class="profileShow_cells">
           <view class="profileShow_cell">
             <view class="profileShow_cell_left">
@@ -122,9 +126,8 @@
           </view>
         </view>
       </view>
-    </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
+
+      <view class="weui-panel__bd new_panel_bd">
         <view class="profileShow_cells">
           <view class="profileShow_cell">
             <view class="profileShow_cell_left">
@@ -141,9 +144,8 @@
           </view>
         </view>
       </view>
-    </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
+
+      <view class="weui-panel__bd new_panel_bd">
         <view class="profileShow_cells">
           <view class="profileShow_cell">
             <view class="profileShow_cell_left">
@@ -160,9 +162,8 @@
           </view>
         </view>
       </view>
-    </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
+
+      <view class="weui-panel__bd new_panel_bd">
         <view class="profileShow_cells">
           <view class="profileShow_cell">
             <view class="profileShow_cell_left">
@@ -179,9 +180,8 @@
           </view>
         </view>
       </view>
-    </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
+
+      <view class="weui-panel__bd new_panel_bd">
         <view class="profileShow_cells">
           <view class="profileShow_cell">
             <view class="profileShow_cell_left">
@@ -199,8 +199,22 @@
         </view>
       </view>
     </view>
-    <!--<view class="weui-btn-area" style="margin-bottom: 15px">
-      <button class="weui-btn" type="primary" bindtap="editProfileShow">编辑</button>
-    </view>-->
+    <!--tabbar-->
+    <view class="weui-tabbar">
+      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToChat">
+        <view class="weui-tabbar__label">私信</view>
+      </view>
+      <view class="weui-tabbar__item" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
+        <image wx:if="{{user.if_my_praise == 0}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
+        <image wx:if="{{user.if_my_praise == null}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
+        <!--<view class="weui-tabbar__label">喜欢</view>-->
+      </view>
+      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToBadReportInput">
+        <view class="weui-tabbar__label">举报</view>
+      </view>
+      <!--</view>-->
+
+      <!--</view>-->
+    </view>
   </view>
 </view>

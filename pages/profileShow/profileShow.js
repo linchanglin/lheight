@@ -1,5 +1,5 @@
 Page({
-    data: {},
+    data: { },
     onLoad: function (option) {
         let that = this;
         if (option.user_id) {

@@ -1,60 +1,60 @@
-/* pages/profileShow/profileShow.wxss */
-
-.placeholder{
-    margin: 5px;
-    padding: 0 10px;
-    text-align: left;
-    background-color: #EBEBEB;
-    height: 2.3em;
-    line-height: 2.3em;
-    /*color: #cfcfcf;*/
+.new_panel_bd {
+  background-color: #fff;
+  margin-top: 0px;
 }
 
 .profileShow_panel {
-    margin: 5px;
-    padding: 0 10px;
-    text-align: left;
-    background-color: #EBEBEB;
-    line-height: 150%;
-    /*line-height: 2.3em;*/
-    /*color: #cfcfcf;*/
+  margin: 5px;
+  padding: 0 10px;
+  text-align: left;
+  background-color: #ebebeb;
+  line-height: 150%;
+  /*line-height: 2.3em;*//*color: #cfcfcf;*/
 }
 
 .profileShow_cells {
-    padding: 10px 15px;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.profileShow_cell {
+  padding: 10px 0;
+  /*border-bottom: 1px solid #EBEBEB;*/
 }
 
 .profileShow_cell_left {
-    float: left;
-    /*width: 30px;*/
-    /*height: 30px;*/
+  float: left;
+  /*width: 30px;*//*height: 30px;*/
 }
+
 .image_picture {
   width: 30px;
   height: 30px;
 }
+
 .image_picture_middle {
   width: 32px;
   height: 32px;
 }
+
 .image_picture_big {
   width: 35px;
   height: 35px;
 }
 
 .profileShow_cell_right {
-    /*position: absolute;*/
-    margin-left: 45px;
+  /*position: absolute;*/
+  margin-left: 45px;
 }
 
 .profileShow_cell_hd {
-    color: #ff8140;
-    margin-bottom: 5px;
-    font-size: 19px;
+  color: #ff8140;
+  margin-bottom: 5px;
+  font-size: 19px;
 }
 
 .profileShow_cell_bd {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 /*.weui-uploader__file {
@@ -64,19 +64,18 @@
 }*/
 
 .weui-panel {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .page__bd {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .signature {
-    position: absolute;
-    padding: 20px;
-    top: 40px;
-    text-align: center;
-    /*left: 90px;*/
+  position: absolute;
+  padding: 20px;
+  top: 40px;
+  text-align: center;
+  /*left: 90px;*/
 }
-
-
+@import "../../utils/common_css/weui-tabbar.wxss";
