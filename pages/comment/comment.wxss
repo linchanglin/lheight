@@ -3,7 +3,7 @@ page {
 }
 
 .container {
-  margin-top: 10px;
+  padding-top: 10px;
 }
 
 .item-header {
@@ -53,7 +53,7 @@ page {
 
 .list-item {
   background-color: #fff;
-  margin: 10px 0 1px 0;
+  margin-bottom: 1px;
   padding: 10px;
   color: #000;
   font-size: 16px;

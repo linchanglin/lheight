@@ -9,6 +9,14 @@ Page({
         }
         wx.getSystemInfo({
             success: (res) => {
+                let wh = res.windowHeight;
+                that.setData({
+                    wh: wh - 45
+                })
+            }
+        })
+        wx.getSystemInfo({
+            success: (res) => {
                 let ww = res.windowWidth;
                 var length = 3;
                 var row = Math.ceil(length / 3);
