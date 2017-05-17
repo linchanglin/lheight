@@ -1,18 +1,10 @@
 <view class="page">
   <view class="page__bd">
-    <image style="width: 100%; opacity:1" mode="aspectFill" src="../images/meet.jpeg"></image>
-    <!--<view class="signature" >{{userInfo.signature}}</view>-->
-    
-    <!--<view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="profileShow_cells">
-          <view class="profileShow_cell_bd">
-            {{signature}}
-          </view>
-        </view>
-      </view>
-    </view>-->
-    <view class="weui-panel" style="margin-top: 5px;">
+    <view style="width: 100%; height: 200px;display: flex; justify-content: center; align-items: center;">
+      <image style="position: absolute;border:  2px solid #fff;z-index: 500;width: 70px; height: 70px;border-radius: 50%" mode="aspectFill" src="{{userInfo.avatarUrl}}"></image>
+      <image style="width: 100%; opacity:1" mode="aspectFill" src="../images/meet.jpeg"></image>
+    </view>
+    <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="profileShow_cells">
           <view class="profileShow_cell">
@@ -69,7 +61,7 @@
               <view class="profileShow_cell_bd">
                 <block wx:for-items="{{userInfo.pictures}}" wx:key="{{index}}">
                   <view class="weui-uploader__file weui-uploader__file_statuss">
-                    <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" data-current="{{item}}" id="{{item}}" mode="aspectFill" />       
+                    <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" data-current="{{item}}" id="{{item}}" mode="aspectFill" />
                   </view>
                 </block>
               </view>

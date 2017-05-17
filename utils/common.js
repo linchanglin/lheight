@@ -33,6 +33,7 @@ function signIn() {
                                                     console.log('my_userInfo res', res)
                                                     let my_userInfo = res.data.data;
                                                     wx.setStorageSync('my_userInfo', my_userInfo);
+                                                    wx.setStorageSync('user_need_refresh', my_userInfo.id)
                                                 }
                                             })
                                         }
@@ -57,6 +58,7 @@ function get_my_userInfo(wesecret) {
             console.log('my_userInfo res', res)
             let my_userInfo = res.data.data;
             wx.setStorageSync('my_userInfo', my_userInfo);
+            wx.setStorageSync('user_need_refresh', my_userInfo.id)
         }
     })
 }

@@ -1,4 +1,5 @@
-// pages/loveInput/loveInput.js
+import common from '../../utils/common.js';
+
 Page({
     data: {
         files: [],
