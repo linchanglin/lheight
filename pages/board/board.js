@@ -32,6 +32,16 @@ Page({
 
         wx.getSystemInfo({
             success: (res) => {
+                let ww = res.windowWidth -20;
+                let image_width = (ww -2) /3;
+                that.setData({
+                    ww: ww,
+                    image_width: image_width
+                })
+            }
+        })
+        wx.getSystemInfo({
+            success: (res) => {
                 let ww = res.windowWidth;
                 var length = 3;
                 var row = Math.ceil(length / 3);
@@ -77,7 +87,7 @@ Page({
             that.onPullDownRefresh();
             wx.removeStorageSync('board_loves_need_refresh_create_love')
         }
-        
+
 
         that.setData({
             showTopTips1: true
