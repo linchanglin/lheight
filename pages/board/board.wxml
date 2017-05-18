@@ -40,7 +40,7 @@
             <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
             <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
           </view>
-          <view class="item-body">
+          <!--<view class="item-body">-->
 
             <view class="article-content">
               <text>{{love.content}}</text>
@@ -54,13 +54,6 @@
               <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;" catchtap="previewImage"></image>
             </view>
 
-
-
-
-            <!--<view class="article-imgs" wx:if="{{love.images.length > 0}}">
-              <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="width:{{imgCss.width}};height:{{imgCss.height}};margin:{{imgCss.margin}}" catchtap="previewImage"></image>
-            </view>-->
-          </view>
           <view class="weui-flex  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" wx:if="{{love.location.name}}">
             <view class="weui-flex__item" data-location="{{love.location}}" catchtap="navigateToLocation">
               <view class="placeholder" style="float: left">
