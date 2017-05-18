@@ -49,49 +49,40 @@ page {
 
 .weui-flex {
   background-color: #fff;
-  /*padding: 3px 0;*/
   padding: 0;
 }
 
-.body-img {
-  margin-top: 8px;
-  display: block;
-  width: 100%;
-}
-
 .article-content {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .article-imgs {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
-image {
-  float: left;
+.flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-
-.placeholder {
-  /*margin: 5px;*//*padding: 0 10px;*/
-  text-align: center;
-  /*background-color: #EBEBEB;*/
+.flex_center_item {
   height: 35px;
-  line-height: 35px;
-  font-size: 14px;
-  /*background-color: #F7F7FA;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.image-comment {
+.icon_size {
   width: 20px;
   height: 20px;
-  vertical-align: middle;
-  float: none;
 }
 
-.weui-flex text {
-  padding-left: 5px;
+.weui-flex__item image {
+  padding: 0 2.5px;
+}
+.weui-flex__item text {
+  padding: 0 2.5px;
 }
 
 @import "../../utils/common_css/ripple-bounceIn.wxss";
