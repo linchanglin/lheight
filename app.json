@@ -1,6 +1,9 @@
 {
     "pages": [
+        "pages/picture/picture",
+        
         "pages/board/board",
+        
         
         "pages/profileShow/profileShow",
         
@@ -22,7 +25,6 @@
         "pages/commentInput/commentInput",
         "pages/videoUrlInput/videoUrlInput",
         "pages/virtualLoveInput/virtualLoveInput",
-        "pages/picture/picture",
         "pages/find/find",
         "pages/myLove/myLove",
         "pages/city_multi_page/city_multi_page",

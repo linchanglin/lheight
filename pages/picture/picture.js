@@ -21,6 +21,16 @@ Page({
         wx.getSystemInfo({
             success: (res) => {
                 let ww = res.windowWidth;
+                let image_width = (ww - 2) / 3;
+                that.setData({
+                    ww: ww,
+                    image_width: image_width
+                })
+            }
+        })
+        wx.getSystemInfo({
+            success: (res) => {
+                let ww = res.windowWidth;
                 let wh = res.windowHeight;
                 let imgWidth = ww * 0.48;
                 // let scrollH = wh;
@@ -75,15 +85,12 @@ Page({
 
                 let pictures = res.data.data;
                 that.setData({
-                    images: pictures
+                    pictures: pictures
                 })
 
                 if (parameter) {
-                    if (parameter == 'pulldown') {
-                        wx.stopPullDownRefresh();
-                    } else if (parameter == 'onLoad') {
-                        wx.hideLoading()
-                    }
+                    wx.stopPullDownRefresh();
+                    wx.hideLoading()
                 }
 
                 if (!pictures || pictures.length == 0) {
@@ -104,65 +111,65 @@ Page({
             }
         })
     },
-    onImageLoad: function (e) {
-        console.log('e', e);
-        let imageId = e.currentTarget.id;
-        let oImgW = e.detail.width;         //图片原始宽度
-        let oImgH = e.detail.height;        //图片原始高度
-        let imgWidth = this.data.imgWidth;  //图片设置的宽度
-        let scale = imgWidth / oImgW;        //比例计算
-        let imgHeight = oImgH * scale;      //自适应高度
+    // onImageLoad: function (e) {
+    //     console.log('e', e);
+    //     let imageId = e.currentTarget.id;
+    //     let oImgW = e.detail.width;         //图片原始宽度
+    //     let oImgH = e.detail.height;        //图片原始高度
+    //     let imgWidth = this.data.imgWidth;  //图片设置的宽度
+    //     let scale = imgWidth / oImgW;        //比例计算
+    //     let imgHeight = oImgH * scale;      //自适应高度
 
-        let images = this.data.images;
-        let imageObj = null;
+    //     let images = this.data.images;
+    //     let imageObj = null;
 
-        console.log('imgHeight', imgHeight);
-        console.log('images', images);
-        console.log('imageId', imageId);
+    //     console.log('imgHeight', imgHeight);
+    //     console.log('images', images);
+    //     console.log('imageId', imageId);
 
-        for (let i = 0; i < images.length; i++) {
-            let img = images[i];
-            if (img.id == imageId) {
-                imageObj = img;
-                break;
-            }
-        }
+    //     for (let i = 0; i < images.length; i++) {
+    //         let img = images[i];
+    //         if (img.id == imageId) {
+    //             imageObj = img;
+    //             break;
+    //         }
+    //     }
 
-        console.log('imageObj', imageObj);
+    //     console.log('imageObj', imageObj);
 
-        if (imageObj)
-            imageObj.height = imgHeight;
+    //     if (imageObj)
+    //         imageObj.height = imgHeight;
 
-        console.log('imageObj1', imageObj);
+    //     console.log('imageObj1', imageObj);
 
-        let loadingCount = this.data.loadingCount - 1;
-        let col1 = this.data.col1;
-        let col2 = this.data.col2;
+    //     let loadingCount = this.data.loadingCount - 1;
+    //     let col1 = this.data.col1;
+    //     let col2 = this.data.col2;
 
-        if (col1H <= col2H) {
-            col1H += imgHeight;
-            col1.push(imageObj);
-        } else {
-            col2H += imgHeight;
-            col2.push(imageObj);
-        }
+    //     if (col1H <= col2H) {
+    //         col1H += imgHeight;
+    //         col1.push(imageObj);
+    //     } else {
+    //         col2H += imgHeight;
+    //         col2.push(imageObj);
+    //     }
 
-        console.log('col1', col1);
-        console.log('col2', col2);
+    //     console.log('col1', col1);
+    //     console.log('col2', col2);
 
-        let data = {
-            loadingCount: loadingCount,
-            col1: col1,
-            col2: col2
-        };
+    //     let data = {
+    //         loadingCount: loadingCount,
+    //         col1: col1,
+    //         col2: col2
+    //     };
 
-        if (!loadingCount) {
-            data.images = [];
-        }
+    //     if (!loadingCount) {
+    //         data.images = [];
+    //     }
 
-        console.log('data col1 col2', data);
-        this.setData(data);
-    },
+    //     console.log('data col1 col2', data);
+    //     this.setData(data);
+    // },
 
     // loadImages: function () {
     //     var that = this

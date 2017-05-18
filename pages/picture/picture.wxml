@@ -1,7 +1,7 @@
 <view class="page">
   <view class="page__bd">
 
-  
+
     <view class="weui-search-bar">
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
@@ -19,12 +19,19 @@
       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
     </view>
 
+    <view style="width: {{ww}}px;display: flex;flex-wrap: wrap; justify-content: space-between;">
+      <block wx:for="{{pictures}}" wx:key="id">
+        <image src="{{item.pictures[0]}}"  mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;" data-userId="{{item.id}}" data-imgUrl="{{item.pictures}}" bindtap="showGoodsDetail"></image>
+      </block>
 
+    </view>
+
+    <!--
     <view style="display:none">
       <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.pictures[0]}}" bindload="onImageLoad"></image>
-    </view>
-    <scroll-view scroll-y="true" bindscrolltolower="loadImages">
-      <view style="width:100%">
+    </view>-->
+    <!--<scroll-view scroll-y="true" bindscrolltolower="loadImages">-->
+    <!--<view style="width:100%">
         <view class="img_item">
           <view wx:for="{{col1}}" wx:key="id">
             <image src="{{item.pictures[0]}}" style="width:100%;height:{{item.height}}px" data-userId="{{item.id}}" data-imgUrl="{{item.pictures}}" bindtap="showGoodsDetail"></image>
@@ -36,7 +43,7 @@
           </view>
         </view>
       </view>
-    </scroll-view>
+    </scroll-view>-->
 
     <!--goodsdetail start-->
     <view class="goods-detail" hidden="{{!showGoodsDetail}}">
