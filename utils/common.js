@@ -75,7 +75,7 @@ function showLoveActionSheet(e) {
         let itemList;
 
         let my_userInfo = wx.getStorageSync('my_userInfo');
-
+        console.log('my_userInfoooooooo', my_userInfo);
         if (my_userInfo.id == user_id) {
             itemList = [love, '举报', '删除'];
         } else {

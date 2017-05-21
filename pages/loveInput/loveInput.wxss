@@ -16,15 +16,15 @@
 
 .weui-uploader__file-contentt {
   position: absolute;
-  top: 7px;
-  left: 69px;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  color: #fff;
+  left: 58.5px;
+  top: -3.5px;
 }
 
 .weui-uploader__file_statuss {
   position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .iconfront {
@@ -43,5 +43,5 @@
 }
 
 .weui-btn-area {
-  margin: 20px 15px ;
+  margin: 20px 15px;
 }

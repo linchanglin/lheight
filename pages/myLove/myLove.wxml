@@ -72,7 +72,7 @@
           <view class="weui-flex {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" wx:if="{{love.location.name}}">
             <view class="weui-flex__item" data-location="{{love.location}}" catchtap="navigateToLocation">
               <view class="placeholder" style="float: left">
-                <image class="image-comment" style="height: 20px" src="../images/location_fill1.png"></image>
+                <image class="image-comment" style="height: 20px" src="../images/location_fill.png"></image>
                 <text>{{love.location.name}}</text>
               </view>
             </view>

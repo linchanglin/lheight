@@ -1,25 +1,25 @@
 {
     "pages": [
-        "pages/board/board",
-        
-        "pages/picture/picture",
-        
-        
-        
-        "pages/profileShow/profileShow",
-        
-        
         "pages/user/user",
         
         "pages/loveInput/loveInput",
         
+        "pages/profileShowInput/profileShowInput",
         
         
+        
+        
+        
+        
+        
+        
+        "pages/profileShow/profileShow",
+        "pages/board/board",
+        "pages/picture/picture",
         "pages/message/message",
         "pages/comment/comment",
         "pages/badReportInput/badReportInput",
         "pages/reply/reply",
-        "pages/profileShowInput/profileShowInput",
         "pages/chat/chat",
         "pages/test/breadtrip/breadtrip",
         "pages/replyInput/replyInput",
@@ -62,8 +62,8 @@
             {
                 "text": "眼缘墙",
                 "pagePath": "pages/picture/picture",
-                "iconPath": "pages/images/camera.png",
-                "selectedIconPath": "pages/images/camera_fill.png"
+                "iconPath": "pages/images/picture.png",
+                "selectedIconPath": "pages/images/picture_fill.png"
             },
             {
                 "text": "发现",

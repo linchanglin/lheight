@@ -29,7 +29,7 @@
           <view class="profileShow_cells">
             <view class="profileShow_cell">
               <view class="profileShow_cell_left">
-                <image class="image_picture_middle" mode="aspectFit" src="../images/picture_fill.png"></image>
+                <image class="image_picture_middle" mode="aspectFit" src="../images/camera.png"></image>
               </view>
               <view class="profileShow_cell_right">
                 <view class="profileShow_cell_hd">

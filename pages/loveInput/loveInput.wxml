@@ -4,23 +4,21 @@
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea class="weui-textarea" style="height: 8em" maxlength="-1" placeholder="这一刻的想法..."  bindinput="bindContentInput" />
+            <textarea class="weui-textarea" style="height: 6.6em" maxlength="-1" placeholder="这一刻的想法..." bindinput="bindContentInput" />
           </view>
         </view>
-        <view class="weui-cell border-top-none">
+        <view wx:if="{{videoUrl_exist == 0}}" class="weui-cell border-top-none">
           <view class="weui-cell__bd">
             <view class="weui-uploader">
               <view class="weui-uploader__bd">
-                <view class="weui-uploader__files" id="uploaderFiles">
-                  <block wx:for-items="{{files}}" wx:key="{{index}}">
-                    <view class="weui-uploader__file weui-uploader__file_statuss">
-                      <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" id="{{item}}" mode="aspectFill" />
-                      <view class="weui-uploader__file-contentt">
-                        <icon type="cancel" size="23" data-image="{{item}}" bindtap="deleteImage"></icon>
-                      </view>
+                <block wx:for-items="{{files}}" wx:key="{{index}}">
+                  <view class="weui-uploader__file weui-uploader__file_statuss">
+                    <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" id="{{item}}" mode="aspectFill" />
+                    <view class="weui-uploader__file-contentt">
+                      <icon type="clear" size="20" data-image="{{item}}" bindtap="deleteImage"></icon>
                     </view>
-                  </block>
-                </view>
+                  </view>
+                </block>
                 <view class="weui-uploader__input-box">
                   <view class="weui-uploader__input" bindtap="chooseImage"></view>
                 </view>
@@ -28,8 +26,8 @@
             </view>
           </view>
         </view>
-        <view class="weui-cells weui-cells_after-title  border-bottom-none" wx:if="{{false == false}}">
-          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToVideoUrlInput">
+        <view class="weui-cells weui-cells_after-title  border-bottom-none">
+          <view wx:if="{{my_userInfo.trust == 1}}" class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToVideoUrlInput">
             <view class="weui-cell__hd">
               <image wx:if="{{videoUrl_exist == 0}}" src="../images/video.png" class="iconfront"></image>
               <image wx:else src="../images/video_fill.png" class="iconfront"></image>
@@ -51,7 +49,7 @@
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
           </view>
-          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active"  bindtap="navigateToVisiableInput">
+          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToVisiableInput">
             <view class="weui-cell__hd">
               <image wx:if="{{visiable == 0}}" src="../images/global.png" class="iconfront"></image>
               <image wx:else src="../images/global_fill.png" class="iconfront"></image>
@@ -67,66 +65,17 @@
           </view>
           <view class="weui-cell weui-cell_switch">
             <view class="weui-cell__hd">
-              <image wx:if="{{nickname == false}}" src="../images/nickname.png" class="iconfront"></image>
+              <image wx:if="{{anonymous == 0}}" src="../images/nickname.png" class="iconfront"></image>
               <image wx:else src="../images/nickname_fill.png" class="iconfront"></image>
             </view>
             <view class="weui-cell__bd">是否匿名</view>
             <view class="weui-cell__ft">
-              <switch bindchange="switchChange" />
+              <switch bindchange="anonymousSwitchChange" />
             </view>
-          </view>
-        </view>
-        <!--<view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="chooseLocation">
-            <view class="weui-cell__hd">
-              <image wx:if="{{location_exist == 0}}" src="../images/location.png" class="iconfront"></image>
-              <image wx:else src="../images/location_fill.png" class="iconfront"></image>
-            </view>
-            <view class="weui-cell__bd">
-              <view wx:if="{{location_exist == 0}}" style="display: inline-block; vertical-align: middle">所在位置</view>
-              <view wx:else style="display: inline-block; vertical-align: middle">{{location.name}}</view>
-            </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </view>
-        </view>-->
-      </view>
-    </view>
-    <!--<view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active"  bindtap="navigateToVisiableInput">
-            <view class="weui-cell__hd">
-              <image wx:if="{{visiable == 0}}" src="../images/global.png" class="iconfront"></image>
-              <image wx:else src="../images/global_fill.png" class="iconfront"></image>
-            </view>
-            <view class="weui-cell__bd">
-              <view style="display: inline-block; vertical-align: middle">谁可以看</view>
-            </view>
-            <view wx:if="{{visiable == 0}}" class="weui-cell__ft weui-cell__ft_in-access">公开</view>
-            <view wx:elif="{{visiable == 1}}" class="weui-cell__ft weui-cell__ft_in-access">仅本校</view>
-            <view wx:elif="{{visiable == 2}}" class="weui-cell__ft weui-cell__ft_in-access">仅男生</view>
-            <view wx:elif="{{visiable == 3}}" class="weui-cell__ft weui-cell__ft_in-access">仅女生</view>
-            <view wx:elif="{{visiable == 4}}" class="weui-cell__ft weui-cell__ft_in-access">私密</view>
           </view>
         </view>
       </view>
     </view>
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_switch">
-            <view class="weui-cell__hd">
-              <image wx:if="{{nickname == false}}" src="../images/nickname.png" class="iconfront"></image>
-              <image wx:else src="../images/nickname_fill.png" class="iconfront"></image>
-            </view>
-            <view class="weui-cell__bd">是否匿名</view>
-            <view class="weui-cell__ft">
-              <switch bindchange="switchChange" />
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>-->
     <view wx:if="{{nickname == true}}" class="weui-cells__title">提示：此表白将以您学校表白君的名义发表。</view>
     <view class="weui-btn-area">
       <button wx:if="{{save_loading == 0}}" class="weui-btn" type="primary" disabled="true">提交</button>

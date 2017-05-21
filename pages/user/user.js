@@ -106,28 +106,28 @@ Page({
             common.signIn();
         }
     },
-    navigateToProfileShow: function () {
-        let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
-            wx.navigateTo({
-                url: '../profileShow/profileShow',
-            })
-        } else {
-            common.signIn();
-        }
-    },
-    // navigateToProfileShowInput: function () {
+    // navigateToProfileShow: function () {
     //     let that = this;
     //     let wesecret = wx.getStorageSync('wesecret');
     //     if (wesecret) {
     //         wx.navigateTo({
-    //             url: '../profileShowInput/profileShowInput',
+    //             url: '../profileShow/profileShow',
     //         })
     //     } else {
     //         common.signIn();
     //     }
     // },
+    navigateToProfileShowInput: function () {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            wx.navigateTo({
+                url: '../profileShowInput/profileShowInput',
+            })
+        } else {
+            common.signIn();
+        }
+    },
     navigateToMyLove: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -154,16 +154,36 @@ Page({
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
-            if (that.data.userInfo.college === '') {
-                that.showNoCollegeModal();
+            let userInfo = that.data.userInfo;
+            if (userInfo.available == 0) {
+                that.showNoAvailableModal();
             } else {
-                wx.navigateTo({
-                    url: '../loveInput/loveInput',
-                })
+                if (that.data.userInfo.college === '') {
+                    that.showNoCollegeModal();
+                } else {
+                    wx.navigateTo({
+                        url: '../loveInput/loveInput',
+                    })
+                }
             }
         } else {
             common.signIn();
         }
+    },
+    showNoAvailableModal: function () {
+        let that = this;
+        wx.showModal({
+            // title: '不能表白',
+            content: '您有不当言论，被禁止发表表白，详情请联系管理员！',
+            showCancel: false,
+            success: function (res) {
+                if (res.confirm) {
+                    console.log('用户点击确定')
+                } else if (res.cancel) {
+                    console.log('用户点击取消')
+                }
+            }
+        })
     },
     showNoCollegeModal: function () {
         let that = this;

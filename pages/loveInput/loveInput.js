@@ -1,25 +1,39 @@
 import common from '../../utils/common.js';
+import qiniuUploader from '../../utils/qiniuUploader.js';
+
+// 初始化七牛相关参数
+function initQiniu() {
+    var options = {
+        region: 'SCN', // 华南区
+        uptokenURL: 'https://collhome.com/apis/uptoken',
+        domain: 'http://cdn.collhome.com'
+    };
+    qiniuUploader.init(options);
+}
 
 Page({
     data: {
+        // imageObject: {},
         files: [],
         content: "",
+        images: [],
+        videoUrl_exist: 0,
+        video_url: '',
+        location_exist: 0,
         location: {},
         visiable: 0,
-        location_exist: 0,
-        nickname: false,
-        videoUrl_exist: 0,
-        save_loading: 0
+        anonymous: 0,
+
+        save_loading: 0,
     },
     onLoad: function () {
         let that = this;
-
         let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
-            that.setData({
-                wesecret: wesecret
-            })
-        }
+        let my_userInfo = wx.getStorageSync('my_userInfo');
+        that.setData({
+            wesecret: wesecret,
+            my_userInfo: my_userInfo
+        })
     },
     onShow: function () {
         let that = this;
@@ -31,12 +45,17 @@ Page({
             wx.removeStorageSync('visiable');
         }
         let video_url = wx.getStorageSync('video_url');
-        if (video_url) {
+        if (video_url && video_url.length > 0) {
             that.setData({
                 videoUrl_exist: 1,
                 video_url: video_url
             });
             wx.removeStorageSync('video_url');
+        } else {
+            that.setData({
+                videoUrl_exist: 0,
+                video_url: ''
+            });
         }
     },
     chooseImage: function (e) {
@@ -131,24 +150,22 @@ Page({
 
         that.set_loading_status();
     },
-    switchChange: function (e) {
-        console.log("switchChange e", e);
+    anonymousSwitchChange: function (e) {
+        console.log("anonymousSwitchChange e", e);
         let that = this;
-
         let value = e.detail.value;
         if (value) {
             that.setData({
-                nickname: true
+                anonymous: 1
             })
         } else {
             that.setData({
-                nickname: false
+                anonymous: 0
             })
         }
     },
     navigateToVideoUrlInput: function () {
         let that = this;
-
         let url;
         let video_url = that.data.video_url;
         if (video_url) {
@@ -168,79 +185,64 @@ Page({
     },
     saveLove: function () {
         let that = this;
-
-        if (that.data.content.length > 0 || that.data.files.length > 0) {
-
+        let content = that.data.content;
+        let files = that.data.files;
+        let images = that.data.images;
+        let video_url = that.data.video_url;
+        if (content.length > 0 || files.length > 0 || video_url.length > 0) {
             that.setData({
                 save_loading: 2
             })
-
-            console.log('that.data.content', that.data.content);
-            wx.request({
-                url: 'https://collhome.com/apis/loves',
-                data: {
-                    'wesecret': that.data.wesecret,
-                    'content': that.data.content,
-                    'location': that.data.location,
-                    'visiable': that.data.visiable
-                },
-                method: 'POST',
-                success: function (res) {
-                    console.log('res', res);
-                    let love_id = res.data.love_id;
-                    that.setData({
-                        love_id: love_id
-                    })
-
-                    let successUp = 0; //成功个数
-                    let failUp = 0; //失败个数
-                    let length = that.data.files.length; //总共个数
-                    let i = 0; //第几个
-                    if (length > 0) {
-                        that.saveLoveImage(love_id, that.data.files, successUp, failUp, i, length);
-                    } else {
-                        that.switchTabToBoardWithSuccess();
+            if (video_url.length > 0) {
+                that.setData({
+                    images: []
+                })
+                that.postSaveLove();
+            } else {
+                if (files.length > 0) {
+                    initQiniu();
+                    let i = 0;
+                    for (let filePath of files) {
+                        // 交给七牛上传
+                        qiniuUploader.upload(filePath, (res) => {
+                            images.push(res.imageURL)
+                            that.setData({
+                                images: images
+                            })
+                        }, (error) => {
+                            console.error('error: ' + JSON.stringify(error));
+                        }, (complete) => {
+                            console.log('complete', complete)
+                            i++;
+                            if (i == files.length) {
+                                that.postSaveLove();
+                            }
+                        });
                     }
-                },
-                fail: function (res) {
-                    console.log('fail res', res);
-                    // fail
-                },
-                complete: function (res) {
-                    // complete
+                } else {
+                    that.postSaveLove();
                 }
-            })
-
-
+            }
         }
     },
-    saveLoveImage: function (love_id, files, successUp, failUp, i, length) {
+    postSaveLove: function () {
         let that = this;
-        wx.uploadFile({
-            url: 'https://collhome.com/apis/loves/images',
-            filePath: that.data.files[i],
-            name: 'file',
-            formData: {
-                wesecret: that.data.wesecret,
-                post_id: love_id
-            },
+        let data = {
+            'wesecret': that.data.wesecret,
+            'content': that.data.content,
+            'images': that.data.images,
+            'video_url': that.data.video_url,
+            'location': that.data.location,
+            'visiable': that.data.visiable,
+            'anonymous': that.data.anonymous
+        };
+        console.log("postSaveLove data", data);
+        wx.request({
+            url: 'https://collhome.com/apis/loves',
+            method: 'POST',
+            data: data,
             success: function (res) {
-                console.log('success res', res);
-                successUp++;
-            },
-            fail: function (res) {
-                console.log('fail res', res);
-                failUp++;
-            },
-            complete: function (res) {
-                i++;
-                if (i == length) {
-                    console.log('总共' + successUp + '张上传成功,' + failUp + '张上传失败！');
-                    that.switchTabToBoardWithSuccess();
-                }
-                else {  //递归调用uploadDIY函数
-                    that.saveLoveImage(love_id, files, successUp, failUp, i, length);
-                }
+                that.switchTabToBoardWithSuccess();
             }
         })
     },
@@ -249,7 +251,7 @@ Page({
         that.setData({
             save_loading: 1
         })
-        wx.setStorageSync('board_loves_need_refresh_create_love', that.data.love_id);
+        wx.setStorageSync('board_loves_need_refresh_create_love', 1);
         wx.showToast({
             title: '成功',
             icon: 'success',
