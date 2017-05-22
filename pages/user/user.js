@@ -117,17 +117,28 @@ Page({
     //         common.signIn();
     //     }
     // },
-    navigateToProfileShowInput: function () {
+    navigateToProfileInput: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.navigateTo({
-                url: '../profileShowInput/profileShowInput',
+                url: '../profileInput/profileInput',
             })
         } else {
             common.signIn();
         }
     },
+    // navigateToProfileShowInput: function () {
+    //     let that = this;
+    //     let wesecret = wx.getStorageSync('wesecret');
+    //     if (wesecret) {
+    //         wx.navigateTo({
+    //             url: '../profileShowInput/profileShowInput',
+    //         })
+    //     } else {
+    //         common.signIn();
+    //     }
+    // },
     navigateToMyLove: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');

@@ -2,6 +2,16 @@
     "pages": [
         "pages/user/user",
         
+        "pages/profileInput/profileInput",
+        "pages/nicknameInput/nicknameInput",
+        "pages/genderInput/genderInput",        
+        
+        
+        
+        
+        
+        
+        
         "pages/loveInput/loveInput",
         
         "pages/profileShowInput/profileShowInput",
