@@ -34,7 +34,7 @@
           <view class="weui-cell__bd">
             <view style="display: inline-block; vertical-align: middle">个性签名</view>
           </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access">{{userInfo.college_name}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{signature}}</view>
         </view>
       </view>
     </view>

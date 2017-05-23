@@ -1,66 +1,56 @@
-// pages/genderInput/genderInput.js
+import common from '../../utils/common.js';
+
 Page({
+    data: {},
+    onLoad: function (options) {
+        let that = this;
+        let my_userInfo = wx.getStorageSync('my_userInfo');
+        let genders;
+        if (my_userInfo.gender == 1) {
+            genders = [
+                { name: '男', value: 1, checked: true },
+                { name: '女', value: 2 }
+            ]
+        } else if (my_userInfo.gender == 2) {
+            genders = [
+                { name: '男', value: 1 },
+                { name: '女', value: 2, checked: true }
+            ]
+        } else {
+            genders = [
+                { name: '男', value: 1 },
+                { name: '女', value: 2 }
+            ]
+        }
+        that.setData({
+            radioItems: genders
+        })
+    },
+    radioChange: function (e) {
+        console.log('radio发生change事件，携带value值为：', e.detail.value);
+        let value = e.detail.value;
+        var radioItems = this.data.radioItems;
+        for (var i = 0, len = radioItems.length; i < len; ++i) {
+            radioItems[i].checked = radioItems[i].value == value;
+        }
+        this.setData({
+            radioItems: radioItems
+        });
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-  
-  },
+        let wesecret = wx.getStorageSync('wesecret');
+        wx.request({
+            url: 'https://collhome.com/apis/users',
+            method: 'POST',
+            data: {
+                wesecret: wesecret,
+                gender: parseInt(value)
+            },
+            success: function (res) {
+                wx.setStorageSync('profile_need_refresh', 1);
+                common.get_my_userInfo(wesecret);
+                wx.navigateBack()
+            }
+        })
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
+    }
 })
