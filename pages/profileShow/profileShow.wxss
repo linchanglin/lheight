@@ -78,4 +78,15 @@
   text-align: center;
   /*left: 90px;*/
 }
+
+.showAvatarUrl {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+}
+
+
 @import "../../utils/common_css/weui-tabbar.wxss";

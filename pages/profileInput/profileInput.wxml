@@ -3,7 +3,7 @@
 
     <view class="weui-panel weui-panel_access" style="margin-top: 20px">
       <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToNicknameInput">
+        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToAvatarUrlInput">
           <view class="weui-cell__bd">
             <view style="display: inline-block; vertical-align: middle">头像</view>
           </view>

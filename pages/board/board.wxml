@@ -49,6 +49,10 @@
             <!--<view class="" style="margin-top: 8px" catchtap="some">
               <video id="myVideo" style="width: 100%" src="{{love.videoUrl}}"></video>
             </view>-->
+             <view class="" style="margin-top: 8px" catchtap="some">
+              <video id="myVideo" style="width: 100%" src="http://video.weibo.com/media/play?fid=1034:40d0795688d3709bff5165204e5a1c84&fr=weibocard&fl=hd&Expires=1495600475&ssig=i4%2FqnylqmO&KID=unistore,video" ></video>
+            </view>
+           
 
             <view wx:if="{{love.images.length > 0}}" class="article-imgs" style="width: {{ww}}px;display: flex;flex-wrap: wrap; justify-content: space-between;">
               <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;" catchtap="previewImage"></image>

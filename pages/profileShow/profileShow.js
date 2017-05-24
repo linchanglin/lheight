@@ -62,9 +62,14 @@ Page({
             urls: that.data.userInfo.pictures// 需要预览的图片http链接列表
         })
     },
-    // editProfileShow: function () {
-    //   wx.navigateTo({
-    //     url: '../profileShowInput/profileShowInput'
-    //   })
-    // }
+    showAvatarUrl: function () {
+
+    },
+    navigateToAvatarUrl: function () {
+        let that = this;
+        let avatarUrl = that.data.userInfo.avatarUrl;
+        wx.navigateTo({
+            url: `../avatarUrl/avatarUrl?avatarUrl=${avatarUrl}`,
+        })
+    }
 })

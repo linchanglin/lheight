@@ -149,6 +149,11 @@ Page({
         })
     },
 
+    navigateToAvatarUrlInput: function () {
+        wx.navigateTo({
+            url: '../avatarUrlInput/avatarUrlInput',
+        })
+    },
     navigateToNicknameInput: function () {
         wx.navigateTo({
             url: '../nicknameInput/nicknameInput',
