@@ -1,5 +1,7 @@
 Page({
-    data: { },
+    data: {
+        ifShowAvatarUrl: false
+    },
     onLoad: function (option) {
         let that = this;
         if (option.user_id) {
@@ -15,24 +17,24 @@ Page({
                 })
             }
         })
-        wx.getSystemInfo({
-            success: (res) => {
-                let ww = res.windowWidth;
-                var length = 3;
-                var row = Math.ceil(length / 3);
-                var line = Math.ceil(length / row);
-                var widthM = ww - 20;
-                var widthX = (widthM / line).toFixed(2) - 6;
-                var margin = "3px";
-                that.setData({
-                    imgCss: {
-                        width: widthX + 'px',
-                        height: widthX + 'px',
-                        margin: margin
-                    }
-                })
-            }
-        })
+        // wx.getSystemInfo({
+        //     success: (res) => {
+        //         let ww = res.windowWidth;
+        //         var length = 3;
+        //         var row = Math.ceil(length / 3);
+        //         var line = Math.ceil(length / row);
+        //         var widthM = ww - 20;
+        //         var widthX = (widthM / line).toFixed(2) - 6;
+        //         var margin = "3px";
+        //         that.setData({
+        //             imgCss: {
+        //                 width: widthX + 'px',
+        //                 height: widthX + 'px',
+        //                 margin: margin
+        //             }
+        //         })
+        //     }
+        // })
     },
     load_user: function (user_id) {
         let that = this;
@@ -63,13 +65,15 @@ Page({
         })
     },
     showAvatarUrl: function () {
-
-    },
-    navigateToAvatarUrl: function () {
         let that = this;
-        let avatarUrl = that.data.userInfo.avatarUrl;
-        wx.navigateTo({
-            url: `../avatarUrl/avatarUrl?avatarUrl=${avatarUrl}`,
+        that.setData({
+            ifShowAvatarUrl: true
+        })
+    },
+    hideAvatarUrl: function () {
+        let that = this;
+        that.setData({
+            ifShowAvatarUrl: false
         })
     }
 })

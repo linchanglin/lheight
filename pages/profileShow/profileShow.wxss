@@ -3,15 +3,6 @@
   margin-top: 0px;
 }
 
-.profileShow_panel {
-  margin: 5px;
-  padding: 0 10px;
-  text-align: left;
-  background-color: #ebebeb;
-  line-height: 150%;
-  /*line-height: 2.3em;*//*color: #cfcfcf;*/
-}
-
 .profileShow_cells {
   padding: 10px 15px;
   border-bottom: 1px solid #ebebeb;
@@ -57,26 +48,8 @@
   font-size: 16px;
 }
 
-/*.weui-uploader__file {
-  float: left;
-  margin-right: 5px;
-  margin-bottom: 5px;
-}*/
-
-.weui-panel {
-  margin-top: 10px;
-}
-
 .page__bd {
   padding-bottom: 10px;
-}
-
-.signature {
-  position: absolute;
-  padding: 20px;
-  top: 40px;
-  text-align: center;
-  /*left: 90px;*/
 }
 
 .showAvatarUrl {
@@ -86,7 +59,9 @@
   width: 100%;
   height: 100%;
   z-index: 999999;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-
 @import "../../utils/common_css/weui-tabbar.wxss";
