@@ -1,46 +1,27 @@
 {
     "pages": [
-        "pages/board/board",
-        
         "pages/profileShow/profileShow",
-        
-        "pages/user/user",
-        
         
         "pages/profileInput/profileInput",
         
-        "pages/avatarUrlInput/avatarUrlInput",
+        "pages/profileDetailsInput/profileDetailsInput",
         
-        
-        "pages/picture/picture",
-        
-        
-        
-        
-        "pages/avatarUrl/avatarUrl",        
-        
-        
-        
-        "pages/nicknameInput/nicknameInput",
-        "pages/genderInput/genderInput",        
-        
-        
-        
-        
+        "pages/user/user",
         
         
         
         "pages/loveInput/loveInput",
         
+        
+        
+        
+        "pages/board/board",
+        "pages/avatarUrlInput/avatarUrlInput",
+        "pages/picture/picture",
+        "pages/avatarUrl/avatarUrl",
+        "pages/nicknameInput/nicknameInput",
+        "pages/genderInput/genderInput",
         "pages/profileShowInput/profileShowInput",
-        
-        
-        
-        
-        
-        
-        
-        
         "pages/message/message",
         "pages/comment/comment",
         "pages/badReportInput/badReportInput",

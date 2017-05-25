@@ -1,0 +1,26 @@
+.weui-vcode-btnn {
+  display: inline-block;
+  height: 2.58823529em;
+  margin-left: 5px;
+  padding: 0 0.6em 0 0.7em;
+  border-left: 1px solid #E5E5E5;
+  line-height: 2.58823529em;
+  vertical-align: middle;
+  font-size: 17px;
+  color: #000;
+  white-space: nowrap;
+  width: 25px;
+}
+
+.page__bd {
+  padding: 20px 0
+}
+
+.weui-cells__title {
+  color: #000;
+  font-size: 17px;
+}
+
+.weui-btn-area {
+  margin: 20px 15px 0 15px;
+}

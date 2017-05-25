@@ -37,7 +37,7 @@
               </view>
               <view class="profileShow_cell_right">
                 <view class="profileShow_cell_hd">
-                  照片
+                   相册
                 </view>
                 <view class="profileShow_cell_bd">
                   <view class="display: flex; justify-content: flex-start">
@@ -63,12 +63,29 @@
                   个人
                 </view>
                 <view class="profileShow_cell_bd">
-                  {{userInfo.nickName}}
+                  {{userInfo.realname}}
                 </view>
                 <view class="profileShow_cell_bd">
                   {{userInfo.gender_name}}
                 </view>
-                
+                <view class="profileShow_cell_bd">
+                  {{userInfo.birthday}}
+                </view>
+                <view class="profileShow_cell_bd">
+                  {{userInfo.age}}
+                </view>
+                <view class="profileShow_cell_bd">
+                  {{userInfo.constellation}}
+                </view>
+                <view wx:if="{{userInfo.height}}" class="profileShow_cell_bd">
+                  {{userInfo.height}} cm
+                </view>
+                <view wx:if="{{userInfo.weight}}" class="profileShow_cell_bd">
+                  {{userInfo.weight}} kg
+                </view>
+                <view class="profileShow_cell_bd">
+                  {{userInfo.hometown}}
+                </view>
                 <view class="profileShow_cell_bd">
                   {{userInfo.signature}}
                 </view>
@@ -78,7 +95,7 @@
         </view>
 
         <view class="weui-panel__bd new_panel_bd">
-          <view class="profileShow_cells" style="border-bottom:0px solid #ffffff;">
+          <view class="profileShow_cells" >
             <view class="profileShow_cell">
               <view class="profileShow_cell_left">
                 <image class="image_picture" mode="aspectFit" src="../images/show_college.png"></image>
@@ -90,14 +107,117 @@
                 <view class="profileShow_cell_bd">
                   {{userInfo.college_name}}
                 </view>
+                <view class="profileShow_cell_bd">
+                  {{userInfo.major}}
+                </view>
+                <view class="profileShow_cell_bd">
+                  {{userInfo.grade_name}}
+                </view>
               </view>
             </view>
           </view>
         </view>
 
+        <view class="weui-panel__bd new_panel_bd">
+          <view class="profileShow_cells">
+            <view class="profileShow_cell">
+              <view class="profileShow_cell_left">
+                <image class="image_picture" mode="aspectFit" src="../images/show_contact.png"></image>
+              </view>
+              <view class="profileShow_cell_right">
+                <view class="profileShow_cell_hd">
+                  社交
+                </view>
+                <view class="profileShow_cell_bd" wx:if="{{userInfo.wechat}}">
+                  微信: {{userInfo.wechat}}
+                </view>
+                <view class="profileShow_cell_bd" wx:if="{{userInfo.qq}}">
+                  QQ: {{userInfo.qq}}
+                </view>
+                <view class="profileShow_cell_bd" wx:if="{{userInfo.weibo}}">
+                  微博: {{userInfo.weibo}}
+                </view>
+                <view class="profileShow_cell_bd" wx:if="{{userInfo.mobilePhone}}">
+                  电话: {{userInfo.mobilePhone}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view wx:if="{{userInfo.character != ''}}" class="weui-panel__bd new_panel_bd">
+          <view class="profileShow_cells">
+            <view class="profileShow_cell">
+              <view class="profileShow_cell_left">
+                <image class="image_picture" mode="aspectFit" src="../images/show_character.png"></image>
+              </view>
+              <view class="profileShow_cell_right">
+                <view class="profileShow_cell_hd">
+                  性格
+                </view>
+                <view class="profileShow_cell_bd">
+                  {{userInfo.character}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view wx:if="{{userInfo.hobby != ''}}" class="weui-panel__bd new_panel_bd">
+          <view class="profileShow_cells">
+            <view class="profileShow_cell">
+              <view class="profileShow_cell_left">
+                <image class="image_picture_big" mode="aspectFit" src="../images/show_hobby.png"></image>
+              </view>
+              <view class="profileShow_cell_right">
+                <view class="profileShow_cell_hd">
+                  爱好
+                </view>
+                <view class="profileShow_cell_bd">
+                  {{userInfo.hobby}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view wx:if="{{userInfo.love_history != ''}}" class="weui-panel__bd new_panel_bd">
+          <view class="profileShow_cells">
+            <view class="profileShow_cell">
+              <view class="profileShow_cell_left">
+                <image class="image_picture" mode="aspectFit" src="../images/show_loveHistory.png"></image>
+              </view>
+              <view class="profileShow_cell_right">
+                <view class="profileShow_cell_hd">
+                  恋爱史
+                </view>
+                <view class="profileShow_cell_bd">
+                  {{userInfo.love_history}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view wx:if="{{userInfo.love_selecting != ''}}" class="weui-panel__bd new_panel_bd">
+          <view class="profileShow_cells">
+            <view class="profileShow_cell">
+              <view class="profileShow_cell_left">
+                <image class="image_picture_big" mode="aspectFit" src="../images/show_selecting.png"></image>
+              </view>
+              <view class="profileShow_cell_right">
+                <view class="profileShow_cell_hd">
+                  择偶观
+                </view>
+                <view class="profileShow_cell_bd">
+                  {{userInfo.love_selecting}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
 
       </view>
-
     </scroll-view>
 
     <!--tabbar-->

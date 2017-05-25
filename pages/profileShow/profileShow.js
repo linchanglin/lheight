@@ -13,28 +13,10 @@ Page({
             success: (res) => {
                 let wh = res.windowHeight;
                 that.setData({
-                    wh: wh - 45
+                    wh: wh - 44
                 })
             }
         })
-        // wx.getSystemInfo({
-        //     success: (res) => {
-        //         let ww = res.windowWidth;
-        //         var length = 3;
-        //         var row = Math.ceil(length / 3);
-        //         var line = Math.ceil(length / row);
-        //         var widthM = ww - 20;
-        //         var widthX = (widthM / line).toFixed(2) - 6;
-        //         var margin = "3px";
-        //         that.setData({
-        //             imgCss: {
-        //                 width: widthX + 'px',
-        //                 height: widthX + 'px',
-        //                 margin: margin
-        //             }
-        //         })
-        //     }
-        // })
     },
     load_user: function (user_id) {
         let that = this;

@@ -40,9 +40,13 @@
   padding-bottom: 20px;
 }
 
-.weui-cells__title {
+/*.weui-cells__title {
   color: #000;
   font-size: 17px;
+}*/
+
+.weui-cells__title {
+  margin-top: 0px;
 }
 
 .page__bd {

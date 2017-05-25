@@ -61,7 +61,7 @@
         <image wx:if="{{love.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
         <image wx:if="{{love.if_my_comment == 1}}" class="image-comment" src="../images/comment_fill.png"></image>
         <text wx:if="{{love.comment_nums == 0}}">评论</text>
-        <text wx:if="{{love.comment_nums !== 0}}">{{love.comment_nums}}</text>
+        <text wx:if="{{love.comment_nums != 0}}">{{love.comment_nums}}</text>
       </view>
     </view>
     <view class="weui-flex__item" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
@@ -69,7 +69,7 @@
         <image wx:if="{{love.if_my_praise == 0}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
         <image wx:if="{{love.if_my_praise == 1}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
         <text wx:if="{{love.praise_nums == 0}}">喜欢</text>
-        <text wx:if="{{love.praise_nums !== 0}}">{{love.praise_nums}}</text>
+        <text wx:if="{{love.praise_nums != 0}}">{{love.praise_nums}}</text>
       </view>
     </view>
   </view>

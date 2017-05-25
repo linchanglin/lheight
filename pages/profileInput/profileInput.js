@@ -149,6 +149,36 @@ Page({
         })
     },
 
+    showPictureOnWall: function (e) {
+        console.log("showPictureOnWall e", e);
+        let that = this;
+        let value = e.detail.value;
+        if (value) {
+            that.setData({
+                pictureOnWall: 1
+            })
+        } else {
+            that.setData({
+                pictureOnWall: 0
+            })
+        }
+        that.postSavePictureOnWall();
+    },
+    postSavePictureOnWall: function () {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        wx.request({
+            url: 'https://collhome.com/apis/users',
+            method: 'POST',
+            data: {
+                wesecret: wesecret,
+                pictureOnWall: that.data.pictureOnWall
+            },
+            success: function (res) {
+                common.get_my_userInfo(wesecret);
+            }
+        })
+    },
     navigateToAvatarUrlInput: function () {
         wx.navigateTo({
             url: '../avatarUrlInput/avatarUrlInput',
@@ -174,4 +204,9 @@ Page({
             url: '../signatureInput/signatureInput',
         })
     },
+    navigateToProfileDetailsInput: function () {
+        wx.navigateTo({
+            url: '../profileDetailsInput/profileDetailsInput',
+        })
+    }
 });

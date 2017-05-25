@@ -41,13 +41,13 @@ Page({
             success: function (res) {
                 console.log(res.data)
                 let userInfo = res.data.data;
-                if (userInfo.gender !== '') {
+                if (userInfo.gender != '') {
                     userInfo.gender--;
                 }
-                if (userInfo.college !== '') {
+                if (userInfo.college != '') {
                     userInfo.college--;
                 }
-                if (userInfo.grade !== '') {
+                if (userInfo.grade != '') {
                     userInfo.grade--;
                 }
 

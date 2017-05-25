@@ -76,7 +76,7 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{nickname == true}}" class="weui-cells__title">提示：此表白将以您学校表白君的名义发表。</view>
+    <view wx:if="{{anonymous == 1}}" class="weui-cells__title">提示：此表白将以您学校表白君的名义发表。</view>
     <view class="weui-btn-area">
       <button wx:if="{{save_loading == 0}}" class="weui-btn" type="primary" disabled="true">提交</button>
       <button wx:elif="{{save_loading == 1}}" class="weui-btn" type="primary" bindtap="saveLove">提交</button>

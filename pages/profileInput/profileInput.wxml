@@ -30,15 +30,36 @@
           </view>
           <view class="weui-cell__ft weui-cell__ft_in-access">{{userInfo.college_name}}</view>
         </view>
+
+
         <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToSignatureInput">
           <view class="weui-cell__bd">
             <view style="display: inline-block; vertical-align: middle">个性签名</view>
           </view>
           <view class="weui-cell__ft weui-cell__ft_in-access">{{signature}}</view>
         </view>
+
+
+
+        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToProfileDetailsInput">
+          <view class="weui-cell__bd">
+            <view style="display: inline-block; vertical-align: middle">更多信息</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">是否上眼缘墙</view>
+          <view class="weui-cell__ft">
+            <switch bindchange="showPictureOnWall" />
+          </view>
+        </view>
       </view>
+
     </view>
-    <view class="weui-panel weui-panel_access">
+    <view wx:if="{{pictureOnWall == 1}}" class="weui-cells__title">提示：您相册的照片将展示在眼缘墙上。</view>
+
+    <view class="weui-panel weui-panel_access" style="margin-bottom: 20px">
       <view class="weui-panel__bd">
         <view class="weui-cell">
           <view class="weui-cell__bd">
