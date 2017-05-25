@@ -26,7 +26,6 @@
 
     <view class="container">
       <block wx:for="{{loves}}" wx:for-item="love" wx:key="id">
-        <!--<template is="loves_item" data="{{love}}"/>-->
 
         <view class="list-item {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" data-loveId="{{love.id}}" style="" catchtap="navigateToLove" bindlongtap="longtap_love" bindtouchmove="touchmove_love">
           <view class="item-header">
@@ -36,27 +35,24 @@
             <!--<button class="weui-btn mini-btn" type="default" size="mini" hover-class="none">
                 <text class="header-time" style="color: #000">11111{{love.read_nums}} 阅读</text>
               </button>-->
-            <image style="float: right;width: 18px;height: 18px; padding: 0 5px 6px" src="../images/down.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickName}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" catchtap="showLoveActionSheet"></image>
+            <image style="float: right;width: 18px;height: 18px; padding: 0 5px 6px" src="../images/more.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickName}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" catchtap="showLoveActionSheet"></image>
             <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
             <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
           </view>
-          <!--<view class="item-body">-->
 
-            <view class="article-content">
-              <text>{{love.content}}</text>
-            </view>
+          <view class="article-content">
+            <text>{{love.content}}</text>
+          </view>
 
-            <!--<view class="" style="margin-top: 8px" catchtap="some">
-              <video id="myVideo" style="width: 100%" src="{{love.videoUrl}}"></video>
-            </view>-->
-             <view class="" style="margin-top: 8px" catchtap="some">
-              <video id="myVideo" style="width: 100%" src="http://video.weibo.com/media/play?fid=1034:40d0795688d3709bff5165204e5a1c84&fr=weibocard&fl=hd&Expires=1495600475&ssig=i4%2FqnylqmO&KID=unistore,video" ></video>
-            </view>
-           
+          <view wx:if="{{love.video_url.length > 0}}" style="margin-top: 8px" catchtap="some">
+            <video id="myVideo" style="width: 100%" src="{{love.video_url}}"></video>
+            <!--<video id="myVideo" style="width: 100%" src="http://video.weibo.com/media/play?fid=1034:40d0795688d3709bff5165204e5a1c84&fr=weibocard&fl=hd&Expires=1495600475&ssig=i4%2FqnylqmO&KID=unistore,video"></video>-->
+          </view>
 
-            <view wx:if="{{love.images.length > 0}}" class="article-imgs" style="width: {{ww}}px;display: flex;flex-wrap: wrap; justify-content: space-between;">
-              <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;" catchtap="previewImage"></image>
-            </view>
+
+          <view wx:if="{{love.images.length > 0}}" class="article-imgs" style="width: {{ww}}px;display: flex;flex-wrap: wrap; justify-content: space-between;">
+            <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;" catchtap="previewImage"></image>
+          </view>
 
           <view class="weui-flex  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" wx:if="{{love.location.name}}">
             <view class="weui-flex__item" data-location="{{love.location}}" catchtap="navigateToLocation">

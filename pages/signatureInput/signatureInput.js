@@ -10,7 +10,7 @@ Page({
           method: 'POST',
           data: {
               wesecret: wesecret,
-              nickName: value
+              signature: value
           },
           success: function (res) {
               wx.setStorageSync('profile_need_refresh', 1);

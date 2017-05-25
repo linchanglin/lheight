@@ -106,17 +106,6 @@ Page({
             common.signIn();
         }
     },
-    // navigateToProfileShow: function () {
-    //     let that = this;
-    //     let wesecret = wx.getStorageSync('wesecret');
-    //     if (wesecret) {
-    //         wx.navigateTo({
-    //             url: '../profileShow/profileShow',
-    //         })
-    //     } else {
-    //         common.signIn();
-    //     }
-    // },
     navigateToProfileInput: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -128,17 +117,6 @@ Page({
             common.signIn();
         }
     },
-    // navigateToProfileShowInput: function () {
-    //     let that = this;
-    //     let wesecret = wx.getStorageSync('wesecret');
-    //     if (wesecret) {
-    //         wx.navigateTo({
-    //             url: '../profileShowInput/profileShowInput',
-    //         })
-    //     } else {
-    //         common.signIn();
-    //     }
-    // },
     navigateToMyLove: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -169,7 +147,7 @@ Page({
             if (userInfo.available == 0) {
                 that.showNoAvailableModal();
             } else {
-                if (that.data.userInfo.college === '') {
+                if (that.data.userInfo.college == '') {
                     that.showNoCollegeModal();
                 } else {
                     wx.navigateTo({
@@ -200,7 +178,7 @@ Page({
         let that = this;
         wx.showModal({
             title: '未知学校',
-            content: '发表表白需要知道您的学校呢，请去 修改信息 -> 学校 选择您的学校！',
+            content: '发表表白需要知道您的学校呢，请去 我 -> 个人信息 -> 学校 选择您的学校！',
             showCancel: false,
             success: function (res) {
                 if (res.confirm) {

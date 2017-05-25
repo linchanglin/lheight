@@ -31,7 +31,8 @@ Page({
         that.setData({
             wesecret: wesecret,
             userInfo: my_userInfo,
-            signature: signature
+            signature: signature,
+            files: my_userInfo.pictures
         })
 
     },
@@ -141,7 +142,8 @@ Page({
             method: 'POST',
             data: {
                 wesecret: that.data.wesecret,
-                picture: picture
+                remain_pictures: that.data.files,
+                the_delete_picture: picture
             },
             success: function (res) {
                 common.get_my_userInfo(that.data.wesecret);

@@ -17,7 +17,7 @@ Page({
             method: 'POST',
             data: {
                 wesecret: wesecret,
-                signature: value
+                nickName: value
             },
             success: function (res) {
                 wx.setStorageSync('profile_need_refresh', 1);

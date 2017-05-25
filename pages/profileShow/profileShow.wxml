@@ -228,10 +228,10 @@
       <view class="weui-tabbar__item" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
         <image wx:if="{{user.if_my_praise == 0}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/loveme.png"></image>
         <image wx:if="{{user.if_my_praise == null}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/loveme_fill.png"></image>
-        <!--<view class="weui-tabbar__label">喜欢</view>-->
+        <view class="weui-tabbar__label">喜欢</view>
       </view>
-      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToBadReportInput">
-        <view class="weui-tabbar__label">举报</view>
+      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToShare">
+        <view class="weui-tabbar__label">分享</view>
       </view>
       <!--</view>-->
 

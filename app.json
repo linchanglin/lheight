@@ -1,21 +1,21 @@
 {
     "pages": [
-        "pages/profileShow/profileShow",
+        "pages/board/board",
         
         "pages/profileInput/profileInput",
-        
         "pages/profileDetailsInput/profileDetailsInput",
         
+        
+        "pages/profileShow/profileShow",
+        
         "pages/user/user",
+        
         
         
         
         "pages/loveInput/loveInput",
         
         
-        
-        
-        "pages/board/board",
         "pages/avatarUrlInput/avatarUrlInput",
         "pages/picture/picture",
         "pages/avatarUrl/avatarUrl",
