@@ -80,6 +80,13 @@
               <text wx:if="{{love.praise_nums != 0}}">{{love.praise_nums}}</text>
             </view>
           </view>
+          <view class="weui-flex__item flex_center" data-loveId="{{love.id}}">
+            <view class="flex_center_item">
+              <image class="icon_size" src="../images/share.png"></image>
+              <text>分享</text>
+              <button open-type="share">share</button>
+            </view>
+          </view>
         </view>
       </block>
     </view>

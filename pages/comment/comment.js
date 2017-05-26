@@ -1,7 +1,9 @@
 import common from '../../utils/common.js';
 
 Page({
-    data: {},
+    data: {
+        page: 1
+    },
     onLoad: function (options) {
         console.log('options', options)
         let that = this;
@@ -73,13 +75,38 @@ Page({
     },
     load_love: function () {
         let that = this;
-        let url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments';
+        let love_id = that.data.love_id;
+        let page = that.data.page;
+        let wesecret = wx.getStorageSync('wesecret');
+        let love_url;
+        if (wesecret) {
+            love_url = `https://collhome.com/apis/loves/${love_id}?wesecret=${wesecret}`
+        } else {
+            love_url = `https://collhome.com/apis/loves/${love_id}?wesecret=`
+        }
+        let comments_url;
+        if (wesecret) {
+            comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=${wesecret}`
+        } else {
+            comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=`
+        }
+        // let love_url = `https://collhome.com/apis/loves/' + that.data.love_id + '/comments`
+        // let url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments';
         wx.request({
-            url: url,
+            url: love_url,
             success: function (res) {
-                console.log('love', res.data)
-                let love = res.data.data.love;
-                let comments = res.data.data.comments;
+                console.log("love", res)
+                let love = res.data.data;
+                that.setData({
+                    love: love
+                })
+            }
+        })
+        wx.request({
+            url: comments_url,
+            success: function (res) {
+                console.log("comments", res)
+                let comments = res.data.data;
                 let last_comment_id;
                 if (comments.length > 0) {
                     last_comment_id = comments[comments.length - 1].id;
@@ -87,12 +114,30 @@ Page({
                     last_comment_id = 0;
                 }
                 that.setData({
-                    love: love,
                     comments: comments,
                     last_comment_id: last_comment_id
                 })
             }
         })
+        // wx.request({
+        //     url: url,
+        //     success: function (res) {
+        //         // console.log('love', res.data)
+        //         // let love = res.data.data.love;
+        //         // let comments = res.data.data.comments;
+        //         // let last_comment_id;
+        //         // if (comments.length > 0) {
+        //         //     last_comment_id = comments[comments.length - 1].id;
+        //         // } else {
+        //         //     last_comment_id = 0;
+        //         // }
+        //         that.setData({
+        //             love: love,
+        //             comments: comments,
+        //             last_comment_id: last_comment_id
+        //         })
+        //     }
+        // })
     },
     previewImage: function (e) {
         console.log('preview e', e);

@@ -274,6 +274,10 @@ Page({
             common.signIn();
         }
     },
+    shareLove: function (e) {
+        let love_id = e.currentTarget.dataset.loveid;
+
+    },
     longtap_love: function (e) {
         console.log('longtap_love', e);
         let love_id = e.currentTarget.dataset.loveid;
