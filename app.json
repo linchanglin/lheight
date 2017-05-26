@@ -68,8 +68,8 @@
             {
                 "text": "眼缘墙",
                 "pagePath": "pages/picture/picture",
-                "iconPath": "pages/images/picture.png",
-                "selectedIconPath": "pages/images/picture_fill.png"
+                "iconPath": "pages/images/picture1.png",
+                "selectedIconPath": "pages/images/picture1_fill.png"
             },
             {
                 "text": "发现",

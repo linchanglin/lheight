@@ -1,3 +1,8 @@
+@import "../../utils/common_css/love-item.wxss";
+@import "../../utils/common_css/comment-item.wxss";
+@import "../../utils/common_css/weui-tabbar.wxss";
+@import "../../utils/common_css/ripple-bounceIn.wxss";
+
 page {
   background-color: #edecf2;
 }
@@ -6,189 +11,23 @@ page {
   padding-top: 10px;
 }
 
-.item-header {
-  overflow: hidden;
-}
 
-.header-img {
-  float: left;
-  width: 43px;
-  height: 43px;
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  overflow: hidden;
-  margin-right: 10px;
-  margin-top: 2px;
-}
 
-.img {
-  width: 100%;
-  height: 100%;
-}
 
-.header-name {
-  /*display: block;*/
-  font-size: 16px;
-  color: #ff8140;
-}
 
-.header-time {
-  display: block;
-  font-size: 14px;
-  color: #9e9e9e;
-}
 
-.scroll-box {
-  height: 700px;
-  background-color: #eee;
-}
 
-/*.article-content {
-  padding: 8px 0;
-}*/
 
-.item-body {
-  margin: 8px 0;
-}
 
-.list-item {
-  background-color: #fff;
-  margin-bottom: 1px;
-  padding: 10px;
-  color: #000;
-  font-size: 16px;
-  line-height: 150%;
-  /*border-bottom: 3px solid #e7e7e7;*/
-}
 
-.body-img {
-  margin-top: 8px;
-  display: block;
-  width: 100%;
-}
 
-.article-imgs {
-  display: inline-block;
-  height: auto;
-  margin: 3px 0;
-}
 
-image {
-  float: left;
-}
 
-.item-body, .list-item {
-  padding-bottom: 1.5px;
-}
 
-.placeholder {
-  /*margin: 5px;*//*padding: 0 10px;*/
-  text-align: center;
-  /*background-color: #EBEBEB;*/
-  height: 30px;
-  line-height: 30px;
-  font-size: 14px;
-  /*background-color: #F7F7FA;*/
-}
 
-/*.placeholder-comment {
-  border-right: 1px solid #cfcfcf;
-}*/
 
-.image-comment {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-  vertical-align: middle;
-  float: none;
-}
 
-.comments {
-  padding-top: 8px;
-}
 
-.content {
-  margin: 0 0 12px 0;
-  word-break: break-all;
-  font-size: 15px;
-}
 
-.item {
-  display: flex;
-  position: relative;
-  padding: 12px 15px 0;
-  background-color: #fff;
-  /*margin-bottom: 1px;*/
-}
 
-.i-right {
-  width: 100%;
-  border-bottom: 1px solid #edecf2;
-}
 
-.c-u-img {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.item .top {
-  display: flex;
-  justify-content: space-between;
-  /*margin-bottom: 3px;*/
-}
-
-.item .u-name {
-  color: deepskyblue;
-  font-size: 14px;
-}
-
-.item .time {
-  color: #888;
-  font-size: 12px;
-}
-
-.comment_icon_right {
-  width: 20px;
-  height: 20px;
-}
-
-.comment_content {
-  margin: 5px 0 8px 0;
-}
-
-.comment_reply {
-  color: #66c;
-  font-size: 13px;
-  padding: 5px 8px;
-  background-color: #f8f8f8;
-  border-radius: 5px;
-}
-
-.comment_reply_hover_class {
-  background-color: #bbb;
-}
-
-.weui-flex {
-  background-color: #fff;
-  /*padding: 3px 0;*/
-  padding: 0;
-}
-
-.weui-flex image {
-  width: 20px;
-  height: 20px;
-}
-
-.weui-flex text {
-  /*padding-left: 3px;*/
-  font-size: 13px;
-}
-
-.no_border_bottom {
-  border-bottom: 0px solid #edecf2;
-}
-
-@import "../../utils/common_css/weui-tabbar.wxss";
-@import "../../utils/common_css/ripple-bounceIn.wxss";

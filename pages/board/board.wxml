@@ -26,7 +26,6 @@
 
     <view class="container">
       <block wx:for="{{loves}}" wx:for-item="love" wx:key="id">
-
         <view class="list-item {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" data-loveId="{{love.id}}" style="" catchtap="navigateToLove" bindlongtap="longtap_love" bindtouchmove="touchmove_love">
           <view class="item-header">
             <view class="header-img" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
@@ -88,6 +87,7 @@
             </view>
           </view>
         </view>
+
       </block>
     </view>
     <view wx:if="{{reach_bottom}}" class="reach_loading">

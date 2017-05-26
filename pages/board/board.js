@@ -27,13 +27,13 @@ Page({
         wx.showLoading({
             title: '加载中',
         })
-
+        
         that.load_loves('onLoad');
 
         wx.getSystemInfo({
             success: (res) => {
-                let ww = res.windowWidth -20;
-                let image_width = (ww -2) /3;
+                let ww = res.windowWidth - 20;
+                let image_width = (ww - 2) / 3;
                 that.setData({
                     ww: ww,
                     image_width: image_width
