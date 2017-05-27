@@ -8,7 +8,7 @@
             <view class="header-img" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
               <image class="img" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
             </view>
-            <image style="float: right;width: 18px;height: 18px; padding: 0 5px 6px" src="../images/down.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickName}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}"  catchtap="showLoveActionSheet"></image>
+            <image style="float: right;width: 18px;height: 18px; padding: 0 5px 6px" src="../images/down.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickName}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" catchtap="showLoveActionSheet"></image>
             <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
             <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
           </view>
@@ -87,17 +87,31 @@
 
     <!--tabbar-->
     <view class="weui-tabbar">
+
       <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToCommentInput">
         <image wx:if="{{love.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
         <image wx:if="{{love.if_my_comment == 1}}" class="image-comment" src="../images/comment_fill.png"></image>
-        <view class="weui-tabbar__label">评论</view>
+        <text class="weui-tabbar__label">评论</text>
       </view>
+
       <view class="weui-tabbar__item" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
         <image wx:if="{{love.if_my_praise == 0}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
         <image wx:if="{{love.if_my_praise == 1}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
-        <view class="weui-tabbar__label">喜欢</view>
+        <text class="weui-tabbar__label">喜欢</text>
       </view>
+
+      <view class="weui-tabbar__item">
+        <button class="shareButton" open-type="share">
+          <!--<view class="flex_center">-->
+            <image class="image-comment" src="../images/share.png"></image>
+            <text class="weui-tabbar__label">分享</text>
+          <!--</view>-->
+        </button>
+      </view>
+
+
+
     </view>
-    
+
   </view>
 </view>

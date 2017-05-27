@@ -56,8 +56,8 @@
               <view class="weui-cell__bd">
                 <view style="display: inline-block; vertical-align: middle">故乡</view>
               </view>
-              <view wx:if="{{hometown}}" class="weui-cell__ft weui-cell__ft_in-access">{{hometown}}</view>
-              <view wx:else class="weui-cell__ft weui-cell__ft_in-access">{{userInfo.hometown}}</view>
+              <view wx:if="{{hometown}}" class="weui-cell__ft weui-cell__ft_in-access" style="color: #000000">{{hometown}}</view>
+              <view wx:else class="weui-cell__ft weui-cell__ft_in-access" style="color: #000000">{{userInfo.hometown}}</view>
             </view>
           </view>
 
@@ -72,7 +72,7 @@
                 <view class="weui-label">专业</view>
               </view>
               <view class="weui-cell__bd">
-                <input name="major" value="{{userInfo.major}}" class="weui-input" placeholder="请输入专业" />
+                <input name="major" value="{{userInfo.major}}" class="weui-input" placeholder="请输入专业"  cursor-spacing="50"/>
               </view>
             </view>
 
@@ -97,7 +97,7 @@
                 <view class="weui-label">微信</view>
               </view>
               <view class="weui-cell__bd">
-                <input name="wechat" value="{{userInfo.wechat}}" class="weui-input" placeholder="请输入微信" />
+                <input name="wechat" value="{{userInfo.wechat}}" class="weui-input" placeholder="请输入微信"  cursor-spacing="50"/>
               </view>
             </view>
 
@@ -106,7 +106,7 @@
                 <view class="weui-label">QQ</view>
               </view>
               <view class="weui-cell__bd">
-                <input name="qq" value="{{userInfo.qq}}" type="number" class="weui-input" placeholder="请输入QQ" />
+                <input name="qq" value="{{userInfo.qq}}" type="number" class="weui-input" placeholder="请输入QQ"  cursor-spacing="50"/>
               </view>
             </view>
 
@@ -115,7 +115,7 @@
                 <view class="weui-label">微博</view>
               </view>
               <view class="weui-cell__bd">
-                <input name="weibo" value="{{userInfo.weibo}}" class="weui-input" placeholder="请输入微博" />
+                <input name="weibo" value="{{userInfo.weibo}}" class="weui-input" placeholder="请输入微博"  cursor-spacing="50"/>
               </view>
             </view>
 
@@ -124,7 +124,7 @@
                 <view class="weui-label">电话</view>
               </view>
               <view class="weui-cell__bd">
-                <input name="mobilePhone" value="{{userInfo.mobilePhone}}" type="number" class="weui-input" placeholder="请输入电话" />
+                <input name="mobilePhone" value="{{userInfo.mobilePhone}}" type="number" class="weui-input" placeholder="请输入电话"  cursor-spacing="50"/>
               </view>
             </view>
           </view>
@@ -136,7 +136,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="character" value="{{userInfo.character}}" class="weui-textarea" style="height: 6em" auto-height="true" maxlength="-1" />
+                <textarea name="character" value="{{userInfo.character}}" class="weui-textarea" style="height: 6em" auto-height="true" cursor-spacing="60" maxlength="-1" />
               </view>
             </view>
           </view>
@@ -144,7 +144,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="hobby" value="{{userInfo.hobby}}" class="weui-textarea" style="height: 6em" auto-height="true" maxlength="-1" />
+                <textarea name="hobby" value="{{userInfo.hobby}}" class="weui-textarea" style="height: 6em" auto-height="true" cursor-spacing="60" maxlength="-1" />
               </view>
             </view>
           </view>
@@ -152,7 +152,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="love_history" value="{{userInfo.love_history}}" class="weui-textarea" style="height: 6em" auto-height="true" maxlength="-1" />
+                <textarea name="love_history" value="{{userInfo.love_history}}" class="weui-textarea" style="height: 6em" auto-height="true" cursor-spacing="60" maxlength="-1" />
               </view>
             </view>
           </view>
@@ -160,7 +160,7 @@
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea name="love_selecting" value="{{userInfo.love_selecting}}" class="weui-textarea" style="height: 6em"  auto-height="true" maxlength="-1" />
+                <textarea name="love_selecting" value="{{userInfo.love_selecting}}" class="weui-textarea" style="height: 6em"  auto-height="true" cursor-spacing="60" maxlength="-1" />
               </view>
             </view>
           </view>

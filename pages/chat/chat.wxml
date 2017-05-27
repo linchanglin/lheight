@@ -35,7 +35,9 @@
 
 <!--<form bindsubmit="sendMessage">-->
 <view class="sendMessage">
-  <textarea auto-height="true" name="input" class="inputMsg" value="{{inputMsg}}" fixed="true" cursor-spacing="20" bindconfirm="sendMessage" />
+  <!--<textarea auto-height="true" name="input" class="inputMsg" value="{{inputMsg}}" fixed="true" cursor-spacing="20" bindconfirm="sendMessage" />-->
+
+  <input name="input" class="inputMsg" value="{{inputMsg}}" cursor-spacing="20" confirm-hold="true" confirm-type="send" bindconfirm="sendMessage" />
 
   <!--<button form-type="submit" class="send">发送</button>-->
 </view>

@@ -62,13 +62,6 @@
   align-items: center;
 }
 
-.flex_center_item {
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .icon_size {
   width: 20px;
   height: 20px;
@@ -77,6 +70,7 @@
 .weui-flex__item image {
   padding: 0 2.5px;
 }
+
 .weui-flex__item text {
   padding: 0 2.5px;
 }
@@ -92,4 +86,24 @@ button[size="mini"] {
   font-size: 13px;
   padding: 0 8px;
   margin: 0;
+}
+
+button {
+  background-color: #fff;
+}
+
+.button-hover {
+  background-color: #ececec;
+  color: #000000;
+}
+
+.shareButton {
+  width: 100%;
+  border: 0px solid #fff;
+  border-radius: 0;
+}
+
+.shareButton::after {
+  border: 0px solid #fff;
+  border-radius: 0;
 }

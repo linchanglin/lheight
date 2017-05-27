@@ -14,6 +14,15 @@ Page({
         })
 
         wx.request({
+            url: 'https://collhome.com/apis/grades',
+            success: function (res) {
+                that.setData({
+                    grades: res.data.data
+                })
+            }
+        })
+
+        wx.request({
             url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
             success: function (res) {
                 console.log(res.data)
