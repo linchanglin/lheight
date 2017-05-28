@@ -45,17 +45,19 @@ Page({
             wx.removeStorageSync('visiable');
         }
         let video_url = wx.getStorageSync('video_url');
-        if (video_url && video_url.length > 0) {
-            that.setData({
-                videoUrl_exist: 1,
-                video_url: video_url
-            });
+        if (video_url) {
+            if (video_url.length > 0) {
+                that.setData({
+                    videoUrl_exist: 1,
+                    video_url: video_url
+                });
+            } else {
+                that.setData({
+                    videoUrl_exist: 0,
+                    video_url: ''
+                });
+            }
             wx.removeStorageSync('video_url');
-        } else {
-            that.setData({
-                videoUrl_exist: 0,
-                video_url: ''
-            });
         }
     },
     chooseImage: function (e) {

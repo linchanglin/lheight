@@ -13,7 +13,10 @@
   position: relative;
   padding: 12px 15px 0;
   background-color: #fff;
-  /*margin-bottom: 1px;*/
+}
+
+.weui-cell_active {
+  background-color: #ececec;
 }
 
 .i-right {

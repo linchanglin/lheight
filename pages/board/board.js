@@ -70,18 +70,24 @@ Page({
             wx.removeStorageSync('board_loves_need_refresh_create_love')
         }
 
-
         that.setData({
             showTopTips1: true
         })
     },
     load_refresh_loves: function (need_refresh_love_id) {
         let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        let url;
+        if (wesecret) {
+            url = `https://collhome.com/apis/loves/${need_refresh_love_id}?wesecret=${wesecret}`
+        } else {
+            url = `https://collhome.com/apis/loves/${need_refresh_love_id}`
+        }
         wx.request({
-            url: `https://collhome.com/apis/loves/${need_refresh_love_id}/comments`,
+            url: url,
             success: function (res) {
                 console.log("load_refresh_loves res", res.data.data)
-                let the_refresh_love = res.data.data.love;
+                let the_refresh_love = res.data.data;
                 let old_loves = that.data.loves;
                 for (let old_love of old_loves) {
                     if (old_love.id == need_refresh_love_id) {

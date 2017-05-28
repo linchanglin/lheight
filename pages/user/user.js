@@ -48,7 +48,7 @@ Page({
         let that = this;
 
         wx.request({
-            url: 'https://collhome.com/api/register',
+            url: 'https://collhome.com/apis/register',
             method: 'POST',
             data: {
                 code: code,
@@ -68,9 +68,9 @@ Page({
     getUserInfo: function (wesecret) {
         let that = this;
         wx.request({
-            url: 'https://collhome.com/api/user?wesecret=' + wesecret,
+            url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
             success: function (res) {
-                console.log('userInfo', res.data.data)
+                console.log('userInfoooo', res.data.data)
                 wx.setStorageSync('my_userInfo', res.data.data);
                 that.setData({
                     userInfo: res.data.data

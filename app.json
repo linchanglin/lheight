@@ -1,26 +1,17 @@
 {
     "pages": [
-        "pages/chat/chat",
-        
-        "pages/user/user",
-        
-        "pages/profileInput/profileInput",
-        
-        
         "pages/board/board",
         
-        "pages/profileDetailsInput/profileDetailsInput",
-        
-        
-        "pages/profileShow/profileShow",
-        
-        
-        
-        
+        "pages/user/user",
         
         "pages/loveInput/loveInput",
         
         
+        
+        "pages/profileInput/profileInput",
+        "pages/chat/chat",
+        "pages/profileDetailsInput/profileDetailsInput",
+        "pages/profileShow/profileShow",
         "pages/avatarUrlInput/avatarUrlInput",
         "pages/picture/picture",
         "pages/avatarUrl/avatarUrl",

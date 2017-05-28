@@ -32,19 +32,11 @@ Page({
 
         wx.getSystemInfo({
             success: (res) => {
-                let ww = res.windowWidth;
-                var length = 3;
-                var row = Math.ceil(length / 3);
-                var line = Math.ceil(length / row);
-                var widthM = ww - 20;
-                var widthX = (widthM / line).toFixed(2) - 6;
-                var margin = "3px";
+                let ww = res.windowWidth - 20;
+                let image_width = (ww - 2) / 3;
                 that.setData({
-                    imgCss: {
-                        width: widthX + 'px',
-                        height: widthX + 'px',
-                        margin: margin
-                    }
+                    ww: ww,
+                    image_width: image_width
                 })
             }
         })
