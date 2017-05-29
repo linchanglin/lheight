@@ -325,6 +325,34 @@ function praiseComment(e) {
     })
 }
 
+function praiseUser(e) {
+    console.log('praiseUser e', e);
+    return new Promise((resolve, reject) => {
+        let user_id = e.currentTarget.dataset.userid;
+        let user_if_my_praise = e.currentTarget.dataset.userifmypraise;
+        let praise;
+        if (user_if_my_praise == 0) {
+            praise = 1;
+        } else {
+            praise = 0;
+        }
+        let wesecret = wx.getStorageSync('wesecret');
+        wx.request({
+            url: `https://collhome.com/apis/users/${user_id}/praises`,
+            method: 'POST',
+            data: {
+                wesecret: wesecret,
+                praise: praise
+            },
+            success: function (res) {
+                console.log('praiseUser success res', res)
+                console.log('praise', praise)
+                resolve(user_id);
+            }
+        })
+    })
+}
+
 module.exports = {
     signIn: signIn,
     get_my_userInfo: get_my_userInfo,
@@ -332,5 +360,6 @@ module.exports = {
     showCommentActionSheet: showCommentActionSheet,
     showReplyActionSheet: showReplyActionSheet,
     praiseLove: praiseLove,
-    praiseComment: praiseComment
+    praiseComment: praiseComment,
+    praiseUser: praiseUser,
 }

@@ -71,19 +71,14 @@ Page({
         let page = that.data.page;
         let wesecret = wx.getStorageSync('wesecret');
         let love_url;
-        if (wesecret) {
-            love_url = `https://collhome.com/apis/loves/${love_id}?wesecret=${wesecret}`
-        } else {
-            love_url = `https://collhome.com/apis/loves/${love_id}?wesecret=`
-        }
         let comments_url;
         if (wesecret) {
+            love_url = `https://collhome.com/apis/loves/${love_id}?wesecret=${wesecret}`;
             comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=${wesecret}`
         } else {
-            comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=`
+            love_url = `https://collhome.com/apis/loves/${love_id}?wesecret=`;
+            comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=`;            
         }
-        // let love_url = `https://collhome.com/apis/loves/' + that.data.love_id + '/comments`
-        // let url = 'https://collhome.com/apis/loves/' + that.data.love_id + '/comments';
         wx.request({
             url: love_url,
             success: function (res) {
@@ -111,25 +106,6 @@ Page({
                 })
             }
         })
-        // wx.request({
-        //     url: url,
-        //     success: function (res) {
-        //         // console.log('love', res.data)
-        //         // let love = res.data.data.love;
-        //         // let comments = res.data.data.comments;
-        //         // let last_comment_id;
-        //         // if (comments.length > 0) {
-        //         //     last_comment_id = comments[comments.length - 1].id;
-        //         // } else {
-        //         //     last_comment_id = 0;
-        //         // }
-        //         that.setData({
-        //             love: love,
-        //             comments: comments,
-        //             last_comment_id: last_comment_id
-        //         })
-        //     }
-        // })
     },
     previewImage: function (e) {
         console.log('preview e', e);
@@ -159,7 +135,18 @@ Page({
         }
     },
     showCommentActionSheet: function (e) {
+        console.log('showCommentActionSheet', e);
+        let comment_id = e.currentTarget.dataset.commentid;
         let that = this;
+        that.setData({
+            item_selected_comment_id: comment_id
+        })
+        setTimeout(function () {
+            that.setData({
+                item_selected_comment_id: ''
+            })
+        }, 200)
+
         let wesecret = wx.getStorageSync('wesecret');
         let my_userInfo = wx.getStorageSync('my_userInfo');
         if (wesecret) {
@@ -179,6 +166,20 @@ Page({
         } else {
             common.signIn();
         }
+    },
+    longtap_comment: function (e) {
+        console.log('longtap_comment', e);
+        let comment_id = e.currentTarget.dataset.commentid;
+        var that = this;
+        that.setData({
+            item_selected_comment_id: comment_id
+        })
+    },
+    touchmove_comment: function (e) {
+        let that = this;
+        that.setData({
+            item_selected_comment_id: ''
+        })
     },
     praiseLove: function (e) {
         let love_if_my_praise = e.currentTarget.dataset.loveifmypraise;
@@ -219,10 +220,10 @@ Page({
 
                         if (comment_if_my_praise == 0) {
                             old_comment.if_my_praise = 1;
-                            old_comment.praise_nums++
+                            old_comment.praise_nums++;
                         } else {
-                            old_comment.if_my_praise = 0
-                            old_comment.praise_nums--
+                            old_comment.if_my_praise = 0;
+                            old_comment.praise_nums--;
                         }
                     }
                 }
@@ -241,6 +242,34 @@ Page({
         let user_id = e.currentTarget.dataset.userid;
         wx.navigateTo({
             url: '../profileShow/profileShow?user_id=' + user_id
+        })
+    },
+    navigateToProfileShowInReply: function (e) {
+        console.log('navigateToProfileShowInReply', e)
+        let that = this;
+        let reply = e.currentTarget.dataset.reply;
+        let type = e.currentTarget.dataset.type;
+        let toUserId = e.currentTarget.dataset.touserid;
+        if (type == 'user') {
+            that.setData({
+                item_selected_reply_id: reply.id,
+                item_selected_reply_userInfo_id: reply.userInfo.id,
+            })
+        } else {
+            that.setData({
+                item_selected_reply_id: reply.id,
+                item_selected_reply_objectUserInfo_id: reply.objectUserInfo.id,
+            })
+        }
+        setTimeout(function () {
+            that.setData({
+                item_selected_reply_id: '',
+                item_selected_reply_userInfo_id: '',
+                item_selected_reply_objectUserInfo_id: '',
+            })
+        }, 450)
+        wx.navigateTo({
+            url: '../profileShow/profileShow?user_id=' + toUserId
         })
     },
     navigateToLocation: function (e) {
@@ -268,13 +297,13 @@ Page({
         let that = this;
         let love_id = that.data.love_id;
         let comment_id = e.target.dataset.commentid;
-        console.log('comment_id', comment_id);
+        console.log('comment_idddd', comment_id);
         that.setData({
-            item_selected_comment_id: comment_id
+            item_reply_selected_comment_id: comment_id,
         })
         setTimeout(function () {
             that.setData({
-                item_selected_comment_id: ''
+                item_reply_selected_comment_id: ''
             })
         }, 450)
         wx.navigateTo({

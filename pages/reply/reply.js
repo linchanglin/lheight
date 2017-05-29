@@ -48,19 +48,40 @@ Page({
     load_comment: function () {
         let that = this;
         let comment_id = that.data.comment_id;
-        let url = `https://collhome.com/apis/comments/${comment_id}/replies`
-
+        let wesecret = wx.getStorageSync('wesecret');
+        let comment_url;
+        let replies_url;
+        if (wesecret) {
+            comment_url = `https://collhome.com/apis/comments/${comment_id}?wesecret=`;
+            replies_url = `https://collhome.com/apis/comments/${comment_id}/replies?wesecret=${wesecret}`;
+        } else {
+            comment_url = `https://collhome.com/apis/comments/${comment_id}?wesecret=`;
+            replies_url = `https://collhome.com/apis/comments/${comment_id}/replies?wesecret=${wesecret}`;
+        }
         wx.request({
-            url: url,
+            url: comment_url,
             success: function (res) {
                 console.log('comment', res.data.data)
                 let comment = res.data.data;
-                let replies = comment.replies;
-                let last_reply_id = replies[replies.length - 1].id;
-                console.log('last_reply_id', last_reply_id)
                 that.setData({
                     comment: comment,
-                    replies: comment.replies,
+                })
+            }
+        })
+        wx.request({
+            url: replies_url,
+            success: function (res) {
+                console.log('replies', res.data.data)
+                let replies = res.data.data;
+                let last_reply_id;
+                if (replies.length > 0) {
+                    last_reply_id = replies[replies.length - 1].id;
+                } else {
+                    last_reply_id = 0;
+                }
+                console.log('last_reply_id', last_reply_id)
+                that.setData({
+                    replies: replies,
                     last_reply_id: last_reply_id
                 })
             }
@@ -150,10 +171,10 @@ Page({
                 old_comment.praise_nums = parseInt(old_comment.praise_nums);
                 if (comment_if_my_praise == 0) {
                     old_comment.if_my_praise = 1;
-                    old_comment.praise_nums++
+                    old_comment.praise_nums++;
                 } else {
-                    old_comment.if_my_praise = 0
-                    old_comment.praise_nums--
+                    old_comment.if_my_praise = 0;
+                    old_comment.praise_nums--;
                 }
                 that.setData({
                     comment: old_comment,

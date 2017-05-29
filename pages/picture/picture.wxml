@@ -26,25 +26,6 @@
 
     </view>
 
-    <!--
-    <view style="display:none">
-      <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.pictures[0]}}" bindload="onImageLoad"></image>
-    </view>-->
-    <!--<scroll-view scroll-y="true" bindscrolltolower="loadImages">-->
-    <!--<view style="width:100%">
-        <view class="img_item">
-          <view wx:for="{{col1}}" wx:key="id">
-            <image src="{{item.pictures[0]}}" style="width:100%;height:{{item.height}}px" data-userId="{{item.id}}" data-imgUrl="{{item.pictures}}" bindtap="showGoodsDetail"></image>
-          </view>
-        </view>
-        <view class="img_item">
-          <view wx:for="{{col2}}" wx:key="id">
-            <image src="{{item.pictures[0]}}" style="width:100%;height:{{item.height}}px" data-userId="{{item.id}}" data-imgUrl="{{item.pictures}}" bindtap="showGoodsDetail"></image>
-          </view>
-        </view>
-      </view>
-    </scroll-view>-->
-
     <!--goodsdetail start-->
     <view class="goods-detail" hidden="{{!showGoodsDetail}}">
       <view class="mask" bindtap="hideGoodsDetail"></view>
@@ -56,9 +37,9 @@
         </swiper>
         <view class="banner_bottom">
           <view class="title1">{{userInfo.nickName}}</view>
-          <view class="title2">{{userInfo.college_name}}</view>
+          <view class="title2">{{userInfo.gender_name}}</view>
           <view class="title3">
-            <view class="title4">{{userInfo.age}} 岁 </view>
+            <view class="title4">{{userInfo.college_name}} 岁 </view>
             <view class="title5" bindtap="navigateToProfileShow" data-userId="{{userInfo.id}}">查看资料</view>
           </view>
           <view class="title6"></view>

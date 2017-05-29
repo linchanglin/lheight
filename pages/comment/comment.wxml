@@ -75,7 +75,8 @@
       <!--评论列表-->
       <view wx:if="{{comments.length > 0}}" class="comments" id="scroll_to_comments">
         <block wx:for="{{comments}}" wx:for-item="comment" wx:key="id">
-          <view class="item" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}" catchtap="showCommentActionSheet" hover-class="weui-cell_active">
+          <view class="item {{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}"
+            catchtap="showCommentActionSheet" bindlongtap="longtap_comment" bindtouchmove="touchmove_comment">
             <view class="i-left">
               <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
             </view>
@@ -98,8 +99,20 @@
               <!--评论内容-->
               <view class="content">
                 <view class="comment_content">{{comment.content}}</view>
-                <view wx:if="{{comment.comment_nums > 0}}" class="comment_reply" data-commentId="{{comment.id}}" catchtap="navigateToReplys">
-                  <text class="{{comment.id == item_selected_comment_id ? 'comment_reply_hover_class':''}}" style="padding: 2px; border-radius: 5px" data-commentId="{{comment.id}}" catchtap="navigateToReply">共{{comment.comment_nums}}条回复 ></text>
+                <view wx:if="{{comment.reply_nums > 0}}" class="comment_reply {{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentId="{{comment.id}}" catchtap="navigateToReplys">
+                  <block wx:for="{{comment.replies}}" wx:for-item="reply" wx:key="id">
+                    <view class="classname">
+                      <text class="{{reply.id == item_selected_reply_id && reply.userInfo.id == item_selected_reply_userInfo_id ? 'comment_reply_hover_class':''}}" style="padding: 1px 2px; border-radius: 5px" data-reply="{{reply}}" data-type="user" data-toUserId="{{reply.userInfo.id}}" catchtap="navigateToProfileShowInReply">{{reply.userInfo.nickName}}</text>
+                      <text wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" style="color:#000000">回复</text>
+                      <text wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" class="{{reply.id == item_selected_reply_id && reply.objectUserInfo.id == item_selected_reply_objectUserInfo_id ? 'comment_reply_hover_class':''}}" style="padding: 1px 2px; border-radius: 5px" data-reply="{{reply}}" data-type="objectuser" data-toUserId="{{reply.objectUserInfo.id}}" catchtap="navigateToProfileShowInReply">@{{reply.objectUserInfo.nickName}}</text>
+                      <text style="color:#000000">: {{reply.content}}</text>
+
+                    </view>
+                  </block>
+                  <view class="classname">
+                    <text class="{{comment.id == item_reply_selected_comment_id ? 'comment_reply_hover_class':''}}" style="padding: 2px; border-radius: 5px" data-commentId="{{comment.id}}" catchtap="navigateToReply">共{{comment.reply_nums}}条回复 ></text>
+                  </view>
+
                 </view>
               </view>
             </view>

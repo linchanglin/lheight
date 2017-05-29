@@ -1,3 +1,7 @@
+@import "../../utils/common_css/ripple-bounceIn.wxss";
+@import "../../utils/common_css/weui-tabbar.wxss";
+
+
 .new_panel_bd {
   background-color: #fff;
   margin-top: 0px;
@@ -64,4 +68,3 @@
   justify-content: center;
   align-items: center;
 }
-@import "../../utils/common_css/weui-tabbar.wxss";

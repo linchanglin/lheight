@@ -1,3 +1,5 @@
+@import "../../utils/common_css/weui-tabbar.wxss";
+
 page {
   background-color: #edecf2;
 }

@@ -1,3 +1,5 @@
+import common from '../../utils/common.js';
+
 Page({
     data: {
         ifShowAvatarUrl: false
@@ -57,5 +59,29 @@ Page({
         that.setData({
             ifShowAvatarUrl: false
         })
-    }
+    },
+    praiseUser: function (e) {
+        let user_if_my_praise = e.currentTarget.dataset.userifmypraise;
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            common.praiseUser(e).then((user_id) => {
+                let old_userInfo = that.data.userInfo;
+                old_userInfo.praise_nums = parseInt(old_userInfo.praise_nums);
+                if (user_if_my_praise == 0) {
+                    old_userInfo.if_my_praise = 1;
+                    old_userInfo.praise_nums++
+                } else {
+                    old_userInfo.if_my_praise = 0
+                    old_userInfo.praise_nums--
+                }
+                that.setData({
+                    userInfo: old_userInfo,
+                    selected_user_id: user_id
+                })
+            });
+        } else {
+            common.signIn();
+        }
+    },
 })

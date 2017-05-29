@@ -65,8 +65,10 @@
         </block>
       </view>
     </scroll-view>
+
+
      <!--tabbar-->
-    <view class="weui-tabbar">
+    <!--<view class="weui-tabbar">
       <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput">
         <image wx:if="{{comment.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
         <image wx:if="{{comment.if_my_comment == 1}}" class="image-comment" src="../images/comment_fill.png"></image>
@@ -77,6 +79,33 @@
         <image wx:if="{{comment.if_my_praise == 1}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
         <view class="weui-tabbar__label">喜欢</view>
       </view>
+    </view>-->
+
+     <view class="weui-tabbar">
+
+      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput">
+        <image wx:if="{{comment.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
+        <image wx:if="{{comment.if_my_comment == 1}}" class="image-comment" src="../images/comment_fill.png"></image>
+        <text class="weui-tabbar__label">评论</text>
+      </view>
+
+      <view class="weui-tabbar__item" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment">
+        <image wx:if="{{comment.if_my_praise == 0}}" class="image-comment  ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
+        <image wx:if="{{comment.if_my_praise == 1}}" class="image-comment  ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
+        <text class="weui-tabbar__label">喜欢</text>
+      </view>
+
+      <view class="weui-tabbar__item">
+        <button class="shareButton1" open-type="share">
+          <image class="image-comment" src="../images/share.png"></image>
+          <text class="weui-tabbar__label">分享</text>
+        </button>
+      </view>
+
+
+
     </view>
+
+
   </view>
 </view>

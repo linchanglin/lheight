@@ -15,9 +15,7 @@
   background-color: #fff;
 }
 
-.weui-cell_active {
-  background-color: #ececec;
-}
+
 
 .i-right {
   width: 100%;
@@ -59,9 +57,13 @@
 }
 
 .comment_reply_hover_class {
-  background-color: #bbb;
+  background-color: #ccc;
 }
 
 .no_border_bottom {
   border-bottom: 0px solid #edecf2;
+}
+
+.weui-cell_active {
+  background-color: #ececec;
 }

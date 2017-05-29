@@ -2,15 +2,15 @@
   <view class="page__bd">
     <view wx:if="{{badReportFrom_id != 0}}" class="badReportFrom">
       <view class="" style=" padding-bottom: 8px;">
-        举报<text style="color: #66c;" catchtap="navigateToProfileShow">@{{objectUser_nickname}}</text>{{badReportFrom}}
+        举报<text style="color: #66c;" catchtap="navigateToProfileShow">{{objectUser_nickname}}</text>{{badReportFrom}}
       </view>
       <view class="classname" style="background-color: #f8f8f8; border-radius: 5px;padding: 8px 0;">
-        <text style="color: #66c;" catchtap="navigateToProfileShow">@{{objectUser_nickname}}</text>{{badReport_content}}
+        <text style="color: #66c;" catchtap="navigateToProfileShow">{{objectUser_nickname}}</text>{{badReport_content}}
       </view>
     </view>
 
     <view wx:if="{{badReportFrom_id == 0}}" class="badReportFromNone">
-        举报<text style="color: #66c;" catchtap="navigateToProfileShow">@{{objectUser_nickname}}</text>
+        举报<text style="color: #66c;" catchtap="navigateToProfileShow">{{objectUser_nickname}}</text>
     </view>
 
     <view class="weui-panel">

@@ -20,7 +20,7 @@
             </view>
             <view style="color: #FF3366;display: flex; justify-content: center;align-items: center">
               <image src="../images/loveme_fill.png" style="width: 20px; height: 20px;"></image>
-              <text style="padding: 0 5px">99</text>
+              <text style="padding: 0 5px">{{userInfo.praise_nums}}</text>
             </view>
           </view>
         </view>
@@ -37,7 +37,7 @@
               </view>
               <view class="profileShow_cell_right">
                 <view class="profileShow_cell_hd">
-                   相册
+                  相册
                 </view>
                 <view class="profileShow_cell_bd">
                   <view class="display: flex; justify-content: flex-start">
@@ -95,7 +95,7 @@
         </view>
 
         <view class="weui-panel__bd new_panel_bd">
-          <view class="profileShow_cells" >
+          <view class="profileShow_cells">
             <view class="profileShow_cell">
               <view class="profileShow_cell_left">
                 <image class="image_picture" mode="aspectFit" src="../images/show_college.png"></image>
@@ -221,7 +221,7 @@
     </scroll-view>
 
     <!--tabbar-->
-    <view class="weui-tabbar">
+    <!--<view class="weui-tabbar">
       <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToChat">
         <view class="weui-tabbar__label">私信</view>
       </view>
@@ -233,9 +233,32 @@
       <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToShare">
         <view class="weui-tabbar__label">分享</view>
       </view>
-      <!--</view>-->
+    </view>-->
 
-      <!--</view>-->
+    <view class="weui-tabbar">
+
+      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToChat">
+        <image class="image-comment" src="../images/comment.png"></image>
+        <text class="weui-tabbar__label">私信</text>
+      </view>
+
+      <view class="weui-tabbar__item" data-userId="{{userInfo.id}}" data-userIfMyPraise="{{userInfo.if_my_praise}}" catchtap="praiseUser">
+        <image wx:if="{{userInfo.if_my_praise == 0}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme.png"></image>
+        <image wx:if="{{userInfo.if_my_praise == 1}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme_fill.png"></image>
+        <text class="weui-tabbar__label">喜欢</text>
+      </view>
+
+      <view class="weui-tabbar__item">
+        <button class="shareButton1" open-type="share">
+          <image class="image-comment" src="../images/share.png"></image>
+          <text class="weui-tabbar__label">分享</text>
+        </button>
+      </view>
+
+
+
     </view>
+
+
   </view>
 </view>

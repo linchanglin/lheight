@@ -301,19 +301,15 @@ Page({
     navigateToLove: function (e) {
         console.log('navigateToLove', e);
         let love_id = e.currentTarget.dataset.loveid;
-        console.log('love_id', love_id);
-
-        var that = this;
+        let that = this;
         that.setData({
             item_selected_love_id: love_id
         })
-
         setTimeout(function () {
             that.setData({
                 item_selected_love_id: ''
             })
         }, 450)
-
         wx.navigateTo({
             url: '../comment/comment?love_id=' + love_id
         });
