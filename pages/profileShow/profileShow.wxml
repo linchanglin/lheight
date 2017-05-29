@@ -65,9 +65,9 @@
                 <view class="profileShow_cell_bd">
                   {{userInfo.realname}}
                 </view>
-                <view class="profileShow_cell_bd">
+                <!--<view class="profileShow_cell_bd">
                   {{userInfo.gender_name}}
-                </view>
+                </view>-->
                 <view class="profileShow_cell_bd">
                   {{userInfo.birthday}}
                 </view>

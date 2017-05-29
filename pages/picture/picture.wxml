@@ -27,9 +27,9 @@
     </view>
 
     <!--goodsdetail start-->
-    <view class="goods-detail" hidden="{{!showGoodsDetail}}">
-      <view class="mask" bindtap="hideGoodsDetail"></view>
-      <view class="goodsdetail ripple {{showName}}">
+    <!--<view class="goods-detail" >
+      <view class="mask" bindtap="hideGoodsDetail"></view>-->
+      <view class="goodsdetail ripple {{showName}}" hidden="{{!showGoodsDetail}}" bindtap="hideGoodsDetail">
         <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="500">
           <swiper-item wx:for="{{imgUrl}}" wx:key="*this">
             <image src="{{item}}" mode="aspectFit"></image>
@@ -39,12 +39,13 @@
           <view class="title1">{{userInfo.nickName}}</view>
           <view class="title2">{{userInfo.gender_name}}</view>
           <view class="title3">
-            <view class="title4">{{userInfo.college_name}} 岁 </view>
-            <view class="title5" bindtap="navigateToProfileShow" data-userId="{{userInfo.id}}">查看资料</view>
+            <view wx:if="{{userInfo.college_name.length > 0}}" class="title4">{{userInfo.college_name}}</view>
+            <view wx:else class="title4"></view>
+            <view class="title5" catchtap="navigateToProfileShow" data-userId="{{userInfo.id}}">查看资料</view>
           </view>
           <view class="title6"></view>
         </view>
       </view>
-    </view>
+    <!--</view>-->
   </view>
 </view>
