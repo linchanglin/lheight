@@ -80,6 +80,19 @@ Page({
     },
     onShow: function () {
         let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            wx.request({
+                url: `https://collhome.com/apis/unreadNoticeNums?wesecret=${wesecret}`,
+                success: function (res) {
+                    console.log('unreadNoticeNums', res);
+                    let unreadNoticeNums = res.data.unreadNoticeNums;
+                    that.setData({
+                        unreadNoticeNums: unreadNoticeNums
+                    })
+                }
+            })
+        }
         let user_need_refresh = wx.getStorageSync('user_need_refresh')
         if (user_need_refresh) {
             let my_userInfo = wx.getStorageSync('my_userInfo');

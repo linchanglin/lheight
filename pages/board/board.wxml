@@ -3,8 +3,10 @@
 <view class="page">
   <view class="page__bd">
 
-    <!--<view class="weui-toptips weui-toptips_notice1" wx:if="{{showTopTips1}}">您有{{}}条表白未查看</view>
-    <view class="weui-toptips weui-toptips_notice2" wx:if="{{showTopTips2}}">更新了{{}}条表白</view>-->
+    <view class="weui-toptips weui-toptips_notice1" wx:if="{{showTopTips1}}">您有{{unreadLoveNums}}条表白未查看</view>
+    <view class="weui-toptips weui-toptips_notice2" wx:if="{{showTopTips2}}">更新了{{unreadLoveNums}}条表白</view>
+
+    
     <view class="weui-search-bar">
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
@@ -65,7 +67,7 @@
           </view>
         </view>
 
-          
+
 
         <view class="weui-flex  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" style="margin-top: 1px;">
           <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">

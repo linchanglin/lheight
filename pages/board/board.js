@@ -27,7 +27,7 @@ Page({
         wx.showLoading({
             title: '加载中',
         })
-        
+
         that.load_loves('onLoad');
 
         wx.getSystemInfo({
@@ -70,9 +70,9 @@ Page({
             wx.removeStorageSync('board_loves_need_refresh_create_love')
         }
 
-        that.setData({
-            showTopTips1: true
-        })
+        if (that.data.loves) {
+            that.get_unreadLoveNums();
+        }
     },
     load_refresh_loves: function (need_refresh_love_id) {
         let that = this;
@@ -116,6 +116,30 @@ Page({
         console.log('load_refresh_loves_delete_love new_loves', new_loves);
         that.setData({
             loves: new_loves
+        })
+    },
+    get_unreadLoveNums: function () {
+        let that = this;
+        let url;
+        let love_id = that.data.loves[0].id;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            url = `https://collhome.com/apis/unreadLoveNums?love_id=${love_id}&wesecret=${wesecret}`
+        } else {
+            url = `https://collhome.com/apis/unreadLoveNums?love_id=${love_id}&wesecret=`
+        }
+        wx.request({
+            url: url,
+            success: function (res) {
+                console.log('get_unreadLoveNums res', res);
+                let unreadLoveNums = res.data.unreadLoveNums;
+                if (unreadLoveNums > 0) {
+                    that.setData({
+                        showTopTips1: true,
+                        unreadLoveNums: res.data.unreadLoveNums
+                    })
+                }
+            }
         })
     },
     onPullDownRefresh: function () {

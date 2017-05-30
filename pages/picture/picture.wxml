@@ -21,7 +21,7 @@
 
     <view style="width: {{ww}}px;display: flex;flex-wrap: wrap; justify-content: space-between;">
       <block wx:for="{{pictures}}" wx:key="id">
-        <image src="{{item.pictures[0]}}"  mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;" data-userId="{{item.id}}" data-imgUrl="{{item.pictures}}" bindtap="showGoodsDetail"></image>
+        <image src="{{item.pictures[0]}}" mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;" data-userId="{{item.id}}" data-imgUrl="{{item.pictures}}" bindtap="showGoodsDetail"></image>
       </block>
 
     </view>
@@ -29,23 +29,27 @@
     <!--goodsdetail start-->
     <!--<view class="goods-detail" >
       <view class="mask" bindtap="hideGoodsDetail"></view>-->
-      <view class="goodsdetail ripple {{showName}}" hidden="{{!showGoodsDetail}}" bindtap="hideGoodsDetail">
-        <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="500">
-          <swiper-item wx:for="{{imgUrl}}" wx:key="*this">
-            <image src="{{item}}" mode="aspectFit"></image>
-          </swiper-item>
-        </swiper>
-        <view class="banner_bottom">
-          <view class="title1">{{userInfo.nickName}}</view>
-          <view class="title2">{{userInfo.gender_name}}</view>
-          <view class="title3">
+    <view class="goodsdetail ripple {{showName}}" hidden="{{!showGoodsDetail}}" bindtap="hideGoodsDetail">
+      <swiper class="banner" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#ffffff" indicator-dots="true" autoplay="true" interval="3000" duration="500">
+        <swiper-item wx:for="{{imgUrl}}" wx:key="*this">
+          <image src="{{item}}" mode="aspectFit"></image>
+        </swiper-item>
+      </swiper>
+      <view class="banner_bottom">
+        <view style="display: flex; justify-content: center; align-items: center">
+          <text class="title1">{{userInfo.nickName}}</text>
+          <image wx:if="{{userInfo.gender == 1}}" src="../images/gender_male.png" style="width: 16px; height: 16px"></image>
+          <image wx:if="{{userInfo.gender == 2}}" src="../images/gender_female.png" style="width: 16px; height: 16px"></image>
+        </view>
+        <view class="title3" catchtap="navigateToProfileShow" data-userId="{{userInfo.id}}">查看资料</view>
+        <!--<view class="title3">
             <view wx:if="{{userInfo.college_name.length > 0}}" class="title4">{{userInfo.college_name}}</view>
             <view wx:else class="title4"></view>
             <view class="title5" catchtap="navigateToProfileShow" data-userId="{{userInfo.id}}">查看资料</view>
           </view>
-          <view class="title6"></view>
-        </view>
+          <view class="title6"></view>-->
       </view>
+    </view>
     <!--</view>-->
   </view>
 </view>

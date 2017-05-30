@@ -13,6 +13,15 @@ Page({
             userInfo: my_userInfo
         })
 
+        wx.getSystemInfo({
+            success: (res) => {
+                let wh = res.windowHeight;
+                that.setData({
+                    wh: wh - 45
+                })
+            }
+        })
+
         var message = wx.getStorageSync('message');
         var top = message.length * 100;
         this.setData({

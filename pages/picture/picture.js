@@ -4,6 +4,7 @@ let col2H = 0;
 Page({
 
     data: {
+        // showGoodsDetail: true,
         // scrollH: 0,
         imgWidth: 0,
         loadingCount: 0,
