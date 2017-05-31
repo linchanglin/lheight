@@ -1,8 +1,9 @@
 {
     "pages": [
+        "pages/board/board",
+        
         "pages/chat/chat",
         
-        "pages/board/board",
         
         
         

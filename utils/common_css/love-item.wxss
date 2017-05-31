@@ -15,7 +15,14 @@
   overflow: hidden;
 }
 
-.header-img {
+.more_image {
+  float: right;
+  width: 18px;
+  height: 18px;
+  padding: 0 5px 6px;
+}
+
+.header_image_box {
   float: left;
   width: 43px;
   height: 43px;
@@ -26,7 +33,7 @@
   margin-top: 2px;
 }
 
-.img {
+.header_image {
   width: 100%;
   height: 100%;
 }
@@ -47,10 +54,25 @@
 
 .article-imgs {
   margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.article-image {
+  margin-bottom: 1px;
 }
 
 .article-img-margin-right {
   margin-right: 0;
+}
+
+.article_video_box {
+  margin-top: 8px;
+}
+
+.article_video {
+  width: 100%;
 }
 
 .weui-flex {
@@ -58,7 +80,9 @@
   background-color: #fff;
   padding: 0;
   font-size: 14px;
+  margin-top: 1px;
 }
+
 .weui-flexx {
   /*height: 35px;*/
   background-color: #fff;
@@ -122,4 +146,8 @@ button {
 .shareButton::after {
   border: 0px solid #fff;
   border-radius: 0;
+}
+
+.share_image_box {
+    font-size: 14px;
 }

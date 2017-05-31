@@ -1,7 +1,7 @@
 <view class="page">
   <view class="page__bd">
 
-    <scroll-view scroll-y="true" style="height: {{wh}}px;">
+    <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" style="height: {{wh}}px;">
       <view class="" style="padding: 7px 0;">
         <block wx:for="{{message}}" wx:key="item.id">
           <block wx:if="{{item.type == 1}}">

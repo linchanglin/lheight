@@ -1,4 +1,7 @@
 @import "../../utils/common_css/weui-tabbar.wxss";
+@import "../../utils/common_css/comment-item.wxss";
+@import "../../utils/common_css/ripple-bounceIn.wxss";
+
 
 page {
   background-color: #edecf2;
@@ -119,8 +122,7 @@ page {
 
 
 
-@import "../../utils/common_css/weui-tabbar.wxss";
-@import "../../utils/common_css/ripple-bounceIn.wxss";
+
 
 
 .no_border_bottom {

@@ -39,6 +39,11 @@ page {
   font-size: 16px;
 }
 
+
+.on_loading {
+    width: 25px;height: 25px
+}
+
 .page_no_data {
   display: flex;
   justify-content: center;
