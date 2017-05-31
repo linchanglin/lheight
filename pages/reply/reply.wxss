@@ -123,28 +123,6 @@ page {
 @import "../../utils/common_css/ripple-bounceIn.wxss";
 
 
-
-
-
-
-/*.sendReply {
-  display: flex;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  background-color: #edecf2;
-}
-
-.inputReply {
-  flex: 2;
-  background-color: #fff;
-  font-size: 16px;
-  border-radius: 5px;
-}*/
-
 .no_border_bottom {
   border-bottom: 0px solid #edecf2;
 }

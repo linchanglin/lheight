@@ -2,80 +2,73 @@ page {
   background-color: #ececec;
 }
 
-scroll-view {
-  /*height: 1150rpx;*/
-  height: 90vh;
-  padding-bottom: 120rpx;
+.reply .pic {
+  padding-right: 5px;
+  display: flex;
 }
 
-.reply .pic, .send .pic {
-  padding: 10px;
+.send .pic {
+  padding-left: 5px;
+  display: flex;
 }
 
 .reply, .send {
   display: flex;
+  padding: 7px 5px;
 }
 
 .reply .pic image, .send .pic image {
-  width: 80rpx;
-  height: 80rpx;
+  width: 40px;
+  height: 40px;
 }
 
 .send {
   justify-content: flex-end;
 }
 
-.reply .content {
-  padding: 10px 10px 10px 0;
+.reply .content, .send .content {
+  padding: 0;
   max-width: 480rpx;
-}
-
-.send .content {
-  padding: 10px 0 10px 10px;
-  max-width: 480rpx;
+  display: flex;
+ 
 }
 
 .reply .content .text, .send .content .text {
   background-color: #fff;
+   border: 0.5px solid #ccc;
   border-radius: 5px;
-  padding: 10px;
+  padding: 7px;
   font-size: 16px;
+  line-height: 1.5;
+  display: flex;
 }
 
 .send .content .text {
-  background-color: #d5eaf8;
+  /*background-color: #d5eaf8;*/
+  background-color: #9EEA6A;
+  
 }
 
 .sendMessage {
+ height: 50px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 10px;
-  background-color: #ececec;
+  padding: 0 10px;
+  background-color: #efefef;
+  border-top: 1px solid #ccc;
 }
 
 .inputMsg {
-  flex: 2;
+  width: 100%;
+  display: flex;
   background-color: #fff;
-  /*height: 30px;*/
   font-size: 16px;
-  /*padding: 5px 10px;*/
-    border-radius: 10rpx;
-
-}
-
-.sendMessage .send {
-  background-color:#17af0f;
-    color:#fff;
-    height: 30px;
-    line-height: 30px;
-    margin-left: 10px;
-    align-self: flex-end;
-}
-
-button {
-  font-size: 16px;
-  height: 30px;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
 }

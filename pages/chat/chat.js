@@ -17,7 +17,7 @@ Page({
             success: (res) => {
                 let wh = res.windowHeight;
                 that.setData({
-                    wh: wh - 45
+                    wh: wh - 51
                 })
             }
         })

@@ -2,10 +2,16 @@
     "pages": [
         "pages/chat/chat",
         
+        "pages/board/board",
+        
+        
+        
+        
+        
+        
         "pages/user/user",
         
         "pages/picture/picture",
-        "pages/board/board",
         "pages/loveInput/loveInput",
         "pages/profileInput/profileInput",
         "pages/profileDetailsInput/profileDetailsInput",

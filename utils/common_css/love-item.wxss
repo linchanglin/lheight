@@ -32,7 +32,6 @@
 }
 
 .header-name {
-  font-size: 16px;
   color: #ff8140;
 }
 

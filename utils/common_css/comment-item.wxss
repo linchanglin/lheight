@@ -5,7 +5,6 @@
 .content {
   margin: 0 0 12px 0;
   word-break: break-all;
-  font-size: 15px;
 }
 
 .item {
@@ -13,6 +12,7 @@
   position: relative;
   padding: 12px 15px 0;
   background-color: #fff;
+  font-size: 15.5px;
 }
 
 
@@ -36,12 +36,11 @@
 
 .item .u-name {
   color: deepskyblue;
-  font-size: 14px;
 }
 
 .item .time {
   color: #888;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .comment_content {
@@ -50,7 +49,7 @@
 
 .comment_reply {
   color: #66c;
-  font-size: 13px;
+  font-size: 15px;
   padding: 5px 8px;
   background-color: #f8f8f8;
   border-radius: 5px;
