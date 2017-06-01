@@ -2,6 +2,18 @@
     "pages": [
         "pages/board/board",
         
+        "pages/profileShow/profileShow",
+        
+        
+        
+        
+        "pages/profileShowMore/profileShowMore",
+        
+        
+        
+        
+        
+        
         "pages/chat/chat",
         
         
@@ -16,7 +28,6 @@
         "pages/loveInput/loveInput",
         "pages/profileInput/profileInput",
         "pages/profileDetailsInput/profileDetailsInput",
-        "pages/profileShow/profileShow",
         "pages/avatarUrlInput/avatarUrlInput",
         "pages/avatarUrl/avatarUrl",
         "pages/nicknameInput/nicknameInput",

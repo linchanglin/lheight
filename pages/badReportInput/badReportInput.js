@@ -94,9 +94,14 @@ Page({
     submitBadReport: function () {
         let that = this;
 
+        that.setData({
+            save_loading: 2
+        })
+
         let url;
         let badReportFrom_id = that.data.badReportFrom_id;
         let badReport_id = that.data.badReport_id;
+        let objectUser_id = that.data.objectUser_id;
         if (badReportFrom_id == 1) {
             url = `https://collhome.com/apis/badReports/love/${badReport_id}`
         } else if (badReportFrom_id == 2) {
@@ -115,14 +120,28 @@ Page({
                 badReport_content: that.data.content
             },
             success: function (res) {
-                wx.showToast({
-                    title: '成功',
-                    icon: 'success',
-                    duration: 1000
-                });
-                setTimeout(function () {
-                    wx.navigateBack()
-                }, 1000)
+                wx.showModal({
+                    content: '受理成功，谢谢您的举报。',
+                    showCancel: false,
+                    success: function (res) {
+                        if (res.confirm) {
+                            wx.navigateBack()
+                        }
+                    }
+                })
+                // wx.showToast({
+                //     title: '成功',
+                //     icon: 'success',
+                //     duration: 1000
+                // });
+
+                that.setData({
+                    save_loading: 1
+                })
+
+                // setTimeout(function () {
+                //     wx.navigateBack()
+                // }, 1000)
             }
         })
     }

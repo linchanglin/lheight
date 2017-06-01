@@ -84,4 +84,11 @@ Page({
             common.signIn();
         }
     },
+    navigateToUserMore: function () {
+        let that = this;
+        let user_id = that.data.userInfo.id;
+        wx.navigateTo({
+            url: `../profileShowMore/profileShowMore?user_id=${user_id}`,
+        })
+    }
 })
