@@ -1,29 +1,12 @@
 {
     "pages": [
+        "pages/message/message",
+        
         "pages/board/board",
-        
         "pages/profileShow/profileShow",
-        
-        
-        
-        
         "pages/profileShowMore/profileShowMore",
-        
-        
-        
-        
-        
-        
         "pages/chat/chat",
-        
-        
-        
-        
-        
-        
-        
         "pages/user/user",
-        
         "pages/picture/picture",
         "pages/loveInput/loveInput",
         "pages/profileInput/profileInput",
@@ -33,7 +16,6 @@
         "pages/nicknameInput/nicknameInput",
         "pages/genderInput/genderInput",
         "pages/profileShowInput/profileShowInput",
-        "pages/message/message",
         "pages/comment/comment",
         "pages/badReportInput/badReportInput",
         "pages/reply/reply",

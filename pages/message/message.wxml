@@ -1,5 +1,6 @@
-<!--<view class="page">
+<view class="page">
   <view class="page__bd">
+
     <view class="weui-search-bar">
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
@@ -16,12 +17,13 @@
       </view>
       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
     </view>
-    
 
 
 
-    <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell" bindtap="navigateToChat" hover="true" hover-class="weui-cell_active">
+
+    <view class="weui-cells weui-cells_after-title" style="background-color:transparent">
+      <view class="classname">
+        <view class="weui-cell" style="background-color: #ffffff; {{txtStyle}}" hover="true" hover-class="weui-cell_active" data-index="1" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="navigateToChat">
           <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
             <image src="../images/pic_160.png" style="width: 50px; height: 50px; display: block;border-radius: 5px" />
             <view class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</view>
@@ -31,6 +33,19 @@
             <view style="font-size: 13px;color: #888888;">摘要信息</view>
           </view>
         </view>
+
+        <view style="background-color: red; z-index: -1; position: absolute; top: 0; width: 100%; height: 70px;">
+        </view>
+      </view>
+
+      <!--<view class='msg-menu'>
+        <view id='{{item.id}}' class='menu-delete' bindtap='onDeleteMsgTap' bindlongtap='onDeleteMsgLongtap'>
+          删除
+        </view>
+      </view>-->
+      <view class="classname">
+
+
         <view class="weui-cell" bindtap="navigateToChat" hover="true" hover-class="weui-cell_active">
           <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
             <image src="../images/pic_160.png" style="width: 50px; height: 50px; display: block;border-radius: 5px" />
@@ -40,26 +55,47 @@
             <view>联系人名称</view>
             <view style="font-size: 13px;color: #888888;">摘要信息</view>
           </view>
+          <view style="background-color: red; z-index: -1; position: absolute; top: 0; width: 100%; height: 70px;">
         </view>
-        <view class="weui-cell" bindtap="navigateToChat" hover="true" hover-class="weui-cell_active">
-          <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-            <image src="../images/pic_160.png" style="width: 50px; height: 50px; display: block;border-radius: 5px" />
-            <view class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</view>
-          </view>
-          <view class="weui-cell__bd">
-            <view>联系人名称</view>
-            <view style="font-size: 13px;color: #888888;">摘要信息</view>
-          </view>
         </view>
-     
+        
+      </view>
+
+
+      <view class="weui-cell" bindtap="navigateToChat" hover="true" hover-class="weui-cell_active">
+        <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+          <image src="../images/pic_160.png" style="width: 50px; height: 50px; display: block;border-radius: 5px" />
+          <view class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view>联系人名称</view>
+          <view style="font-size: 13px;color: #888888;">摘要信息</view>
+        </view>
+      </view>
+
     </view>
   </view>
-</view>-->
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <!--index.wxml-->
-<view class="container">
+<!--<view class="container">
    <scroll-view style='height:{{height}}px;' scroll-y='{{scrollY}}' class='msg-list' bindscroll = 'onScroll'>
        <view wx:for="{{msgList}}" wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
             <view id='{{item.id}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
@@ -77,4 +113,4 @@
             </view>
        </view>
    </scroll-view>
-</view>
+</view>-->
