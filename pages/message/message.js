@@ -1,6 +1,39 @@
 Page({
     data: {
-        delBtnWidth: 150,
+        messages: [
+            {
+                id: 1,
+                userInfo: {
+                    id: 1,
+                    avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
+                    nickName: 'you see'
+                },
+                unreadMessageNums: 3,
+                lastUnreadMessage: '什么时候',
+            },
+            {
+                id: 2,
+                userInfo: {
+                    id: 1,
+                    avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
+                    nickName: '琳达'
+                },
+                unreadMessageNums: 5,
+                lastUnreadMessage: '可以',
+            },
+            {
+                id: 3,
+                userInfo: {
+                    id: 1,
+                    avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
+                    nickName: 'you see'
+                },
+                unreadMessageNums: 7,
+                lastUnreadMessage: '哈哈',
+            }
+
+        ],
+        delBtnWidth: 75,
 
 
 
@@ -21,7 +54,9 @@ Page({
     },
     //触摸时触发，手指在屏幕上每移动一次，触发一次
     touchM: function (e) {
+        let index = e.currentTarget.dataset.index;
         console.log("touchM:", e);
+        console.log("M index:", index);
         console.log("touchM:" + e);
         var that = this
         if (e.touches.length == 1) {
@@ -41,9 +76,21 @@ Page({
                     txtStyle = "left:-" + delBtnWidth + "px";
                 }
             }
+            txtStyle = txtStyle + ";transition: left 0.3s;"
+            let messages = that.data.messages;
+            for (let message of messages) {
+                if (message.id == index) {
+                    message.txtStyle = txtStyle
+                }
+            }
             that.setData({
-                txtStyle: txtStyle
+                messages: messages
             })
+
+            // that.setData({
+            //     txtStyle: txtStyle,
+            //     the_selected_message_id: index
+            // })
             // //获取手指触摸的是哪一个item
             // var index = e.currentTarget.dataset.index;
             // var list = that.data.addressList;
@@ -56,7 +103,9 @@ Page({
         }
     },
     touchE: function (e) {
-        console.log("touchE" , e);
+        let index = e.currentTarget.dataset.index;
+        
+        console.log("touchE", e);
         console.log("touchE" + e);
         var that = this
         if (e.changedTouches.length == 1) {
@@ -67,8 +116,17 @@ Page({
             var delBtnWidth = that.data.delBtnWidth;
             //如果距离小于删除按钮的1/2，不显示删除按钮
             var txtStyle = disX > delBtnWidth / 2 ? "left:-" + delBtnWidth + "px" : "left:0px";
+            // that.setData({
+                txtStyle = txtStyle + ";transition: left 0.3s;"
+            // })
+            let messages = that.data.messages;
+            for (let message of messages) {
+                if (message.id == index) {
+                    message.txtStyle = txtStyle
+                }
+            }
             that.setData({
-                txtStyle: txtStyle + ";transition: left 0.5s;"
+                messages: messages
             })
             // //获取手指触摸的是哪一项
             // var index = e.currentTarget.dataset.index;
