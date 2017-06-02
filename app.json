@@ -1,11 +1,13 @@
 {
     "pages": [
-        "pages/message/message",
-        
         "pages/user/user",
         
-        
         "pages/board/board",
+        
+        "pages/message/message",
+        
+        
+        
         "pages/profileShow/profileShow",
         "pages/profileShowMore/profileShowMore",
         "pages/chat/chat",

@@ -4,7 +4,7 @@
   <view class="page__bd">
 
     <view class="weui-toptips weui-toptips_notice1" wx:if="{{showTopTips1}}">您有{{unreadLoveNums}}条表白未查看</view>
-    <view class="weui-toptips weui-toptips_notice2" wx:if="{{showTopTips2}}">更新了{{unreadLoveNums}}条表白</view>
+    <view class="weui-toptips weui-toptips_notice2" wx:if="{{showTopTips2 && unreadLoveNums > 0 }}">更新了{{unreadLoveNums}}条表白</view>
 
     
     <view class="weui-search-bar">
