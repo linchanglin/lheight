@@ -2,9 +2,9 @@ import common from '../../utils/common.js';
 
 Page({
     data: {
-        // page: 1,
-        // reach_bottom: false,
-        // page_no_data: false,
+        page: 1,
+        reach_bottom: false,
+        page_no_data: false,
     },
     onLoad: function (options) {
         console.log('options', options)
@@ -33,6 +33,7 @@ Page({
         })
 
         that.load_comment();
+        that.load_replies();
     },
     onReady: function () {
         let that = this;
@@ -46,8 +47,31 @@ Page({
         let that = this;
         let comment_need_refresh = wx.getStorageSync('comment_need_refresh')
         if (comment_need_refresh) {
-            that.load_comment();
+            that.load_replies();
             wx.removeStorageSync('comment_need_refresh')
+        }
+    },
+    onShareAppMessage: function () {
+        let that = this;
+        let share_loveId = that.data.love_id;
+        let share_commentId = that.data.comment_id;
+        let share_userNickname = that.data.comment.userInfo.nickName;
+        return {
+            title: `分享${share_userNickname}的评论`,
+            path: `/pages/reply/reply?love_id=${share_loveId}&comment_id=${share_commentId}`
+        }
+    },
+    scrollToLower: function () {
+        console.log('scrollToLower')
+
+        let that = this;
+        if (!that.data.page_no_data) {
+            that.setData({
+                reach_bottom: true,
+                page_no_data: false,
+                page: that.data.page + 1
+            })
+            that.load_replies('add_page')
         }
     },
     load_comment: function () {
@@ -55,13 +79,10 @@ Page({
         let comment_id = that.data.comment_id;
         let wesecret = wx.getStorageSync('wesecret');
         let comment_url;
-        let replies_url;
         if (wesecret) {
-            comment_url = `https://collhome.com/apis/comments/${comment_id}?wesecret=`;
-            replies_url = `https://collhome.com/apis/comments/${comment_id}/replies?wesecret=${wesecret}`;
+            comment_url = `https://collhome.com/apis/comments/${comment_id}?wesecret=${wesecret}`;
         } else {
             comment_url = `https://collhome.com/apis/comments/${comment_id}?wesecret=`;
-            replies_url = `https://collhome.com/apis/comments/${comment_id}/replies?wesecret=${wesecret}`;
         }
         wx.request({
             url: comment_url,
@@ -73,22 +94,53 @@ Page({
                 })
             }
         })
+    },
+    load_replies: function (parameter) {
+        let that = this;
+        let page = that.data.page;
+        let comment_id = that.data.comment_id;
+        let wesecret = wx.getStorageSync('wesecret');
+        let replies_url;
+        if (wesecret) {
+            replies_url = `https://collhome.com/apis/comments/${comment_id}/replies?page=${page}&wesecret=${wesecret}`;
+        } else {
+            replies_url = `https://collhome.com/apis/comments/${comment_id}/replies?page=${page}&wesecret=`;
+        }
         wx.request({
             url: replies_url,
             success: function (res) {
                 console.log('replies', res.data.data)
                 let replies = res.data.data;
-                let last_reply_id;
-                if (replies.length > 0) {
-                    last_reply_id = replies[replies.length - 1].id;
+                if (parameter && parameter == 'add_page') {
+                    console.log("replies.length", replies.length)
+                    if (replies.length == 0) {
+                        that.setData({
+                            reach_bottom: false,
+                            page_no_data: true
+                        })
+                    } else {
+                        let new_replies = that.data.replies.concat(replies);
+                        let last_reply_id = new_replies[new_replies.length - 1].id;
+                        that.setData({
+                            replies: new_replies,
+                            last_reply_id: last_reply_id
+                        })
+                        that.setData({
+                            reach_bottom: false
+                        })
+                    }
                 } else {
-                    last_reply_id = 0;
+                    let last_reply_id;
+                    if (replies.length > 0) {
+                        last_reply_id = replies[replies.length - 1].id;
+                    } else {
+                        last_reply_id = 0;
+                    }
+                    that.setData({
+                        replies: replies,
+                        last_reply_id: last_reply_id
+                    })
                 }
-                console.log('last_reply_id', last_reply_id)
-                that.setData({
-                    replies: replies,
-                    last_reply_id: last_reply_id
-                })
             }
         })
     },
@@ -133,7 +185,7 @@ Page({
                 common.showReplyActionSheet(e, comment_id).then((reply_id) => {
                     console.log('delete reply_id', reply_id)
                     wx.setStorageSync('love_need_refresh', reply_id);
-                    that.load_comment();
+                    that.load_replies();
                 });
             } else {
                 common.get_my_userInfo(wesecret);

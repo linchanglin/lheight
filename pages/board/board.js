@@ -28,8 +28,6 @@ Page({
             title: '加载中',
         })
 
-        that.load_loves('onLoad');
-
         wx.getSystemInfo({
             success: (res) => {
                 let ww = res.windowWidth - 20;
@@ -40,6 +38,8 @@ Page({
                 })
             }
         })
+
+        that.load_loves('onLoad');
     },
     onShow: function () {
         let that = this;
@@ -181,10 +181,23 @@ Page({
             that.load_loves('add_page')
         }
     },
+    share_touchstart: function (e) {
+        let share_loveId = e.currentTarget.dataset.loveid;
+        let share_userNickname = e.currentTarget.dataset.usernickname;
+        let that = this;
+        that.setData({
+            share_loveId: share_loveId,
+            share_userNickname: share_userNickname
+        })
+    },
     onShareAppMessage: function () {
+        let that = this;
+        let share_loveId = that.data.share_loveId;
+        let share_userNickname = that.data.share_userNickname;
+        console.log('share_loveId', share_loveId);
         return {
-            title: '表白墙',
-            path: '/pages/board/board'
+            title: `分享${share_userNickname}的表白`,
+            path: `/pages/comment/comment?love_id=${share_loveId}`
         }
     },
     load_loves: function (parameter) {

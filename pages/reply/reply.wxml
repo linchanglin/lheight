@@ -1,11 +1,10 @@
 <view class="page">
   <view class="page__bd">
-    <scroll-view scroll-y="true" style="height: {{wh}}px" scroll-with-animation="" scroll-into-view="{{toView}}">
+    <scroll-view scroll-y="true" style="height: {{wh}}px" scroll-with-animation="" scroll-into-view="{{toView}}" bindscrolltolower="scrollToLower" lower-threshold="0">
 
       <!--评论列表-->
       <view class="comments">
-        <view class="item" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}"
-          catchtap="showCommentActionSheet">
+        <view class="item" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}" catchtap="showCommentActionSheet">
           <view class="i-left">
             <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
           </view>
@@ -33,8 +32,8 @@
       <view class="replies">
         <block wx:for="{{replies}}" wx:for-item="reply" wx:key="id">
 
-          <view class="item {{reply.id == item_selected_reply_id ? 'weui-cell_active':''}}" data-replyUserId="{{reply.userInfo.id}}" data-replyUserNickName="{{reply.userInfo.nickName}}" data-replyId="{{reply.id}}" data-replyContent="{{reply.content}}"
-            catchtap="showReplyActionSheet" bindlongtap="longtap_reply" bindtouchmove="touchmove_reply">
+          <view class="item {{reply.id == item_selected_reply_id ? 'weui-cell_active':''}}" data-replyUserId="{{reply.userInfo.id}}" data-replyUserNickName="{{reply.userInfo.nickName}}" data-replyId="{{reply.id}}" data-replyContent="{{reply.content}}" catchtap="showReplyActionSheet"
+            bindlongtap="longtap_reply" bindtouchmove="touchmove_reply">
             <view class="i-left">
               <image class="c-u-img" src="{{reply.userInfo.avatarUrl}}" data-userId="{{reply.userInfo.id}}" catchtap="navigateToProfileShow"></image>
             </view>
@@ -60,6 +59,12 @@
           </view>
 
         </block>
+
+        <!--<view wx:if="{{reach_bottom}}" class="reach_loading">
+          <view class="weui-loading on_loading"></view>
+          <view class="weui-loadmore__tips">正在加载...</view>
+        </view>-->
+
       </view>
     </scroll-view>
 

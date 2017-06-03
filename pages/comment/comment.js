@@ -2,9 +2,9 @@ import common from '../../utils/common.js';
 
 Page({
     data: {
-        // page: 1,
-        // reach_bottom: false,
-        // page_no_data: false,
+        page: 1,
+        reach_bottom: false,
+        page_no_data: false,
     },
     onLoad: function (options) {
         console.log('options', options)
@@ -24,24 +24,18 @@ Page({
         wx.getSystemInfo({
             success: (res) => {
                 let wh = res.windowHeight;
-                that.setData({
-                    wh: wh - 45
-                })
-            }
-        })
-
-        that.load_love();
-
-        wx.getSystemInfo({
-            success: (res) => {
                 let ww = res.windowWidth - 20;
                 let image_width = (ww - 2) / 3;
                 that.setData({
+                    wh: wh - 45,
                     ww: ww,
                     image_width: image_width
                 })
             }
         })
+
+        that.load_love();
+        that.load_comments();
     },
     onReady: function () {
         let that = this;
@@ -56,30 +50,41 @@ Page({
         let love_need_refresh = wx.getStorageSync('love_need_refresh')
         if (love_need_refresh) {
             that.load_love();
+            that.load_comments();
             wx.removeStorageSync('love_need_refresh')
         }
     },
     onShareAppMessage: function () {
         let that = this;
-        let love_id = that.data.love_id;
+        let share_loveId = that.data.love_id;
+        let share_userNickname = that.data.love.userInfo.nickName;
         return {
-            title: '表白',
-            path: `/pages/comment/comment?love_id=${love_id}`
+            title: `分享${share_userNickname}的表白`,
+            path: `/pages/comment/comment?love_id=${share_loveId}`
+        }
+    },
+    scrollToLower: function () {
+        console.log('scrollToLower')
+
+        let that = this;
+        if (!that.data.page_no_data) {
+            that.setData({
+                reach_bottom: true,
+                page_no_data: false,
+                page: that.data.page + 1
+            })
+            that.load_comments('add_page')
         }
     },
     load_love: function () {
         let that = this;
         let love_id = that.data.love_id;
-        let page = that.data.page;
         let wesecret = wx.getStorageSync('wesecret');
         let love_url;
-        let comments_url;
         if (wesecret) {
             love_url = `https://collhome.com/apis/loves/${love_id}?wesecret=${wesecret}`;
-            comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=${wesecret}`
         } else {
             love_url = `https://collhome.com/apis/loves/${love_id}?wesecret=`;
-            comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=`;            
         }
         wx.request({
             url: love_url,
@@ -91,21 +96,53 @@ Page({
                 })
             }
         })
+    },
+    load_comments: function (parameter) {
+        let that = this;
+        let page = that.data.page;
+        let love_id = that.data.love_id;
+        let wesecret = wx.getStorageSync('wesecret');
+        let comments_url;
+        if (wesecret) {
+            comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=${wesecret}`
+        } else {
+            comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=`;
+        }
         wx.request({
             url: comments_url,
             success: function (res) {
                 console.log("comments", res)
                 let comments = res.data.data;
-                let last_comment_id;
-                if (comments.length > 0) {
-                    last_comment_id = comments[comments.length - 1].id;
+                if (parameter && parameter == 'add_page') {
+                    console.log("comments.length", comments.length)
+                    if (comments.length == 0) {
+                        that.setData({
+                            reach_bottom: false,
+                            page_no_data: true
+                        })
+                    } else {
+                        let new_comments = that.data.comments.concat(comments);
+                        let last_comment_id = new_comments[new_comments.length - 1].id;
+                        that.setData({
+                            comments: new_comments,
+                            last_comment_id: last_comment_id
+                        })
+                        that.setData({
+                            reach_bottom: false
+                        })
+                    }
                 } else {
-                    last_comment_id = 0;
+                    let last_comment_id;
+                    if (comments.length > 0) {
+                        last_comment_id = comments[comments.length - 1].id;
+                    } else {
+                        last_comment_id = 0;
+                    }
+                    that.setData({
+                        comments: comments,
+                        last_comment_id: last_comment_id
+                    })
                 }
-                that.setData({
-                    comments: comments,
-                    last_comment_id: last_comment_id
-                })
             }
         })
     },
@@ -161,6 +198,7 @@ Page({
                     wx.setStorageSync('college_loves_need_refresh', love_id);
                     wx.setStorageSync('my_loves_need_refresh', love_id);
                     that.load_love();
+                    that.load_comments();
                 });
             } else {
                 common.get_my_userInfo(wesecret);

@@ -1,6 +1,6 @@
 <view class="page">
   <view class="page__bd">
-    <scroll-view scroll-y="true" style="height: {{wh}}px" scroll-with-animation="" scroll-into-view="{{toView}}">
+    <scroll-view scroll-y="true" style="height: {{wh}}px" scroll-with-animation="" scroll-into-view="{{toView}}" bindscrolltolower="scrollToLower" lower-threshold="0">
       <!--love-->
       <view class="container">
 
@@ -87,10 +87,8 @@
                   <view class="time">{{comment.created_at}}</view>
                 </view>
                 <view class="comment_image_box">
-                  <image wx:if="{{comment.if_my_praise == 0}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}"
-                    catchtap="praiseComment"></image>
-                  <image wx:if="{{comment.if_my_praise == 1}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise_fill.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}"
-                    catchtap="praiseComment"></image>
+                  <image wx:if="{{comment.if_my_praise == 0}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment"></image>
+                  <image wx:if="{{comment.if_my_praise == 1}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise_fill.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment"></image>
                   <text wx:if="{{comment.praise_nums > 0}}" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment">{{comment.praise_nums}}</text>
                   <image class="comment_image2" src="../images/comment.png" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput"></image>
                 </view>
@@ -104,7 +102,8 @@
                     <view>
                       <text class="comment_reply_text {{reply.id == item_selected_reply_id && reply.userInfo.id == item_selected_reply_userInfo_id ? 'comment_reply_hover_class':''}}" data-reply="{{reply}}" data-type="user" data-toUserId="{{reply.userInfo.id}}" catchtap="navigateToProfileShowInReply">{{reply.userInfo.nickName}}</text>
                       <text wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" class="comment_reply_text_color">回复</text>
-                      <text wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" class="comment_reply_text {{reply.id == item_selected_reply_id && reply.objectUserInfo.id == item_selected_reply_objectUserInfo_id ? 'comment_reply_hover_class':''}}" data-reply="{{reply}}" data-type="objectuser" data-toUserId="{{reply.objectUserInfo.id}}" catchtap="navigateToProfileShowInReply">@{{reply.objectUserInfo.nickName}}</text>
+                      <text wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" class="comment_reply_text {{reply.id == item_selected_reply_id && reply.objectUserInfo.id == item_selected_reply_objectUserInfo_id ? 'comment_reply_hover_class':''}}" data-reply="{{reply}}"
+                        data-type="objectuser" data-toUserId="{{reply.objectUserInfo.id}}" catchtap="navigateToProfileShowInReply">@{{reply.objectUserInfo.nickName}}</text>
                       <text class="comment_reply_text_color">: {{reply.content}}</text>
 
                     </view>
@@ -118,6 +117,18 @@
             </view>
           </view>
         </block>
+
+        <!--<view wx:if="{{reach_bottom}}" class="reach_loading">
+          <view class="weui-loading on_loading"></view>
+          <view class="weui-loadmore__tips">正在加载...</view>
+        </view>-->
+
+        <!--<view wx:if="{{page_no_data}}" class="page_no_data">
+          <view class="weui-loadmore weui-loadmore_line">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+          </view>
+        </view>-->
+
       </view>
     </scroll-view>
 

@@ -6,11 +6,10 @@ Page({
     },
     onLoad: function (option) {
         let that = this;
-        if (option.user_id) {
-            that.load_user(option.user_id);
-        } else {
-            that.load_user();
-        }
+        let user_id = option.user_id;
+        that.setData({
+            user_id: user_id
+        })
         wx.getSystemInfo({
             success: (res) => {
                 let wh = res.windowHeight;
@@ -19,15 +18,27 @@ Page({
                 })
             }
         })
+
+        that.load_user();
     },
-    load_user: function (user_id) {
+    onShareAppMessage: function () {
         let that = this;
+        let share_userId = that.data.user_id;
+        let share_userNickname = that.data.userInfo.nickName;
+        return {
+            title: `分享${share_userNickname}`,
+            path: `/pages/profileShow/profileShow?user_id=${share_userId}`
+        }
+    },
+    load_user: function () {
+        let that = this;
+        let user_id = that.data.user_id;
         let wesecret = wx.getStorageSync('wesecret');
         let url;
         if (wesecret) {
             url = `https://collhome.com/apis/users/${user_id}?wesecert=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/users/${user_id}`
+            url = `https://collhome.com/apis/users/${user_id}?wesecert=`
         }
         wx.request({
             url: url,
