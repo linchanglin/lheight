@@ -1,8 +1,14 @@
 {
     "pages": [
-        "pages/user/user",
+        "pages/reply/reply",
         
         "pages/board/board",
+        
+        "pages/user/user",
+        
+        "pages/manage/manage",
+        
+        
         
         "pages/message/message",
         
@@ -22,7 +28,6 @@
         "pages/profileShowInput/profileShowInput",
         "pages/comment/comment",
         "pages/badReportInput/badReportInput",
-        "pages/reply/reply",
         "pages/test/breadtrip/breadtrip",
         "pages/replyInput/replyInput",
         "pages/commentInput/commentInput",

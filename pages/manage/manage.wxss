@@ -1,0 +1,9 @@
+/* pages/manage/manage.wxss */
+
+.page__bd {
+    padding: 20px 0;
+}
+
+.weui-panel {
+    margin-top: 20px;
+}

@@ -30,6 +30,35 @@
           </view>
         </view>-->
         <view class="item {{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}"
+          catchtap="showCommentActionSheet" bindlongtap="longtap_comment" bindtouchmove="touchmove_comment">
+          <view class="i-left">
+            <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
+          </view>
+          <view class="i-right flex_column {{last_comment_id == comment.id ? 'no_border_bottom': ''}}">
+            <view class="top">
+              <view class="flex_column">
+                <view class="u-name" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow">{{comment.userInfo.nickName}}</view>
+                <view class="time">{{comment.created_at}}</view>
+              </view>
+              <view class="comment_image_box">
+                <image wx:if="{{comment.if_my_praise == 0}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment"></image>
+                <image wx:if="{{comment.if_my_praise == 1}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise_fill.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment"></image>
+                <text wx:if="{{comment.praise_nums > 0}}" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment">{{comment.praise_nums}}</text>
+                <image class="comment_image2" src="../images/comment.png" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput"></image>
+              </view>
+            </view>
+
+            <!--评论内容-->
+            <view class="content flex_column">
+              <text class="">{{comment.content}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="replies">
+        <block wx:for="{{replies}}" wx:for-item="reply" wx:key="id">
+
+          <view class="item {{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}"
             catchtap="showCommentActionSheet" bindlongtap="longtap_comment" bindtouchmove="touchmove_comment">
             <view class="i-left">
               <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
@@ -41,10 +70,8 @@
                   <view class="time">{{comment.created_at}}</view>
                 </view>
                 <view class="comment_image_box">
-                  <image wx:if="{{comment.if_my_praise == 0}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}"
-                    catchtap="praiseComment"></image>
-                  <image wx:if="{{comment.if_my_praise == 1}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise_fill.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}"
-                    catchtap="praiseComment"></image>
+                  <image wx:if="{{comment.if_my_praise == 0}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment"></image>
+                  <image wx:if="{{comment.if_my_praise == 1}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise_fill.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment"></image>
                   <text wx:if="{{comment.praise_nums > 0}}" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment">{{comment.praise_nums}}</text>
                   <image class="comment_image2" src="../images/comment.png" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput"></image>
                 </view>
@@ -56,10 +83,7 @@
               </view>
             </view>
           </view>
-      </view>
-      <view class="replies">
-        <block wx:for="{{replies}}" wx:for-item="reply" wx:key="id">
-          <view class="item touch-active"  data-replyUserId="{{reply.userInfo.id}}" data-replyUserNickName="{{reply.userInfo.nickName}}" data-replytId="{{reply.id}}" data-replyContent="{{reply.content}}" catchtap="showReplyActionSheet">
+          <!--<view class="item touch-active"  data-replyUserId="{{reply.userInfo.id}}" data-replyUserNickName="{{reply.userInfo.nickName}}" data-replytId="{{reply.id}}" data-replyContent="{{reply.content}}" catchtap="showReplyActionSheet">
             <view class="i-left">
               <image class="c-u-img" src="{{reply.userInfo.avatarUrl}}" data-userId="{{reply.userInfo.id}}" catchtap="navigateToProfileShow"></image>
             </view>
@@ -78,7 +102,6 @@
                 </view>
               </view>
 
-              <!--评论内容-->
               <view class="content">
                 <view  wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}"   class="comment_content">
                 <text>回复</text>
@@ -87,12 +110,12 @@
                  <view wx:else class="comment_content">{{reply.content}}</view>
               </view>
             </view>
-          </view>
+          </view>-->
         </block>
       </view>
     </scroll-view>
 
-     <view class="weui-tabbar">
+    <view class="weui-tabbar">
 
       <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput">
         <image wx:if="{{comment.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>

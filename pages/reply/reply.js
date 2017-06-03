@@ -7,10 +7,16 @@ Page({
         let that = this;
         let love_id = options.love_id;
         let comment_id = options.comment_id;
+        // that.setData({
+        //     love_id: love_id,
+        //     comment_id: comment_id
+        // })
+
         that.setData({
-            love_id: love_id,
-            comment_id: comment_id
+            love_id: 16,
+            comment_id: 33
         })
+
         let scroll = options.scroll;
         if (scroll) {
             that.setData({

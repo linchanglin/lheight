@@ -108,6 +108,17 @@ Page({
             path: '/pages/user/user'
         }
     },
+    navigateToManage: function() {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            wx.navigateTo({
+                url: '../manage/manage',
+            })
+        } else {
+            common.signIn();
+        }
+    },
     navigateToProfile: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');

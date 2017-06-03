@@ -20,7 +20,8 @@ Page({
 	},
 	confirmInput: function () {
 		let that = this;
-		console.log('confirmInput    that.data.comment_id', that.data.comment_id);
+        console.log('confirmInput    that.data.comment_id', that.data.content);
+        console.log('confirmInput    that.data.comment_id', that.data.objectUser_id);
 
 		let comment_id = that.data.comment_id;
 		wx.request({
