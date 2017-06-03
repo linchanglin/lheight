@@ -1,5 +1,6 @@
 @import "../../utils/common_css/weui-tabbar.wxss";
 @import "../../utils/common_css/comment-item.wxss";
+@import "../../utils/common_css/reply-item.wxss";
 @import "../../utils/common_css/ripple-bounceIn.wxss";
 
 
@@ -7,7 +8,7 @@ page {
   background-color: #edecf2;
 }
 
-.image-comment {
+/*.image-comment {
   width: 20px;
   height: 20px;
   margin-right: 5px;
@@ -71,7 +72,6 @@ page {
 .item .top {
   display: flex;
   justify-content: space-between;
-  /*margin-bottom: 3px;*/
 }
 
 .item .u-name {
@@ -127,4 +127,4 @@ page {
 
 .no_border_bottom {
   border-bottom: 0px solid #edecf2;
-}
+}*/

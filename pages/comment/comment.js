@@ -2,7 +2,9 @@ import common from '../../utils/common.js';
 
 Page({
     data: {
-        page: 1
+        // page: 1,
+        // reach_bottom: false,
+        // page_no_data: false,
     },
     onLoad: function (options) {
         console.log('options', options)

@@ -1,19 +1,10 @@
 {
     "pages": [
-        "pages/reply/reply",
-        
         "pages/board/board",
-        
+        "pages/reply/reply",
         "pages/user/user",
-        
         "pages/manage/manage",
-        
-        
-        
         "pages/message/message",
-        
-        
-        
         "pages/profileShow/profileShow",
         "pages/profileShowMore/profileShowMore",
         "pages/chat/chat",

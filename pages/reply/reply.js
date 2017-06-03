@@ -1,20 +1,19 @@
 import common from '../../utils/common.js';
 
 Page({
-    data: {},
+    data: {
+        // page: 1,
+        // reach_bottom: false,
+        // page_no_data: false,
+    },
     onLoad: function (options) {
         console.log('options', options)
         let that = this;
         let love_id = options.love_id;
         let comment_id = options.comment_id;
-        // that.setData({
-        //     love_id: love_id,
-        //     comment_id: comment_id
-        // })
-
         that.setData({
-            love_id: 16,
-            comment_id: 33
+            love_id: love_id,
+            comment_id: comment_id
         })
 
         let scroll = options.scroll;
@@ -93,16 +92,6 @@ Page({
             }
         })
     },
-    previewImage: function (e) {
-        console.log('preview e', e);
-        var current = e.currentTarget.dataset.current;
-        var urls = e.currentTarget.dataset.urls;
-
-        wx.previewImage({
-            current: current, // 当前显示图片的http链接
-            urls: urls // 需要预览的图片http链接列表
-        })
-    },
     navigateToProfileShow: function (e) {
         console.log('navigateToProfileShow', e);
         let that = this;
@@ -152,6 +141,20 @@ Page({
         } else {
             common.signIn();
         }
+    },
+    longtap_reply: function (e) {
+        console.log('longtap_reply', e);
+        let reply_id = e.currentTarget.dataset.replyid;
+        let that = this;
+        that.setData({
+            item_selected_reply_id: reply_id
+        })
+    },
+    touchmove_reply: function (e) {
+        let that = this;
+        that.setData({
+            item_selected_reply_id: ''
+        })
     },
     navigateToReplyInput: function (e) {
         console.log('navigateToReplyInput e', e);
