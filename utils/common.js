@@ -74,9 +74,8 @@ function showLoveActionSheet(e) {
         let love = `${user_nickname}: ${love_content}`;
         let itemList;
 
-        let my_userInfo = wx.getStorageSync('my_userInfo');
-        console.log('my_userInfoooooooo', my_userInfo);
-        if (my_userInfo.id == user_id) {
+        let belongsToMe = e.currentTarget.dataset.belongstome
+        if (belongsToMe == 1) {
             itemList = [love, '举报', '删除'];
         } else {
             itemList = [love, '举报']

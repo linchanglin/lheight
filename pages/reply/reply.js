@@ -45,10 +45,13 @@ Page({
     },
     onShow: function () {
         let that = this;
-        let comment_need_refresh = wx.getStorageSync('comment_need_refresh')
-        if (comment_need_refresh) {
+        let replies_need_refresh_create_reply = wx.getStorageSync('replies_need_refresh_create_reply')
+        if (replies_need_refresh_create_reply) {
+            that.setData({
+                page: 1
+            })
             that.load_replies();
-            wx.removeStorageSync('comment_need_refresh')
+            wx.removeStorageSync('replies_need_refresh_create_reply')
         }
     },
     onShareAppMessage: function () {
@@ -161,7 +164,7 @@ Page({
             if (my_userInfo) {
                 common.showCommentActionSheet(e).then((comment_id) => {
                     console.log('delete comment_id', comment_id)
-                    wx.setStorageSync('love_need_refresh', comment_id);
+                    wx.setStorageSync('comments_need_refresh_delete_comment', comment_id);
                     wx.setStorageSync('board_loves_need_refresh', love_id);
                     wx.setStorageSync('hot_loves_need_refresh', love_id);
                     wx.setStorageSync('college_loves_need_refresh', love_id);
@@ -177,6 +180,16 @@ Page({
     },
     showReplyActionSheet: function (e) {
         let that = this;
+        let reply_id = e.currentTarget.dataset.replyid;
+        that.setData({
+            item_selected_reply_id: reply_id
+        })
+        setTimeout(function () {
+            that.setData({
+                item_selected_reply_id: ''
+            })
+        }, 200)
+
         let wesecret = wx.getStorageSync('wesecret');
         let my_userInfo = wx.getStorageSync('my_userInfo');
         let comment_id = that.data.comment_id;
@@ -184,8 +197,10 @@ Page({
             if (my_userInfo) {
                 common.showReplyActionSheet(e, comment_id).then((reply_id) => {
                     console.log('delete reply_id', reply_id)
-                    wx.setStorageSync('love_need_refresh', reply_id);
-                    that.load_replies();
+                    wx.setStorageSync('comments_need_refresh', comment_id);
+
+                    that.load_comment();
+                    that.load_refresh_replies_delete_reply(reply_id)
                 });
             } else {
                 common.get_my_userInfo(wesecret);
@@ -193,6 +208,28 @@ Page({
         } else {
             common.signIn();
         }
+    },
+    load_refresh_replies_delete_reply: function (reply_id) {
+        let that = this;
+        let new_replies = [];
+        let old_replies = that.data.replies;
+        for (let old_reply of old_replies) {
+            if (old_reply.id != reply_id) {
+                new_replies.push(old_reply)
+            }
+        }
+
+        let last_reply_id;
+        if (new_replies.length > 0) {
+            last_reply_id = new_replies[new_replies.length - 1].id;
+        } else {
+            last_reply_id = 0;
+        }
+
+        that.setData({
+            replies: new_replies,
+            last_reply_id: last_reply_id
+        })
     },
     longtap_reply: function (e) {
         console.log('longtap_reply', e);
@@ -241,7 +278,7 @@ Page({
                     comment: old_comment,
                     selected_comment_id: comment_id
                 })
-                wx.setStorageSync('love_need_refresh', comment_id);
+                wx.setStorageSync('comments_need_refresh', comment_id);
             });
         } else {
             common.signIn();

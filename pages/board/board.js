@@ -44,16 +44,6 @@ Page({
     onShow: function () {
         let that = this;
 
-        if (!that.data.wesecret) {
-            let wesecret = wx.getStorageSync('wesecret');
-            if (wesecret) {
-                that.setData({
-                    wesecret: wesecret
-                })
-                that.load_loves();
-            }
-        }
-
         let board_loves_need_refresh = wx.getStorageSync('board_loves_need_refresh')
         if (board_loves_need_refresh) {
             that.load_refresh_loves(board_loves_need_refresh);
@@ -66,11 +56,11 @@ Page({
         }
         let board_loves_need_refresh_create_love = wx.getStorageSync('board_loves_need_refresh_create_love')
         if (board_loves_need_refresh_create_love) {
-            that.onPullDownRefresh();
+            that.load_loves('pulldown');
             wx.removeStorageSync('board_loves_need_refresh_create_love')
         }
 
-        if (that.data.loves) {
+        if (that.data.loves && !board_loves_need_refresh_create_love) {
             that.get_unreadLoveNums();
         }
     },
@@ -91,6 +81,7 @@ Page({
                 let old_loves = that.data.loves;
                 for (let old_love of old_loves) {
                     if (old_love.id == need_refresh_love_id) {
+                        // old_love = the_refresh_love
                         old_love.praise_nums = the_refresh_love.praise_nums;
                         old_love.comment_nums = the_refresh_love.comment_nums;
                         old_love.if_my_comment = the_refresh_love.if_my_comment;
@@ -202,7 +193,15 @@ Page({
     },
     load_loves: function (parameter) {
         let that = this;
-        let page = that.data.page;
+        let page;
+        if (parameter == 'add_page') {
+            page = that.data.page;
+        } else {
+            page = 1;
+            that.setData({
+                page: 1
+            })
+        }
         let search = that.data.inputVal;
         let wesecret = wx.getStorageSync('wesecret');
         let url;
@@ -216,7 +215,7 @@ Page({
             success: function (res) {
                 console.log('loves', res.data);
                 let loves = res.data.data;
-                if (parameter && parameter == 'add_page') {
+                if (parameter == 'add_page') {
                     console.log("loves.length", loves.length)
                     if (loves.length == 0) {
                         that.setData({
@@ -237,11 +236,9 @@ Page({
                         loves: loves
                     })
                 }
-                if (parameter) {
-                    if (parameter == 'pulldown' || parameter == 'onLoad') {
-                        wx.stopPullDownRefresh();
-                        wx.hideLoading()
-                    }
+                if (parameter == 'pulldown' || parameter == 'onLoad') {
+                    wx.stopPullDownRefresh();
+                    wx.hideLoading()
                 }
                 if (!that.data.loves || that.data.loves.length == 0) {
                     wx.showModal({
@@ -435,10 +432,7 @@ Page({
     },
     searchInputConfirm: function (e) {
         let that = this;
-        that.setData({
-            page: 1
-        })
-        that.load_loves();
+        that.load_loves('pulldown');
     }
 
 });

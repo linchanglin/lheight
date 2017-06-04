@@ -12,7 +12,7 @@
             <!--<button class="weui-btn mini-btn" type="default" size="mini" hover-class="none">
                 <text class="header-time" style="color: #000">11111{{love.read_nums}} 阅读</text>
               </button>-->
-            <image class="more_image" src="../images/more.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickName}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" catchtap="showLoveActionSheet"></image>
+            <image class="more_image" src="../images/more.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickName}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" data-belongsToMe="{{love.belongsToMe}}" catchtap="showLoveActionSheet"></image>
             <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
             <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
           </view>
@@ -83,20 +83,20 @@
             <view class="i-right flex_column {{last_comment_id == comment.id ? 'no_border_bottom': ''}}">
               <view class="top">
                 <view class="flex_column">
-                  <view class="u-name" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow">{{comment.userInfo.nickName}}</view>
-                  <view class="time">{{comment.created_at}}</view>
+                  <text class="u-name" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow">{{comment.userInfo.nickName}}</text>
+                  <text class="time">{{comment.created_at}}</text>
                 </view>
                 <view class="comment_image_box">
                   <image wx:if="{{comment.if_my_praise == 0}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment"></image>
                   <image wx:if="{{comment.if_my_praise == 1}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise_fill.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment"></image>
-                  <text wx:if="{{comment.praise_nums > 0}}" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment">{{comment.praise_nums}}</text>
-                  <image class="comment_image2" src="../images/comment.png" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput"></image>
+                  <text class="image_box_text" wx:if="{{comment.praise_nums > 0}}" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment">{{comment.praise_nums}}</text>
+                  <image class="comment_image1" src="../images/comment.png" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput"></image>
                 </view>
               </view>
 
               <!--评论内容-->
               <view class="content flex_column">
-                <text class="">{{comment.content}}</text>
+                <text class="content_content">{{comment.content}}</text>
                 <view wx:if="{{comment.reply_nums > 0}}" class="comment_reply {{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentId="{{comment.id}}" catchtap="navigateToReplys">
                   <block wx:for="{{comment.replies}}" wx:for-item="reply" wx:key="id">
                     <view>

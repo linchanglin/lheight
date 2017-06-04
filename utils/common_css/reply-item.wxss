@@ -29,17 +29,20 @@
 }
 
 .replies .item .u-name {
-  color: #6633CC;
+  color: #63c;
 }
 
-.item .time {
+.replies .item .time {
   color: #888;
-  font-size: 13px;
+  font-size: 12.5px;
 }
 
 .replies .item .content {
   margin: 0 0 5px 0;
-  word-break: break-all;
+}
+
+.replies .content_content {
+  padding-right: 9px;
 }
 
 .flex_column {
@@ -52,17 +55,17 @@
   font-size: 12.5px;
 }
 
-.reply_image1 {
-  width: 19px;
-  height: 19px;
+.replies .reply_image1 {
+  width: 18px;
+  height: 18px;
   padding: 0 5px 10px;
 }
 
-.reply_image2 {
+/*.replies .reply_image2 {
   width: 19px;
   height: 19px;
   padding: 0 0 10px 10px;
-}
+}*/
 
 .no_border_bottom {
   border-bottom: 0px solid #edecf2;

@@ -47,12 +47,82 @@ Page({
     },
     onShow: function () {
         let that = this;
-        let love_need_refresh = wx.getStorageSync('love_need_refresh')
-        if (love_need_refresh) {
+
+        let comments_need_refresh = wx.getStorageSync('comments_need_refresh')
+        if (comments_need_refresh) {
+            that.load_refresh_comments(comments_need_refresh);
+            wx.removeStorageSync('comments_need_refresh')
+        }
+        let comments_need_refresh_delete_comment = wx.getStorageSync('comments_need_refresh_delete_comment')
+        if (comments_need_refresh_delete_comment) {
+            that.load_refresh_comments_delete_comment(comments_need_refresh_delete_comment);
+            wx.removeStorageSync('comments_need_refresh_delete_comment')
+        }
+        let comments_need_refresh_create_comment = wx.getStorageSync('comments_need_refresh_create_comment')
+        if (comments_need_refresh_create_comment) {
+            that.setData({
+                page: 1
+            })
             that.load_love();
             that.load_comments();
-            wx.removeStorageSync('love_need_refresh')
+            wx.removeStorageSync('comments_need_refresh_create_comment')
         }
+
+    },
+    load_refresh_comments: function (need_refresh_comment_id) {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        let url;
+        if (wesecret) {
+            url = `https://collhome.com/apis/comments/${need_refresh_comment_id}?wesecret=${wesecret}`
+        } else {
+            url = `https://collhome.com/apis/comments/${need_refresh_comment_id}`
+        }
+        wx.request({
+            url: url,
+            success: function (res) {
+                console.log("load_refresh_comments res", res.data.data)
+                let the_refresh_comment = res.data.data;
+                let old_comments = that.data.comments;
+                for (let old_comment of old_comments) {
+                    if (old_comment.id == need_refresh_comment_id) {
+                        // old_comment = the_refresh_comment
+                        old_comment.praise_nums = the_refresh_comment.praise_nums;
+                        old_comment.comment_nums = the_refresh_comment.comment_nums;
+                        old_comment.if_my_comment = the_refresh_comment.if_my_comment;
+                        old_comment.if_my_praise = the_refresh_comment.if_my_praise;
+                        old_comment.replies = the_refresh_comment.replies;
+                        old_comment.reply_nums = the_refresh_comment.reply_nums;
+                    }
+                }
+                console.log('load_refresh_comments old_comments', old_comments);
+                that.setData({
+                    comments: old_comments
+                })
+            }
+        })
+    },
+    load_refresh_comments_delete_comment: function (comment_id) {
+        let that = this;
+        let old_comments = that.data.comments;
+        let new_comments = [];
+        for (let old_comment of old_comments) {
+            if (old_comment.id != comment_id) {
+                new_comments.push(old_comment)
+            }
+        }
+
+        let last_comment_id;
+        if (new_comments.length > 0) {
+            last_comment_id = new_comments[new_comments.length - 1].id;
+        } else {
+            last_comment_id = 0;
+        }
+
+        that.setData({
+            comments: new_comments,
+            last_comment_id: last_comment_id
+        })
     },
     onShareAppMessage: function () {
         let that = this;
@@ -197,8 +267,10 @@ Page({
                     wx.setStorageSync('hot_loves_need_refresh', love_id);
                     wx.setStorageSync('college_loves_need_refresh', love_id);
                     wx.setStorageSync('my_loves_need_refresh', love_id);
+
                     that.load_love();
-                    that.load_comments();
+                    that.load_refresh_comments_delete_comment(comment_id)
+                    // that.load_comments();
                 });
             } else {
                 common.get_my_userInfo(wesecret);

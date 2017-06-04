@@ -1,7 +1,7 @@
 Page({
     data: {
         save_loading: 0,
-        content: ''
+        content: '',
     },
     onLoad: function (options) {
         console.log('badReportInput  options', options)
@@ -111,12 +111,18 @@ Page({
         } else {
             url = `https://collhome.com/apis/badReports/user/${objectUser_id}`
         }
+        let badReport_type;
+        if (that.data.index) {
+            badReport_type = parseInt(that.data.index) + 1;
+        } else {
+            badReport_type = 0
+        }
         wx.request({
             url: url,
             method: 'POST',
             data: {
                 wesecret: that.data.wesecret,
-                badReport_type: that.data.index,
+                badReport_type: badReport_type,
                 badReport_content: that.data.content
             },
             success: function (res) {

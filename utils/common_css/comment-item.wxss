@@ -5,7 +5,7 @@
 .item {
   display: flex;
   position: relative;
-  padding: 10px 15px 0;
+  padding: 10px 10px 0 15px;
   background-color: #fff;
   font-size: 15px;
 }
@@ -34,12 +34,17 @@
 
 .item .time {
   color: #888;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .item .content {
   margin: 2px 0 7px 0;
   word-break: break-all;
+  padding-right: 14px;
+}
+
+.content_content {
+  padding-right: 10px;
 }
 
 .flex_column {
@@ -52,24 +57,28 @@
   font-size: 13px;
 }
 
+.image_box_text {
+    padding-right: 5px;
+}
+
 .comment_image1 {
   width: 19px;
   height: 19px;
   padding: 0 5px 10px;
 }
 
-.comment_image2 {
+/*.comment_image2 {
   width: 19px;
   height: 19px;
-  padding: 0 0 10px 10px;
-}
+  padding: 0 5px 10px;
+}*/
 
 .comment_reply {
   color: #66c;
   font-size: 14px;
-  padding: 3px 8px;
+  padding: 3px 10px;
   background-color: #f8f8f8;
-  border-radius: 5px;
+  border-radius: 3px;
   margin: 5px 0;
 }
 

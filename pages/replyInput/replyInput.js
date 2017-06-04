@@ -34,8 +34,8 @@ Page({
 			},
 			success: function (res) {
 				console.log('post reply', res.data)
-                wx.setStorageSync('love_need_refresh', 1);
-				wx.setStorageSync('comment_need_refresh', 1);
+                wx.setStorageSync('comments_need_refresh', comment_id);
+				wx.setStorageSync('replies_need_refresh_create_reply', 1);
 				wx.navigateBack()
 			}
 		})
