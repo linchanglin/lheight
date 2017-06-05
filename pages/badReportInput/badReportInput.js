@@ -1,5 +1,3 @@
-import common from '../../utils/common.js';
-
 Page({
     data: {
         save_loading: 0,
@@ -38,7 +36,6 @@ Page({
         that.setData({
             objectUser_id: options.user_id,
             objectUser_nickname: options.user_nickname,
-            objectUser_role: options.user_role,
         })
 
         let wesecret = wx.getStorageSync('wesecret');
@@ -88,11 +85,12 @@ Page({
             })
         }
     },
-    navigateToProfileShow: function (e) {
+    navigateToProfileShow: function () {
         let that = this;
         let objectUser_id = that.data.objectUser_id;
-        let objectUser_role = that.data.objectUser_role;
-        common.navigateToProfileShow(objectUser_role, objectUser_id);
+        wx.navigateTo({
+            url: `../profileShow/profileShow?user_id=${objectUser_id}`,
+        })
     },
     submitBadReport: function () {
         let that = this;

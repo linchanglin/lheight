@@ -14,12 +14,10 @@
 
 .profileShow_cell {
   padding: 10px 0;
-  /*border-bottom: 1px solid #EBEBEB;*/
 }
 
 .profileShow_cell_left {
   float: left;
-  /*width: 30px;*//*height: 30px;*/
 }
 
 .image_picture {
@@ -38,7 +36,6 @@
 }
 
 .profileShow_cell_right {
-  /*position: absolute;*/
   margin-left: 45px;
 }
 
