@@ -102,12 +102,6 @@ Page({
             wx.removeStorageSync('user_need_refresh')
         }
     },
-    onShareAppMessage: function () {
-        return {
-            title: '我',
-            path: '/pages/user/user'
-        }
-    },
     navigateToManage: function() {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -119,17 +113,28 @@ Page({
             common.signIn();
         }
     },
-    navigateToProfile: function () {
+    navigateToPraiseMeUsers: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.navigateTo({
-                url: '../profile/profile',
+                url: '../praiseMeUser/praiseMeUser',
             })
         } else {
             common.signIn();
         }
     },
+    // navigateToProfile: function () {
+    //     let that = this;
+    //     let wesecret = wx.getStorageSync('wesecret');
+    //     if (wesecret) {
+    //         wx.navigateTo({
+    //             url: '../profile/profile',
+    //         })
+    //     } else {
+    //         common.signIn();
+    //     }
+    // },
     navigateToProfileInput: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');

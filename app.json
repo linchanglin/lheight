@@ -1,10 +1,18 @@
 {
     "pages": [
+        "pages/adminProfileShow/adminProfileShow",
+        
+        "pages/user/user",
+        
+        "pages/praiseMeUser/praiseMeUser",
+        
+        "pages/message/message",
+        
+        
+        
         "pages/board/board",
         "pages/reply/reply",
-        "pages/user/user",
         "pages/manage/manage",
-        "pages/message/message",
         "pages/profileShow/profileShow",
         "pages/profileShowMore/profileShowMore",
         "pages/chat/chat",

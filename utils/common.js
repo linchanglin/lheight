@@ -352,6 +352,18 @@ function praiseUser(e) {
     })
 }
 
+function navigateToProfileShow(role, user_id) {
+    if (role == 0) {
+        wx.navigateTo({
+            url: `../adminProfileShow/adminProfileShow?user_id=${user_id}`
+        })
+    } else {
+        wx.navigateTo({
+            url: `../profileShow/profileShow?user_id=${user_id}`
+        })
+    }
+}
+
 module.exports = {
     signIn: signIn,
     get_my_userInfo: get_my_userInfo,
@@ -361,4 +373,5 @@ module.exports = {
     praiseLove: praiseLove,
     praiseComment: praiseComment,
     praiseUser: praiseUser,
+    navigateToProfileShow: navigateToProfileShow
 }
