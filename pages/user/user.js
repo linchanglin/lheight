@@ -1,5 +1,3 @@
-import common from '../../utils/common.js';
-
 Page({
     data: {},
     onLoad: function () {
@@ -110,7 +108,7 @@ Page({
                 url: '../manage/manage',
             })
         } else {
-            common.signIn();
+            that.signIn();
         }
     },
     navigateToPraiseMeUsers: function () {
@@ -121,20 +119,9 @@ Page({
                 url: '../praiseMeUser/praiseMeUser',
             })
         } else {
-            common.signIn();
+            that.signIn();
         }
     },
-    // navigateToProfile: function () {
-    //     let that = this;
-    //     let wesecret = wx.getStorageSync('wesecret');
-    //     if (wesecret) {
-    //         wx.navigateTo({
-    //             url: '../profile/profile',
-    //         })
-    //     } else {
-    //         common.signIn();
-    //     }
-    // },
     navigateToProfileInput: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -143,7 +130,7 @@ Page({
                 url: '../profileInput/profileInput',
             })
         } else {
-            common.signIn();
+            that.signIn();
         }
     },
     navigateToMyLove: function () {
@@ -154,7 +141,7 @@ Page({
                 url: '../myLove/myLove',
             })
         } else {
-            common.signIn();
+            that.signIn();
         }
     },
     navigateToMessage: function () {
@@ -165,7 +152,7 @@ Page({
                 url: '../message/message',
             })
         } else {
-            common.signIn();
+            that.signIn();
         }
     },
     navigateToLoveInput: function () {
@@ -185,7 +172,7 @@ Page({
                 }
             }
         } else {
-            common.signIn();
+            that.signIn();
         }
     },
     showNoAvailableModal: function () {

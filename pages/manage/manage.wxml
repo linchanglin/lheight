@@ -57,7 +57,7 @@
     </view>
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToCollegeInput">
+        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="signOut">
           <view class="weui-cell__bd" style="display: flex; justify-content: center; align-items: center">
             <view style="display: inline-block; vertical-align: middle">退出登录</view>
           </view>
