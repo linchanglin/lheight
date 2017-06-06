@@ -188,7 +188,10 @@ Page({
         console.log('share_loveId', share_loveId);
         return {
             title: `分享${share_userNickname}的表白`,
-            path: `/pages/comment/comment?love_id=${share_loveId}`
+            path: `/pages/comment/comment?love_id=${share_loveId}`,
+            success: function (res) {
+                console.log("onShareAppMessage", res);
+            }
         }
     },
     load_loves: function (parameter) {

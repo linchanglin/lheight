@@ -6,6 +6,9 @@ Page({
         scrollTop: 0
     },
     onLoad: function (options) {
+        // wx.setNavigationBarTitle({
+        //     title: '当前页面'
+        // })
         let that = this;
         let my_userInfo = wx.getStorageSync('my_userInfo');
 

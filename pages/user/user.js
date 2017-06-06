@@ -78,7 +78,7 @@ Page({
     },
     onShow: function () {
         let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
+        let wesecret = that.data.wesecret;
         if (wesecret) {
             wx.request({
                 url: `https://collhome.com/apis/unreadNoticeNums?wesecret=${wesecret}`,
@@ -100,9 +100,9 @@ Page({
             wx.removeStorageSync('user_need_refresh')
         }
     },
-    navigateToManage: function() {
+    navigateToManage: function () {
         let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
+        let wesecret = that.data.wesecret;
         if (wesecret) {
             wx.navigateTo({
                 url: '../manage/manage',
@@ -113,7 +113,7 @@ Page({
     },
     navigateToPraiseMeUsers: function () {
         let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
+        let wesecret = that.data.wesecret;
         if (wesecret) {
             wx.navigateTo({
                 url: '../praiseMeUser/praiseMeUser',
@@ -124,7 +124,7 @@ Page({
     },
     navigateToProfileInput: function () {
         let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
+        let wesecret = that.data.wesecret;
         if (wesecret) {
             wx.navigateTo({
                 url: '../profileInput/profileInput',
@@ -135,7 +135,7 @@ Page({
     },
     navigateToMyLove: function () {
         let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
+        let wesecret = that.data.wesecret;
         if (wesecret) {
             wx.navigateTo({
                 url: '../myLove/myLove',
@@ -144,9 +144,20 @@ Page({
             that.signIn();
         }
     },
+    navigateToNotice: function () {
+        let that = this;
+        let wesecret = that.data.wesecret;
+        if (wesecret) {
+            wx.navigateTo({
+                url: '../notice/notice',
+            })
+        } else {
+            that.signIn();
+        }
+    },
     navigateToMessage: function () {
         let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
+        let wesecret = that.data.wesecret;
         if (wesecret) {
             wx.navigateTo({
                 url: '../message/message',
@@ -157,7 +168,7 @@ Page({
     },
     navigateToLoveInput: function () {
         let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
+        let wesecret = that.data.wesecret;
         if (wesecret) {
             let userInfo = that.data.userInfo;
             if (userInfo.available == 0) {

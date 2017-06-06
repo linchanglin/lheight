@@ -1,35 +1,26 @@
 Page({
     data: {
-        messages: [
+        users: [
+
             {
                 id: 1,
-                userInfo: {
-                    id: 1,
-                    avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
-                    nickName: 'you see'
-                },
-                unreadMessageNums: 3,
-                lastUnreadMessage: '什么时候',
+                avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
+                nickName: 'you see'
+
             },
             {
+
                 id: 2,
-                userInfo: {
-                    id: 1,
-                    avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
-                    nickName: '琳达'
-                },
-                unreadMessageNums: 5,
-                lastUnreadMessage: '可以',
+                avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
+                nickName: '琳达'
+
             },
             {
+
                 id: 3,
-                userInfo: {
-                    id: 1,
-                    avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
-                    nickName: 'you see'
-                },
-                unreadMessageNums: 7,
-                lastUnreadMessage: '哈哈',
+                avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
+                nickName: 'you see'
+
             }
 
         ],
@@ -38,6 +29,22 @@ Page({
 
         inputShowed: false,
         inputVal: ""
+    },
+    onLoad: function () {
+        let that = this;
+        that.load_inBlackListUsers();
+    },
+    load_inBlackListUsers: function () {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        wx.request({
+            url: `https://collhome.com/apis/blacklists?wesecret=${wesecret}`,
+            success: function (res) {
+                that.setData({
+                    users: res.data.data
+                })
+            }
+        })
     },
     //手指刚放到屏幕触发
     touchS: function (e) {
@@ -53,9 +60,9 @@ Page({
     },
     //触摸时触发，手指在屏幕上每移动一次，触发一次
     touchM: function (e) {
-        let message_id = e.currentTarget.dataset.messageid;
+        let user_id = e.currentTarget.dataset.userid;
         console.log("touchM:", e);
-        console.log("M message_id:", message_id);
+        console.log("M user_id:", user_id);
         console.log("touchM:" + e);
         var that = this
         if (e.touches.length == 1) {
@@ -76,19 +83,19 @@ Page({
                 }
             }
             // txtStyle = txtStyle + ";transition: left 0.3s;"
-            let messages = that.data.messages;
-            for (let message of messages) {
-                if (message.id == message_id) {
-                    message.txtStyle = txtStyle
+            let users = that.data.users;
+            for (let user of users) {
+                if (user.id == user_id) {
+                    user.txtStyle = txtStyle
                 }
             }
             that.setData({
-                messages: messages,
+                users: users,
             })
         }
     },
     touchE: function (e) {
-        let message_id = e.currentTarget.dataset.messageid;
+        let user_id = e.currentTarget.dataset.userid;
 
         console.log("touchE", e);
         console.log("touchE" + e);
@@ -102,22 +109,40 @@ Page({
             //如果距离小于删除按钮的1/2，不显示删除按钮
             var txtStyle = disX > delBtnWidth / 2 ? "left:-" + delBtnWidth + "px" : "left:0px";
             txtStyle = txtStyle + ";transition: left 0.3s;"
-            let messages = that.data.messages;
-            for (let message of messages) {
-                if (message.id == message_id) {
-                    message.txtStyle = txtStyle
+            let users = that.data.users;
+            for (let user of users) {
+                if (user.id == user_id) {
+                    user.txtStyle = txtStyle
                 }
             }
             that.setData({
-                messages: messages,
+                users: users,
             })
         }
     },
 
 
-    navigateToChat: function (e) {
+    navigateToProfileShow: function (e) {
+        let user_id = e.currentTarget.dataset.userid;
         wx.navigateTo({
-            url: '../chat/chat',
+            url: `../profileShow/profileShow?user_id=${user_id}`,
+        })
+    },
+    removeUser: function (e) {
+        let that = this;
+        let user_id = e.currentTarget.dataset.userid;
+        let wesecret = wx.getStorageSync('wesecret');
+        wx.request({
+            url: 'https://collhome.com/apis/blacklists',
+            method: 'POST',
+            data: {
+                wesecret: wesecret,
+                objectUser_id: user_id,
+                inBlacklists: 0
+            },
+            success: function (res) {
+                that.load_inBlackListUsers();
+            }
         })
     },
 

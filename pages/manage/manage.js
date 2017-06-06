@@ -1,6 +1,13 @@
 // pages/manage/manage.js
 Page({
-    data: {},
+    data: {
+        canIUseContact: wx.canIUse('button.open-type.contact')
+    },
+    navigateToBlackList: function () {
+        wx.navigateTo({
+            url: '../blackList/blackList',
+        })
+    },
     signOut: function () {
         wx.showActionSheet({
             itemList: ['退出登录'],

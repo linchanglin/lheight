@@ -1,0 +1,57 @@
+.weui-cells {
+  background-color: transparent;
+}
+
+.weui-cell {
+  height: 36px;
+  background-color: #fff;
+}
+
+.weui-cell__hd {
+  position: relative;
+  margin-right: 10px;
+}
+
+.weui-cell__hd_image {
+  width: 50px;
+  height: 50px;
+  display: block;
+  border-radius: 5px;
+}
+
+.weui-badge {
+  position: absolute;
+  top: -.4em;
+  right: -.4em;
+}
+
+.weui-cell__bd_lastUnreadMessage {
+  font-size: 13px;
+  color: #888;
+}
+
+.delete_level {
+  background-color: #fff;
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  /*height: 70px;*/
+  height: 56px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.delete_box {
+  height: 100%;
+  width: 75px;
+  background-color: #f00;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weui-cell_active {
+  background-color: #ececec;
+}

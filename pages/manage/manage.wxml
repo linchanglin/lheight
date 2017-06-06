@@ -1,33 +1,12 @@
 <view class="page">
   <view class="page__bd">
 
-    <audio poster="http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000" name="此时此刻" author="许巍" src="http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46"
-      id="myAudio" controls loop></audio>
-
+    <!--<audio poster="http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000" name="此时此刻" author="许巍" src="http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46"
+      id="myAudio" controls loop></audio>-->
 
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToNicknameInput">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">关于表白墙</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </view>
-      <!--</view>
-    </view>
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">-->
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToNicknameInput">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">合作院校</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </view>
-      </view>
-    </view>
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToNicknameInput">
+        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToBlackList">
           <view class="weui-cell__bd">
             <view style="display: inline-block; vertical-align: middle">黑名单</view>
           </view>
@@ -35,23 +14,15 @@
         </view>
       </view>
     </view>
+
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToGenderInput">
+        <view class="weui-cell weui-cell_access" style="padding: 0;" hover="true" hover-class="weui-cell_active" bindtap="navigateToCollegeInput">
           <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">系统通知</view>
+            <button wx:if="{{canIUseContact}}" hover-class="none" open-type="contact"> 客服</button>
+            <view class="weui-cell__ft weui-cell__ft_in-access" style="position:relative; top:-23px; left:-15px;"></view>
+
           </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </view>
-      </view>
-    </view>
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToCollegeInput">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">客服</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
       </view>
     </view>
