@@ -1,8 +1,17 @@
 {
     "pages": [
-        "pages/user/user",
         "pages/notice/notice",
+        
+        "pages/user/user",
+        
+        
         "pages/board/board",
+        
+        
+        
+        
+        
+        
         "pages/manage/manage",
         "pages/blackList/blackList",
         "pages/message/message",

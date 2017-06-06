@@ -1,1 +1,13 @@
-/* pages/notice/notice.wxss */
+@import "../../utils/common_css/comment-item.wxss";
+
+page {
+  background-color: #edecf2;
+}
+
+.page__bd {
+    padding-bottom: 8px;
+}
+
+.item {
+    margin-top: 8px;
+}

@@ -1,2 +1,41 @@
-<!--pages/notice/notice.wxml-->
-<text>pages/notice/notice.wxml</text>
+<view class="page">
+  <view class="page__bd">
+
+    <!--提醒列表-->
+
+    <block wx:for="{{notices}}" wx:for-item="notice" wx:key="id">
+      <view class="item">
+        <view class="i-left">
+          <image class="c-u-img" src="{{notice.userInfo.avatarUrl}}" data-userId="{{notice.userInfo.id}}" catchtap="navigateToProfileShow"></image>
+        </view>
+        <view class="i-right flex_column no_border_bottom">
+          <view class="top">
+            <view class="flex_column">
+              <text class="u-name" data-userId="{{notice.userInfo.id}}" catchtap="navigateToProfileShow">{{notice.userInfo.nickName}}</text>
+              <text class="time">{{notice.created_at}}</text>
+            </view>
+          </view>
+
+          <!--提醒内容-->
+          <view class="content flex_column">
+            <text class="content_content">{{notice.content}}</text>
+            <view class="comment_reply">
+              <view>
+                <text>来自</text>
+                <text class="comment_reply_text">{{notice.source.userInfo.nickName}}</text>
+                <text wx:if="{{notice.type == 'comment'}}" class="comment_reply_text_color">的表白</text>
+                <text wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" class="comment_reply_text_color">回复</text>
+                <text wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" class="comment_reply_text {{reply.id == item_selected_reply_id && reply.objectUserInfo.id == item_selected_reply_objectUserInfo_id ? 'comment_reply_hover_class':''}}" data-reply="{{reply}}"
+                  data-type="objectuser" data-toUserId="{{reply.objectUserInfo.id}}" catchtap="navigateToProfileShowInReply">@{{reply.objectUserInfo.nickName}}</text>
+                <text class="comment_reply_text_color">: {{notice.source.content}}</text>
+
+              </view>
+
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+  </view>
+</view>

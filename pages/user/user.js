@@ -7,7 +7,8 @@ Page({
             that.setData({
                 wesecret: wesecret
             })
-            that.getUserInfo(wesecret);
+            that.get_userInfo();
+            that.get_unreadNoticeNums();
         } else {
             that.signIn();
         }
@@ -59,16 +60,18 @@ Page({
                 that.setData({
                     wesecret: res.data,
                 })
-                that.getUserInfo(res.data);
+                that.get_userInfo();
+                that.get_unreadNoticeNums();
             }
         })
     },
-    getUserInfo: function (wesecret) {
+    get_userInfo: function () {
         let that = this;
+        let wesecret = that.data.wesecret;
         wx.request({
-            url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
+            url: `https://collhome.com/apis/user?wesecret=${wesecret}`,
             success: function (res) {
-                console.log('userInfoooo', res.data.data)
+                console.log('userInfo', res.data.data)
                 wx.setStorageSync('my_userInfo', res.data.data);
                 that.setData({
                     userInfo: res.data.data
@@ -76,21 +79,22 @@ Page({
             }
         })
     },
-    onShow: function () {
+    get_unreadNoticeNums: function () {
         let that = this;
         let wesecret = that.data.wesecret;
-        if (wesecret) {
-            wx.request({
-                url: `https://collhome.com/apis/unreadNoticeNums?wesecret=${wesecret}`,
-                success: function (res) {
-                    console.log('unreadNoticeNums', res);
-                    let unreadNoticeNums = res.data.unreadNoticeNums;
-                    that.setData({
-                        unreadNoticeNums: unreadNoticeNums
-                    })
-                }
-            })
-        }
+        wx.request({
+            url: `https://collhome.com/apis/unreadNoticeNums?wesecret=${wesecret}`,
+            success: function (res) {
+                console.log('unreadNoticeNums', res);
+                let unreadNoticeNums = res.data.unreadNoticeNums;
+                that.setData({
+                    unreadNoticeNums: unreadNoticeNums
+                })
+            }
+        })
+    },
+    onShow: function () {
+        let that = this;       
         let user_need_refresh = wx.getStorageSync('user_need_refresh')
         if (user_need_refresh) {
             let my_userInfo = wx.getStorageSync('my_userInfo');
