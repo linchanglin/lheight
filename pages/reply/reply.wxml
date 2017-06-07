@@ -47,13 +47,19 @@
                   <image wx:if="{{reply.if_my_praise == 0}}" class="reply_image1 ripple {{reply.id == selected_reply_id ? 'bounceIn':''}}" src="../images/praise.png" data-replyId="{{reply.id}}" data-replyIfMyPraise="{{reply.if_my_praise}}" catchtap="praiseReply"></image>
                   <image wx:if="{{reply.if_my_praise == 1}}" class="reply_image1 ripple {{reply.id == selected_reply_id ? 'bounceIn':''}}" src="../images/praise_fill.png" data-replyId="{{reply.id}}" data-replyIfMyPraise="{{reply.if_my_praise}}" catchtap="praiseReply"></image>
                   <text class="image_box_text" wx:if="{{reply.praise_nums > 0}}" data-replyId="{{reply.id}}" data-replyIfMyPraise="{{reply.if_my_praise}}" catchtap="praiseReply">{{reply.praise_nums}}</text>
-                  <!--<image class="reply_image2" src="../images/reply.png" data-userId="{{reply.userInfo.id}}" data-replyId="{{reply.id}}" catchtap="navigateToReplyInput"></image>-->
                 </view>
               </view>
 
               <!--评论内容-->
               <view class="content flex_column">
-                <text class="content_content">{{reply.content}}</text>
+
+                <view wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" class="content_content">
+                  <text>回复</text>
+                  <text style="color: #66c" data-userId="{{reply.objectUserInfo.id}}" catchtap="navigateToProfileShow">@{{reply.objectUserInfo.nickName}}</text>
+                  <text>: {{reply.content}}</text>
+                </view>
+                <view wx:else class="content_content">{{reply.content}}</view>
+
               </view>
             </view>
           </view>

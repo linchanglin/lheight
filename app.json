@@ -1,11 +1,13 @@
 {
     "pages": [
-        "pages/notice/notice",
+        "pages/board/board",
         
         "pages/user/user",
         
+        "pages/notice/notice",
         
-        "pages/board/board",
+        
+        
         
         
         
