@@ -374,14 +374,8 @@ Page({
     },
     navigateToProfileShow: function (e) {
         console.log('navigateToProfileShow', e);
-
         let that = this;
-        that.setData({
-            hoverClass: ''
-        })
-
         let user_id = e.currentTarget.dataset.userid;
-
         wx.navigateTo({
             url: '../profileShow/profileShow?user_id=' + user_id
         })

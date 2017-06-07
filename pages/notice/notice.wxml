@@ -18,16 +18,22 @@
 
           <!--提醒内容-->
           <view class="content flex_column">
-            <text class="content_content">{{notice.content}}</text>
+            <view class="content_content">
+              <text wx:if="{{notice.type == 'reply' && notice.objectUserInfo.id != notice.source.userInfo.id}}">回复</text>
+              <text wx:if="{{notice.type == 'reply' && notice.objectUserInfo.id != notice.source.userInfo.id}}" class="comment_reply_text nickname_color {{notice.id == selected_notice_id && notice.objectUserInfo.id == selected_notice_objectUserInfo_id ? 'comment_reply_hover_class':''}}"  data-noticeId="{{notice.id}}" data-noticeObjectUserInfoId="{{notice.objectUserInfo.id}}"
+                  catchtap="navigateToProfileShowInObjectUserInfo">@{{notice.objectUserInfo.nickName}}</text>
+              <text wx:if="{{notice.type == 'reply' && notice.objectUserInfo.id != notice.source.userInfo.id}}">: {{notice.content}}</text>
+              <text wx:else>{{notice.content}}</text>
+            </view>
+
             <view class="comment_reply">
               <view>
-                <text>来自</text>
-                <text class="comment_reply_text">{{notice.source.userInfo.nickName}}</text>
+                <text class="comment_reply_text_color">来自</text>
+                <text class="comment_reply_text {{notice.id == item_selected_notice_id && notice.source.userInfo.id == item_selected_notice_source_userInfo_id ? 'comment_reply_hover_class':''}}" data-noticeId="{{notice.id}}" data-noticeSourceUserInfoId="{{notice.source.userInfo.id}}"
+                  catchtap="navigateToProfileShowInSource">{{notice.source.userInfo.nickName}}</text>
                 <text wx:if="{{notice.type == 'comment'}}" class="comment_reply_text_color">的表白</text>
-                <text wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" class="comment_reply_text_color">回复</text>
-                <text wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" class="comment_reply_text {{reply.id == item_selected_reply_id && reply.objectUserInfo.id == item_selected_reply_objectUserInfo_id ? 'comment_reply_hover_class':''}}" data-reply="{{reply}}"
-                  data-type="objectuser" data-toUserId="{{reply.objectUserInfo.id}}" catchtap="navigateToProfileShowInReply">@{{reply.objectUserInfo.nickName}}</text>
-                <text class="comment_reply_text_color">: {{notice.source.content}}</text>
+                <text wx:if="{{notice.type == 'reply'}}" class="comment_reply_text_color">的评论</text>
+                <text class="comment_reply_text_color">{{notice.source.content}}</text>
 
               </view>
 

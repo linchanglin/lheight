@@ -11,3 +11,7 @@ page {
 .item {
     margin-top: 8px;
 }
+
+.nickname_color {
+    color: #66c
+}

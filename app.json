@@ -2,18 +2,11 @@
     "pages": [
         "pages/board/board",
         
-        "pages/user/user",
-        
         "pages/notice/notice",
         
         
-        
-        
-        
-        
-        
-        
-        
+
+        "pages/user/user",
         "pages/manage/manage",
         "pages/blackList/blackList",
         "pages/message/message",
