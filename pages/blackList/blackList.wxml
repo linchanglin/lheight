@@ -19,31 +19,21 @@
     </view>
 
 
-
-
-    <view class="weui-cells weui-cells_after-title" style="width: 100%">
+    <view class="weui-cells weui-cells_after-title">
       <block wx:for="{{users}}" wx:for-item="userInfo" wx:key="id">
-
-
-        
-
-        <view class="weui-cell" style="position: absolute; width: 100%; overflow:hidden;{{userInfo.txtStyle}}" hover="true" hover-class="weui-cell_active" data-userId="{{userInfo.id}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="navigateToProfileShow">
-
+        <view class="weui-cell" hover-class="weui-cell_active" data-userId="{{userInfo.id}}" bindtap="navigateToProfileShow">
+          <view class="weui-cell__hd">
+            <image class="weui-cell__hd_image" src="{{userInfo.avatarUrl}}" />
+          </view>
           <view class="weui-cell__bd">
             <view>{{userInfo.nickName}}</view>
+            <view class="weui-cell__bd_gender">{{userInfo.gender_name}}</view>
           </view>
+           <view class="weui-cell__ft weui-cell__ft_in-access">
+            </view>
         </view>
-
-<view class="delete_level" style="">
-          <!--<view class="delete_level" style="top: {{56* index}}px">-->
-          <view class="delete_box" data-userId="{{userInfo.id}}" bindtap="removeUser">
-            <text>删除</text>
-          </view>
-        </view>
-
       </block>
     </view>
-
 
   </view>
 </view>

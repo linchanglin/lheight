@@ -20,7 +20,6 @@ Page({
     },
     navigateToProfileShow: function (e) {
         let user_id = e.currentTarget.dataset.userid;
-        let that = this;
         wx.navigateTo({
             url: '../profileShow/profileShow?user_id=' + user_id
         })

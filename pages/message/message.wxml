@@ -20,28 +20,23 @@
 
 
 
-
     <view class="weui-cells weui-cells_after-title">
-      <block wx:for="{{messages}}" wx:for-item="message" wx:key="id">
 
-        <view class="weui-cell" style="{{message.txtStyle}}" hover="true" hover-class="weui-cell_active" data-messageId="{{message.id}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="navigateToChat">
-          <view class="weui-cell__hd">
-            <image class="weui-cell__hd_image" src="{{message.userInfo.avatarUrl}}" mode="aspectFill" />
-            <view wx:if="{{message.unreadMessageNums > 0}}" class="weui-badge">{{message.unreadMessageNums}}</view>
+      <block wx:for="{{messages}}" wx:for-item="message" wx:key="id">
+        <view class="weui-cell" hover-class="weui-cell_active" bindtap="navigateToChat">
+          <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+            <image src="{{message.userInfo.avatarUrl}}" mode="aspectFill" style="width: 50px; height: 50px;border-radius: 5px; display: block" />
+            <view wx:if="{{message.unreadMessageNums > 0}}" class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">{{message.unreadMessageNums}}</view>
           </view>
           <view class="weui-cell__bd">
             <view>{{message.userInfo.nickName}}</view>
-            <view class="weui-cell__bd_lastUnreadMessage">{{message.lastUnreadMessage}}</view>
+            <view style="font-size: 13px;color: #888888;">{{message.lastUnreadMessage}}</view>
           </view>
         </view>
-        <view class="delete_level" style="top: {{70* index}}px">
-          <view class="delete_box" data-messageId="{{message.id}}" catchtap="deleteMessage">
-            <text>删除</text>
-          </view>
-        </view>
-
       </block>
+
     </view>
+
 
 
   </view>

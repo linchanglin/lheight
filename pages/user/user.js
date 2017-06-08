@@ -159,24 +159,12 @@ Page({
             that.signIn();
         }
     },
-    // navigateToMessage: function () {
-    //     let that = this;
-    //     let wesecret = that.data.wesecret;
-    //     if (wesecret) {
-    //         wx.navigateTo({
-    //             url: '../message/message',
-    //         })
-    //     } else {
-    //         that.signIn();
-    //     }
-    // },
-    navigateToPrivateLetter: function () {
+    navigateToMessage: function () {
         let that = this;
         let wesecret = that.data.wesecret;
         if (wesecret) {
             wx.navigateTo({
-                url: '../privateLetter/privateLetter',
-                // url: '../message/message',
+                url: '../message/message',
             })
         } else {
             that.signIn();
