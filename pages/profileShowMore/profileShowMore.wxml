@@ -33,7 +33,7 @@
         <view class="weui-cell weui-cell_switch">
           <view class="weui-cell__bd">加入黑名单</view>
           <view class="weui-cell__ft">
-            <switch bindchange="putInBlacklists" />
+            <switch checked="{{inMyBlackList}}"  bindchange="putInBlacklists" />
           </view>
         </view>
       </view>

@@ -1,22 +1,33 @@
 Page({
-    data: {},
+    data: { },
     onLoad: function (option) {
         console.log('options', option);
         let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
         that.setData({
             user_id: option.user_id,
+            wesecret: wesecret
         })
         that.load_user();
     },
     load_user: function () {
         let that = this;
         let user_id = that.data.user_id;
+        let wesecret = that.data.wesecret;
         wx.request({
-            url: `https://collhome.com/apis/users/${user_id}` ,
+            url: `https://collhome.com/apis/users/${user_id}?wesecret=${wesecret}` ,
             success: function (res) {
                 console.log('userInfo', res.data.data)
+                let userInfo = res.data.data;
+                let inMyBlackList;
+                if (userInfo.inMyBlackList == 1) {
+                    inMyBlackList = true;
+                } else {
+                    inMyBlackList = false;
+                }
                 that.setData({
-                    userInfo: res.data.data
+                    userInfo: userInfo,
+                    inMyBlackList: inMyBlackList
                 })
             }
         })

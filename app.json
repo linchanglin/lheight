@@ -1,15 +1,25 @@
 {
     "pages": [
+        "pages/manage/manage",
+        
+        "pages/blackList/blackList",
+        
+        "pages/message/message",
+        
+        "pages/user/user",
+        
+        "pages/privateLetter/privateLetter",
+        
+        
+        
+        
+        
         "pages/board/board",
         
         "pages/notice/notice",
         
         
 
-        "pages/user/user",
-        "pages/manage/manage",
-        "pages/blackList/blackList",
-        "pages/message/message",
         "pages/praiseMeUser/praiseMeUser",
         "pages/reply/reply",
         "pages/profileShow/profileShow",

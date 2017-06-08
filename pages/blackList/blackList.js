@@ -40,9 +40,9 @@ Page({
         wx.request({
             url: `https://collhome.com/apis/blacklists?wesecret=${wesecret}`,
             success: function (res) {
-                that.setData({
-                    users: res.data.data
-                })
+                // that.setData({
+                //     users: res.data.data
+                // })
             }
         })
     },
@@ -129,6 +129,7 @@ Page({
         })
     },
     removeUser: function (e) {
+        console.log('eee', e);
         let that = this;
         let user_id = e.currentTarget.dataset.userid;
         let wesecret = wx.getStorageSync('wesecret');

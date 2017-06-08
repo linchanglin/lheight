@@ -98,8 +98,13 @@ Page({
     navigateToUserMore: function () {
         let that = this;
         let user_id = that.data.userInfo.id;
-        wx.navigateTo({
-            url: `../profileShowMore/profileShowMore?user_id=${user_id}`,
-        })
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            wx.navigateTo({
+                url: `../profileShowMore/profileShowMore?user_id=${user_id}`,
+            })
+        } else {
+            common.signIn();
+        }
     }
 })
