@@ -8,6 +8,10 @@ page {
   background-color: #edecf2;
 }
 
+.page__bd {
+    padding-bottom: 45px;
+}
+
 .reach_loading {
   display: flex;
   justify-content: center;

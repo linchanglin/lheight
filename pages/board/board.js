@@ -1,4 +1,5 @@
 import common from '../../utils/common.js';
+var app = getApp()
 
 Page({
     data: {
@@ -28,15 +29,11 @@ Page({
             title: '加载中',
         })
 
-        wx.getSystemInfo({
-            success: (res) => {
-                let ww = res.windowWidth - 20;
-                let image_width = (ww - 2) / 3;
-                that.setData({
-                    ww: ww,
-                    image_width: image_width
-                })
-            }
+        let ww = app.data.deviceInfo.windowWidth - 20;
+        let image_width = (ww - 2) / 3;
+        that.setData({
+            ww: ww,
+            image_width: image_width
         })
 
         that.load_loves('onLoad');
@@ -368,7 +365,7 @@ Page({
             }
         } else {
             wx.navigateTo({
-                url: `../comment/comment?love_id=${love_id}&scroll=scroll_to_comments`
+                url: `../comment/comment?love_id=${love_id}`
             });
         }
     },

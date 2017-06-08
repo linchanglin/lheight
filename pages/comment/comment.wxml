@@ -1,6 +1,5 @@
 <view class="page">
   <view class="page__bd">
-    <scroll-view scroll-y="true" style="height: {{wh}}px" scroll-with-animation="" scroll-into-view="{{toView}}" bindscrolltolower="scrollToLower" lower-threshold="0">
       <!--love-->
       <view class="container">
 
@@ -130,7 +129,6 @@
         </view>-->
 
       </view>
-    </scroll-view>
 
     <!--tabbar-->
     <view class="weui-tabbar">

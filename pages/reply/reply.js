@@ -16,32 +16,8 @@ Page({
             comment_id: comment_id
         })
 
-        let scroll = options.scroll;
-        if (scroll) {
-            that.setData({
-                scroll: scroll
-            })
-        }
-
-        wx.getSystemInfo({
-            success: (res) => {
-                let wh = res.windowHeight;
-                that.setData({
-                    wh: wh - 45
-                })
-            }
-        })
-
         that.load_comment();
         that.load_replies();
-    },
-    onReady: function () {
-        let that = this;
-        setTimeout(function () {
-            that.setData({
-                toView: that.data.scroll
-            })
-        }, 100)
     },
     onShow: function () {
         let that = this;
@@ -64,8 +40,8 @@ Page({
             path: `/pages/reply/reply?love_id=${share_loveId}&comment_id=${share_commentId}`
         }
     },
-    scrollToLower: function () {
-        console.log('scrollToLower')
+    onReachBottom: function () {
+        console.log('onReachBottom')
 
         let that = this;
         if (!that.data.page_no_data) {

@@ -1,5 +1,7 @@
 {
     "pages": [
+        "pages/board/board",
+        
         "pages/user/user",
         
         "pages/manage/manage",
@@ -17,7 +19,6 @@
         
         
         
-        "pages/board/board",
         
         "pages/notice/notice",
         

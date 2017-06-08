@@ -1,4 +1,5 @@
 import common from '../../utils/common.js';
+var app = getApp()
 
 Page({
     data: {
@@ -10,13 +11,10 @@ Page({
         that.setData({
             user_id: user_id
         })
-        wx.getSystemInfo({
-            success: (res) => {
-                let wh = res.windowHeight;
-                that.setData({
-                    wh: wh - 44
-                })
-            }
+        
+        let wh = app.data.deviceInfo.windowHeight - 44;
+        that.setData({
+            wh: wh
         })
 
         that.load_user();

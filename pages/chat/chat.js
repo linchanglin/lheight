@@ -1,3 +1,5 @@
+var app = getApp()
+
 Page({
     data: {
         userInfo: {},
@@ -16,13 +18,9 @@ Page({
             userInfo: my_userInfo
         })
 
-        wx.getSystemInfo({
-            success: (res) => {
-                let wh = res.windowHeight;
-                that.setData({
-                    wh: wh - 51
-                })
-            }
+        let wh = app.data.deviceInfo.windowHeight - 51;
+        that.setData({
+            wh: wh
         })
 
         var message = wx.getStorageSync('message');

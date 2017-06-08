@@ -1,4 +1,5 @@
 import common from '../../utils/common.js';
+var app = getApp()
 
 Page({
     data: {
@@ -14,36 +15,15 @@ Page({
             love_id: love_id
         })
 
-        let scroll = options.scroll;
-        if (scroll) {
-            that.setData({
-                scroll: scroll
-            })
-        }
-
-        wx.getSystemInfo({
-            success: (res) => {
-                let wh = res.windowHeight;
-                let ww = res.windowWidth - 20;
-                let image_width = (ww - 2) / 3;
-                that.setData({
-                    wh: wh - 45,
-                    ww: ww,
-                    image_width: image_width
-                })
-            }
+        let ww = app.data.deviceInfo.windowWidth - 20;
+        let image_width = (ww - 2) / 3;
+        that.setData({
+            ww: ww,
+            image_width: image_width
         })
 
         that.load_love();
         that.load_comments();
-    },
-    onReady: function () {
-        let that = this;
-        setTimeout(function () {
-            that.setData({
-                toView: that.data.scroll
-            })
-        }, 100)
     },
     onShow: function () {
         let that = this;
@@ -133,8 +113,8 @@ Page({
             path: `/pages/comment/comment?love_id=${share_loveId}`
         }
     },
-    scrollToLower: function () {
-        console.log('scrollToLower')
+    onReachBottom: function () {
+        console.log('onReachBottom')
 
         let that = this;
         if (!that.data.page_no_data) {
