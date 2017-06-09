@@ -4,7 +4,7 @@
     <!--提醒列表-->
 
     <block wx:for="{{notices}}" wx:for-item="notice" wx:key="id">
-      <view class="item">
+      <view class="item {{notice.if_read == 0 ? 'unreadBackgroundColor': ''}}"  hover-class="weui-cell_active" data-type="{{notice.type}}" data-sourceLoveId="{{notice.source.love_id}}" data-sourceCommentId="{{notice.source.comment_id}}" bindtap="navigateToSource">
         <view class="i-left">
           <image class="c-u-img" src="{{notice.userInfo.avatarUrl}}" data-userId="{{notice.userInfo.id}}" catchtap="navigateToProfileShow"></image>
         </view>

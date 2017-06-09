@@ -156,16 +156,6 @@ Page({
     },
     showReplyActionSheet: function (e) {
         let that = this;
-        let reply_id = e.currentTarget.dataset.replyid;
-        that.setData({
-            item_selected_reply_id: reply_id
-        })
-        setTimeout(function () {
-            that.setData({
-                item_selected_reply_id: ''
-            })
-        }, 200)
-
         let wesecret = wx.getStorageSync('wesecret');
         let my_userInfo = wx.getStorageSync('my_userInfo');
         let comment_id = that.data.comment_id;
@@ -205,20 +195,6 @@ Page({
         that.setData({
             replies: new_replies,
             last_reply_id: last_reply_id
-        })
-    },
-    longtap_reply: function (e) {
-        console.log('longtap_reply', e);
-        let reply_id = e.currentTarget.dataset.replyid;
-        let that = this;
-        that.setData({
-            item_selected_reply_id: reply_id
-        })
-    },
-    touchmove_reply: function (e) {
-        let that = this;
-        that.setData({
-            item_selected_reply_id: ''
         })
     },
     navigateToReplyInput: function (e) {

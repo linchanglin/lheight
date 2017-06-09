@@ -225,17 +225,7 @@ Page({
     },
     showCommentActionSheet: function (e) {
         console.log('showCommentActionSheet', e);
-        let comment_id = e.currentTarget.dataset.commentid;
         let that = this;
-        that.setData({
-            item_selected_comment_id: comment_id
-        })
-        setTimeout(function () {
-            that.setData({
-                item_selected_comment_id: ''
-            })
-        }, 200)
-
         let wesecret = wx.getStorageSync('wesecret');
         let my_userInfo = wx.getStorageSync('my_userInfo');
         if (wesecret) {
@@ -258,20 +248,6 @@ Page({
         } else {
             common.signIn();
         }
-    },
-    longtap_comment: function (e) {
-        console.log('longtap_comment', e);
-        let comment_id = e.currentTarget.dataset.commentid;
-        var that = this;
-        that.setData({
-            item_selected_comment_id: comment_id
-        })
-    },
-    touchmove_comment: function (e) {
-        let that = this;
-        that.setData({
-            item_selected_comment_id: ''
-        })
     },
     praiseLove: function (e) {
         let love_if_my_praise = e.currentTarget.dataset.loveifmypraise;

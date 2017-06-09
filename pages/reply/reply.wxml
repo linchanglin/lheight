@@ -31,8 +31,7 @@
       <view class="replies">
         <block wx:for="{{replies}}" wx:for-item="reply" wx:key="id">
 
-          <view class="item {{reply.id == item_selected_reply_id ? 'weui-cell_active':''}}" data-replyUserId="{{reply.userInfo.id}}" data-replyUserNickName="{{reply.userInfo.nickName}}" data-replyId="{{reply.id}}" data-replyContent="{{reply.content}}" catchtap="showReplyActionSheet"
-            bindlongtap="longtap_reply" bindtouchmove="touchmove_reply">
+          <view class="item" hover-class="weui-cell_active" data-replyUserId="{{reply.userInfo.id}}" data-replyUserNickName="{{reply.userInfo.nickName}}" data-replyId="{{reply.id}}" data-replyContent="{{reply.content}}" catchtap="showReplyActionSheet">
             <view class="i-left">
               <image class="c-u-img" src="{{reply.userInfo.avatarUrl}}" data-userId="{{reply.userInfo.id}}" catchtap="navigateToProfileShow"></image>
             </view>

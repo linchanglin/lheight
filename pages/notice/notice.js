@@ -1,55 +1,6 @@
 Page({
     data: {
         page: 1,
-        notices: [
-            {
-                if_read: 0,
-                type: 'comment',
-                id: 1,
-                content: '评论1架提供丰富的微信原生API，可以方便的调起微信提供的能力，如获取用户信息，本地存储，支付功能等',
-                userInfo: {
-                    id: 1,
-                    nickName: 'nickName1',
-                    avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI7hsTibhnpQPxN0eJPoiaNpPq0HSQzG9XpvmicjAjr0x5f1GcNd7LpHoXMgiadUbd4ibn46HibM5FMXBow/0"
-                },
-                created_at: '一分钟前',
-                source: {
-                    love_id: 1,
-                    content: '表白1框架提供丰富的微信原生API，可以方便的调起微信提供的能力，如获取用户信息，本地存储，支付功能等。',
-                    userInfo: {
-                        id: 2,
-                        nickName: 'nickName2',
-                        avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI7hsTibhnpQPxN0eJPoiaNpPq0HSQzG9XpvmicjAjr0x5f1GcNd7LpHoXMgiadUbd4ibn46HibM5FMXBow/0"
-                    }
-                }
-
-            },
-            {
-                if_read: 1,
-                type: 'reply',
-                id: 2,
-                content: '回复1架提供丰富的微信原生API，可以方便的调起微信提供的能力，如获取用户信息，本地存储，支付功能等',
-                userInfo: {
-                    id: 2,
-                    nickName: 'nickName2',
-                    avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI7hsTibhnpQPxN0eJPoiaNpPq0HSQzG9XpvmicjAjr0x5f1GcNd7LpHoXMgiadUbd4ibn46HibM5FMXBow/0"
-                },
-                objectUserInfo: {
-                    id: 1,
-                    nickName: 'nickName1'
-                },
-                created_at: '一天前',
-                source: {
-                    comment_id: 1,
-                    content: '评论1',
-                    userInfo: {
-                        id: 3,
-                        nickName: 'nickName3',
-                        avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI7hsTibhnpQPxN0eJPoiaNpPq0HSQzG9XpvmicjAjr0x5f1GcNd7LpHoXMgiadUbd4ibn46HibM5FMXBow/0"
-                    }
-                }
-            }
-        ]
     },
     onLoad: function () {
         let that = this;
@@ -59,6 +10,18 @@ Page({
         })
         that.load_notices();
     },
+    onReachBottom: function () {
+        console.log('onReachBottom')
+        let that = this;
+        if (!that.data.page_no_data) {
+            that.setData({
+                reach_bottom: true,
+                page_no_data: false,
+                page: that.data.page + 1
+            })
+            that.load_replies('add_page')
+        }
+    },
     load_notices: function () {
         let that = this;
         let wesecret = that.data.wesecret;
@@ -67,8 +30,7 @@ Page({
             url: `https://collhome.com/apis/notices?wesecret=${wesecret}&page=${page}`,
             success: function (res) {
                 console.log("load_notices res", res);
-                // let notices = res.data.data;
-                let notices = that.data.notices;
+                let notices = res.data.data;
                 for (let notice of notices) {
                     if (notice.source.content.length > 20) {
                         notice.source.content = ':  ' + notice.source.content.substring(0, 20) + '...';
@@ -126,5 +88,19 @@ Page({
         wx.navigateTo({
             url: '../profileShow/profileShow?user_id=' + notice_objectUserInfo_Id
         })
+    },
+    navigateToSource: function (e) {
+        let type = e.currentTarget.dataset.type;
+        let source_love_id = e.currentTarget.dataset.sourceloveid;
+        let source_comment_id = e.currentTarget.dataset.sourcecommentid;
+        if (type == "comment") {
+            wx.navigateTo({
+                url: `../comment/comment?love_id=${source_love_id}`
+            });
+        } else {
+            wx.navigateTo({
+                url: `../reply/reply?love_id=${source_love_id}&comment_id=${source_comment_id}`
+            });
+        }
     }
 })

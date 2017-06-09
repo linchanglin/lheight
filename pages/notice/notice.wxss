@@ -15,3 +15,11 @@ page {
 .nickname_color {
     color: #66c
 }
+
+.unreadBackgroundColor {
+    background-color: #fddd7d
+}
+
+.weui-cell_active {
+  background-color: #ececec;
+}
