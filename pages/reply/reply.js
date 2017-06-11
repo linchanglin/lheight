@@ -134,10 +134,19 @@ Page({
     showCommentActionSheet: function (e) {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
-        let my_userInfo = wx.getStorageSync('my_userInfo');
         let love_id = that.data.love_id;
         if (wesecret) {
-            if (my_userInfo) {
+            common.showCommentActionSheet(e).then((comment_id) => {
+                console.log('delete comment_id', comment_id)
+                wx.setStorageSync('comments_need_refresh_delete_comment', comment_id);
+                wx.setStorageSync('board_loves_need_refresh', love_id);
+                wx.setStorageSync('hot_loves_need_refresh', love_id);
+                wx.setStorageSync('college_loves_need_refresh', love_id);
+                wx.setStorageSync('my_loves_need_refresh', love_id);
+                wx.navigateBack();
+            });
+        } else {
+            common.signIn().then(() => {
                 common.showCommentActionSheet(e).then((comment_id) => {
                     console.log('delete comment_id', comment_id)
                     wx.setStorageSync('comments_need_refresh_delete_comment', comment_id);
@@ -147,20 +156,23 @@ Page({
                     wx.setStorageSync('my_loves_need_refresh', love_id);
                     wx.navigateBack();
                 });
-            } else {
-                common.get_my_userInfo(wesecret);
-            }
-        } else {
-            common.signIn();
+            });
         }
     },
     showReplyActionSheet: function (e) {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
-        let my_userInfo = wx.getStorageSync('my_userInfo');
         let comment_id = that.data.comment_id;
         if (wesecret) {
-            if (my_userInfo) {
+            common.showReplyActionSheet(e, comment_id).then((reply_id) => {
+                console.log('delete reply_id', reply_id)
+                wx.setStorageSync('comments_need_refresh', comment_id);
+
+                that.load_comment();
+                that.load_refresh_replies_delete_reply(reply_id)
+            });
+        } else {
+            common.signIn().then(() => {
                 common.showReplyActionSheet(e, comment_id).then((reply_id) => {
                     console.log('delete reply_id', reply_id)
                     wx.setStorageSync('comments_need_refresh', comment_id);
@@ -168,11 +180,7 @@ Page({
                     that.load_comment();
                     that.load_refresh_replies_delete_reply(reply_id)
                 });
-            } else {
-                common.get_my_userInfo(wesecret);
-            }
-        } else {
-            common.signIn();
+            });
         }
     },
     load_refresh_replies_delete_reply: function (reply_id) {
@@ -199,16 +207,20 @@ Page({
     },
     navigateToReplyInput: function (e) {
         console.log('navigateToReplyInput e', e);
+        let comment_id = e.currentTarget.dataset.commentid;
+        let user_id = e.currentTarget.dataset.userid;
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
-            let comment_id = e.currentTarget.dataset.commentid;
-            let user_id = e.currentTarget.dataset.userid;
             wx.navigateTo({
                 url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
             });
         } else {
-            common.signIn();
+            common.signIn().then(() => {
+                wx.navigateTo({
+                    url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+                });
+            });
         }
     },
     praiseComment: function (e) {
@@ -233,7 +245,24 @@ Page({
                 wx.setStorageSync('comments_need_refresh', comment_id);
             });
         } else {
-            common.signIn();
+            common.signIn().then(() => {
+                common.praiseComment(e).then((comment_id) => {
+                    let old_comment = that.data.comment;
+                    old_comment.praise_nums = parseInt(old_comment.praise_nums);
+                    if (comment_if_my_praise == 0) {
+                        old_comment.if_my_praise = 1;
+                        old_comment.praise_nums++;
+                    } else {
+                        old_comment.if_my_praise = 0;
+                        old_comment.praise_nums--;
+                    }
+                    that.setData({
+                        comment: old_comment,
+                        selected_comment_id: comment_id
+                    })
+                    wx.setStorageSync('comments_need_refresh', comment_id);
+                });
+            });
         }
     },
     praiseReply: function (e) {
@@ -280,7 +309,43 @@ Page({
                 }
             })
         } else {
-            common.signIn();
+            common.signIn().then(() => {
+                let praise;
+                if (reply_if_my_praise == 0) {
+                    praise = 1;
+                } else {
+                    praise = 0;
+                }
+                wx.request({
+                    url: `https://collhome.com/apis/replies/${reply_id}/praises`,
+                    method: 'POST',
+                    data: {
+                        wesecret: wesecret,
+                        praise: praise
+                    },
+                    success: function (res) {
+                        console.log('praiseReply res', res);
+                        let old_replies = that.data.replies;
+                        for (let old_reply of old_replies) {
+                            if (old_reply.id == reply_id) {
+                                old_reply.praise_nums = parseInt(old_reply.praise_nums);
+
+                                if (reply_if_my_praise == 0) {
+                                    old_reply.if_my_praise = 1;
+                                    old_reply.praise_nums++
+                                } else {
+                                    old_reply.if_my_praise = 0
+                                    old_reply.praise_nums--
+                                }
+                            }
+                        }
+                        that.setData({
+                            replies: old_replies,
+                            selected_reply_id: reply_id
+                        })
+                    }
+                })
+            });
         }
     }
 })

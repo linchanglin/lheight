@@ -92,7 +92,9 @@ Page({
             method: 'POST',
             success: function (res) {
                 console.log('res', res);
-                that.navigateBackWithSuccess();
+                common.get_my_userInfo(that.data.wesecret).then((user_id) => {
+                    that.navigateBackWithSuccess();
+                });
             }
         })
     },
@@ -101,9 +103,6 @@ Page({
         that.setData({
             save_loading: false
         })
-
-        common.get_my_userInfo(that.data.wesecret);
-
         wx.showToast({
             title: '成功',
             icon: 'success',

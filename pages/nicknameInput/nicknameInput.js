@@ -17,12 +17,15 @@ Page({
             method: 'POST',
             data: {
                 wesecret: wesecret,
-                nickName: value
+                userInfo: {
+                    nickName: value
+                }
             },
             success: function (res) {
                 wx.setStorageSync('profile_need_refresh', 1);
-                common.get_my_userInfo(wesecret);
-                wx.navigateBack()
+                common.get_my_userInfo(wesecret).then((user_id) => {
+                    wx.navigateBack()
+                });
             }
         })
     }

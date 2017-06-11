@@ -20,7 +20,7 @@ Page({
 
         let wesecret = wx.getStorageSync('wesecret');
         let my_userInfo = wx.getStorageSync('my_userInfo');
-        console.log('my_userInfo', my_userInfo);
+        console.log('my_userInfo onLoad', my_userInfo);
         let signature_show = my_userInfo.signature;
         let signature;
         if (signature_show.length > 10) {
@@ -28,11 +28,18 @@ Page({
         } else {
             signature = signature_show
         }
+        let pictureOnWall;
+        if (my_userInfo.pictureOnWall == 1) {
+            pictureOnWall = true
+        } else {
+            pictureOnWall = false
+        }
         that.setData({
             wesecret: wesecret,
             userInfo: my_userInfo,
             signature: signature,
-            files: my_userInfo.pictures
+            files: my_userInfo.pictures,
+            pictureOnWall: pictureOnWall
         })
 
     },
@@ -41,8 +48,25 @@ Page({
         let profile_need_refresh = wx.getStorageSync('profile_need_refresh')
         if (profile_need_refresh) {
             let my_userInfo = wx.getStorageSync('my_userInfo');
+            console.log('my_userInfo1111', my_userInfo);
+            let signature_show = my_userInfo.signature;
+            let signature;
+            if (signature_show.length > 10) {
+                signature = signature_show.substring(0, 10) + '...'
+            } else {
+                signature = signature_show
+            }
+            let pictureOnWall;
+            if (my_userInfo.pictureOnWall == 1) {
+                pictureOnWall = true
+            } else {
+                pictureOnWall = false
+            }
             that.setData({
                 userInfo: my_userInfo,
+                signature: signature,
+                files: my_userInfo.pictures,
+                pictureOnWall: pictureOnWall
             })
             wx.removeStorageSync('profile_need_refresh')
         }
@@ -89,13 +113,15 @@ Page({
     },
     postSavePictures: function () {
         let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
+        let wesecret = that.data.wesecret;
         wx.request({
             url: 'https://collhome.com/apis/users',
             method: 'POST',
             data: {
                 wesecret: wesecret,
-                pictures: that.data.files
+                userInfo: {
+                    pictures: that.data.files
+                }
             },
             success: function (res) {
                 common.get_my_userInfo(wesecret);
@@ -137,16 +163,19 @@ Page({
     },
     deleteUserPicture: function (picture) {
         let that = this;
+        let wesecret = that.data.wesecret;
         wx.request({
             url: 'https://collhome.com/apis/delete/user/picture',
             method: 'POST',
             data: {
-                wesecret: that.data.wesecret,
-                remain_pictures: that.data.files,
-                the_delete_picture: picture
+                wesecret: wesecret,
+                userInfo: {
+                    remain_pictures: that.data.files,
+                    the_delete_picture: picture
+                }
             },
             success: function (res) {
-                common.get_my_userInfo(that.data.wesecret);
+                common.get_my_userInfo(wesecret);
             }
         })
     },
@@ -168,13 +197,15 @@ Page({
     },
     postSavePictureOnWall: function () {
         let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
+        let wesecret = that.data.wesecret;
         wx.request({
             url: 'https://collhome.com/apis/users',
             method: 'POST',
             data: {
                 wesecret: wesecret,
-                pictureOnWall: that.data.pictureOnWall
+                userInfo: {
+                    pictureOnWall: that.data.pictureOnWall
+                }
             },
             success: function (res) {
                 common.get_my_userInfo(wesecret);

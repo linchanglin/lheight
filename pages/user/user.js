@@ -1,100 +1,30 @@
+import common from '../../utils/common.js';
+
 Page({
     data: {},
     onLoad: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
+        let my_userInfo = wx.getStorageSync('my_userInfo');
+        if (wesecret && my_userInfo) {
             that.setData({
-                wesecret: wesecret
+                wesecret: wesecret,
+                userInfo: my_userInfo
             })
-            that.get_userInfo();
-            that.get_unreadNoticeNums();
         } else {
-            that.signIn();
+            common.signIn().then(() => {
+                let wesecret = wx.getStorageSync('wesecret');
+                let my_userInfo = wx.getStorageSync('my_userInfo');
+                that.setData({
+                    wesecret: wesecret,
+                    userInfo: my_userInfo
+                })
+                that.get_unreadNoticeNums();
+            })
         }
     },
-    signIn: function () {
-        let that = this;
-        wx.showModal({
-            title: '提示',
-            content: '您还未登录呢，立即使用微信登录!',
-            confirmText: '确定',
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-
-                    wx.login({
-                        success: (res) => {
-                            const code = res.code
-                            if (code) {
-                                wx.getUserInfo({
-                                    success: (res) => {
-                                        console.log('res', res);
-                                        console.log('code', code, 'encryptedData', res.encryptedData, 'iv', res.iv)
-                                        that.postRegister(code, res.encryptedData, res.iv);
-                                    }
-                                })
-                            } else {
-                                console.log('获取用户登录态失败！' + res.errMsg)
-                            }
-                        }
-                    });
-                }
-            }
-        })
-    },
-    postRegister: function (code, encryptedData, iv) {
-        let that = this;
-
-        wx.request({
-            url: 'https://collhome.com/apis/register',
-            method: 'POST',
-            data: {
-                code: code,
-                encryptedData: encryptedData,
-                iv: iv
-            },
-            success: function (res) {
-                console.log('res', res);
-                wx.setStorageSync('wesecret', res.data);
-                that.setData({
-                    wesecret: res.data,
-                })
-                that.get_userInfo();
-                that.get_unreadNoticeNums();
-            }
-        })
-    },
-    get_userInfo: function () {
-        let that = this;
-        let wesecret = that.data.wesecret;
-        wx.request({
-            url: `https://collhome.com/apis/user?wesecret=${wesecret}`,
-            success: function (res) {
-                console.log('userInfo', res.data.data)
-                wx.setStorageSync('my_userInfo', res.data.data);
-                that.setData({
-                    userInfo: res.data.data
-                })
-            }
-        })
-    },
-    get_unreadNoticeNums: function () {
-        let that = this;
-        let wesecret = that.data.wesecret;
-        wx.request({
-            url: `https://collhome.com/apis/unreadNoticeNums?wesecret=${wesecret}`,
-            success: function (res) {
-                console.log('unreadNoticeNums', res);
-                let unreadNoticeNums = res.data.unreadNoticeNums;
-                that.setData({
-                    unreadNoticeNums: unreadNoticeNums
-                })
-            }
-        })
-    },
     onShow: function () {
-        let that = this;       
+        let that = this;
         let user_need_refresh = wx.getStorageSync('user_need_refresh')
         if (user_need_refresh) {
             let my_userInfo = wx.getStorageSync('my_userInfo');
@@ -103,76 +33,153 @@ Page({
             })
             wx.removeStorageSync('user_need_refresh')
         }
+        that.get_unreadNoticeNums();
+    },
+    get_unreadNoticeNums: function () {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            wx.request({
+                url: `https://collhome.com/apis/unreadNoticeNums?wesecret=${wesecret}`,
+                success: function (res) {
+                    console.log('unreadNoticeNums', res);
+                    let unreadNoticeNums = res.data.unreadNoticeNums;
+                    that.setData({
+                        unreadNoticeNums: unreadNoticeNums
+                    })
+                }
+            })
+        }
     },
     navigateToManage: function () {
         let that = this;
-        let wesecret = that.data.wesecret;
+        let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.navigateTo({
                 url: '../manage/manage',
             })
         } else {
-            that.signIn();
+            common.signIn().then(() => {
+                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                that.setData({
+                    userInfo: my_userInfo
+                })
+                that.get_unreadNoticeNums();
+
+                wx.navigateTo({
+                    url: '../manage/manage',
+                })
+            });
         }
     },
     navigateToPraiseMeUsers: function () {
         let that = this;
-        let wesecret = that.data.wesecret;
+        let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.navigateTo({
                 url: '../praiseMeUser/praiseMeUser',
             })
         } else {
-            that.signIn();
+            common.signIn().then(() => {
+                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                that.setData({
+                    userInfo: my_userInfo
+                })
+                that.get_unreadNoticeNums();
+
+                wx.navigateTo({
+                    url: '../praiseMeUser/praiseMeUser',
+                })
+            });
         }
     },
     navigateToProfileInput: function () {
         let that = this;
-        let wesecret = that.data.wesecret;
+        let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.navigateTo({
                 url: '../profileInput/profileInput',
             })
         } else {
-            that.signIn();
+            common.signIn().then(() => {
+                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                that.setData({
+                    userInfo: my_userInfo
+                })
+                that.get_unreadNoticeNums();
+
+                wx.navigateTo({
+                    url: '../profileInput/profileInput',
+                })
+            });
         }
     },
     navigateToMyLove: function () {
         let that = this;
-        let wesecret = that.data.wesecret;
+        let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.navigateTo({
                 url: '../myLove/myLove',
             })
         } else {
-            that.signIn();
+            common.signIn().then(() => {
+                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                that.setData({
+                    userInfo: my_userInfo
+                })
+                that.get_unreadNoticeNums();
+
+                wx.navigateTo({
+                    url: '../myLove/myLove',
+                })
+            });
         }
     },
     navigateToNotice: function () {
         let that = this;
-        let wesecret = that.data.wesecret;
+        let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.navigateTo({
                 url: '../notice/notice',
             })
         } else {
-            that.signIn();
+            common.signIn().then(() => {
+                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                that.setData({
+                    userInfo: my_userInfo
+                })
+                that.get_unreadNoticeNums();
+
+                wx.navigateTo({
+                    url: '../notice/notice',
+                })
+            });
         }
     },
     navigateToMessage: function () {
         let that = this;
-        let wesecret = that.data.wesecret;
+        let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.navigateTo({
                 url: '../message/message',
             })
         } else {
-            that.signIn();
+            common.signIn().then(() => {
+                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                that.setData({
+                    userInfo: my_userInfo
+                })
+                that.get_unreadNoticeNums();
+
+                wx.navigateTo({
+                    url: '../message/message',
+                })
+            });
         }
     },
     navigateToLoveInput: function () {
         let that = this;
-        let wesecret = that.data.wesecret;
+        let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             let userInfo = that.data.userInfo;
             if (userInfo.available == 0) {
@@ -187,7 +194,26 @@ Page({
                 }
             }
         } else {
-            that.signIn();
+            common.signIn().then(() => {
+                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                that.setData({
+                    userInfo: my_userInfo
+                })
+                that.get_unreadNoticeNums();
+
+                let userInfo = that.data.userInfo;
+                if (userInfo.available == 0) {
+                    that.showNoAvailableModal();
+                } else {
+                    if (that.data.userInfo.college == '') {
+                        that.showNoCollegeModal();
+                    } else {
+                        wx.navigateTo({
+                            url: '../loveInput/loveInput',
+                        })
+                    }
+                }
+            });
         }
     },
     showNoAvailableModal: function () {

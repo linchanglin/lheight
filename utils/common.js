@@ -1,65 +1,72 @@
 function signIn() {
-    wx.showModal({
-        title: '提示',
-        content: '您还未登录呢，立即使用微信登录!',
-        confirmText: '确定',
-        success: function (res) {
-            if (res.confirm) {
-                console.log('用户点击确定')
+    return new Promise((resolve, reject) => {
+        wx.showModal({
+            title: '提示',
+            content: '您还未登录呢，立即使用微信登录!',
+            confirmText: '确定',
+            success: function (res) {
+                if (res.confirm) {
+                    console.log('用户点击确定')
 
-                wx.login({
-                    success: (res) => {
-                        const code = res.code
-                        if (code) {
-                            wx.getUserInfo({
-                                success: (res) => {
-                                    console.log('res', res);
-                                    console.log('code', code, 'encryptedData', res.encryptedData, 'iv', res.iv)
-                                    wx.request({
-                                        url: 'https://collhome.com/apis/register',
-                                        method: 'POST',
-                                        data: {
-                                            code: code,
-                                            encryptedData: res.encryptedData,
-                                            iv: res.iv
-                                        },
-                                        success: function (res) {
-                                            console.log('wesecret res', res);
-                                            let wesecret = res.data;
-                                            wx.setStorageSync('wesecret', wesecret);
-                                            wx.request({
-                                                url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
-                                                success: function (res) {
-                                                    console.log('my_userInfo res', res)
-                                                    let my_userInfo = res.data.data;
-                                                    wx.setStorageSync('my_userInfo', my_userInfo);
-                                                    wx.setStorageSync('user_need_refresh', my_userInfo.id)
-                                                }
-                                            })
-                                        }
-                                    })
+                    wx.login({
+                        success: (res) => {
+                            const code = res.code
+                            if (code) {
+                                wx.getUserInfo({
+                                    success: (res) => {
+                                        console.log('res', res);
+                                        console.log('code', code, 'encryptedData', res.encryptedData, 'iv', res.iv)
+                                        wx.request({
+                                            url: 'https://collhome.com/apis/register',
+                                            method: 'POST',
+                                            data: {
+                                                code: code,
+                                                encryptedData: res.encryptedData,
+                                                iv: res.iv
+                                            },
+                                            success: function (res) {
+                                                console.log('wesecret res', res);
+                                                let wesecret = res.data;
+                                                wx.setStorageSync('wesecret', wesecret);
+                                                wx.request({
+                                                    url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
+                                                    success: function (res) {
+                                                        console.log('my_userInfo res', res)
+                                                        let my_userInfo = res.data.data;
+                                                        wx.setStorageSync('my_userInfo', my_userInfo);
+                                                        wx.setStorageSync('user_need_refresh', my_userInfo.id)
+                                                        resolve()
+                                                    }
+                                                })
+                                            }
+                                        })
 
-                                }
-                            })
-                        } else {
-                            console.log('获取用户登录态失败！' + res.errMsg)
+                                    }
+                                })
+                            } else {
+                                console.log('获取用户登录态失败！' + res.errMsg)
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
-        }
+        })
     })
 }
 
 function get_my_userInfo(wesecret) {
-    wx.request({
-        url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
-        success: function (res) {
-            console.log('my_userInfo res', res)
-            let my_userInfo = res.data.data;
-            wx.setStorageSync('my_userInfo', my_userInfo);
-            wx.setStorageSync('user_need_refresh', my_userInfo.id)
-        }
+    return new Promise((resolve, reject) => {
+        wx.request({
+            url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
+            success: function (res) {
+                console.log('my_userInfo res', res)
+                let my_userInfo = res.data.data;
+                wx.setStorageSync('my_userInfo', my_userInfo);
+                wx.setStorageSync('user_need_refresh', my_userInfo.id)
+
+                resolve(my_userInfo.id);
+            }
+        })
     })
 }
 

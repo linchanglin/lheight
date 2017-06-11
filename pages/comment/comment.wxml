@@ -77,7 +77,7 @@
           <view class="item" hover-class="weui-cell_active" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickName}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}"
             catchtap="showCommentActionSheet">
             <view class="i-left">
-              <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
+              <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" mode="aspectFill" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
             </view>
             <view class="i-right flex_column {{last_comment_id == comment.id ? 'no_border_bottom': ''}}">
               <view class="top">

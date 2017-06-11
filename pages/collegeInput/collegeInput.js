@@ -42,12 +42,15 @@ Page({
             method: 'POST',
             data: {
                 wesecret: wesecret,
-                college: parseInt(value) + 1
+                userInfo: {
+                    college: parseInt(value) + 1
+                }
             },
             success: function (res) {
                 wx.setStorageSync('profile_need_refresh', 1);
-                common.get_my_userInfo(wesecret);
-                wx.navigateBack()
+                common.get_my_userInfo(wesecret).then((user_id) => {
+                    wx.navigateBack()
+                });
             }
         })
 

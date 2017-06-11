@@ -209,27 +209,40 @@ Page({
     showLoveActionSheet: function (e) {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
-        let my_userInfo = wx.getStorageSync('my_userInfo');
         if (wesecret) {
-            if (my_userInfo) {
+            common.showLoveActionSheet(e).then((love_id) => {
+                console.log('delete love_id', love_id)
+                wx.navigateBack()
+            });
+        } else {
+            common.signIn().then(() => {
                 common.showLoveActionSheet(e).then((love_id) => {
                     console.log('delete love_id', love_id)
                     wx.navigateBack()
                 });
-            } else {
-                common.get_my_userInfo(wesecret);
-            }
-        } else {
-            common.signIn();
+            });
         }
     },
     showCommentActionSheet: function (e) {
         console.log('showCommentActionSheet', e);
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
-        let my_userInfo = wx.getStorageSync('my_userInfo');
         if (wesecret) {
-            if (my_userInfo) {
+            common.showCommentActionSheet(e).then((comment_id) => {
+                console.log('delete comment_id', comment_id)
+                let love_id = that.data.love_id;
+                wx.setStorageSync('board_loves_need_refresh', love_id);
+                wx.setStorageSync('hot_loves_need_refresh', love_id);
+                wx.setStorageSync('college_loves_need_refresh', love_id);
+                wx.setStorageSync('my_loves_need_refresh', love_id);
+
+                that.load_love();
+                that.load_refresh_comments_delete_comment(comment_id)
+                // that.load_comments();
+            });
+
+        } else {
+            common.signIn().then(() => {
                 common.showCommentActionSheet(e).then((comment_id) => {
                     console.log('delete comment_id', comment_id)
                     let love_id = that.data.love_id;
@@ -242,11 +255,7 @@ Page({
                     that.load_refresh_comments_delete_comment(comment_id)
                     // that.load_comments();
                 });
-            } else {
-                common.get_my_userInfo(wesecret);
-            }
-        } else {
-            common.signIn();
+            });
         }
     },
     praiseLove: function (e) {
@@ -272,7 +281,25 @@ Page({
                 wx.setStorageSync('my_loves_need_refresh', love_id);
             });
         } else {
-            common.signIn();
+            common.signIn().then(() => {
+                common.praiseLove(e).then((love_id) => {
+                    let old_love = that.data.love;
+                    old_love.praise_nums = parseInt(old_love.praise_nums);
+                    if (love_if_my_praise == 0) {
+                        old_love.if_my_praise = 1;
+                        old_love.praise_nums++
+                    } else {
+                        old_love.if_my_praise = 0
+                        old_love.praise_nums--
+                    }
+                    that.setData({
+                        love: old_love,
+                        selected_love_id: love_id
+                    })
+                    wx.setStorageSync('board_loves_need_refresh', love_id);
+                    wx.setStorageSync('my_loves_need_refresh', love_id);
+                });
+            });
         }
     },
     praiseComment: function (e) {
@@ -301,7 +328,28 @@ Page({
                 })
             });
         } else {
-            common.signIn();
+            common.signIn().then(() => {
+                common.praiseComment(e).then((comment_id) => {
+                    let old_comments = that.data.comments;
+                    for (let old_comment of old_comments) {
+                        if (old_comment.id == comment_id) {
+                            old_comment.praise_nums = parseInt(old_comment.praise_nums);
+
+                            if (comment_if_my_praise == 0) {
+                                old_comment.if_my_praise = 1;
+                                old_comment.praise_nums++;
+                            } else {
+                                old_comment.if_my_praise = 0;
+                                old_comment.praise_nums--;
+                            }
+                        }
+                    }
+                    that.setData({
+                        comments: old_comments,
+                        selected_comment_id: comment_id
+                    })
+                });
+            });
         }
     },
     navigateToProfileShow: function (e) {
@@ -386,22 +434,29 @@ Page({
                 url: '../commentInput/commentInput?love_id=' + that.data.love_id
             })
         } else {
-            common.signIn();
+            common.signIn().then(() => {
+                wx.navigateTo({
+                    url: '../commentInput/commentInput?love_id=' + that.data.love_id
+                })
+            });
         }
     },
     navigateToReplyInput: function (e) {
         console.log('navigateToReplyInput e', e);
+        let comment_id = e.currentTarget.dataset.commentid;
+        let user_id = e.currentTarget.dataset.userid;
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
-            let comment_id = e.currentTarget.dataset.commentid;
-            let user_id = e.currentTarget.dataset.userid;
             wx.navigateTo({
                 url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
             });
-        }
-        else {
-            common.signIn();
+        } else {
+            common.signIn().then(() => {
+                wx.navigateTo({
+                    url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+                });
+            });
         }
     },
 })

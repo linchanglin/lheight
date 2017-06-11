@@ -11,7 +11,7 @@ Page({
         that.setData({
             user_id: user_id
         })
-        
+
         let wh = app.data.deviceInfo.windowHeight - 44;
         that.setData({
             wh: wh
@@ -90,7 +90,23 @@ Page({
                 })
             });
         } else {
-            common.signIn();
+            common.signIn().then(() => {
+                common.praiseUser(e).then((user_id) => {
+                    let old_userInfo = that.data.userInfo;
+                    old_userInfo.praise_nums = parseInt(old_userInfo.praise_nums);
+                    if (user_if_my_praise == 0) {
+                        old_userInfo.if_my_praise = 1;
+                        old_userInfo.praise_nums++
+                    } else {
+                        old_userInfo.if_my_praise = 0
+                        old_userInfo.praise_nums--
+                    }
+                    that.setData({
+                        userInfo: old_userInfo,
+                        selected_user_id: user_id
+                    })
+                });
+            });
         }
     },
     navigateToUserMore: function () {
@@ -102,7 +118,11 @@ Page({
                 url: `../profileShowMore/profileShowMore?user_id=${user_id}`,
             })
         } else {
-            common.signIn();
+            common.signIn().then(() => {
+                wx.navigateTo({
+                    url: `../profileShowMore/profileShowMore?user_id=${user_id}`,
+                })
+            });
         }
     }
 })

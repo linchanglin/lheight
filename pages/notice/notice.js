@@ -1,6 +1,8 @@
 Page({
     data: {
         page: 1,
+        reach_bottom: false,
+        page_no_data: false,
     },
     onLoad: function () {
         let that = this;
@@ -19,10 +21,10 @@ Page({
                 page_no_data: false,
                 page: that.data.page + 1
             })
-            that.load_replies('add_page')
+            that.load_notices('add_page')
         }
     },
-    load_notices: function () {
+    load_notices: function (parameter) {
         let that = this;
         let wesecret = that.data.wesecret;
         let page = that.data.page;
@@ -39,9 +41,24 @@ Page({
                     }
                 }
 
-                that.setData({
-                    notices: notices
-                })
+                if (parameter && parameter == 'add_page') {
+                    if (notices.length == 0) {
+                        that.setData({
+                            reach_bottom: false,
+                            page_no_data: true
+                        })
+                    } else {
+                        let new_notices = that.data.notices.concat(notices);
+                        that.setData({
+                            notices: new_notices,
+                            reach_bottom: false,
+                        })
+                    }
+                } else {
+                    that.setData({
+                        notices: notices
+                    })
+                }
             }
         })
     },
@@ -90,10 +107,14 @@ Page({
         })
     },
     navigateToSource: function (e) {
-        let type = e.currentTarget.dataset.type;
+        let that = this;
+        let notice_ifRead = e.currentTarget.dataset.noticeifread;
+        let notice_id = e.currentTarget.dataset.noticeid;
+        let source_id = e.currentTarget.dataset.sourceid;
         let source_love_id = e.currentTarget.dataset.sourceloveid;
         let source_comment_id = e.currentTarget.dataset.sourcecommentid;
-        if (type == "comment") {
+        let source_type = e.currentTarget.dataset.sourcetype;
+        if (source_type == 1) {
             wx.navigateTo({
                 url: `../comment/comment?love_id=${source_love_id}`
             });
@@ -101,6 +122,28 @@ Page({
             wx.navigateTo({
                 url: `../reply/reply?love_id=${source_love_id}&comment_id=${source_comment_id}`
             });
+        }
+        if (notice_ifRead == 0) {
+            wx.request({
+                url: 'https://collhome.com/apis/read/notice',
+                method: 'POST',
+                data: {
+                    wesecret: that.data.wesecret,
+                    source_id: source_id,
+                    source_type: source_type
+                },
+                success: function (res) {
+                    let new_notices = that.data.notices;
+                    for (let new_notice of new_notices) {
+                        if (new_notice.id == notice_id) {
+                            new_notice.if_read = 1
+                        }
+                    }
+                    that.setData({
+                        notices: new_notices
+                    })
+                }
+            })
         }
     }
 })

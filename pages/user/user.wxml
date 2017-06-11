@@ -4,7 +4,7 @@
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_appmsg" hover="true" bindtap="navigateToProfileInput" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
+            <image class="weui-media-box__thumb" mode="aspectFill" src="{{userInfo.avatarUrl}}" />
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
             <view class="weui-media-box__title">{{userInfo.nickName}}</view>
@@ -32,7 +32,7 @@
           </view>
           <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToPraiseMeUsers" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
-              <image wx:if="{{ userInfo.gender == 1}}" src="../images/actor_male.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+              <image wx:if="{{ userInfo.gender == 2}}" src="../images/actor_male.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
               <image wx:else src="../images/actor_female.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
             </view>
             <view class="weui-cell__bd">

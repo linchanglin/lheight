@@ -272,18 +272,18 @@ Page({
     showLoveActionSheet: function (e) {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
-        let my_userInfo = wx.getStorageSync('my_userInfo');
         if (wesecret) {
-            if (my_userInfo) {
+            common.showLoveActionSheet(e).then((love_id) => {
+                console.log('delete love_id', love_id)
+                that.load_refresh_loves_delete_love(love_id);
+            });
+        } else {
+            common.signIn().then(() => {
                 common.showLoveActionSheet(e).then((love_id) => {
                     console.log('delete love_id', love_id)
                     that.load_refresh_loves_delete_love(love_id);
                 });
-            } else {
-                common.get_my_userInfo(wesecret);
-            }
-        } else {
-            common.signIn();
+            });
         }
     },
     praiseLove: function (e) {
@@ -311,7 +311,27 @@ Page({
                 })
             });
         } else {
-            common.signIn();
+            common.signIn().then(() => {
+                common.praiseLove(e).then((love_id) => {
+                    let old_loves = that.data.loves;
+                    for (let value of old_loves) {
+                        if (value.id == love_id) {
+                            value.praise_nums = parseInt(value.praise_nums);
+                            if (love_if_my_praise == 0) {
+                                value.if_my_praise = 1;
+                                value.praise_nums++
+                            } else {
+                                value.if_my_praise = 0
+                                value.praise_nums--
+                            }
+                        }
+                    }
+                    that.setData({
+                        loves: old_loves,
+                        selected_love_id: love_id
+                    })
+                });
+            });
         }
     },
     shareLove: function (e) {
@@ -361,7 +381,11 @@ Page({
                     url: '../commentInput/commentInput?love_id=' + love_id
                 });
             } else {
-                common.signIn();
+                common.signIn().then(() => {
+                    wx.navigateTo({
+                        url: '../commentInput/commentInput?love_id=' + love_id
+                    });
+                });
             }
         } else {
             wx.navigateTo({

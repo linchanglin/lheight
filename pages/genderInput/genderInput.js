@@ -43,12 +43,15 @@ Page({
             method: 'POST',
             data: {
                 wesecret: wesecret,
-                gender: parseInt(value)
+                userInfo: {
+                    gender: parseInt(value)
+                }
             },
             success: function (res) {
                 wx.setStorageSync('profile_need_refresh', 1);
-                common.get_my_userInfo(wesecret);
-                wx.navigateBack()
+                common.get_my_userInfo(wesecret).then((user_id) => {
+                    wx.navigateBack()
+                });
             }
         })
 

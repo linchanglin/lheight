@@ -69,7 +69,9 @@ Page({
             method: 'POST',
             data: {
                 wesecret: wesecret,
-                avatarUrl: that.data.avatarUrl
+                userInfo: {
+                    avatarUrl: that.data.avatarUrl
+                }
             },
             success: function (res) {
                 wx.setStorageSync('profile_need_refresh', 1);
