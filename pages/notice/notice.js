@@ -52,6 +52,7 @@ Page({
                         that.setData({
                             notices: new_notices,
                             reach_bottom: false,
+                            page_no_data: false,
                         })
                     }
                 } else {

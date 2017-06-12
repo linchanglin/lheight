@@ -2,8 +2,14 @@ var app = getApp()
 Page({
 
     data: {
-        page: 1,
         imgUrl: [],
+
+        page: 1,
+        reach_bottom: false,
+        page_no_data: false,
+
+        inputShowed: false,
+        inputVal: "",
     },
 
     onLoad: function () {
@@ -19,27 +25,75 @@ Page({
             ww: ww,
             image_width: image_width
         })
-        
+
         that.load_pictures('onLoad');
     },
     onPullDownRefresh: function () {
         let that = this;
         that.load_pictures('pulldown');
     },
+    onReachBottom: function () {
+        let that = this;
+        if (!that.data.page_no_data) {
+            that.setData({
+                reach_bottom: true,
+                page_no_data: false,
+                page: that.data.page + 1
+            })
+            that.load_pictures('add_page')
+        }
+    },
     load_pictures: function (parameter) {
         let that = this;
 
+        let page;
+        if (parameter == 'add_page') {
+            page = that.data.page;
+        } else {
+            page = 1;
+            that.setData({
+                page: 1,
+                reach_bottom: false,
+                page_no_data: false
+            })
+        }
+        let search = that.data.inputVal;
+        let wesecret = wx.getStorageSync('wesecret');
+        let url;
+        if (wesecret) {
+            url = `https://collhome.com/apis/pictures?page=${page}&search=${search}&wesecret=${wesecret}`
+        } else {
+            url = `https://collhome.com/apis/pictures?page=${page}&search=${search}&wesecret=`
+        }
         wx.request({
-            url: 'https://collhome.com/apis/pictures',
+            url: url,
             success: function (res) {
                 console.log('pictures', res.data.data);
-
                 let pictures = res.data.data;
-                that.setData({
-                    pictures: pictures
-                })
 
-                if (parameter) {
+                if (parameter == 'add_page') {
+                    console.log("pictures.length", pictures.length)
+                    if (pictures.length == 0) {
+                        that.setData({
+                            reach_bottom: false,
+                            page_no_data: true
+                        })
+                    } else {
+                        let new_pictures = that.data.pictures.concat(pictures);
+                        that.setData({
+                            pictures: new_pictures
+                        })
+                        that.setData({
+                            reach_bottom: false,
+                            page_no_data: false
+                        })
+                    }
+                } else {
+                    that.setData({
+                        pictures: pictures
+                    })
+                }
+                if (parameter == 'pulldown' || parameter == 'onLoad') {
                     wx.stopPullDownRefresh();
                     wx.hideLoading()
                 }
@@ -77,6 +131,7 @@ Page({
             showName: 'zoomIn'
         });
     },
+    // 需要改成 接口里面自带
     load_user: function (user_id) {
         let that = this;
 
@@ -111,5 +166,42 @@ Page({
         wx.navigateTo({
             url: '../profileShow/profileShow?user_id=' + user_id,
         })
+    },
+
+
+
+
+
+
+
+
+    showInput: function () {
+        let that = this;
+        that.setData({
+            inputShowed: true
+        });
+    },
+    hideInput: function () {
+        let that = this;
+        that.setData({
+            inputVal: "",
+            inputShowed: false
+        });
+    },
+    clearInput: function () {
+        let that = this;
+        that.setData({
+            inputVal: ""
+        });
+    },
+    inputTyping: function (e) {
+        let that = this;
+        that.setData({
+            inputVal: e.detail.value
+        });
+    },
+    searchInputConfirm: function (e) {
+        let that = this;
+        that.load_pictures('pulldown');
     }
 })

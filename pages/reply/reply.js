@@ -24,7 +24,9 @@ Page({
         let replies_need_refresh_create_reply = wx.getStorageSync('replies_need_refresh_create_reply')
         if (replies_need_refresh_create_reply) {
             that.setData({
-                page: 1
+                page: 1,
+                reach_bottom: false,
+                page_no_data: false,
             })
             that.load_replies();
             wx.removeStorageSync('replies_need_refresh_create_reply')
@@ -105,7 +107,8 @@ Page({
                             last_reply_id: last_reply_id
                         })
                         that.setData({
-                            reach_bottom: false
+                            reach_bottom: false,
+                            page_no_data: false,
                         })
                     }
                 } else {

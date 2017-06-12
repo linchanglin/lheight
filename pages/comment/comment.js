@@ -41,7 +41,9 @@ Page({
         let comments_need_refresh_create_comment = wx.getStorageSync('comments_need_refresh_create_comment')
         if (comments_need_refresh_create_comment) {
             that.setData({
-                page: 1
+                page: 1,
+                reach_bottom: false,
+                page_no_data: false,
             })
             that.load_love();
             that.load_comments();
@@ -178,7 +180,8 @@ Page({
                             last_comment_id: last_comment_id
                         })
                         that.setData({
-                            reach_bottom: false
+                            reach_bottom: false,
+                            page_no_data: false
                         })
                     }
                 } else {

@@ -131,14 +131,7 @@ Page({
         })
     },
     onPullDownRefresh: function () {
-        console.log('onPullDownRefresh')
-
         let that = this;
-        that.setData({
-            page: 1,
-            reach_bottom: false,
-            page_no_data: false,
-        })
         that.setData({
             showTopTips1: false,
         });
@@ -199,7 +192,9 @@ Page({
         } else {
             page = 1;
             that.setData({
-                page: 1
+                page: 1,
+                reach_bottom: false,
+                page_no_data: false
             })
         }
         let search = that.data.inputVal;
@@ -228,7 +223,9 @@ Page({
                             loves: new_loves
                         })
                         that.setData({
-                            reach_bottom: false
+                            reach_bottom: false,
+                            page_no_data: false
+
                         })
                     }
                 } else {
