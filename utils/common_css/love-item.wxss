@@ -68,7 +68,8 @@
 }
 
 .article_video_box {
-  margin-top: 8px;
+  display: flex;
+  margin-top: 5px;
 }
 
 .article_video {

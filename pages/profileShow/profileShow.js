@@ -12,9 +12,19 @@ Page({
             user_id: user_id
         })
 
-        let wh = app.data.deviceInfo.windowHeight - 44;
-        that.setData({
-            wh: wh
+        // let wh = app.data.deviceInfo.windowHeight + 3;
+        // // let wh = app.data.deviceInfo.windowHeight;
+        // that.setData({
+        //     wh: wh
+        // })
+
+        wx.getSystemInfo({
+            success: (res) => {
+                let wh = res.windowHeight;
+                that.setData({
+                    wh: wh - 45
+                })
+            }
         })
 
         that.load_user();

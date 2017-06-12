@@ -1,5 +1,5 @@
 <view wx:if="{{userInfo.role == 1}}" class="page">
-  <view class="page__bd">
+  <view class="page__bd" style="margin: 0; padding: 0; height: 100%">
     <view wx:if="{{ifShowAvatarUrl}}" class="showAvatarUrl" catchtap="hideAvatarUrl">
       <image src="{{userInfo.avatarUrl}}" mode="aspectFit" style="width: 100%;height: 100%"></image>
     </view>
@@ -65,9 +65,9 @@
                 <view class="profileShow_cell_bd">
                   {{userInfo.realname}}
                 </view>
-                <!--<view class="profileShow_cell_bd">
+                <view class="profileShow_cell_bd">
                   {{userInfo.gender_name}}
-                </view>-->
+                </view>
                 <view class="profileShow_cell_bd">
                   {{userInfo.birthday}}
                 </view>

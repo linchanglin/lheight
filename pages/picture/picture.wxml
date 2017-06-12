@@ -1,7 +1,7 @@
 <view class="page">
   <view class="page__bd">
 
-    <view class="weui-search-bar">
+    <view class="weui-search-bar" style="margin-bottom: 1px;">
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
@@ -16,6 +16,11 @@
         </label>
       </view>
       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+
+    <view style="display: flex; margin-bottom: 1px;" >
+      <!--<video id="myVideo" class="article_video" src="{{love.video_url}}"></video>-->
+      <video id="myVideo" style="width: 100%;" src="http://gslb.miaopai.com/stream/jdAWk5hXUOZm13bvzhO6T2PnhrhqY0Mz.mp4?ssig=539a30d870c3b75b76b159af62212874&time_stamp=1496837741678&cookie_id=&vend=1&os=3&partner=1&platform=2&cookie_id=&refer=miaopai&scid=jdAWk5hXUOZm13bvzhO6T2PnhrhqY0Mz"></video>
     </view>
 
     <view style="width: {{ww}}px;display: flex;flex-wrap: wrap; justify-content: space-between;">
@@ -34,11 +39,11 @@
       </swiper>
       <view class="banner_bottom">
         <view style="display: flex; justify-content: center; align-items: center">
-          <text class="title1" data-userId="{{userInfo.id}}"  catchtap="navigateToProfileShow">{{userInfo.nickName}}</text>
+          <text class="title1" data-userId="{{userInfo.id}}" catchtap="navigateToProfileShow">{{userInfo.nickName}}</text>
           <image wx:if="{{userInfo.gender == 1}}" src="../images/gender_male.png" style="width: 16px; height: 16px"></image>
           <image wx:if="{{userInfo.gender == 2}}" src="../images/gender_female.png" style="width: 16px; height: 16px"></image>
         </view>
-        <view class="title3" data-userId="{{userInfo.id}}"  catchtap="navigateToProfileShow">查看资料</view>
+        <view class="title3" data-userId="{{userInfo.id}}" catchtap="navigateToProfileShow">查看资料</view>
       </view>
     </view>
   </view>
