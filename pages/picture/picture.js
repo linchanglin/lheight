@@ -98,7 +98,7 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (!pictures || pictures.length == 0) {
+                if (!that.data.pictures || that.data.pictures.length == 0) {
                     wx.showModal({
                         // title: '提示',
                         showCancel: false,
@@ -121,32 +121,13 @@ Page({
         let userInfo = e.target.dataset.userinfo;
         let imgUrl = e.target.dataset.imgurl;
 
-        // this.load_user(e.target.dataset.userid);
         this.setData({
             showPictures: true,
             userInfo: userInfo,
-
-            // id: e.target.dataset.id,
-
-            // imgUrl: e.target.dataset.imgurl,
             imgUrl: imgUrl,
             showName: 'zoomIn'
         });
     },
-    // 需要改成 接口里面自带
-    // load_user: function (user_id) {
-    //     let that = this;
-
-    //     wx.request({
-    //         url: 'https://collhome.com/apis/users/' + user_id,
-    //         success: function (res) {
-    //             console.log('user', res.data)
-    //             that.setData({
-    //                 userInfo: res.data.data,
-    //             })
-    //         }
-    //     })
-    // },
     closePictures: function () {
         let that = this;
         that.setData({
