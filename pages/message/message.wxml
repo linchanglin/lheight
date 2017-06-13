@@ -29,7 +29,7 @@
             <view wx:if="{{message.unreadMessageNums > 0}}" class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">{{message.unreadMessageNums}}</view>
           </view>
           <view class="weui-cell__bd">
-            <view>{{message.userInfo.nickName}}</view>
+            <view>{{message.userInfo.nickname}}</view>
             <view style="font-size: 13px;color: #888888;">{{message.lastUnreadMessage}}</view>
           </view>
         </view>

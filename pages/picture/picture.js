@@ -117,45 +117,45 @@ Page({
         })
     },
 
+    openPictures: function (e) {
+        let userInfo = e.target.dataset.userinfo;
+        let imgUrl = e.target.dataset.imgurl;
 
-
-
-    //显示隐藏商品详情弹窗
-    showGoodsDetail: function (e) {
-        this.load_user(e.target.dataset.userid);
+        // this.load_user(e.target.dataset.userid);
         this.setData({
-            showGoodsDetail: !this.data.showGoodsDetail,
-            id: e.target.dataset.id,
+            showPictures: true,
+            userInfo: userInfo,
 
-            imgUrl: e.target.dataset.imgurl,
+            // id: e.target.dataset.id,
+
+            // imgUrl: e.target.dataset.imgurl,
+            imgUrl: imgUrl,
             showName: 'zoomIn'
         });
     },
     // 需要改成 接口里面自带
-    load_user: function (user_id) {
-        let that = this;
+    // load_user: function (user_id) {
+    //     let that = this;
 
-        wx.request({
-            url: 'https://collhome.com/apis/users/' + user_id,
-            success: function (res) {
-                console.log('user', res.data)
-                that.setData({
-                    userInfo: res.data.data,
-                })
-            }
-        })
-    },
-    hideGoodsDetail: function () {
-        // showGoodsDetail: false,
+    //     wx.request({
+    //         url: 'https://collhome.com/apis/users/' + user_id,
+    //         success: function (res) {
+    //             console.log('user', res.data)
+    //             that.setData({
+    //                 userInfo: res.data.data,
+    //             })
+    //         }
+    //     })
+    // },
+    closePictures: function () {
         let that = this;
         that.setData({
             showName: 'zoomOut',
-            // showGoodsDetail: false,
         })
 
         setTimeout(function () {
             that.setData({
-                showGoodsDetail: false,
+                showPictures: false,
                 imgUrl: []
             })
         }, 300)

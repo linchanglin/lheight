@@ -14,7 +14,7 @@
 
           <view class="classname" style="text-align: center">
             <view style="color: #ff8140;display: flex; justify-content: center;align-items: center">
-              <text style="padding-right: 5px">{{userInfo.nickName}}</text>
+              <text style="padding-right: 5px">{{userInfo.nickname}}</text>
               <image wx:if="{{userInfo.gender == 1}}" src="../images/gender_male.png" style="width: 16px; height: 16px"></image>
               <image wx:if="{{userInfo.gender == 2}}" src="../images/gender_female.png" style="width: 16px; height: 16px"></image>
             </view>
@@ -263,7 +263,7 @@
             <image style="border-radius: 5px;" class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">{{userInfo.nickName}}</view>
+            <view class="weui-media-box__title">{{userInfo.nickname}}</view>
             <view class="weui-media-box__desc">{{userInfo.college_name}}</view>
           </view>
         </view>

@@ -8,7 +8,7 @@
             <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">{{userInfo.nickName}}</view>
+            <view class="weui-media-box__title">{{userInfo.nickname}}</view>
             <view class="weui-media-box__desc">{{userInfo.gender_name}}</view>
           </view>
         </view>

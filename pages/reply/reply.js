@@ -36,7 +36,7 @@ Page({
         let that = this;
         let share_loveId = that.data.love_id;
         let share_commentId = that.data.comment_id;
-        let share_userNickname = that.data.comment.userInfo.nickName;
+        let share_userNickname = that.data.comment.userInfo.nickname;
         return {
             title: `分享${share_userNickname}的评论`,
             path: `/pages/reply/reply?love_id=${share_loveId}&comment_id=${share_commentId}`

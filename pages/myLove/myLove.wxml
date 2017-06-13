@@ -58,7 +58,7 @@
                 <text class="header-time" style="color: #000">{{love.read_nums}} 阅读</text>
               </button>
             </view>
-            <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickName}}</text>
+            <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickname}}</text>
             <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
           </view>
           <view class="item-body">

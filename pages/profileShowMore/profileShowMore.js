@@ -35,7 +35,7 @@ Page({
     navigateBadReportInput: function () {
         let that = this;
         let user_id = that.data.user_id;
-        let user_nickname = that.data.userInfo.nickName;
+        let user_nickname = that.data.userInfo.nickname;
         wx.navigateTo({
             url: `../badReportInput/badReportInput?user_id=${user_id}&user_nickname=${user_nickname}`,
         })

@@ -6,7 +6,7 @@ Page({
         let that = this;
         let my_userInfo = wx.getStorageSync('my_userInfo');
         that.setData({
-            nickName: my_userInfo.nickName
+            nickname: my_userInfo.nickname
         })
     },
     confirmInput: function (e) {
@@ -18,7 +18,7 @@ Page({
             data: {
                 wesecret: wesecret,
                 userInfo: {
-                    nickName: value
+                    nickname: value
                 }
             },
             success: function (res) {

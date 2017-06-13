@@ -21,7 +21,7 @@
               <view class="weui-cell__bd">
                 <view style="display: inline-block; vertical-align: middle">名字</view>
               </view>
-              <view class="weui-cell__ft">{{userInfo.nickName}}</view>
+              <view class="weui-cell__ft">{{userInfo.nickname}}</view>
             </view>
             <view class="weui-cell weui-cell_access">
               <view class="weui-cell__bd">

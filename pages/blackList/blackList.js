@@ -5,21 +5,21 @@ Page({
         //     {
         //         id: 1,
         //         avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
-        //         nickName: 'you see'
+        //         nickname: 'you see'
 
         //     },
         //     {
 
         //         id: 2,
         //         avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
-        //         nickName: '琳达'
+        //         nickname: '琳达'
 
         //     },
         //     {
 
         //         id: 3,
         //         avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJAqNTRvyNObvC1OXmHCbOz1Ag7pFbVCZe7fCXviaOMHPffbn9rfVyibb8BA3icU2iaweXZ9LyTYtkMFw/0",
-        //         nickName: 'you see'
+        //         nickname: 'you see'
 
         //     }
 

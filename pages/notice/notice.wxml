@@ -11,7 +11,7 @@
         <view class="i-right flex_column no_border_bottom">
           <view class="top">
             <view class="flex_column">
-              <text class="u-name" data-userId="{{notice.userInfo.id}}" catchtap="navigateToProfileShow">{{notice.userInfo.nickName}}</text>
+              <text class="u-name" data-userId="{{notice.userInfo.id}}" catchtap="navigateToProfileShow">{{notice.userInfo.nickname}}</text>
               <text class="time">{{notice.created_at}}</text>
             </view>
           </view>
@@ -21,7 +21,7 @@
             <view class="content_content">
               <text wx:if="{{notice.type == 'reply' && notice.objectUserInfo.id != notice.source.userInfo.id}}">回复</text>
               <text wx:if="{{notice.type == 'reply' && notice.objectUserInfo.id != notice.source.userInfo.id}}" class="comment_reply_text nickname_color {{notice.id == selected_notice_id && notice.objectUserInfo.id == selected_notice_objectUserInfo_id ? 'comment_reply_hover_class':''}}"  data-noticeId="{{notice.id}}" data-noticeObjectUserInfoId="{{notice.objectUserInfo.id}}"
-                  catchtap="navigateToProfileShowInObjectUserInfo">@{{notice.objectUserInfo.nickName}}</text>
+                  catchtap="navigateToProfileShowInObjectUserInfo">@{{notice.objectUserInfo.nickname}}</text>
               <text wx:if="{{notice.type == 'reply' && notice.objectUserInfo.id != notice.source.userInfo.id}}">: {{notice.content}}</text>
               <text wx:else>{{notice.content}}</text>
             </view>
@@ -30,7 +30,7 @@
               <view>
                 <text class="comment_reply_text_color">来自</text>
                 <text class="comment_reply_text {{notice.id == item_selected_notice_id && notice.source.userInfo.id == item_selected_notice_source_userInfo_id ? 'comment_reply_hover_class':''}}" data-noticeId="{{notice.id}}" data-noticeSourceUserInfoId="{{notice.source.userInfo.id}}"
-                  catchtap="navigateToProfileShowInSource">{{notice.source.userInfo.nickName}}</text>
+                  catchtap="navigateToProfileShowInSource">{{notice.source.userInfo.nickname}}</text>
                 <text wx:if="{{notice.type == 'comment'}}" class="comment_reply_text_color">的表白</text>
                 <text wx:if="{{notice.type == 'reply'}}" class="comment_reply_text_color">的评论</text>
                 <text class="comment_reply_text_color">{{notice.source.content}}</text>

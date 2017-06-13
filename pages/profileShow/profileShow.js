@@ -32,7 +32,7 @@ Page({
     onShareAppMessage: function () {
         let that = this;
         let share_userId = that.data.user_id;
-        let share_userNickname = that.data.userInfo.nickName;
+        let share_userNickname = that.data.userInfo.nickname;
         return {
             title: `分享${share_userNickname}`,
             path: `/pages/profileShow/profileShow?user_id=${share_userId}`
