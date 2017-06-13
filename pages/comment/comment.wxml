@@ -74,8 +74,8 @@
       <!--评论列表-->
       <view wx:if="{{comments.length > 0}}" class="comments" id="scroll_to_comments">
         <block wx:for="{{comments}}" wx:for-item="comment" wx:key="id">
-          <view class="item" hover-class="weui-cell_active" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickname}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}"
-            catchtap="showCommentActionSheet">
+          <view class="item {{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickname}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}"
+            catchtap="showCommentActionSheet" bindlongtap="longtap_comment" bindtouchmove="touchmove_comment">
             <view class="i-left">
               <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" mode="aspectFill" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
             </view>

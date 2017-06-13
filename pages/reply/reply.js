@@ -128,8 +128,19 @@ Page({
     },
     navigateToProfileShow: function (e) {
         console.log('navigateToProfileShow', e);
-        let that = this;
+        let reply_id = e.currentTarget.dataset.replyid;
         let user_id = e.currentTarget.dataset.userid;
+        let that = this;
+
+        that.setData({
+            item_selected_objectUser_reply_id: reply_id,
+        })
+        setTimeout(function () {
+            that.setData({
+                item_selected_objectUser_reply_id: ''
+            })
+        }, 450)
+
         wx.navigateTo({
             url: '../profileShow/profileShow?user_id=' + user_id
         })
@@ -163,7 +174,18 @@ Page({
         }
     },
     showReplyActionSheet: function (e) {
+        console.log('showReplyActionSheet', e);
+        let reply_id = e.currentTarget.dataset.replyid;
         let that = this;
+        that.setData({
+            item_selected_reply_id: reply_id
+        })
+        setTimeout(function () {
+            that.setData({
+                item_selected_reply_id: ''
+            })
+        }, 200)
+
         let wesecret = wx.getStorageSync('wesecret');
         let comment_id = that.data.comment_id;
         if (wesecret) {
@@ -185,6 +207,20 @@ Page({
                 });
             });
         }
+    },
+    longtap_reply: function (e) {
+        console.log('longtap_reply', e);
+        let reply_id = e.currentTarget.dataset.replyid;
+        var that = this;
+        that.setData({
+            item_selected_reply_id: reply_id
+        })
+    },
+    touchmove_reply: function (e) {
+        let that = this;
+        that.setData({
+            item_selected_reply_id: ''
+        })
     },
     load_refresh_replies_delete_reply: function (reply_id) {
         let that = this;

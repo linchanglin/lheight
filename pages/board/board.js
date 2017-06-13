@@ -10,6 +10,8 @@ Page({
 
         showTopTips1: false,
         showTopTips2: false,
+        // showTopTips2: true,
+        animationData: {},
 
 
         inputShowed: false,
@@ -137,18 +139,6 @@ Page({
         });
 
         that.load_loves('pulldown');
-
-        setTimeout(function () {
-            that.setData({
-                showTopTips2: true
-            });
-        }, 1000);
-
-        setTimeout(function () {
-            that.setData({
-                showTopTips2: false
-            });
-        }, 2500);
     },
     onReachBottom: function () {
         let that = this;
@@ -237,6 +227,30 @@ Page({
                     wx.stopPullDownRefresh();
                     wx.hideLoading()
                 }
+
+                if (parameter == 'pulldown') {
+                    if (that.data.unreadLoveNums > 0) {
+                        that.setData({
+                            showTopTips2: true
+                        });
+                        setTimeout(function () {
+                            let animation = wx.createAnimation({
+                                duration: 500,
+                            })
+                            animation.translateY(-100).step()
+                            that.setData({
+                                animationData: animation.export()
+                            })
+                        }, 1500)
+                        setTimeout(function () {
+                            that.setData({
+                                showTopTips2: false,
+                                animationData: {}
+                            });
+                        }, 2000);
+                    }
+                }
+
                 if (!that.data.loves || that.data.loves.length == 0) {
                     wx.showModal({
                         // title: '提示',

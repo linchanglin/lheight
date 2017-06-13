@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/picture/picture",
         "pages/board/board",
+        
+        "pages/picture/picture",
         "pages/user/user",
         "pages/profileInput/profileInput",
         "pages/notice/notice",

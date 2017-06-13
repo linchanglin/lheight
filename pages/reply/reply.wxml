@@ -31,7 +31,7 @@
       <view class="replies">
         <block wx:for="{{replies}}" wx:for-item="reply" wx:key="id">
 
-          <view class="item" hover-class="weui-cell_active" data-replyUserId="{{reply.userInfo.id}}" data-replyUserNickName="{{reply.userInfo.nickname}}" data-replyId="{{reply.id}}" data-replyContent="{{reply.content}}" catchtap="showReplyActionSheet">
+          <view class="item {{reply.id == item_selected_reply_id ? 'weui-cell_active':''}}" data-replyUserId="{{reply.userInfo.id}}" data-replyUserNickName="{{reply.userInfo.nickname}}" data-replyId="{{reply.id}}" data-replyContent="{{reply.content}}" catchtap="showReplyActionSheet" bindlongtap="longtap_reply" bindtouchmove="touchmove_reply">
             <view class="i-left">
               <image class="c-u-img" src="{{reply.userInfo.avatarUrl}}" mode="aspectFill" data-userId="{{reply.userInfo.id}}" catchtap="navigateToProfileShow"></image>
             </view>
@@ -53,7 +53,7 @@
 
                 <view wx:if="{{reply.objectUserInfo.id != comment.userInfo.id}}" class="content_content">
                   <text>回复</text>
-                  <text style="color: #66c" data-userId="{{reply.objectUserInfo.id}}" catchtap="navigateToProfileShow">@{{reply.objectUserInfo.nickname}}</text>
+                  <text class="comment_reply_text {{reply.id == item_selected_objectUser_reply_id? 'comment_reply_hover_class':''}}" style="color: #66c" data-replyId="{{reply.id}}" data-userId="{{reply.objectUserInfo.id}}" catchtap="navigateToProfileShow">@{{reply.objectUserInfo.nickname}}</text>
                   <text>: {{reply.content}}</text>
                 </view>
                 <view wx:else class="content_content">{{reply.content}}</view>
