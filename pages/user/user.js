@@ -220,7 +220,7 @@ Page({
         let that = this;
         wx.showModal({
             // title: '不能表白',
-            content: '您有不当言论，被禁止发表表白，详情请联系管理员！',
+            content: '您被禁止发表表白，请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！',
             showCancel: false,
             success: function (res) {
                 if (res.confirm) {
@@ -235,7 +235,7 @@ Page({
         let that = this;
         wx.showModal({
             title: '未知学校',
-            content: '发表表白需要知道您的学校呢，请去 我 -> 个人信息 -> 学校 选择您的学校！',
+            content: '发表表白需要知道您的学校呢，请去 我 -> 个人信息 -> 学校，选择您的学校！',
             showCancel: false,
             success: function (res) {
                 if (res.confirm) {

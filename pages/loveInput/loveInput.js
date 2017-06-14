@@ -13,7 +13,6 @@ function initQiniu() {
 
 Page({
     data: {
-        // imageObject: {},
         files: [],
         content: "",
         images: [],
@@ -29,21 +28,25 @@ Page({
     onLoad: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
-        let my_userInfo = wx.getStorageSync('my_userInfo');
-        that.setData({
-            wesecret: wesecret,
-            my_userInfo: my_userInfo
+        wx.request({
+            url: `https://collhome.com/apis/user?wesecret=${wesecret}`,
+            success: function (res) {
+                that.setData({
+                    wesecret: wesecret,
+                    my_userInfo: res.data.data
+                })
+            }
         })
     },
     onShow: function () {
         let that = this;
-        let visiable = wx.getStorageSync('visiable');
-        if (visiable) {
-            that.setData({
-                visiable: visiable
-            });
-            wx.removeStorageSync('visiable');
-        }
+        // let visiable = wx.getStorageSync('visiable');
+        // if (visiable) {
+        //     that.setData({
+        //         visiable: visiable
+        //     });
+        //     wx.removeStorageSync('visiable');
+        // }
         let video_url = wx.getStorageSync('video_url');
         if (video_url) {
             if (video_url.length > 0) {
@@ -179,50 +182,59 @@ Page({
             url: url,
         })
     },
-    navigateToVisiableInput: function () {
-        let that = this;
-        wx.navigateTo({
-            url: `../visiableInput/visiableInput?visiable=${that.data.visiable}`
-        })
-    },
+    // navigateToVisiableInput: function () {
+    //     let that = this;
+    //     wx.navigateTo({
+    //         url: `../visiableInput/visiableInput?visiable=${that.data.visiable}`
+    //     })
+    // },
     saveLove: function () {
         let that = this;
-        let content = that.data.content;
-        let files = that.data.files;
-        let images = that.data.images;
-        let video_url = that.data.video_url;
-        if (content.length > 0 || files.length > 0 || video_url.length > 0) {
-            that.setData({
-                save_loading: 2
-            })
-            if (video_url.length > 0) {
-                that.setData({
-                    images: []
-                })
-                that.postSaveLove();
+        if (that.data.my_userInfo.available == 0) {
+            that.showNoAvailableModal();
+        } else {
+            if (that.data.my_userInfo.college == '') {
+                that.showNoCollegeModal();
             } else {
-                if (files.length > 0) {
-                    initQiniu();
-                    let i = 0;
-                    for (let filePath of files) {
-                        // 交给七牛上传
-                        qiniuUploader.upload(filePath, (res) => {
-                            images.push(res.imageURL)
-                            that.setData({
-                                images: images
-                            })
-                        }, (error) => {
-                            console.error('error: ' + JSON.stringify(error));
-                        }, (complete) => {
-                            console.log('complete', complete)
-                            i++;
-                            if (i == files.length) {
-                                that.postSaveLove();
+
+                let content = that.data.content;
+                let files = that.data.files;
+                let images = that.data.images;
+                let video_url = that.data.video_url;
+                if (content.length > 0 || files.length > 0 || video_url.length > 0) {
+                    that.setData({
+                        save_loading: 2
+                    })
+                    if (video_url.length > 0) {
+                        that.setData({
+                            images: []
+                        })
+                        that.postSaveLove();
+                    } else {
+                        if (files.length > 0) {
+                            initQiniu();
+                            let i = 0;
+                            for (let filePath of files) {
+                                // 交给七牛上传
+                                qiniuUploader.upload(filePath, (res) => {
+                                    images.push(res.imageURL)
+                                    that.setData({
+                                        images: images
+                                    })
+                                }, (error) => {
+                                    console.error('error: ' + JSON.stringify(error));
+                                }, (complete) => {
+                                    console.log('complete', complete)
+                                    i++;
+                                    if (i == files.length) {
+                                        that.postSaveLove();
+                                    }
+                                });
                             }
-                        });
+                        } else {
+                            that.postSaveLove();
+                        }
                     }
-                } else {
-                    that.postSaveLove();
                 }
             }
         }
@@ -245,6 +257,35 @@ Page({
             data: data,
             success: function (res) {
                 that.switchTabToBoardWithSuccess();
+            }
+        })
+    },
+    showNoAvailableModal: function () {
+        let that = this;
+        wx.showModal({
+            content: '您被禁止发表表白，请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！',
+            showCancel: false,
+            success: function (res) {
+                if (res.confirm) {
+                    console.log('用户点击确定')
+                } else if (res.cancel) {
+                    console.log('用户点击取消')
+                }
+            }
+        })
+    },
+    showNoCollegeModal: function () {
+        let that = this;
+        wx.showModal({
+            title: '未知学校',
+            content: '发表表白需要知道您的学校呢，请去 我 -> 个人信息 -> 学校，选择您的学校！',
+            showCancel: false,
+            success: function (res) {
+                if (res.confirm) {
+                    console.log('用户点击确定')
+                } else if (res.cancel) {
+                    console.log('用户点击取消')
+                }
             }
         })
     },

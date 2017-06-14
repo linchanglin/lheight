@@ -1,6 +1,11 @@
 {
     "pages": [
+        "pages/find/find",
+        
         "pages/board/board",
+        
+        "pages/loveInput/loveInput",
+        
         
         "pages/picture/picture",
         "pages/user/user",
@@ -14,7 +19,6 @@
         "pages/profileShow/profileShow",
         "pages/profileShowMore/profileShowMore",
         "pages/chat/chat",
-        "pages/loveInput/loveInput",
         "pages/profileDetailsInput/profileDetailsInput",
         "pages/avatarUrlInput/avatarUrlInput",
         "pages/avatarUrl/avatarUrl",
@@ -28,7 +32,6 @@
         "pages/commentInput/commentInput",
         "pages/videoUrlInput/videoUrlInput",
         "pages/virtualLoveInput/virtualLoveInput",
-        "pages/find/find",
         "pages/myLove/myLove",
         "pages/city_multi_page/city_multi_page",
         "pages/city_multi_page_city/city_multi_page_city",
