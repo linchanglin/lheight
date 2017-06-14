@@ -211,6 +211,401 @@ Page({
         })
 
     },
+    load_imageLoves: function (parameter) {
+        let that = this;
+        let image_page;
+        if (parameter == 'add_page') {
+            image_page = that.data.image_page;
+        } else {
+            image_page = 1;
+            that.setData({
+                image_page: 1,
+                image_reach_bottom: false,
+                image_page_no_data: false
+            })
+        }
+        let search = that.data.image_inputVal;
+        let wesecret = wx.getStorageSync('wesecret');
+        let type = 'imageLoves';
+        let url;
+        if (wesecret) {
+            url = `https://collhome.com/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=${wesecret}`
+        } else {
+            url = `https://collhome.com/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=`
+        }
+        wx.request({
+            url: url,
+            success: function (res) {
+                console.log('loves', res.data);
+                let loves = res.data.data;
+                if (parameter == 'add_page') {
+                    console.log("loves.length", loves.length)
+                    if (loves.length == 0) {
+                        that.setData({
+                            image_reach_bottom: false,
+                            image_page_no_data: true
+                        })
+                    } else {
+                        let new_loves = that.data.image_loves.concat(loves);
+                        that.setData({
+                            image_loves: new_loves
+                        })
+                        that.setData({
+                            image_reach_bottom: false,
+                            image_page_no_data: false
+
+                        })
+                    }
+                } else {
+                    that.setData({
+                        image_loves: loves
+                    })
+                }
+                if (parameter == 'pulldown' || parameter == 'onLoad') {
+                    wx.stopPullDownRefresh();
+                    wx.hideLoading()
+                }
+
+                if (!that.data.image_loves || that.data.image_loves.length == 0) {
+                    wx.showModal({
+                        // title: '提示',
+                        showCancel: false,
+                        content: '没有表白',
+                        success: function (res) {
+                            if (res.confirm) {
+                                console.log('用户点击确定')
+                            } else if (res.cancel) {
+                                console.log('用户点击取消')
+                            }
+                        }
+                    })
+                }
+
+            }
+        })
+
+    },
+    load_videoLoves: function (parameter) {
+        let that = this;
+        let video_page;
+        if (parameter == 'add_page') {
+            video_page = that.data.video_page;
+        } else {
+            video_page = 1;
+            that.setData({
+                video_page: 1,
+                video_reach_bottom: false,
+                video_page_no_data: false
+            })
+        }
+        let search = that.data.video_inputVal;
+        let wesecret = wx.getStorageSync('wesecret');
+        let type = 'videoLoves';
+        let url;
+        if (wesecret) {
+            url = `https://collhome.com/apis/loves?type=${type}&page=${video_page}&search=${search}&wesecret=${wesecret}`
+        } else {
+            url = `https://collhome.com/apis/loves?type=${type}&page=${video_page}&search=${search}&wesecret=`
+        }
+        wx.request({
+            url: url,
+            success: function (res) {
+                console.log('loves', res.data);
+                let loves = res.data.data;
+                if (parameter == 'add_page') {
+                    console.log("loves.length", loves.length)
+                    if (loves.length == 0) {
+                        that.setData({
+                            video_reach_bottom: false,
+                            video_page_no_data: true
+                        })
+                    } else {
+                        let new_loves = that.data.video_loves.concat(loves);
+                        that.setData({
+                            video_loves: new_loves
+                        })
+                        that.setData({
+                            video_reach_bottom: false,
+                            video_page_no_data: false
+
+                        })
+                    }
+                } else {
+                    that.setData({
+                        video_loves: loves
+                    })
+                }
+                if (parameter == 'pulldown' || parameter == 'onLoad') {
+                    wx.stopPullDownRefresh();
+                    wx.hideLoading()
+                }
+
+                if (!that.data.video_loves || that.data.video_loves.length == 0) {
+                    wx.showModal({
+                        // title: '提示',
+                        showCancel: false,
+                        content: '没有表白',
+                        success: function (res) {
+                            if (res.confirm) {
+                                console.log('用户点击确定')
+                            } else if (res.cancel) {
+                                console.log('用户点击取消')
+                            }
+                        }
+                    })
+                }
+
+            }
+        })
+
+    },
+    previewImage: function (e) {
+        console.log('preview e', e);
+        var current = e.currentTarget.dataset.current;
+        var urls = e.currentTarget.dataset.urls;
+
+        wx.previewImage({
+            current: current, // 当前显示图片的http链接
+            urls: urls // 需要预览的图片http链接列表
+        })
+    },
+    showLoveActionSheet: function (e) {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            common.showLoveActionSheet(e).then((love_id) => {
+                console.log('delete love_id', love_id)
+                that.load_refresh_loves_delete_love(love_id);
+            });
+        } else {
+            common.signIn().then(() => {
+                common.showLoveActionSheet(e).then((love_id) => {
+                    console.log('delete love_id', love_id)
+                    that.load_refresh_loves_delete_love(love_id);
+                });
+            });
+        }
+    },
+    load_refresh_loves_delete_love: function (love_id) {
+        let that = this;
+        let old_hot_loves = that.data.hot_loves;
+        let old_image_loves = that.data.image_loves;
+        let old_video_loves = that.data.video_loves;
+        let new_hot_loves = [];
+        let new_image_loves = [];
+        let new_video_loves = [];
+        for (let old_hot_love of old_hot_loves) {
+            if (old_hot_love.id != love_id) {
+                new_hot_loves.push(old_hot_love)
+            }
+        }
+        for (let old_image_love of old_image_loves) {
+            if (old_image_love.id != love_id) {
+                new_image_loves.push(old_image_love)
+            }
+        }
+        for (let old_video_love of old_video_loves) {
+            if (old_video_love.id != love_id) {
+                new_video_loves.push(old_video_love)
+            }
+        }
+        console.log('load_refresh_loves_delete_love', love_id);
+        that.setData({
+            hot_loves: new_hot_loves,
+            image_loves: new_image_loves,
+            video_loves: new_video_loves,
+        })
+    },
+    praiseLove: function (e) {
+        let love_if_my_praise = e.currentTarget.dataset.loveifmypraise;
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            common.praiseLove(e).then((love_id) => {
+
+                let old_hot_loves = that.data.hot_loves;
+                let old_image_loves = that.data.image_loves;
+                let old_video_loves = that.data.video_loves;
+                for (let value of old_hot_loves) {
+                    if (value.id == love_id) {
+                        value.praise_nums = parseInt(value.praise_nums);
+                        if (love_if_my_praise == 0) {
+                            value.if_my_praise = 1;
+                            value.praise_nums++
+                        } else {
+                            value.if_my_praise = 0
+                            value.praise_nums--
+                        }
+                    }
+                }
+                for (let value of old_image_loves) {
+                    if (value.id == love_id) {
+                        value.praise_nums = parseInt(value.praise_nums);
+                        if (love_if_my_praise == 0) {
+                            value.if_my_praise = 1;
+                            value.praise_nums++
+                        } else {
+                            value.if_my_praise = 0
+                            value.praise_nums--
+                        }
+                    }
+                }
+                for (let value of old_video_loves) {
+                    if (value.id == love_id) {
+                        value.praise_nums = parseInt(value.praise_nums);
+                        if (love_if_my_praise == 0) {
+                            value.if_my_praise = 1;
+                            value.praise_nums++
+                        } else {
+                            value.if_my_praise = 0
+                            value.praise_nums--
+                        }
+                    }
+                }
+                that.setData({
+                    hot_loves: old_hot_loves,
+                    image_loves: old_image_loves,
+                    video_loves: old_video_loves,
+
+                    selected_love_id: love_id
+                })
+
+            });
+        } else {
+            common.signIn().then(() => {
+                common.praiseLove(e).then((love_id) => {
+
+                    let old_hot_loves = that.data.hot_loves;
+                    let old_image_loves = that.data.image_loves;
+                    let old_video_loves = that.data.video_loves;
+                    for (let value of old_hot_loves) {
+                        if (value.id == love_id) {
+                            value.praise_nums = parseInt(value.praise_nums);
+                            if (love_if_my_praise == 0) {
+                                value.if_my_praise = 1;
+                                value.praise_nums++
+                            } else {
+                                value.if_my_praise = 0
+                                value.praise_nums--
+                            }
+                        }
+                    }
+                    for (let value of old_image_loves) {
+                        if (value.id == love_id) {
+                            value.praise_nums = parseInt(value.praise_nums);
+                            if (love_if_my_praise == 0) {
+                                value.if_my_praise = 1;
+                                value.praise_nums++
+                            } else {
+                                value.if_my_praise = 0
+                                value.praise_nums--
+                            }
+                        }
+                    }
+                    for (let value of old_video_loves) {
+                        if (value.id == love_id) {
+                            value.praise_nums = parseInt(value.praise_nums);
+                            if (love_if_my_praise == 0) {
+                                value.if_my_praise = 1;
+                                value.praise_nums++
+                            } else {
+                                value.if_my_praise = 0
+                                value.praise_nums--
+                            }
+                        }
+                    }
+                    that.setData({
+                        hot_loves: old_hot_loves,
+                        image_loves: old_image_loves,
+                        video_loves: old_video_loves,
+
+                        selected_love_id: love_id
+                    })
+
+                });
+            });
+        }
+    },
+    longtap_love: function (e) {
+        console.log('longtap_love', e);
+        let love_id = e.currentTarget.dataset.loveid;
+        var that = this;
+        that.setData({
+            item_selected_love_id: love_id
+        })
+    },
+    touchmove_love: function (e) {
+        let that = this;
+        that.setData({
+            item_selected_love_id: ''
+        })
+    },
+    navigateToLove: function (e) {
+        console.log('navigateToLove', e);
+        let love_id = e.currentTarget.dataset.loveid;
+        let that = this;
+        that.setData({
+            item_selected_love_id: love_id
+        })
+        setTimeout(function () {
+            that.setData({
+                item_selected_love_id: ''
+            })
+        }, 450)
+        wx.navigateTo({
+            url: '../comment/comment?love_id=' + love_id
+        });
+    },
+    navigateToComment: function (e) {
+        console.log('navigateToComment', e);
+        let love_id = e.currentTarget.dataset.loveid;
+        let comment_nums = e.currentTarget.dataset.commentnums;
+
+        var that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (comment_nums == 0) {
+            if (wesecret) {
+                wx.navigateTo({
+                    url: '../commentInput/commentInput?love_id=' + love_id
+                });
+            } else {
+                common.signIn().then(() => {
+                    wx.navigateTo({
+                        url: '../commentInput/commentInput?love_id=' + love_id
+                    });
+                });
+            }
+        } else {
+            wx.navigateTo({
+                url: `../comment/comment?love_id=${love_id}`
+            });
+        }
+    },
+    navigateToProfileShow: function (e) {
+        console.log('navigateToProfileShow', e);
+        let that = this;
+        let user_id = e.currentTarget.dataset.userid;
+        wx.navigateTo({
+            url: '../profileShow/profileShow?user_id=' + user_id
+        })
+    },
+    navigateToLocation: function (e) {
+        console.log('location', e);
+        let location = e.currentTarget.dataset.location;
+        wx.openLocation({
+            name: location.name,
+            address: location.address,
+            latitude: parseFloat(location.latitude),
+            longitude: parseFloat(location.longitude),
+            // scale: 18,
+            success: function (res) {
+                console.log('openLocation success', res);
+            },
+            fail: function (res) {
+                console.log('openLocation fail', res);
+            }
+        })
+    },
 
 
 

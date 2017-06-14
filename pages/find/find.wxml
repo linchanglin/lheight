@@ -1,7 +1,7 @@
 <view class="page">
   <view class="page__bd">
     <view class="weui-tab">
-      <view class="weui-navbar">
+      <view class="weui-navbar" style="background-color: white;">
         <block wx:for-items="{{tabs}}" wx:key="{{index}}">
           <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
             <view class="weui-navbar__title">{{item}}</view>
@@ -10,14 +10,326 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <view class="weui-tab__content" wx:if="{{activeIndex == 0}}">
-          
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+
+
+<view class="page">
+  <view class="page__bd">
+    
+    <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{hot_inputVal}}" focus="{{hot_inputShowed}}" bindinput="inputTyping" bindconfirm="searchInputConfirm" />
+          <view class="weui-icon-clear" wx:if="{{hot_inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
         </view>
-        <view class="weui-tab__content" wx:if="{{activeIndex == 1}}">
-          
+        <label class="weui-search-bar__label" hidden="{{hot_inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!hot_inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+
+    
+
+    <view class="container">
+      <block wx:for="{{hot_loves}}" wx:for-item="love" wx:key="id">
+
+        <view class="list-item {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" data-loveId="{{love.id}}" catchtap="navigateToLove" bindlongtap="longtap_love" bindtouchmove="touchmove_love">
+          <view class="item-header">
+            <view class="header_image_box" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
+              <image class="header_image" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
+            </view>
+            <!--<button class="weui-btn mini-btn" type="default" size="mini" hover-class="none">
+                <text class="header-time" style="color: #000">11111{{love.read_nums}} 阅读</text>
+              </button>-->
+            <image class="more_image" src="../images/more.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickname}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" data-belongsToMe="{{love.belongsToMe}}" catchtap="showLoveActionSheet"></image>
+            <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickname}}</text>
+            <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
+          </view>
+
+          <view class="article-content">
+            <text>{{love.content}}</text>
+          </view>
+
+          <view wx:if="{{love.video_url.length > 0}}" class="article_video_box" catchtap="some">
+            <video id="myVideo" class="article_video" src="{{love.video_url}}"></video>
+          </view>
+
+
+          <view wx:if="{{love.images.length > 0}}" class="article-imgs" style="width: {{ww}}px;">
+            <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" class="article-image" style="width:{{image_width}}px;height:{{image_width}}px;" catchtap="previewImage"></image>
+          </view>
+
+
+
+
         </view>
-        <view class="weui-tab__content" wx:if="{{activeIndex == 2}}">
+
+        <view class="weui-flexx  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" wx:if="{{love.location.name}}">
+          <view class="weui-flex__item flex_start" data-location="{{love.location}}" catchtap="navigateToLocation">
+            <image class="icon_size" src="../images/location_fill.png"></image>
+            <text>{{love.location.name}}</text>
+          </view>
+        </view>
+
+
+
+        <view class="weui-flex  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}">
+          <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
+            <image wx:if="{{love.if_my_comment == 0}}" class="icon_size" src="../images/comment.png"></image>
+            <image wx:if="{{love.if_my_comment == 1}}" class="icon_size" src="../images/comment_fill.png"></image>
+            <text wx:if="{{love.comment_nums == 0}}">评论</text>
+            <text wx:if="{{love.comment_nums != 0}}">{{love.comment_nums}}</text>
+          </view>
+          <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
+            <image wx:if="{{love.if_my_praise == 0}}" class="icon_size  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
+            <image wx:if="{{love.if_my_praise == 1}}" class="icon_size  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
+            <text wx:if="{{love.praise_nums == 0}}">喜欢</text>
+            <text wx:if="{{love.praise_nums != 0}}">{{love.praise_nums}}</text>
+          </view>
+          <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-userNickname="{{love.userInfo.nickname}}" bindtouchstart="share_touchstart">
+            <button class="shareButton  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" open-type="share">
+              <view class="share_image_box flex_center">
+                <image class="icon_size" src="../images/share.png"></image>
+                <text>分享</text>
+              </view>
+            </button>
+          </view>
+        </view>
+
+      </block>
+    </view>
+    <!--<view wx:if="{{reach_bottom}}" class="reach_loading">
+      <view class="weui-loading on_loading"></view>
+      <view class="weui-loadmore__tips">正在加载...</view>
+    </view>-->
+    <!--<view wx:if="{{page_no_data}}" class="page_no_data">
+      <view class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+      </view>
+    </view>-->
+  </view>
+</view>
+
+
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          
+
+<view class="page">
+  <view class="page__bd">
+    
+    <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{image_inputVal}}" focus="{{image_inputShowed}}" bindinput="inputTyping" bindconfirm="searchInputConfirm" />
+          <view class="weui-icon-clear" wx:if="{{image_inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{image_inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!image_inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+
+    
+
+    <view class="container">
+      <block wx:for="{{image_loves}}" wx:for-item="love" wx:key="id">
+
+        <view class="list-item {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" data-loveId="{{love.id}}" catchtap="navigateToLove" bindlongtap="longtap_love" bindtouchmove="touchmove_love">
+          <view class="item-header">
+            <view class="header_image_box" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
+              <image class="header_image" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
+            </view>
+            <!--<button class="weui-btn mini-btn" type="default" size="mini" hover-class="none">
+                <text class="header-time" style="color: #000">11111{{love.read_nums}} 阅读</text>
+              </button>-->
+            <image class="more_image" src="../images/more.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickname}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" data-belongsToMe="{{love.belongsToMe}}" catchtap="showLoveActionSheet"></image>
+            <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickname}}</text>
+            <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
+          </view>
+
+          <view class="article-content">
+            <text>{{love.content}}</text>
+          </view>
+
+          <view wx:if="{{love.video_url.length > 0}}" class="article_video_box" catchtap="some">
+            <video id="myVideo" class="article_video" src="{{love.video_url}}"></video>
+          </view>
+
+
+          <view wx:if="{{love.images.length > 0}}" class="article-imgs" style="width: {{ww}}px;">
+            <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" class="article-image" style="width:{{image_width}}px;height:{{image_width}}px;" catchtap="previewImage"></image>
+          </view>
+
+
+
+
+        </view>
+
+        <view class="weui-flexx  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" wx:if="{{love.location.name}}">
+          <view class="weui-flex__item flex_start" data-location="{{love.location}}" catchtap="navigateToLocation">
+            <image class="icon_size" src="../images/location_fill.png"></image>
+            <text>{{love.location.name}}</text>
+          </view>
+        </view>
+
+
+
+        <view class="weui-flex  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}">
+          <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
+            <image wx:if="{{love.if_my_comment == 0}}" class="icon_size" src="../images/comment.png"></image>
+            <image wx:if="{{love.if_my_comment == 1}}" class="icon_size" src="../images/comment_fill.png"></image>
+            <text wx:if="{{love.comment_nums == 0}}">评论</text>
+            <text wx:if="{{love.comment_nums != 0}}">{{love.comment_nums}}</text>
+          </view>
+          <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
+            <image wx:if="{{love.if_my_praise == 0}}" class="icon_size  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
+            <image wx:if="{{love.if_my_praise == 1}}" class="icon_size  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
+            <text wx:if="{{love.praise_nums == 0}}">喜欢</text>
+            <text wx:if="{{love.praise_nums != 0}}">{{love.praise_nums}}</text>
+          </view>
+          <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-userNickname="{{love.userInfo.nickname}}" bindtouchstart="share_touchstart">
+            <button class="shareButton  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" open-type="share">
+              <view class="share_image_box flex_center">
+                <image class="icon_size" src="../images/share.png"></image>
+                <text>分享</text>
+              </view>
+            </button>
+          </view>
+        </view>
+
+      </block>
+    </view>
+    <!--<view wx:if="{{reach_bottom}}" class="reach_loading">
+      <view class="weui-loading on_loading"></view>
+      <view class="weui-loadmore__tips">正在加载...</view>
+    </view>-->
+    <!--<view wx:if="{{page_no_data}}" class="page_no_data">
+      <view class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+      </view>
+    </view>-->
+  </view>
+</view>
+
+
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
         
+
+<view class="page">
+  <view class="page__bd">
+    
+    <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{video_inputVal}}" focus="{{video_inputShowed}}" bindinput="inputTyping" bindconfirm="searchInputConfirm" />
+          <view class="weui-icon-clear" wx:if="{{video_inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{video_inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!video_inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+
+    
+
+    <view class="container">
+      <block wx:for="{{video_loves}}" wx:for-item="love" wx:key="id">
+
+        <view class="list-item {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" data-loveId="{{love.id}}" catchtap="navigateToLove" bindlongtap="longtap_love" bindtouchmove="touchmove_love">
+          <view class="item-header">
+            <view class="header_image_box" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
+              <image class="header_image" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
+            </view>
+            <!--<button class="weui-btn mini-btn" type="default" size="mini" hover-class="none">
+                <text class="header-time" style="color: #000">11111{{love.read_nums}} 阅读</text>
+              </button>-->
+            <image class="more_image" src="../images/more.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickname}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" data-belongsToMe="{{love.belongsToMe}}" catchtap="showLoveActionSheet"></image>
+            <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickname}}</text>
+            <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
+          </view>
+
+          <view class="article-content">
+            <text>{{love.content}}</text>
+          </view>
+
+          <view wx:if="{{love.video_url.length > 0}}" class="article_video_box" catchtap="some">
+            <video id="myVideo" class="article_video" src="{{love.video_url}}"></video>
+          </view>
+
+
+          <view wx:if="{{love.images.length > 0}}" class="article-imgs" style="width: {{ww}}px;">
+            <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" class="article-image" style="width:{{image_width}}px;height:{{image_width}}px;" catchtap="previewImage"></image>
+          </view>
+
+
+
+
+        </view>
+
+        <view class="weui-flexx  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" wx:if="{{love.location.name}}">
+          <view class="weui-flex__item flex_start" data-location="{{love.location}}" catchtap="navigateToLocation">
+            <image class="icon_size" src="../images/location_fill.png"></image>
+            <text>{{love.location.name}}</text>
+          </view>
+        </view>
+
+
+
+        <view class="weui-flex  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}">
+          <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
+            <image wx:if="{{love.if_my_comment == 0}}" class="icon_size" src="../images/comment.png"></image>
+            <image wx:if="{{love.if_my_comment == 1}}" class="icon_size" src="../images/comment_fill.png"></image>
+            <text wx:if="{{love.comment_nums == 0}}">评论</text>
+            <text wx:if="{{love.comment_nums != 0}}">{{love.comment_nums}}</text>
+          </view>
+          <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
+            <image wx:if="{{love.if_my_praise == 0}}" class="icon_size  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
+            <image wx:if="{{love.if_my_praise == 1}}" class="icon_size  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
+            <text wx:if="{{love.praise_nums == 0}}">喜欢</text>
+            <text wx:if="{{love.praise_nums != 0}}">{{love.praise_nums}}</text>
+          </view>
+          <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-userNickname="{{love.userInfo.nickname}}" bindtouchstart="share_touchstart">
+            <button class="shareButton  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" open-type="share">
+              <view class="share_image_box flex_center">
+                <image class="icon_size" src="../images/share.png"></image>
+                <text>分享</text>
+              </view>
+            </button>
+          </view>
+        </view>
+
+      </block>
+    </view>
+    <!--<view wx:if="{{reach_bottom}}" class="reach_loading">
+      <view class="weui-loading on_loading"></view>
+      <view class="weui-loadmore__tips">正在加载...</view>
+    </view>-->
+    <!--<view wx:if="{{page_no_data}}" class="page_no_data">
+      <view class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+      </view>
+    </view>-->
+  </view>
+</view>
+
+
         </view>
       </view>
     </view>

@@ -346,10 +346,6 @@ Page({
             });
         }
     },
-    shareLove: function (e) {
-        let love_id = e.currentTarget.dataset.loveid;
-
-    },
     longtap_love: function (e) {
         console.log('longtap_love', e);
         let love_id = e.currentTarget.dataset.loveid;
@@ -416,9 +412,6 @@ Page({
     navigateToLocation: function (e) {
         console.log('location', e);
         let location = e.currentTarget.dataset.location;
-
-        console.log('location111', location);
-
         wx.openLocation({
             name: location.name,
             address: location.address,

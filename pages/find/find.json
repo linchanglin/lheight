@@ -1,4 +1,6 @@
 {
     "navigationBarTitleText": "发现",
-     "backgroundColor": "#ffffff"
+    "backgroundColor": "#ffffff",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark"
 }
