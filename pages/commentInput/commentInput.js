@@ -32,7 +32,10 @@ Page({
         console.log('post comment', res.data)
         wx.setStorageSync('comments_need_refresh_create_comment', that.data.love_id);
         wx.setStorageSync('board_loves_need_refresh', that.data.love_id);
+        wx.setStorageSync('find_loves_need_refresh', that.data.love_id);
+        wx.setStorageSync('mycomment_loves_need_refresh', that.data.love_id);
         wx.setStorageSync('my_loves_need_refresh', that.data.love_id);
+
         wx.navigateBack()
       }
     })

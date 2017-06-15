@@ -245,8 +245,8 @@ Page({
                 console.log('delete comment_id', comment_id)
                 let love_id = that.data.love_id;
                 wx.setStorageSync('board_loves_need_refresh', love_id);
-                wx.setStorageSync('hot_loves_need_refresh', love_id);
-                wx.setStorageSync('college_loves_need_refresh', love_id);
+                wx.setStorageSync('find_loves_need_refresh', love_id);
+                wx.setStorageSync('mycomment_loves_need_refresh', love_id);
                 wx.setStorageSync('my_loves_need_refresh', love_id);
 
                 that.load_love();
@@ -260,8 +260,8 @@ Page({
                     console.log('delete comment_id', comment_id)
                     let love_id = that.data.love_id;
                     wx.setStorageSync('board_loves_need_refresh', love_id);
-                    wx.setStorageSync('hot_loves_need_refresh', love_id);
-                    wx.setStorageSync('college_loves_need_refresh', love_id);
+                    wx.setStorageSync('find_loves_need_refresh', love_id);
+                    wx.setStorageSync('mycomment_loves_need_refresh', love_id);
                     wx.setStorageSync('my_loves_need_refresh', love_id);
 
                     that.load_love();
@@ -305,6 +305,8 @@ Page({
                     selected_love_id: love_id
                 })
                 wx.setStorageSync('board_loves_need_refresh', love_id);
+                wx.setStorageSync('find_loves_need_refresh', love_id);
+                wx.setStorageSync('mycomment_loves_need_refresh', love_id);
                 wx.setStorageSync('my_loves_need_refresh', love_id);
             });
         } else {
@@ -324,6 +326,8 @@ Page({
                         selected_love_id: love_id
                     })
                     wx.setStorageSync('board_loves_need_refresh', love_id);
+                    wx.setStorageSync('find_loves_need_refresh', love_id);
+                    wx.setStorageSync('mycomment_loves_need_refresh', love_id);
                     wx.setStorageSync('my_loves_need_refresh', love_id);
                 });
             });

@@ -70,6 +70,105 @@ Page({
         that.load_imageLoves('onLoad');
         that.load_videoLoves('onLoad');
     },
+    onShow: function () {
+        let that = this;
+
+        let find_loves_need_refresh = wx.getStorageSync('find_loves_need_refresh')
+        if (find_loves_need_refresh) {
+            that.load_refresh_loves(find_loves_need_refresh);
+            wx.removeStorageSync('find_loves_need_refresh')
+        }
+        let find_loves_need_refresh_delete_love = wx.getStorageSync('find_loves_need_refresh_delete_love')
+        if (find_loves_need_refresh_delete_love) {
+            that.load_refresh_loves_delete_love(find_loves_need_refresh_delete_love);
+            wx.removeStorageSync('find_loves_need_refresh_delete_love')
+        }
+    },
+    load_refresh_loves: function (need_refresh_love_id) {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        let url;
+        if (wesecret) {
+            url = `https://collhome.com/apis/loves/${need_refresh_love_id}?wesecret=${wesecret}`
+        } else {
+            url = `https://collhome.com/apis/loves/${need_refresh_love_id}?wesecret=`
+        }
+        wx.request({
+            url: url,
+            success: function (res) {
+                console.log("load_refresh_loves res", res.data.data)
+                let the_refresh_love = res.data.data;
+
+                let old_hot_loves = that.data.hot_loves;
+                let old_image_loves = that.data.image_loves;
+                let old_video_loves = that.data.video_loves;
+
+                for (let old_love of old_hot_loves) {
+                    if (old_love.id == need_refresh_love_id) {
+                        // old_love = the_refresh_love
+                        old_love.praise_nums = the_refresh_love.praise_nums;
+                        old_love.comment_nums = the_refresh_love.comment_nums;
+                        old_love.if_my_comment = the_refresh_love.if_my_comment;
+                        old_love.if_my_praise = the_refresh_love.if_my_praise;
+                    }
+                }
+                for (let old_love of old_image_loves) {
+                    if (old_love.id == need_refresh_love_id) {
+                        // old_love = the_refresh_love
+                        old_love.praise_nums = the_refresh_love.praise_nums;
+                        old_love.comment_nums = the_refresh_love.comment_nums;
+                        old_love.if_my_comment = the_refresh_love.if_my_comment;
+                        old_love.if_my_praise = the_refresh_love.if_my_praise;
+                    }
+                }
+                for (let old_love of old_video_loves) {
+                    if (old_love.id == need_refresh_love_id) {
+                        // old_love = the_refresh_love
+                        old_love.praise_nums = the_refresh_love.praise_nums;
+                        old_love.comment_nums = the_refresh_love.comment_nums;
+                        old_love.if_my_comment = the_refresh_love.if_my_comment;
+                        old_love.if_my_praise = the_refresh_love.if_my_praise;
+                    }
+                }
+
+                that.setData({
+                    hot_loves: old_hot_loves,
+                    image_loves: old_image_loves,
+                    video_loves: old_video_loves,
+                })
+            }
+        })
+    },
+    load_refresh_loves_delete_love: function (love_id) {
+        let that = this;
+        let old_hot_loves = that.data.hot_loves;
+        let old_image_loves = that.data.image_loves;
+        let old_video_loves = that.data.video_loves;
+        let new_hot_loves = [];
+        let new_image_loves = [];
+        let new_video_loves = [];
+        for (let old_hot_love of old_hot_loves) {
+            if (old_hot_love.id != love_id) {
+                new_hot_loves.push(old_hot_love)
+            }
+        }
+        for (let old_image_love of old_image_loves) {
+            if (old_image_love.id != love_id) {
+                new_image_loves.push(old_image_love)
+            }
+        }
+        for (let old_video_love of old_video_loves) {
+            if (old_video_love.id != love_id) {
+                new_video_loves.push(old_video_love)
+            }
+        }
+        console.log('load_refresh_loves_delete_love', love_id);
+        that.setData({
+            hot_loves: new_hot_loves,
+            image_loves: new_image_loves,
+            video_loves: new_video_loves,
+        })
+    },
     onPullDownRefresh: function () {
         let that = this;
         let activeIndex = that.data.activeIndex;
@@ -385,36 +484,6 @@ Page({
                 });
             });
         }
-    },
-    load_refresh_loves_delete_love: function (love_id) {
-        let that = this;
-        let old_hot_loves = that.data.hot_loves;
-        let old_image_loves = that.data.image_loves;
-        let old_video_loves = that.data.video_loves;
-        let new_hot_loves = [];
-        let new_image_loves = [];
-        let new_video_loves = [];
-        for (let old_hot_love of old_hot_loves) {
-            if (old_hot_love.id != love_id) {
-                new_hot_loves.push(old_hot_love)
-            }
-        }
-        for (let old_image_love of old_image_loves) {
-            if (old_image_love.id != love_id) {
-                new_image_loves.push(old_image_love)
-            }
-        }
-        for (let old_video_love of old_video_loves) {
-            if (old_video_love.id != love_id) {
-                new_video_loves.push(old_video_love)
-            }
-        }
-        console.log('load_refresh_loves_delete_love', love_id);
-        that.setData({
-            hot_loves: new_hot_loves,
-            image_loves: new_image_loves,
-            video_loves: new_video_loves,
-        })
     },
     praiseLove: function (e) {
         let love_if_my_praise = e.currentTarget.dataset.loveifmypraise;

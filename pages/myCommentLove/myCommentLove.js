@@ -1,20 +1,54 @@
-// 从myCommentLove.js 复制过来  只是去掉了 image 和 activeIndex 和 改了 let type = 'myLoves'; 还有 mycomment 改为 my;
+// 从find.js 复制过来  只是去掉了 video 和 改了 let type = 'commentLoves'; let type = 'praiseLoves'; 还有 find 改为 mycomment;
 
 import common from '../../utils/common.js';
 var app = getApp()
 
+var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+
 Page({
     data: {
+        tabs: ["评论", "喜欢"],
+        activeIndex: 0,
+        sliderOffset: 0,
+        sliderLeft: 0,
+
+
         hot_page: 1,
         hot_reach_bottom: false,
         hot_page_no_data: false,
+        image_page: 1,
+        image_reach_bottom: false,
+        image_page_no_data: false,
        
 
         hot_inputShowed: false,
         hot_inputVal: "",
+        image_inputShowed: false,
+        image_inputVal: "",
+       
+    },
+    tabClick: function (e) {
+        let that = this;
+
+        that.setData({
+            sliderOffset: e.currentTarget.offsetLeft,
+            activeIndex: e.currentTarget.id
+        });
     },
     onLoad: function () {
         let that = this;
+
+        wx.getSystemInfo({
+            success: function (res) {
+                console.log('systemInfo', res);
+                that.setData({
+                    sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+                    sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
+                    mapHeight: res.windowHeight - 51
+                });
+            }
+        });
+
 
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
@@ -32,19 +66,20 @@ Page({
             image_width: image_width
         })
         that.load_hotLoves('onLoad');
+        that.load_imageLoves('onLoad');
     },
     onShow: function () {
         let that = this;
 
-        let my_loves_need_refresh = wx.getStorageSync('my_loves_need_refresh')
-        if (my_loves_need_refresh) {
-            that.load_refresh_loves(my_loves_need_refresh);
-            wx.removeStorageSync('my_loves_need_refresh')
+        let mycomment_loves_need_refresh = wx.getStorageSync('mycomment_loves_need_refresh')
+        if (mycomment_loves_need_refresh) {
+            that.load_refresh_loves(mycomment_loves_need_refresh);
+            wx.removeStorageSync('mycomment_loves_need_refresh')
         }
-        let my_loves_need_refresh_delete_love = wx.getStorageSync('my_loves_need_refresh_delete_love')
-        if (my_loves_need_refresh_delete_love) {
-            that.load_refresh_loves_delete_love(my_loves_need_refresh_delete_love);
-            wx.removeStorageSync('my_loves_need_refresh_delete_love')
+        let mycomment_loves_need_refresh_delete_love = wx.getStorageSync('mycomment_loves_need_refresh_delete_love')
+        if (mycomment_loves_need_refresh_delete_love) {
+            that.load_refresh_loves_delete_love(mycomment_loves_need_refresh_delete_love);
+            wx.removeStorageSync('mycomment_loves_need_refresh_delete_love')
         }
     },
     load_refresh_loves: function (need_refresh_love_id) {
@@ -63,6 +98,7 @@ Page({
                 let the_refresh_love = res.data.data;
 
                 let old_hot_loves = that.data.hot_loves;
+                let old_image_loves = that.data.image_loves;
 
                 for (let old_love of old_hot_loves) {
                     if (old_love.id == need_refresh_love_id) {
@@ -73,9 +109,20 @@ Page({
                         old_love.if_my_praise = the_refresh_love.if_my_praise;
                     }
                 }
+                for (let old_love of old_image_loves) {
+                    if (old_love.id == need_refresh_love_id) {
+                        // old_love = the_refresh_love
+                        old_love.praise_nums = the_refresh_love.praise_nums;
+                        old_love.comment_nums = the_refresh_love.comment_nums;
+                        old_love.if_my_comment = the_refresh_love.if_my_comment;
+                        old_love.if_my_praise = the_refresh_love.if_my_praise;
+                    }
+                }
+                
 
                 that.setData({
                     hot_loves: old_hot_loves,
+                    image_loves: old_image_loves,
                 })
             }
         })
@@ -83,33 +130,57 @@ Page({
     load_refresh_loves_delete_love: function (love_id) {
         let that = this;
         let old_hot_loves = that.data.hot_loves;
+        let old_image_loves = that.data.image_loves;
         let new_hot_loves = [];
+        let new_image_loves = [];
         for (let old_hot_love of old_hot_loves) {
             if (old_hot_love.id != love_id) {
                 new_hot_loves.push(old_hot_love)
+            }
+        }
+        for (let old_image_love of old_image_loves) {
+            if (old_image_love.id != love_id) {
+                new_image_loves.push(old_image_love)
             }
         }
 
         console.log('load_refresh_loves_delete_love', love_id);
         that.setData({
             hot_loves: new_hot_loves,
+            image_loves: new_image_loves,
         })
     },
     onPullDownRefresh: function () {
         let that = this;
-       
-        that.load_hotLoves('pulldown');
+        let activeIndex = that.data.activeIndex;
+        if (activeIndex == 0) {
+            that.load_hotLoves('pulldown');
+        } else {
+            that.load_imageLoves('pulldown');
+        } 
     },
     onReachBottom: function () {
         let that = this;
-
-        if (!that.data.hot_page_no_data) {
-            that.setData({
-                hot_reach_bottom: true,
-                hot_page_no_data: false,
-                hot_page: that.data.hot_page + 1
-            })
-            that.load_hotLoves('add_page')
+        let activeIndex = that.data.activeIndex;
+        console.log('onReachBottom activeIndex', activeIndex);
+        if (activeIndex == 0) {
+            if (!that.data.hot_page_no_data) {
+                that.setData({
+                    hot_reach_bottom: true,
+                    hot_page_no_data: false,
+                    hot_page: that.data.hot_page + 1
+                })
+                that.load_hotLoves('add_page')
+            }
+        } else {
+            if (!that.data.image_page_no_data) {
+                that.setData({
+                    image_reach_bottom: true,
+                    image_page_no_data: false,
+                    image_page: that.data.image_page + 1
+                })
+                that.load_imageLoves('add_page')
+            }
         }
     },
     share_touchstart: function (e) {
@@ -149,7 +220,7 @@ Page({
         }
         let search = that.data.hot_inputVal;
         let wesecret = wx.getStorageSync('wesecret');
-        let type = 'myLoves';
+        let type = 'commentLoves';
         let url;
         if (wesecret) {
             url = `https://collhome.com/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=${wesecret}`
@@ -208,6 +279,80 @@ Page({
         })
 
     },
+    load_imageLoves: function (parameter) {
+        let that = this;
+        let image_page;
+        if (parameter == 'add_page') {
+            image_page = that.data.image_page;
+        } else {
+            image_page = 1;
+            that.setData({
+                image_page: 1,
+                image_reach_bottom: false,
+                image_page_no_data: false
+            })
+        }
+        let search = that.data.image_inputVal;
+        let wesecret = wx.getStorageSync('wesecret');
+        let type = 'praiseLoves';
+        let url;
+        if (wesecret) {
+            url = `https://collhome.com/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=${wesecret}`
+        } else {
+            url = `https://collhome.com/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=`
+        }
+        wx.request({
+            url: url,
+            success: function (res) {
+                console.log('loves', res.data);
+                let loves = res.data.data;
+                if (parameter == 'add_page') {
+                    console.log("loves.length", loves.length)
+                    if (loves.length == 0) {
+                        that.setData({
+                            image_reach_bottom: false,
+                            image_page_no_data: true
+                        })
+                    } else {
+                        let new_loves = that.data.image_loves.concat(loves);
+                        that.setData({
+                            image_loves: new_loves
+                        })
+                        that.setData({
+                            image_reach_bottom: false,
+                            image_page_no_data: false
+
+                        })
+                    }
+                } else {
+                    that.setData({
+                        image_loves: loves
+                    })
+                }
+                if (parameter == 'pulldown' || parameter == 'onLoad') {
+                    wx.stopPullDownRefresh();
+                    wx.hideLoading()
+                }
+
+                if (!that.data.image_loves || that.data.image_loves.length == 0) {
+                    wx.showModal({
+                        // title: '提示',
+                        showCancel: false,
+                        content: '没有表白',
+                        success: function (res) {
+                            if (res.confirm) {
+                                console.log('用户点击确定')
+                            } else if (res.cancel) {
+                                console.log('用户点击取消')
+                            }
+                        }
+                    })
+                }
+
+            }
+        })
+
+    },
     previewImage: function (e) {
         console.log('preview e', e);
         var current = e.currentTarget.dataset.current;
@@ -243,6 +388,7 @@ Page({
             common.praiseLove(e).then((love_id) => {
 
                 let old_hot_loves = that.data.hot_loves;
+                let old_image_loves = that.data.image_loves;
                 for (let value of old_hot_loves) {
                     if (value.id == love_id) {
                         value.praise_nums = parseInt(value.praise_nums);
@@ -255,9 +401,21 @@ Page({
                         }
                     }
                 }
-                
+                for (let value of old_image_loves) {
+                    if (value.id == love_id) {
+                        value.praise_nums = parseInt(value.praise_nums);
+                        if (love_if_my_praise == 0) {
+                            value.if_my_praise = 1;
+                            value.praise_nums++
+                        } else {
+                            value.if_my_praise = 0
+                            value.praise_nums--
+                        }
+                    }
+                }
                 that.setData({
                     hot_loves: old_hot_loves,
+                    image_loves: old_image_loves,
 
                     selected_love_id: love_id
                 })
@@ -268,7 +426,20 @@ Page({
                 common.praiseLove(e).then((love_id) => {
 
                     let old_hot_loves = that.data.hot_loves;
+                    let old_image_loves = that.data.image_loves;
                     for (let value of old_hot_loves) {
+                        if (value.id == love_id) {
+                            value.praise_nums = parseInt(value.praise_nums);
+                            if (love_if_my_praise == 0) {
+                                value.if_my_praise = 1;
+                                value.praise_nums++
+                            } else {
+                                value.if_my_praise = 0
+                                value.praise_nums--
+                            }
+                        }
+                    }
+                    for (let value of old_image_loves) {
                         if (value.id == love_id) {
                             value.praise_nums = parseInt(value.praise_nums);
                             if (love_if_my_praise == 0) {
@@ -283,6 +454,7 @@ Page({
             
                     that.setData({
                         hot_loves: old_hot_loves,
+                        image_loves: old_image_loves,
 
                         selected_love_id: love_id
                     })
@@ -385,36 +557,65 @@ Page({
 
     showInput: function () {
         let that = this;
-        
-        that.setData({
-            hot_inputShowed: true
-        });
+        let activeIndex = that.data.activeIndex;
+        if (activeIndex == 0) {
+            that.setData({
+                hot_inputShowed: true
+            });
+        } else {
+            that.setData({
+                image_inputShowed: true
+            });
+        }
     },
     hideInput: function () {
         let that = this;
-        
-        that.setData({
-            hot_inputVal: "",
-            hot_inputShowed: false
-        });
+        let activeIndex = that.data.activeIndex;
+        if (activeIndex == 0) {
+            that.setData({
+                hot_inputVal: "",
+                hot_inputShowed: false
+            });
+        } else {
+            that.setData({
+                image_inputVal: "",
+                image_inputShowed: false
+            });
+        }
     },
     clearInput: function () {
         let that = this;
-        
-        that.setData({
-            hot_inputVal: ""
-        });
+        let activeIndex = that.data.activeIndex;
+        if (activeIndex == 0) {
+            that.setData({
+                hot_inputVal: ""
+            });
+        } else {
+            that.setData({
+                image_inputVal: ""
+            });
+        } 
     },
     inputTyping: function (e) {
         let that = this;
-        
-        that.setData({
-            hot_inputVal: e.detail.value
-        });
+        let activeIndex = that.data.activeIndex;
+        if (activeIndex == 0) {
+            that.setData({
+                hot_inputVal: e.detail.value
+            });
+        } else {
+            that.setData({
+                image_inputVal: e.detail.value
+            });
+        }
     },
     searchInputConfirm: function (e) {
         let that = this;
-        
-        that.load_hotLoves('pulldown');
+        let activeIndex = that.data.activeIndex;
+        if (activeIndex == 0) {
+            that.load_hotLoves('pulldown');
+        } else {
+            that.load_imageLoves('pulldown');
+        }
     }
 });

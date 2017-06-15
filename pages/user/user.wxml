@@ -52,7 +52,7 @@
       <view class="weui-panel__bd">
         <view class="weui-cells weui-cells_after-title">
     
-          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMyLove" hover-class="weui-cell_active">
+          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMyCommentLove" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
               <image src="../images/comment_and_love1.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
             </view>

@@ -120,8 +120,8 @@ function showLoveActionSheet(e) {
                                     success: function (res) {
                                         console.log('delete love success', res.data)
                                         wx.setStorageSync('board_loves_need_refresh_delete_love', love_id);
-                                        wx.setStorageSync('hot_loves_need_refresh_delete_love', love_id);
-                                        wx.setStorageSync('college_loves_need_refresh_delete_love', love_id);
+                                        wx.setStorageSync('find_loves_need_refresh_delete_love', love_id);
+                                        wx.setStorageSync('mycomment_loves_need_refresh_delete_love', love_id);
                                         wx.setStorageSync('my_loves_need_refresh_delete_love', love_id);
                                         resolve(love_id);
                                     }

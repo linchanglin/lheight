@@ -60,7 +60,7 @@ Page({
             })
         } else {
             common.signIn().then(() => {
-                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                let my_userInfo = wx.getStorageSync('my_userInfo');
                 that.setData({
                     userInfo: my_userInfo
                 })
@@ -81,7 +81,7 @@ Page({
             })
         } else {
             common.signIn().then(() => {
-                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                let my_userInfo = wx.getStorageSync('my_userInfo');
                 that.setData({
                     userInfo: my_userInfo
                 })
@@ -102,7 +102,7 @@ Page({
             })
         } else {
             common.signIn().then(() => {
-                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                let my_userInfo = wx.getStorageSync('my_userInfo');
                 that.setData({
                     userInfo: my_userInfo
                 })
@@ -110,6 +110,27 @@ Page({
 
                 wx.navigateTo({
                     url: '../profileInput/profileInput',
+                })
+            });
+        }
+    },
+    navigateToMyCommentLove: function () {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            wx.navigateTo({
+                url: '../myCommentLove/myCommentLove',
+            })
+        } else {
+            common.signIn().then(() => {
+                let my_userInfo = wx.getStorageSync('my_userInfo');
+                that.setData({
+                    userInfo: my_userInfo
+                })
+                that.get_unreadNoticeNums();
+
+                wx.navigateTo({
+                    url: '../myCommentLove/myCommentLove',
                 })
             });
         }
@@ -123,7 +144,7 @@ Page({
             })
         } else {
             common.signIn().then(() => {
-                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                let my_userInfo = wx.getStorageSync('my_userInfo');
                 that.setData({
                     userInfo: my_userInfo
                 })
@@ -144,7 +165,7 @@ Page({
             })
         } else {
             common.signIn().then(() => {
-                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                let my_userInfo = wx.getStorageSync('my_userInfo');
                 that.setData({
                     userInfo: my_userInfo
                 })
@@ -165,7 +186,7 @@ Page({
             })
         } else {
             common.signIn().then(() => {
-                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                let my_userInfo = wx.getStorageSync('my_userInfo');
                 that.setData({
                     userInfo: my_userInfo
                 })
@@ -195,7 +216,7 @@ Page({
             }
         } else {
             common.signIn().then(() => {
-                let my_userInfo = wx.getStorageSync('my_userInfo');                
+                let my_userInfo = wx.getStorageSync('my_userInfo');
                 that.setData({
                     userInfo: my_userInfo
                 })

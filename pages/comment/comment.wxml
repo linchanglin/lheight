@@ -117,10 +117,10 @@
           </view>
         </block>
 
-        <!--<view wx:if="{{reach_bottom}}" class="reach_loading">
+        <view wx:if="{{reach_bottom}}" class="reach_loading">
           <view class="weui-loading on_loading"></view>
           <view class="weui-loadmore__tips">正在加载...</view>
-        </view>-->
+        </view>
 
         <!--<view wx:if="{{page_no_data}}" class="page_no_data">
           <view class="weui-loadmore weui-loadmore_line">
