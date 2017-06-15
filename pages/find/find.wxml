@@ -103,15 +103,15 @@
 
       </block>
     </view>
-    <view wx:if="{{reach_bottom}}" class="reach_loading">
+    <view wx:if="{{hot_reach_bottom}}" class="reach_loading">
       <view class="weui-loading on_loading"></view>
       <view class="weui-loadmore__tips">正在加载...</view>
     </view>
-    <view wx:if="{{page_no_data}}" class="page_no_data">
+    <!--<view wx:if="{{hot_page_no_data}}" class="page_no_data">
       <view class="weui-loadmore weui-loadmore_line">
         <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
       </view>
-    </view>
+    </view>-->
   </view>
 </view>
 
@@ -210,15 +210,15 @@
 
       </block>
     </view>
-    <view wx:if="{{reach_bottom}}" class="reach_loading">
+    <view wx:if="{{image_reach_bottom}}" class="reach_loading">
       <view class="weui-loading on_loading"></view>
       <view class="weui-loadmore__tips">正在加载...</view>
     </view>
-    <view wx:if="{{page_no_data}}" class="page_no_data">
+    <!--<view wx:if="{{image_page_no_data}}" class="page_no_data">
       <view class="weui-loadmore weui-loadmore_line">
         <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
       </view>
-    </view>
+    </view>-->
   </view>
 </view>
 
@@ -317,15 +317,15 @@
 
       </block>
     </view>
-    <view wx:if="{{reach_bottom}}" class="reach_loading">
+    <view wx:if="{{video_reach_bottom}}" class="reach_loading">
       <view class="weui-loading on_loading"></view>
       <view class="weui-loadmore__tips">正在加载...</view>
     </view>
-    <view wx:if="{{page_no_data}}" class="page_no_data">
+    <!--<view wx:if="{{video_page_no_data}}" class="page_no_data">
       <view class="weui-loadmore weui-loadmore_line">
         <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
       </view>
-    </view>
+    </view>-->
   </view>
 </view>
 
