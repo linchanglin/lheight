@@ -75,7 +75,6 @@ Page({
                 } else {
                     if (add_files.length > 0) {
 
-
                         qiniuUploader.getUptoken().then((uptoken) => {
                             let files = that.data.files;
                             let i = 0;
@@ -96,35 +95,6 @@ Page({
                                 });
                             }
                         })
-
-
-                        // initQiniu();
-                        // let files = that.data.files;
-                        // let i = 0;
-                        // for (let filePath of add_files) {
-                        //     // 交给七牛上传
-                        //     qiniuUploader.upload(filePath, (res) => {
-                        //         files.push(res.imageURL)
-                        //         that.setData({
-                        //             files: files
-                        //         })
-                        //     }, (error) => {
-                        //         console.error('error: ' + JSON.stringify(error));
-                        //     }, (complete) => {
-                        //         console.log('complete', complete)
-                        //         i++;
-                        //         if (i == add_files.length) {
-                        //             that.postSavePictures();
-                        //         }
-                        //     });
-                        // }
-
-
-
-                    // } else {
-                    //     that.postSaveLove();
-
-
 
                     }
                 }

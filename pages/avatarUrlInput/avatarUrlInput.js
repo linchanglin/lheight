@@ -18,11 +18,12 @@ Page({
             success: function (res) {
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
                 let add_files = res.tempFilePaths;
+                console.log('add_files', add_files);
                 if (add_files.length > 1) {
                     that.openAlertPictureTooMany();
                 } else {
                     if (add_files.length > 0) {
-
+                        console.log('add_filesss ', add_files);
                         qiniuUploader.getUptoken().then((uptoken) => {
                             let filePath = add_files[0];
                             qiniuUploader.upload(uptoken, filePath, (res) => {
@@ -56,6 +57,7 @@ Page({
     postSaveAvatarUrl: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
+        console.log('that.data.avatarUrlsssss', that.data.avatarUrl);
         wx.request({
             url: 'https://collhome.com/apis/users',
             method: 'POST',
