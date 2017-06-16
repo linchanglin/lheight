@@ -1,17 +1,6 @@
 import common from '../../utils/common.js';
 import qiniuUploader from '../../utils/qiniuUploader.js';
 
-// 初始化七牛相关参数
-function initQiniu() {
-    var options = {
-        region: 'SCN', // 华南区
-        uptokenURL: 'https://collhome.com/apis/uptoken',
-        domain: 'http://cdn.collhome.com'
-    };
-    qiniuUploader.init(options);
-}
-
-
 Page({
     data: {},
     onLoad: function (options) {
@@ -33,18 +22,21 @@ Page({
                     that.openAlertPictureTooMany();
                 } else {
                     if (add_files.length > 0) {
-                        initQiniu();
-                        let filePath = add_files[0];
-                        qiniuUploader.upload(filePath, (res) => {
-                            that.setData({
-                                avatarUrl: res.imageURL
-                            })
-                            that.postSaveAvatarUrl();
-                        }, (error) => {
-                            console.error('error: ' + JSON.stringify(error));
-                        }, (complete) => {
 
-                        });
+                        qiniuUploader.getUptoken().then((uptoken) => {
+                            let filePath = add_files[0];
+                            qiniuUploader.upload(uptoken, filePath, (res) => {
+                                that.setData({
+                                    avatarUrl: res.imageURL
+                                })
+                                that.postSaveAvatarUrl();
+                            }, (error) => {
+                                console.error('error: ' + JSON.stringify(error));
+                            }, (complete) => {
+                                console.log('complete', complete)
+                            });
+                        })
+
                     }
                 }
             }

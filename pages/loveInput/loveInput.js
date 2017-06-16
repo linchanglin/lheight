@@ -1,16 +1,6 @@
 import common from '../../utils/common.js';
 import qiniuUploader from '../../utils/qiniuUploader.js';
 
-// 初始化七牛相关参数
-function initQiniu() {
-    var options = {
-        region: 'SCN', // 华南区
-        uptokenURL: 'https://collhome.com/apis/uptoken',
-        domain: 'http://cdn.collhome.com'
-    };
-    qiniuUploader.init(options);
-}
-
 Page({
     data: {
         files: [],
@@ -212,25 +202,25 @@ Page({
                         that.postSaveLove();
                     } else {
                         if (files.length > 0) {
-                            initQiniu();
-                            let i = 0;
-                            for (let filePath of files) {
-                                // 交给七牛上传
-                                qiniuUploader.upload(filePath, (res) => {
-                                    images.push(res.imageURL)
-                                    that.setData({
-                                        images: images
-                                    })
-                                }, (error) => {
-                                    console.error('error: ' + JSON.stringify(error));
-                                }, (complete) => {
-                                    console.log('complete', complete)
-                                    i++;
-                                    if (i == files.length) {
-                                        that.postSaveLove();
-                                    }
-                                });
-                            }
+                            qiniuUploader.getUptoken().then((uptoken) => {
+                                let i = 0;
+                                for (let filePath of files) {
+                                    qiniuUploader.upload(uptoken, filePath, (res) => {
+                                        images.push(res.imageURL)
+                                        that.setData({
+                                            images: images
+                                        })
+                                    }, (error) => {
+                                        console.error('error: ' + JSON.stringify(error));
+                                    }, (complete) => {
+                                        console.log('complete', complete)
+                                        i++;
+                                        if (i == files.length) {
+                                            that.postSaveLove();
+                                        }
+                                    });
+                                }
+                            })
                         } else {
                             that.postSaveLove();
                         }

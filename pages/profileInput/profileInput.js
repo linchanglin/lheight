@@ -1,16 +1,6 @@
 import common from '../../utils/common.js';
 import qiniuUploader from '../../utils/qiniuUploader.js';
 
-// 初始化七牛相关参数
-function initQiniu() {
-    var options = {
-        region: 'SCN', // 华南区
-        uptokenURL: 'https://collhome.com/apis/uptoken',
-        domain: 'http://cdn.collhome.com'
-    };
-    qiniuUploader.init(options);
-}
-
 Page({
     data: {
         files: []
@@ -84,28 +74,58 @@ Page({
                     that.openAlertPictureTooMany();
                 } else {
                     if (add_files.length > 0) {
-                        initQiniu();
-                        let files = that.data.files;
-                        let i = 0;
-                        for (let filePath of add_files) {
-                            // 交给七牛上传
-                            qiniuUploader.upload(filePath, (res) => {
-                                files.push(res.imageURL)
-                                that.setData({
-                                    files: files
-                                })
-                            }, (error) => {
-                                console.error('error: ' + JSON.stringify(error));
-                            }, (complete) => {
-                                console.log('complete', complete)
-                                i++;
-                                if (i == add_files.length) {
-                                    that.postSavePictures();
-                                }
-                            });
-                        }
-                    } else {
-                        that.postSaveLove();
+
+
+                        qiniuUploader.getUptoken().then((uptoken) => {
+                            let files = that.data.files;
+                            let i = 0;
+                            for (let filePath of add_files) {
+                                qiniuUploader.upload(uptoken, filePath, (res) => {
+                                    files.push(res.imageURL)
+                                    that.setData({
+                                        files: files
+                                    })
+                                }, (error) => {
+                                    console.error('error: ' + JSON.stringify(error));
+                                }, (complete) => {
+                                    console.log('complete', complete)
+                                    i++;
+                                    if (i == add_files.length) {
+                                        that.postSavePictures();
+                                    }
+                                });
+                            }
+                        })
+
+
+                        // initQiniu();
+                        // let files = that.data.files;
+                        // let i = 0;
+                        // for (let filePath of add_files) {
+                        //     // 交给七牛上传
+                        //     qiniuUploader.upload(filePath, (res) => {
+                        //         files.push(res.imageURL)
+                        //         that.setData({
+                        //             files: files
+                        //         })
+                        //     }, (error) => {
+                        //         console.error('error: ' + JSON.stringify(error));
+                        //     }, (complete) => {
+                        //         console.log('complete', complete)
+                        //         i++;
+                        //         if (i == add_files.length) {
+                        //             that.postSavePictures();
+                        //         }
+                        //     });
+                        // }
+
+
+
+                    // } else {
+                    //     that.postSaveLove();
+
+
+
                     }
                 }
             }
@@ -179,7 +199,6 @@ Page({
             }
         })
     },
-
     showPictureOnWall: function (e) {
         console.log("showPictureOnWall e", e);
         let that = this;
