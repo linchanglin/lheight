@@ -34,10 +34,12 @@ Page({
                 console.log("load_notices res", res);
                 let notices = res.data.data;
                 for (let notice of notices) {
-                    if (notice.source.content.length > 20) {
-                        notice.source.content = ':  ' + notice.source.content.substring(0, 20) + '...';
-                    } else {
-                        notice.source.content = ':  ' + notice.source.content;
+                    if (notice.source) {
+                        if (notice.source.content.length > 20) {
+                            notice.source.content = ':  ' + notice.source.content.substring(0, 20) + '...';
+                        } else {
+                            notice.source.content = ':  ' + notice.source.content;
+                        }
                     }
                 }
 
