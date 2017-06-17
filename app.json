@@ -1,15 +1,10 @@
 {
     "pages": [
+        "pages/board/board",
         "pages/user/user",
-        
         "pages/find/find",
         "pages/myCommentLove/myCommentLove",
-        
-        "pages/board/board",
-        
         "pages/loveInput/loveInput",
-        
-        
         "pages/picture/picture",
         "pages/profileInput/profileInput",
         "pages/notice/notice",

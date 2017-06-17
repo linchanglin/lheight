@@ -222,10 +222,10 @@
 
     <view class="weui-tabbar">
 
-      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToChat">
+      <!--<view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToChat">
         <image class="image-comment" src="../images/comment.png"></image>
         <text class="weui-tabbar__label">私信</text>
-      </view>
+      </view>-->
 
       <view class="weui-tabbar__item" data-userId="{{userInfo.id}}" data-userIfMyPraise="{{userInfo.if_my_praise}}" catchtap="praiseUser">
         <image wx:if="{{userInfo.if_my_praise == 0}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme.png"></image>
@@ -240,11 +240,12 @@
         </button>
       </view>
 
-      <view class="weui-tabbar__item" hover-class="weui-cell_active" catchtap="navigateToUserMore">
+      <!--<view class="weui-tabbar__item" hover-class="weui-cell_active" catchtap="navigateToUserMore">
         <image class="image-comment" src="../images/round_right.png"></image>
 
         <text class="weui-tabbar__label">更多</text>
-      </view>
+      </view>-->
+
     </view>
 
   </view>

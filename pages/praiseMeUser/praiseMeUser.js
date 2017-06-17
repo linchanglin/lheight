@@ -7,14 +7,30 @@ Page({
     onLoad: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
+        that.setData({
+            wesecret: wesecret
+        })
+        that.load_praiseMeUsers('onLoad');
+    },
+    load_praiseMeUsers: function (parameter) {
+        let that = this;
+        let wesecret = that.data.wesecret;
+        let search = that.data.inputVal;
         wx.request({
-            url: `https://collhome.com/apis/praiseMeUsers?wesecret=${wesecret}`,
+            url: `https://collhome.com/apis/praiseMeUsers?wesecret=${wesecret}&search=${search}`,
             success: function (res) {
                 console.log('praiseMeUsers', res.data.data);
                 let praiseMeUsers = res.data.data;
                 that.setData({
                     praiseMeUsers: praiseMeUsers
                 })
+
+                if (parameter == 'onLoad') {
+                    let user_nums = praiseMeUsers.length;
+                    wx.setNavigationBarTitle({
+                        title: `${user_nums} 人喜欢我`
+                    })
+                }
             }
         })
     },
@@ -24,6 +40,7 @@ Page({
             url: '../profileShow/profileShow?user_id=' + user_id
         })
     },
+
     showInput: function () {
         this.setData({
             inputShowed: true
@@ -45,8 +62,9 @@ Page({
             inputVal: e.detail.value
         });
     },
-
-
-
+    searchInputConfirm: function (e) {
+        let that = this;
+        that.load_praiseMeUsers();
+    }
 
 })

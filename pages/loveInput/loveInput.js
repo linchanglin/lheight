@@ -51,6 +51,7 @@ Page({
                 });
             }
             wx.removeStorageSync('video_url');
+            that.set_loading_status();
         }
     },
     chooseImage: function (e) {
@@ -75,7 +76,7 @@ Page({
     },
     set_loading_status: function () {
         let that = this;
-        if (that.data.content.length > 0 || that.data.files.length > 0) {
+        if (that.data.content.length > 0 || that.data.files.length > 0 || that.data.video_url.length > 0) {
             that.setData({
                 save_loading: 1
             })
@@ -252,8 +253,9 @@ Page({
     },
     showNoAvailableModal: function () {
         let that = this;
+        let disabled_reason = that.data.my_userInfo.disabled_reason;
         wx.showModal({
-            content: '您被禁止发表表白，请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！',
+            content: `您被禁止发表表白，原因是: ${disabled_reason} 请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！`,
             showCancel: false,
             success: function (res) {
                 if (res.confirm) {

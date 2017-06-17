@@ -73,6 +73,11 @@ Page({
                 that.setData({
                     comment: comment,
                 })
+
+                let reply_nums = comment.reply_nums;
+                wx.setNavigationBarTitle({
+                    title: `${reply_nums} 条回复`
+                })
             }
         })
     },

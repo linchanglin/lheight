@@ -365,21 +365,22 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (!that.data.image_loves || that.data.image_loves.length == 0) {
-                    wx.showModal({
-                        // title: '提示',
-                        showCancel: false,
-                        content: '没有表白',
-                        success: function (res) {
-                            if (res.confirm) {
-                                console.log('用户点击确定')
-                            } else if (res.cancel) {
-                                console.log('用户点击取消')
+                if (parameter != 'onLoad') {
+                    if (!that.data.image_loves || that.data.image_loves.length == 0) {
+                        wx.showModal({
+                            // title: '提示',
+                            showCancel: false,
+                            content: '没有表白',
+                            success: function (res) {
+                                if (res.confirm) {
+                                    console.log('用户点击确定')
+                                } else if (res.cancel) {
+                                    console.log('用户点击取消')
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
-
             }
         })
 
@@ -439,21 +440,22 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (!that.data.video_loves || that.data.video_loves.length == 0) {
-                    wx.showModal({
-                        // title: '提示',
-                        showCancel: false,
-                        content: '没有表白',
-                        success: function (res) {
-                            if (res.confirm) {
-                                console.log('用户点击确定')
-                            } else if (res.cancel) {
-                                console.log('用户点击取消')
+                if (parameter != 'onLoad') {
+                    if (!that.data.video_loves || that.data.video_loves.length == 0) {
+                        wx.showModal({
+                            // title: '提示',
+                            showCancel: false,
+                            content: '没有表白',
+                            success: function (res) {
+                                if (res.confirm) {
+                                    console.log('用户点击确定')
+                                } else if (res.cancel) {
+                                    console.log('用户点击取消')
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
-
             }
         })
 
