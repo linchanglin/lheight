@@ -20,6 +20,8 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
+                that.get_unreadSystemNoticeNums();
+                
             })
         }
     },
@@ -34,6 +36,7 @@ Page({
             wx.removeStorageSync('user_need_refresh')
         }
         that.get_unreadNoticeNums();
+        that.get_unreadSystemNoticeNums();
     },
     get_unreadNoticeNums: function () {
         let that = this;
@@ -51,12 +54,29 @@ Page({
             })
         }
     },
-    navigateToManage: function () {
+    get_unreadSystemNoticeNums: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
+            wx.request({
+                url: `https://collhome.com/apis/unreadSystemNoticeNums?wesecret=${wesecret}`,
+                success: function (res) {
+                    console.log('unreadSystemNoticeNums', res);
+                    let unreadSystemNoticeNums = res.data.data.unreadSystemNoticeNums;
+                    that.setData({
+                        unreadSystemNoticeNums: unreadSystemNoticeNums
+                    })
+                }
+            })
+        }
+    },
+    navigateToManage: function () {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        let unreadSystemNoticeNums = that.data.unreadSystemNoticeNums;
+        if (wesecret) {
             wx.navigateTo({
-                url: '../manage/manage',
+                url: `../manage/manage?unreadSystemNoticeNums=${unreadSystemNoticeNums}`,
             })
         } else {
             common.signIn().then(() => {
@@ -65,9 +85,10 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
+                that.get_unreadSystemNoticeNums();
 
                 wx.navigateTo({
-                    url: '../manage/manage',
+                    url: `../manage/manage?unreadSystemNoticeNums=${unreadSystemNoticeNums}`,
                 })
             });
         }
@@ -86,6 +107,7 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
+                that.get_unreadSystemNoticeNums();               
 
                 wx.navigateTo({
                     url: '../praiseMeUser/praiseMeUser',
@@ -107,7 +129,8 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
-
+                that.get_unreadSystemNoticeNums();
+                
                 wx.navigateTo({
                     url: '../profileInput/profileInput',
                 })
@@ -128,7 +151,8 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
-
+                that.get_unreadSystemNoticeNums();
+                
                 wx.navigateTo({
                     url: '../myCommentLove/myCommentLove',
                 })
@@ -149,7 +173,8 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
-
+                that.get_unreadSystemNoticeNums();
+                
                 wx.navigateTo({
                     url: '../myLove/myLove',
                 })
@@ -170,7 +195,8 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
-
+                that.get_unreadSystemNoticeNums();
+                
                 wx.navigateTo({
                     url: '../notice/notice',
                 })
@@ -191,7 +217,8 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
-
+                that.get_unreadSystemNoticeNums();
+                
                 wx.navigateTo({
                     url: '../message/message',
                 })
@@ -221,7 +248,8 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
-
+                that.get_unreadSystemNoticeNums();
+                
                 let userInfo = that.data.userInfo;
                 if (userInfo.available == 0) {
                     that.showNoAvailableModal();
@@ -242,7 +270,7 @@ Page({
         let disabled_reason = that.data.userInfo.disabled_reason;
         wx.showModal({
             // title: '不能表白',
-            content: `您被禁止发表表白，原因是: ${disabled_reason} 请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！`,
+            content: `您被禁止发表表白，原因是: ${disabled_reason} 请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！给您造成不便，谢谢您的谅解！`,
             showCancel: false,
             success: function (res) {
                 if (res.confirm) {

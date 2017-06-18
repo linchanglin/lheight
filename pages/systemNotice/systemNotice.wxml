@@ -1,0 +1,16 @@
+<view class="page">
+  <view class="page__bd" style="padding-top: 15px;">
+    <block wx:for="{{systemNotices}}" wx:for-item="systemNotice" wx:key="id">
+      <view style="display: flex; justify-content: center; align-items: center">
+        <text style="background-color: #DADADA; color: #ffffff; padding: 0 5px; font-size: 13px; border-radius: 5px;">{{systemNotice.created_at}}</text>
+      </view>
+      <view style="padding: 15px;">
+        <view style="background-color: #fff;border-radius: 5px;border: 0.5px solid #ccc;padding: 15px;">
+          <video wx:if="{{systemNotice.video_url.length > 0}}" style="width: 100%;height: 200px;" src="{{systemNotice.video_url}}"></video>
+          <image wx:if="{{systemNotice.image.length > 0}}" style="width: 100%;height: 200px;" mode="aspectFill" src="{{systemNotice.image}}" data-current="{{systemNotice.image}}" catchtap="previewImage"></image>
+          <text wx:if="{{systemNotice.content.length > 0}}" >{{systemNotice.content}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

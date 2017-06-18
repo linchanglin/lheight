@@ -3,9 +3,21 @@ Page({
     data: {
         canIUseContact: wx.canIUse('button.open-type.contact')
     },
-    navigateToBlackList: function () {
+    onLoad: function (options) {
+        let that = this;
+        let unreadSystemNoticeNums = options.unreadSystemNoticeNums;
+        that.setData({
+            unreadSystemNoticeNums: unreadSystemNoticeNums
+        })
+    },
+    // navigateToBlackList: function () {
+    //     wx.navigateTo({
+    //         url: '../blackList/blackList',
+    //     })
+    // },
+    navigateToSystemNotice: function () {
         wx.navigateTo({
-            url: '../blackList/blackList',
+            url: '../systemNotice/systemNotice',
         })
     },
     signOut: function () {

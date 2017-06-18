@@ -1,0 +1,5 @@
+/* pages/systemNotice/systemNotice.wxss */
+
+page {
+    background-color: #edecf2;
+}

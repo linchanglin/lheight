@@ -17,11 +17,13 @@
 
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToBlackList">
+        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToSystemNotice">
           <view class="weui-cell__bd">
             <view style="display: inline-block; vertical-align: middle">系统通知</view>
           </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">
+            <view wx:if="{{unreadSystemNoticeNums > 0}}" class="weui-badge weui-badge_dot" style="margin-left: 5px;margin-right: 5px;"></view>
+          </view>
         </view>
       </view>
     </view>

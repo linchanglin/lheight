@@ -255,7 +255,7 @@ Page({
         let that = this;
         let disabled_reason = that.data.my_userInfo.disabled_reason;
         wx.showModal({
-            content: `您被禁止发表表白，原因是: ${disabled_reason} 请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！`,
+            content: `您被禁止发表表白，原因是: ${disabled_reason} 请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！给您造成不便，谢谢您的谅解！`,
             showCancel: false,
             success: function (res) {
                 if (res.confirm) {

@@ -1,21 +1,27 @@
 {
     "pages": [
-        "pages/board/board",
         "pages/user/user",
+        
+        "pages/systemNotice/systemNotice",
+        
+        "pages/manage/manage",
+        
+        "pages/chat/chat",
+        
+        
+        "pages/board/board",
         "pages/find/find",
         "pages/myCommentLove/myCommentLove",
         "pages/loveInput/loveInput",
         "pages/picture/picture",
         "pages/profileInput/profileInput",
         "pages/notice/notice",
-        "pages/manage/manage",
         "pages/message/message",
         "pages/blackList/blackList",
         "pages/praiseMeUser/praiseMeUser",
         "pages/reply/reply",
         "pages/profileShow/profileShow",
         "pages/profileShowMore/profileShowMore",
-        "pages/chat/chat",
         "pages/profileDetailsInput/profileDetailsInput",
         "pages/avatarUrlInput/avatarUrlInput",
         "pages/avatarUrl/avatarUrl",
