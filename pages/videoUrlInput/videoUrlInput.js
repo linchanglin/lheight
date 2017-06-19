@@ -22,7 +22,14 @@ Page({
     },
     confirmInput: function () {
         let that = this;
-        let video_url = that.data.video_url;
+        let video = that.data.video_url;
+        let video_url;
+        if (video) {
+            video_url = video;
+        } else {
+            video_url = 'setnull'
+        }
+        console.log("video_urll",  video_url);
         wx.setStorageSync('video_url', video_url);
         wx.navigateBack();
     }

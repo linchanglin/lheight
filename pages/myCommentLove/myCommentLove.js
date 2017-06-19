@@ -19,13 +19,13 @@ Page({
         image_page: 1,
         image_reach_bottom: false,
         image_page_no_data: false,
-       
+
 
         hot_inputShowed: false,
         hot_inputVal: "",
         image_inputShowed: false,
         image_inputVal: "",
-       
+
     },
     tabClick: function (e) {
         let that = this;
@@ -118,7 +118,7 @@ Page({
                         old_love.if_my_praise = the_refresh_love.if_my_praise;
                     }
                 }
-                
+
 
                 that.setData({
                     hot_loves: old_hot_loves,
@@ -157,7 +157,7 @@ Page({
             that.load_hotLoves('pulldown');
         } else {
             that.load_imageLoves('pulldown');
-        } 
+        }
     },
     onReachBottom: function () {
         let that = this;
@@ -334,19 +334,21 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (!that.data.image_loves || that.data.image_loves.length == 0) {
-                    wx.showModal({
-                        // title: '提示',
-                        showCancel: false,
-                        content: '没有表白',
-                        success: function (res) {
-                            if (res.confirm) {
-                                console.log('用户点击确定')
-                            } else if (res.cancel) {
-                                console.log('用户点击取消')
+                if (parameter != 'onLoad') {
+                    if (!that.data.image_loves || that.data.image_loves.length == 0) {
+                        wx.showModal({
+                            // title: '提示',
+                            showCancel: false,
+                            content: '没有表白',
+                            success: function (res) {
+                                if (res.confirm) {
+                                    console.log('用户点击确定')
+                                } else if (res.cancel) {
+                                    console.log('用户点击取消')
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
 
             }
@@ -451,7 +453,7 @@ Page({
                             }
                         }
                     }
-            
+
                     that.setData({
                         hot_loves: old_hot_loves,
                         image_loves: old_image_loves,
@@ -594,7 +596,7 @@ Page({
             that.setData({
                 image_inputVal: ""
             });
-        } 
+        }
     },
     inputTyping: function (e) {
         let that = this;
