@@ -57,7 +57,7 @@
       </view>
 
     </view>
-    <view wx:if="{{pictureOnWall == 1}}" class="weui-cells__title">提示：您相册的照片将展示在眼缘墙上。</view>
+    <view wx:if="{{pictureOnWall == 1}}" class="weui-cells__title">提示：您的照片或头像将展示在眼缘墙上。</view>
 
     <view class="weui-panel weui-panel_access" style="margin-bottom: 20px">
       <view class="weui-panel__bd">

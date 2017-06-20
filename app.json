@@ -1,15 +1,10 @@
 {
     "pages": [
-        "pages/user/user",
-        
-        "pages/systemNotice/systemNotice",
-        
-        "pages/manage/manage",
-        
-        "pages/chat/chat",
-        
-        
         "pages/board/board",
+        "pages/user/user",
+        "pages/systemNotice/systemNotice",
+        "pages/manage/manage",
+        "pages/chat/chat",
         "pages/find/find",
         "pages/myCommentLove/myCommentLove",
         "pages/loveInput/loveInput",

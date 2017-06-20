@@ -84,7 +84,7 @@ Page({
     navigateToProfileShow: function (e) {
         let user_id = e.currentTarget.dataset.userid;
         wx.navigateTo({
-            url: '../profileShow/profileShow?user_id=' + user_id
+            url: `../profileShow/profileShow?user_id=${user_id}`
         })
     },
     navigateToProfileShowInSource: function (e) {
@@ -103,7 +103,7 @@ Page({
         }, 450)
         let user_id = e.currentTarget.dataset.userid;
         wx.navigateTo({
-            url: '../profileShow/profileShow?user_id=' + notice_source_userInfo_id
+            url: `../profileShow/profileShow?user_id=${notice_source_userInfo_id}`
         })
     },
     navigateToProfileShowInObjectUserInfo: function (e) {
@@ -122,7 +122,7 @@ Page({
         }, 450)
         let user_id = e.currentTarget.dataset.userid;
         wx.navigateTo({
-            url: '../profileShow/profileShow?user_id=' + notice_objectUserInfo_Id
+            url: `../profileShow/profileShow?user_id=${notice_objectUserInfo_Id}`
         })
     },
     navigateToSource: function (e) {
@@ -133,6 +133,16 @@ Page({
         let source_love_id = e.currentTarget.dataset.sourceloveid;
         let source_comment_id = e.currentTarget.dataset.sourcecommentid;
         let source_type = e.currentTarget.dataset.sourcetype;
+
+        that.setData({
+            the_item_selected_notice_id: notice_id
+        })
+        setTimeout(function () {
+            that.setData({
+                the_item_selected_notice_id: ''
+            })
+        }, 450)
+
         if (source_type == 1) {
             wx.navigateTo({
                 url: `../comment/comment?love_id=${source_love_id}`
@@ -164,5 +174,19 @@ Page({
                 }
             })
         }
-    }
+    },
+    longtap_notice: function (e) {
+        console.log('longtap_notice', e);
+        let notice_id = e.currentTarget.dataset.noticeid;
+        var that = this;
+        that.setData({
+            the_item_selected_notice_id: notice_id
+        })
+    },
+    touchmove_notice: function (e) {
+        let that = this;
+        that.setData({
+            the_item_selected_notice_id: ''
+        })
+    },
 })
