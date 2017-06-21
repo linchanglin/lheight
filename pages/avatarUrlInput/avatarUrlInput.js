@@ -59,7 +59,7 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         console.log('that.data.avatarUrlsssss', that.data.avatarUrl);
         wx.request({
-            url: 'https://collhome.com/apis/users',
+            url: 'https://collhome.com/shanghai/apis/users',
             method: 'POST',
             data: {
                 wesecret: wesecret,

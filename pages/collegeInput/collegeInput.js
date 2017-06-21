@@ -6,7 +6,7 @@ Page({
         let that = this;
         let my_userInfo = wx.getStorageSync('my_userInfo');
         wx.request({
-            url: 'https://collhome.com/apis/colleges',
+            url: 'https://collhome.com/shanghai/apis/colleges',
             success: function (res) {
                 console.log('colleges res', res);
                 let originColleges = res.data.data;
@@ -38,7 +38,7 @@ Page({
 
         let wesecret = wx.getStorageSync('wesecret');
         wx.request({
-            url: 'https://collhome.com/apis/users',
+            url: 'https://collhome.com/shanghai/apis/users',
             method: 'POST',
             data: {
                 wesecret: wesecret,

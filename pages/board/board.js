@@ -68,9 +68,9 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/loves/${need_refresh_love_id}?wesecret=${wesecret}`
+            url = `https://collhome.com/shanghai/apis/loves/${need_refresh_love_id}?wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/loves/${need_refresh_love_id}?wesecret=`
+            url = `https://collhome.com/shanghai/apis/loves/${need_refresh_love_id}?wesecret=`
         }
         wx.request({
             url: url,
@@ -114,9 +114,9 @@ Page({
         let love_id = that.data.loves[0].id;
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
-            url = `https://collhome.com/apis/unreadLoveNums?love_id=${love_id}&wesecret=${wesecret}`
+            url = `https://collhome.com/shanghai/apis/unreadLoveNums?love_id=${love_id}&wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/unreadLoveNums?love_id=${love_id}&wesecret=`
+            url = `https://collhome.com/shanghai/apis/unreadLoveNums?love_id=${love_id}&wesecret=`
         }
         wx.request({
             url: url,
@@ -192,9 +192,9 @@ Page({
         let type = 'newLoves';
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${page}&search=${search}&wesecret=${wesecret}`
+            url = `https://collhome.com/shanghai/apis/loves?type=${type}&page=${page}&search=${search}&wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${page}&search=${search}&wesecret=`
+            url = `https://collhome.com/shanghai/apis/loves?type=${type}&page=${page}&search=${search}&wesecret=`
         }
         wx.request({
             url: url,

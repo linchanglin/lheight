@@ -44,9 +44,9 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/users/${user_id}?wesecret=${wesecret}`
+            url = `https://collhome.com/shanghai/apis/users/${user_id}?wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/users/${user_id}?wesecret=`
+            url = `https://collhome.com/shanghai/apis/users/${user_id}?wesecret=`
         }
         wx.request({
             url: url,

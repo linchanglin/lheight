@@ -17,7 +17,7 @@ function signIn() {
                                         console.log('res', res);
                                         console.log('code', code, 'encryptedData', res.encryptedData, 'iv', res.iv)
                                         wx.request({
-                                            url: 'https://collhome.com/apis/register',
+                                            url: 'https://collhome.com/shanghai/apis/register',
                                             method: 'POST',
                                             data: {
                                                 code: code,
@@ -29,7 +29,7 @@ function signIn() {
                                                 let wesecret = res.data;
                                                 wx.setStorageSync('wesecret', wesecret);
                                                 wx.request({
-                                                    url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
+                                                    url: 'https://collhome.com/shanghai/apis/user?wesecret=' + wesecret,
                                                     success: function (res) {
                                                         console.log('my_userInfo res', res)
                                                         let my_userInfo = res.data.data;
@@ -57,7 +57,7 @@ function signIn() {
 function get_my_userInfo(wesecret) {
     return new Promise((resolve, reject) => {
         wx.request({
-            url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
+            url: 'https://collhome.com/shanghai/apis/user?wesecret=' + wesecret,
             success: function (res) {
                 console.log('my_userInfo res', res)
                 let my_userInfo = res.data.data;
@@ -111,7 +111,7 @@ function showLoveActionSheet(e) {
 
                                 let wesecret = wx.getStorageSync('wesecret');
                                 wx.request({
-                                    url: 'https://collhome.com/apis/delete/love',
+                                    url: 'https://collhome.com/shanghai/apis/delete/love',
                                     method: 'POST',
                                     data: {
                                         wesecret: wesecret,
@@ -184,7 +184,7 @@ function showCommentActionSheet(e) {
                             if (res.tapIndex == 0) {
                                 let wesecret = wx.getStorageSync('wesecret');
                                 wx.request({
-                                    url: 'https://collhome.com/apis/delete/comment',
+                                    url: 'https://collhome.com/shanghai/apis/delete/comment',
                                     method: 'POST',
                                     data: {
                                         wesecret: wesecret,
@@ -252,7 +252,7 @@ function showReplyActionSheet(e, comment_id) {
                             if (res.tapIndex == 0) {
                                 let wesecret = wx.getStorageSync('wesecret');
                                 wx.request({
-                                    url: 'https://collhome.com/apis/delete/reply',
+                                    url: 'https://collhome.com/shanghai/apis/delete/reply',
                                     method: 'POST',
                                     data: {
                                         wesecret: wesecret,
@@ -288,7 +288,7 @@ function praiseLove(e) {
         }
         let wesecret = wx.getStorageSync('wesecret');
         wx.request({
-            url: 'https://collhome.com/apis/loves/' + love_id + '/praises',
+            url: 'https://collhome.com/shanghai/apis/loves/' + love_id + '/praises',
             method: 'POST',
             data: {
                 wesecret: wesecret,
@@ -316,7 +316,7 @@ function praiseComment(e) {
         }
         let wesecret = wx.getStorageSync('wesecret');
         wx.request({
-            url: `https://collhome.com/apis/comments/${comment_id}/praises`,
+            url: `https://collhome.com/shanghai/apis/comments/${comment_id}/praises`,
             method: 'POST',
             data: {
                 wesecret: wesecret,
@@ -344,7 +344,7 @@ function praiseUser(e) {
         }
         let wesecret = wx.getStorageSync('wesecret');
         wx.request({
-            url: `https://collhome.com/apis/users/${user_id}/praises`,
+            url: `https://collhome.com/shanghai/apis/users/${user_id}/praises`,
             method: 'POST',
             data: {
                 wesecret: wesecret,

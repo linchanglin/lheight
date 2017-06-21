@@ -14,7 +14,7 @@ Page({
         })
 
         wx.request({
-            url: 'https://collhome.com/apis/grades',
+            url: 'https://collhome.com/shanghai/apis/grades',
             success: function (res) {
                 that.setData({
                     grades: res.data.data
@@ -23,7 +23,7 @@ Page({
         })
 
         wx.request({
-            url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
+            url: 'https://collhome.com/shanghai/apis/user?wesecret=' + wesecret,
             success: function (res) {
                 console.log(res.data)
                 let userInfo = res.data.data;
@@ -84,7 +84,7 @@ Page({
         })
 
         wx.request({
-            url: 'https://collhome.com/apis/users',
+            url: 'https://collhome.com/shanghai/apis/users',
             data: {
                 'wesecret': that.data.wesecret,
                 'userInfo': submitData,

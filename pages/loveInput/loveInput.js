@@ -19,7 +19,7 @@ Page({
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         wx.request({
-            url: `https://collhome.com/apis/user?wesecret=${wesecret}`,
+            url: `https://collhome.com/shanghai/apis/user?wesecret=${wesecret}`,
             success: function (res) {
                 that.setData({
                     wesecret: wesecret,
@@ -243,7 +243,7 @@ Page({
         };
         console.log("postSaveLove data", data);
         wx.request({
-            url: 'https://collhome.com/apis/loves',
+            url: 'https://collhome.com/shanghai/apis/loves',
             method: 'POST',
             data: data,
             success: function (res) {
