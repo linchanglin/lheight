@@ -105,7 +105,7 @@ Page({
         let that = this;
         let wesecret = that.data.wesecret;
         wx.request({
-            url: 'https://collhome.com/apis/users',
+            url: 'https://collhome.com/jiangxi-jingdezhen/apis/users',
             method: 'POST',
             data: {
                 wesecret: wesecret,
@@ -155,7 +155,7 @@ Page({
         let that = this;
         let wesecret = that.data.wesecret;
         wx.request({
-            url: 'https://collhome.com/apis/delete/user/picture',
+            url: 'https://collhome.com/jiangxi-jingdezhen/apis/delete/user/picture',
             method: 'POST',
             data: {
                 wesecret: wesecret,
@@ -188,7 +188,7 @@ Page({
         let that = this;
         let wesecret = that.data.wesecret;
         wx.request({
-            url: 'https://collhome.com/apis/users',
+            url: 'https://collhome.com/jiangxi-jingdezhen/apis/users',
             method: 'POST',
             data: {
                 wesecret: wesecret,

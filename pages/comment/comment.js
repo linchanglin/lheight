@@ -56,9 +56,9 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/comments/${need_refresh_comment_id}?wesecret=${wesecret}`
+            url = `https://collhome.com/jiangxi-jingdezhen/apis/comments/${need_refresh_comment_id}?wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/comments/${need_refresh_comment_id}`
+            url = `https://collhome.com/jiangxi-jingdezhen/apis/comments/${need_refresh_comment_id}`
         }
         wx.request({
             url: url,
@@ -134,9 +134,9 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         let love_url;
         if (wesecret) {
-            love_url = `https://collhome.com/apis/loves/${love_id}?wesecret=${wesecret}`;
+            love_url = `https://collhome.com/jiangxi-jingdezhen/apis/loves/${love_id}?wesecret=${wesecret}`;
         } else {
-            love_url = `https://collhome.com/apis/loves/${love_id}?wesecret=`;
+            love_url = `https://collhome.com/jiangxi-jingdezhen/apis/loves/${love_id}?wesecret=`;
         }
         wx.request({
             url: love_url,
@@ -156,9 +156,9 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         let comments_url;
         if (wesecret) {
-            comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=${wesecret}`
+            comments_url = `https://collhome.com/jiangxi-jingdezhen/apis/loves/${love_id}/comments?page=${page}&wesecret=${wesecret}`
         } else {
-            comments_url = `https://collhome.com/apis/loves/${love_id}/comments?page=${page}&wesecret=`;
+            comments_url = `https://collhome.com/jiangxi-jingdezhen/apis/loves/${love_id}/comments?page=${page}&wesecret=`;
         }
         wx.request({
             url: comments_url,
