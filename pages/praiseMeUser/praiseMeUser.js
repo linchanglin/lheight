@@ -17,7 +17,7 @@ Page({
         let wesecret = that.data.wesecret;
         let search = that.data.inputVal;
         wx.request({
-            url: `https://collhome.com/apis/praiseMeUsers?wesecret=${wesecret}&search=${search}`,
+            url: `https://collhome.com/tianjin-jidianzhiye/apis/praiseMeUsers?wesecret=${wesecret}&search=${search}`,
             success: function (res) {
                 console.log('praiseMeUsers', res.data.data);
                 let praiseMeUsers = res.data.data;

@@ -15,7 +15,7 @@ Page({
         let user_id = that.data.user_id;
         let wesecret = that.data.wesecret;
         wx.request({
-            url: `https://collhome.com/apis/users/${user_id}?wesecret=${wesecret}` ,
+            url: `https://collhome.com/tianjin-jidianzhiye/apis/users/${user_id}?wesecret=${wesecret}` ,
             success: function (res) {
                 console.log('userInfo', res.data.data)
                 let userInfo = res.data.data;
@@ -59,7 +59,7 @@ Page({
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         wx.request({
-            url: 'https://collhome.com/apis/blacklists',
+            url: 'https://collhome.com/tianjin-jidianzhiye/apis/blacklists',
             method: 'POST',
             data: {
                 wesecret: wesecret,
