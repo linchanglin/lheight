@@ -47,8 +47,13 @@ Page({
                 success: function (res) {
                     console.log('unreadNoticeNums', res);
                     let unreadNoticeNums = res.data.unreadNoticeNums;
+
+                    let availablePostLove = res.data.availablePostLove;
+                    
                     that.setData({
-                        unreadNoticeNums: unreadNoticeNums
+                        unreadNoticeNums: unreadNoticeNums,
+
+                        availablePostLove: availablePostLove
                     })
                 }
             })
