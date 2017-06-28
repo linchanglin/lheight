@@ -1,7 +1,7 @@
 function getUptoken() {
     return new Promise((resolve, reject) => {
         wx.request({
-            url: 'https://collhome.com/apis/uptoken',
+            url: 'https://collhome.com/shandong-nongyegongcheng/apis/uptoken',
             success: function (res) {
                 let uptoken = res.data.uptoken;
                 resolve(uptoken)

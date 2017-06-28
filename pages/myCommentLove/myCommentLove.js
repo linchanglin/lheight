@@ -87,9 +87,9 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/loves/${need_refresh_love_id}?wesecret=${wesecret}`
+            url = `https://collhome.com/shandong-nongyegongcheng/apis/loves/${need_refresh_love_id}?wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/loves/${need_refresh_love_id}?wesecret=`
+            url = `https://collhome.com/shandong-nongyegongcheng/apis/loves/${need_refresh_love_id}?wesecret=`
         }
         wx.request({
             url: url,
@@ -223,9 +223,9 @@ Page({
         let type = 'commentLoves';
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=${wesecret}`
+            url = `https://collhome.com/shandong-nongyegongcheng/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=`
+            url = `https://collhome.com/shandong-nongyegongcheng/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=`
         }
         wx.request({
             url: url,
@@ -297,9 +297,9 @@ Page({
         let type = 'praiseLoves';
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=${wesecret}`
+            url = `https://collhome.com/shandong-nongyegongcheng/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=`
+            url = `https://collhome.com/shandong-nongyegongcheng/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=`
         }
         wx.request({
             url: url,
