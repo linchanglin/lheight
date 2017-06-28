@@ -39,7 +39,7 @@ Page({
 
         let wesecret = wx.getStorageSync('wesecret');
         wx.request({
-            url: 'https://collhome.com/apis/users',
+            url: 'https://collhome.com/guangdong-zhongkainongye/apis/users',
             method: 'POST',
             data: {
                 wesecret: wesecret,

@@ -30,7 +30,7 @@ Page({
         let wesecret = that.data.wesecret;
         let page = that.data.page;
         wx.request({
-            url: `https://collhome.com/apis/systemNotices?wesecret=${wesecret}&page=${page}`,
+            url: `https://collhome.com/guangdong-zhongkainongye/apis/systemNotices?wesecret=${wesecret}&page=${page}`,
             success: function (res) {
                 console.log("load_systemNotices res", res);
                 let systemNotices = res.data.data;
@@ -59,7 +59,7 @@ Page({
                     if (systemNotices.length > 0) {
                         let systemNotice_id = systemNotices[0].id;
                         wx.request({
-                            url: 'https://collhome.com/apis/read/systemNotice',
+                            url: 'https://collhome.com/guangdong-zhongkainongye/apis/read/systemNotice',
                             method: 'post',
                             data: {
                                 wesecret: wesecret,

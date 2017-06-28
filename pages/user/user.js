@@ -43,7 +43,7 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.request({
-                url: `https://collhome.com/apis/unreadNoticeNums?wesecret=${wesecret}`,
+                url: `https://collhome.com/guangdong-zhongkainongye/apis/unreadNoticeNums?wesecret=${wesecret}`,
                 success: function (res) {
                     console.log('unreadNoticeNums', res);
                     let unreadNoticeNums = res.data.unreadNoticeNums;
@@ -64,7 +64,7 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.request({
-                url: `https://collhome.com/apis/unreadSystemNoticeNums?wesecret=${wesecret}`,
+                url: `https://collhome.com/guangdong-zhongkainongye/apis/unreadSystemNoticeNums?wesecret=${wesecret}`,
                 success: function (res) {
                     console.log('unreadSystemNoticeNums', res);
                     let unreadSystemNoticeNums = res.data.data.unreadSystemNoticeNums;

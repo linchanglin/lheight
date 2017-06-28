@@ -33,7 +33,7 @@ Page({
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         wx.request({
-            url: `https://collhome.com/apis/blacklists?wesecret=${wesecret}`,
+            url: `https://collhome.com/guangdong-zhongkainongye/apis/blacklists?wesecret=${wesecret}`,
             success: function (res) {
                 console.log("load_inBlackListUsers res", res);
                 that.setData({
