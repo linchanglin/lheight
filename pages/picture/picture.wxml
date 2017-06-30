@@ -24,7 +24,8 @@
 
     <view style="width: {{ww}}px;display: flex;flex-wrap: wrap; justify-content: space-between;">
       <block wx:for="{{pictures}}" wx:key="id">
-        <image src="{{item.pictures[0]}}" mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;" data-userInfo="{{item}}" data-imgUrl="{{item.pictures}}" bindtap="openPictures"></image>
+        <image wx:if="{{get_available == 1}}" src="{{item.pictures[0]}}" mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;" data-userInfo="{{item}}" data-imgUrl="{{item.pictures}}" bindtap="openPictures"></image>
+        <image wx:if="{{get_available == 0}}" src="{{item.pictures[0]}}" mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;"></image>
       </block>
 
     </view>

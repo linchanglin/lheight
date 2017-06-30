@@ -43,6 +43,8 @@ Page({
     onShow: function () {
         let that = this;
 
+        that.get_available();
+
         let board_loves_need_refresh = wx.getStorageSync('board_loves_need_refresh')
         if (board_loves_need_refresh) {
             that.load_refresh_loves(board_loves_need_refresh);
@@ -62,6 +64,19 @@ Page({
         if (that.data.loves && !board_loves_need_refresh_create_love) {
             that.get_unreadLoveNums();
         }
+    },
+    get_available: function () {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/apis/get_available',
+            success: function (res) {
+                let get_available = res.data.data;
+                that.setData({
+                    get_available: get_available
+                })
+                console.log('that.data.get_available', that.data.get_available);
+            }
+        })
     },
     load_refresh_loves: function (need_refresh_love_id) {
         let that = this;
