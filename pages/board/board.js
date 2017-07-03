@@ -274,7 +274,9 @@ Page({
                         setTimeout(function () {
                             that.setData({
                                 showTopTips2: false,
-                                animationData: {}
+                                animationData: {},
+
+                                unreadLoveNums: 0
                             });
                         }, 2000);
                     }
