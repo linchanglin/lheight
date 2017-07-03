@@ -81,7 +81,7 @@ Page({
     get_available: function () {
         let that = this;
         wx.request({
-            url: 'https://collhome.com/apis/get_available',
+            url: 'https://collhome.com/shanghai/apis/get_available',
             success: function (res) {
                 let get_available = res.data.data;
                 that.setData({
