@@ -1,5 +1,24 @@
-<view class="page">
+<view wx:if="{{get_available == 0}}" class="page">
   <view class="page__bd">
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_appmsg">
+
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">表白墙</view>
+            <view class="weui-media-box__desc">谢谢您的关注！此表白墙仅用于表白信息的展示！</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<view wx:if="{{get_available == 1}}" class="page">
+  <view class="page__bd">
+
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_appmsg" hover="true" bindtap="navigateToProfileInput" hover-class="weui-cell_active">
@@ -15,11 +34,10 @@
       </view>
     </view>
 
-
     <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToManage" >
+          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToManage">
             <view class="weui-cell__hd">
               <image src="../images/setting.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
             </view>
@@ -51,7 +69,7 @@
     <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-cells weui-cells_after-title">
-    
+
           <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMyCommentLove" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
               <image src="../images/comment_and_love1.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
@@ -62,7 +80,7 @@
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
           </view>
 
-          <view wx:if="{{availablePostLove == 1}}" class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMyLove" hover-class="weui-cell_active">
+          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMyLove" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
               <image src="../images/love_stores.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
             </view>
@@ -106,7 +124,7 @@
       </view>
     </view>
 
-    <view wx:if="{{availablePostLove == 1}}" class="weui-panel">
+    <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToLoveInput" hover-class="weui-cell_active">

@@ -3,30 +3,33 @@ import common from '../../utils/common.js';
 Page({
     data: {},
     onLoad: function () {
-        let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
-        let my_userInfo = wx.getStorageSync('my_userInfo');
-        if (wesecret && my_userInfo) {
-            that.setData({
-                wesecret: wesecret,
-                userInfo: my_userInfo
-            })
-        } else {
-            common.signIn().then(() => {
-                let wesecret = wx.getStorageSync('wesecret');
-                let my_userInfo = wx.getStorageSync('my_userInfo');
-                that.setData({
-                    wesecret: wesecret,
-                    userInfo: my_userInfo
-                })
-                that.get_unreadNoticeNums();
-                that.get_unreadSystemNoticeNums();
+        // let that = this;
+        // let wesecret = wx.getStorageSync('wesecret');
+        // let my_userInfo = wx.getStorageSync('my_userInfo');
+        // if (wesecret && my_userInfo) {
+        //     that.setData({
+        //         wesecret: wesecret,
+        //         userInfo: my_userInfo
+        //     })
+        // } else {
+        //     common.signIn().then(() => {
+        //         let wesecret = wx.getStorageSync('wesecret');
+        //         let my_userInfo = wx.getStorageSync('my_userInfo');
+        //         that.setData({
+        //             wesecret: wesecret,
+        //             userInfo: my_userInfo
+        //         })
+        //         that.get_unreadNoticeNums();
+        //         that.get_unreadSystemNoticeNums();
                 
-            })
-        }
+        //     })
+        // }
     },
     onShow: function () {
         let that = this;
+
+        that.get_available();
+
         let user_need_refresh = wx.getStorageSync('user_need_refresh')
         if (user_need_refresh) {
             let my_userInfo = wx.getStorageSync('my_userInfo');
@@ -38,6 +41,18 @@ Page({
         that.get_unreadNoticeNums();
         that.get_unreadSystemNoticeNums();
     },
+    get_available: function () {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/apis/get_available',
+            success: function (res) {
+                let get_available = res.data.data;
+                that.setData({
+                    get_available: get_available
+                })
+            }
+        })
+    },
     get_unreadNoticeNums: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -47,13 +62,8 @@ Page({
                 success: function (res) {
                     console.log('unreadNoticeNums', res);
                     let unreadNoticeNums = res.data.unreadNoticeNums;
-
-                    let availablePostLove = res.data.availablePostLove;
-                    
                     that.setData({
-                        unreadNoticeNums: unreadNoticeNums,
-
-                        availablePostLove: availablePostLove
+                        unreadNoticeNums: unreadNoticeNums
                     })
                 }
             })
