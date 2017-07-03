@@ -5,6 +5,20 @@ var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
     data: {
+        // 测试用
+        test_loves: [
+            {id: 1, content: '我喜欢余生这个词多么好听，想表达什么呢，岁月如风，刮来阵阵暖意，又刮走了人们的念想，岁月如酒，香椿而又清香，醉时的的你又那么深意。它时刻都在，他在和你挥手，但你又抓不住它，是啊，如此反复出现在你的面'},
+            {id: 2, content: '清珞，你在想我吗？那本日记是否还有新的字迹，我们的爱，还未结束！'},
+            {id: 3, content: '美静静地舒展着韵划过心间，一关千年的情冲破神的禁忌，若同宣泄的雪花，漫着天空，裹着大地，抚着心灵。寻找在极限的边缘，在阳光的沉睡中醒来，一帘梦的幽思，随着若隐若现的星越来越繁。'},
+
+        ],
+
+        
+
+
+
+
+
         tabs: ["热门", "图片", "视频"],
         activeIndex: 0,
         sliderOffset: 0,
@@ -73,6 +87,8 @@ Page({
     onShow: function () {
         let that = this;
 
+        that.get_available();
+
         let find_loves_need_refresh = wx.getStorageSync('find_loves_need_refresh')
         if (find_loves_need_refresh) {
             that.load_refresh_loves(find_loves_need_refresh);
@@ -83,6 +99,18 @@ Page({
             that.load_refresh_loves_delete_love(find_loves_need_refresh_delete_love);
             wx.removeStorageSync('find_loves_need_refresh_delete_love')
         }
+    },
+    get_available: function () {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/apis/get_available',
+            success: function (res) {
+                let get_available = res.data.data;
+                that.setData({
+                    get_available: get_available
+                })
+            }
+        })
     },
     load_refresh_loves: function (need_refresh_love_id) {
         let that = this;

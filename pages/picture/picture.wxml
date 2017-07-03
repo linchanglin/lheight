@@ -1,4 +1,24 @@
-<view class="page">
+<view wx:if="{{get_available == 0}}" class="page">
+  <view class="page__bd">
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_appmsg">
+
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">表白墙</view>
+            <view class="weui-media-box__desc">谢谢您的关注！此表白墙仅用于表白信息的展示！</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+
+
+<view wx:if="{{get_available == 1}}" class="page">
   <view class="page__bd">
 
     <view class="weui-search-bar" style="margin-bottom: 1px;">
