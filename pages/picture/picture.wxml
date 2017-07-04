@@ -6,8 +6,8 @@
         <view class="weui-media-box weui-media-box_appmsg">
 
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">表白墙</view>
-            <view class="weui-media-box__desc">谢谢您的关注！此表白墙仅用于表白信息的展示！</view>
+            <view class="weui-media-box__title">人生</view>
+            <view class="weui-media-box__desc">人生若只如初见，何事秋风悲画扇。</view>
           </view>
         </view>
       </view>
