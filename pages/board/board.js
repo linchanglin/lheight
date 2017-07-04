@@ -5,8 +5,8 @@ Page({
     data: {
         // 测试用
         test_loves: [
-            {id: 1, content: '我喜欢余生这个词多么好听，想表达什么呢，岁月如风，刮来阵阵暖意，又刮走了人们的念想，岁月如酒，香椿而又清香，醉时的的你又那么深意。它时刻都在，他在和你挥手，但你又抓不住它，是啊，如此反复出现在你的面', images:['http://cdn.collhome.com/tmp_1368536078o6zAJs2-BFKQ2p3cSIBWonXCBvL8213c513a61561aaf21a1a5b49eda3b2b.jpeg'] },
-            {id: 2, content: '清珞，你在想我吗？那本日记是否还有新的字迹，我们的爱，还未结束！'},
+            {id: 1, content: '细数门前落叶，倾听窗外雨声，涉水而过的声音此次响起，你被雨淋湿的心，是否依旧。', images:['http://cdn.collhome.com/tmp_1368536078o6zAJs2-BFKQ2p3cSIBWonXCBvL8213c513a61561aaf21a1a5b49eda3b2b.jpeg'] },
+            {id: 2, content: '谁与我醉明月，愁在夕阳中'},
             {id: 3, content: '美静静地舒展着韵划过心间，一关千年的情冲破神的禁忌，若同宣泄的雪花，漫着天空，裹着大地，抚着心灵。寻找在极限的边缘，在阳光的沉睡中醒来，一帘梦的幽思，随着若隐若现的星越来越繁。'},
 
         ],
