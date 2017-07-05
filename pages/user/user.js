@@ -3,15 +3,16 @@ import common from '../../utils/common.js';
 Page({
     data: {},
     onLoad: function () {
-        // let that = this;
-        // let wesecret = wx.getStorageSync('wesecret');
-        // let my_userInfo = wx.getStorageSync('my_userInfo');
-        // if (wesecret && my_userInfo) {
-        //     that.setData({
-        //         wesecret: wesecret,
-        //         userInfo: my_userInfo
-        //     })
-        // } else {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        let my_userInfo = wx.getStorageSync('my_userInfo');
+        if (wesecret && my_userInfo) {
+            that.setData({
+                wesecret: wesecret,
+                userInfo: my_userInfo
+            })
+        } 
+        // else {
         //     common.signIn().then(() => {
         //         let wesecret = wx.getStorageSync('wesecret');
         //         let my_userInfo = wx.getStorageSync('my_userInfo');
