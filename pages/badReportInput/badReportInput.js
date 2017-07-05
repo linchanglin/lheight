@@ -48,7 +48,7 @@ Page({
     load_badReportTypes: function () {
         let that = this;
         wx.request({
-            url: 'https://collhome.com/apis/badReportTypes',
+            url: 'https://collhome.com/fujian-huaqiao/apis/badReportTypes',
             success: function (res) {
                 let badReportTypes = res.data.data;
                 that.setData({
@@ -104,13 +104,13 @@ Page({
         let badReport_id = that.data.badReport_id;
         let objectUser_id = that.data.objectUser_id;
         if (badReportFrom_id == 1) {
-            url = `https://collhome.com/apis/badReports/love/${badReport_id}`
+            url = `https://collhome.com/fujian-huaqiao/apis/badReports/love/${badReport_id}`
         } else if (badReportFrom_id == 2) {
-            url = `https://collhome.com/apis/badReports/comment/${badReport_id}`
+            url = `https://collhome.com/fujian-huaqiao/apis/badReports/comment/${badReport_id}`
         } else if (badReportFrom_id == 3) {
-            url = `https://collhome.com/apis/badReports/reply/${badReport_id}`
+            url = `https://collhome.com/fujian-huaqiao/apis/badReports/reply/${badReport_id}`
         } else {
-            url = `https://collhome.com/apis/badReports/user/${objectUser_id}`
+            url = `https://collhome.com/fujian-huaqiao/apis/badReports/user/${objectUser_id}`
         }
         let badReport_type;
         if (that.data.index) {

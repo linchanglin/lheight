@@ -61,9 +61,9 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         let comment_url;
         if (wesecret) {
-            comment_url = `https://collhome.com/apis/comments/${comment_id}?wesecret=${wesecret}`;
+            comment_url = `https://collhome.com/fujian-huaqiao/apis/comments/${comment_id}?wesecret=${wesecret}`;
         } else {
-            comment_url = `https://collhome.com/apis/comments/${comment_id}?wesecret=`;
+            comment_url = `https://collhome.com/fujian-huaqiao/apis/comments/${comment_id}?wesecret=`;
         }
         wx.request({
             url: comment_url,
@@ -88,9 +88,9 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         let replies_url;
         if (wesecret) {
-            replies_url = `https://collhome.com/apis/comments/${comment_id}/replies?page=${page}&wesecret=${wesecret}`;
+            replies_url = `https://collhome.com/fujian-huaqiao/apis/comments/${comment_id}/replies?page=${page}&wesecret=${wesecret}`;
         } else {
-            replies_url = `https://collhome.com/apis/comments/${comment_id}/replies?page=${page}&wesecret=`;
+            replies_url = `https://collhome.com/fujian-huaqiao/apis/comments/${comment_id}/replies?page=${page}&wesecret=`;
         }
         wx.request({
             url: replies_url,
@@ -326,7 +326,7 @@ Page({
                 praise = 0;
             }
             wx.request({
-                url: `https://collhome.com/apis/replies/${reply_id}/praises`,
+                url: `https://collhome.com/fujian-huaqiao/apis/replies/${reply_id}/praises`,
                 method: 'POST',
                 data: {
                     wesecret: wesecret,
@@ -363,7 +363,7 @@ Page({
                     praise = 0;
                 }
                 wx.request({
-                    url: `https://collhome.com/apis/replies/${reply_id}/praises`,
+                    url: `https://collhome.com/fujian-huaqiao/apis/replies/${reply_id}/praises`,
                     method: 'POST',
                     data: {
                         wesecret: wesecret,
