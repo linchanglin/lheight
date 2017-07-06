@@ -1,16 +1,14 @@
 <view wx:if="{{get_available == 0}}" class="page">
   <view class="page__bd">
 
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_appmsg">
-
-          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">人生</view>
-            <view class="weui-media-box__desc">人生若只如初见，何事秋风悲画扇。</view>
+    <view class="container">
+      <block wx:for="{{test_loves}}" wx:for-item="love" wx:key="id">
+        <view class="list-item">
+          <view class="article-content">
+            <text>{{love.content}}</text>
           </view>
         </view>
-      </view>
+      </block>
     </view>
 
   </view>
