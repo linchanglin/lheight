@@ -12,7 +12,7 @@ Page({
         let that = this;
         let search = that.data.inputVal;
         wx.request({
-            url: `https://collhome.com/apis/applets?search=${search}`,
+            url: `https://collhome.com/shanghai/apis/applets?search=${search}`,
             success: function (res) {
                 console.log('applets', res.data.data);
                 let applets = res.data.data;
