@@ -11,7 +11,7 @@ Page({
                 wesecret: wesecret,
                 userInfo: my_userInfo
             })
-        } 
+        }
         // else {
         //     common.signIn().then(() => {
         //         let wesecret = wx.getStorageSync('wesecret');
@@ -22,7 +22,7 @@ Page({
         //         })
         //         that.get_unreadNoticeNums();
         //         that.get_unreadSystemNoticeNums();
-                
+
         //     })
         // }
     },
@@ -86,6 +86,11 @@ Page({
             })
         }
     },
+    navigateToRelatedApplet: function () {
+        wx.navigateTo({
+            url: '../relatedApplet/relatedApplet',
+        })
+    },
     navigateToManage: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -123,7 +128,7 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
-                that.get_unreadSystemNoticeNums();               
+                that.get_unreadSystemNoticeNums();
 
                 wx.navigateTo({
                     url: '../praiseMeUser/praiseMeUser',
@@ -146,7 +151,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../profileInput/profileInput',
                 })
@@ -168,7 +173,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../myCommentLove/myCommentLove',
                 })
@@ -190,7 +195,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../myLove/myLove',
                 })
@@ -212,7 +217,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../notice/notice',
                 })
@@ -234,7 +239,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../message/message',
                 })
@@ -265,7 +270,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 let userInfo = that.data.userInfo;
                 if (userInfo.available == 0) {
                     that.showNoAvailableModal();

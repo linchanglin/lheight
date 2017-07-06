@@ -1,9 +1,11 @@
 {
     "pages": [
         "pages/board/board",
-        "pages/user/user",
-        "pages/systemNotice/systemNotice",
+        "pages/aboutLoveWall/aboutLoveWall",
         "pages/manage/manage",
+        "pages/user/user",
+        "pages/relatedApplet/relatedApplet",
+        "pages/systemNotice/systemNotice",
         "pages/chat/chat",
         "pages/find/find",
         "pages/myCommentLove/myCommentLove",
