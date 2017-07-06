@@ -2,6 +2,15 @@ var app = getApp()
 Page({
 
     data: {
+        // 测试用
+        test_loves: [
+            { id: 1, content: '福州大学，简称福大，是国家“211工程”重点建设高校，教育部与福建省人民政府共建高校[1]  ，教育部首批“卓越工程师教育培养计划”试点高校之一[2]  ，福建省三所重点建设的高水平大学之一，入选“千人计划”[3]  、“国家建设高水平大学公派研究生项目”。' },
+        ],
+
+
+
+
+
         imgUrl: [],
 
         page: 1,
@@ -114,21 +123,24 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (!that.data.pictures || that.data.pictures.length == 0) {
-                    wx.showModal({
-                        // title: '提示',
-                        showCancel: false,
-                        content: '没有照片',
-                        success: function (res) {
-                            if (res.confirm) {
-                                console.log('用户点击确定')
-                            } else if (res.cancel) {
-                                console.log('用户点击取消')
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (!that.data.pictures || that.data.pictures.length == 0) {
+                        wx.showModal({
+                            // title: '提示',
+                            showCancel: false,
+                            content: '没有照片',
+                            success: function (res) {
+                                if (res.confirm) {
+                                    console.log('用户点击确定')
+                                } else if (res.cancel) {
+                                    console.log('用户点击取消')
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
-
             }
         })
     },
