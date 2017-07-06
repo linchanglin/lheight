@@ -8,7 +8,7 @@ Page({
         hot_page: 1,
         hot_reach_bottom: false,
         hot_page_no_data: false,
-       
+
 
         hot_inputShowed: false,
         hot_inputVal: "",
@@ -97,7 +97,7 @@ Page({
     },
     onPullDownRefresh: function () {
         let that = this;
-       
+
         that.load_hotLoves('pulldown');
     },
     onReachBottom: function () {
@@ -189,21 +189,24 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (!that.data.hot_loves || that.data.hot_loves.length == 0) {
-                    wx.showModal({
-                        // title: '提示',
-                        showCancel: false,
-                        content: '没有表白',
-                        success: function (res) {
-                            if (res.confirm) {
-                                console.log('用户点击确定')
-                            } else if (res.cancel) {
-                                console.log('用户点击取消')
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (!that.data.hot_loves || that.data.hot_loves.length == 0) {
+                        wx.showModal({
+                            // title: '提示',
+                            showCancel: false,
+                            content: '没有表白',
+                            success: function (res) {
+                                if (res.confirm) {
+                                    console.log('用户点击确定')
+                                } else if (res.cancel) {
+                                    console.log('用户点击取消')
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
-
             }
         })
 
@@ -255,7 +258,7 @@ Page({
                         }
                     }
                 }
-                
+
                 that.setData({
                     hot_loves: old_hot_loves,
 
@@ -280,7 +283,7 @@ Page({
                             }
                         }
                     }
-            
+
                     that.setData({
                         hot_loves: old_hot_loves,
 
@@ -385,14 +388,14 @@ Page({
 
     showInput: function () {
         let that = this;
-        
+
         that.setData({
             hot_inputShowed: true
         });
     },
     hideInput: function () {
         let that = this;
-        
+
         that.setData({
             hot_inputVal: "",
             hot_inputShowed: false
@@ -400,21 +403,21 @@ Page({
     },
     clearInput: function () {
         let that = this;
-        
+
         that.setData({
             hot_inputVal: ""
         });
     },
     inputTyping: function (e) {
         let that = this;
-        
+
         that.setData({
             hot_inputVal: e.detail.value
         });
     },
     searchInputConfirm: function (e) {
         let that = this;
-        
+
         that.load_hotLoves('pulldown');
     }
 });

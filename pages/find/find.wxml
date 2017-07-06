@@ -1,22 +1,16 @@
 <view wx:if="{{get_available == 0}}" class="page">
   <view class="page__bd">
-    <view class="container">
 
+    <view class="container">
       <block wx:for="{{test_loves}}" wx:for-item="love" wx:key="id">
         <view class="list-item">
           <view class="article-content">
             <text>{{love.content}}</text>
           </view>
-          <view wx:if="{{love.video_url.length > 0}}" class="article_video_box" catchtap="some">
-            <video id="myVideo" class="article_video" src="{{love.video_url}}"></video>
-          </view>
-          <view wx:if="{{love.images.length > 0}}" class="article-imgs" style="width: {{ww}}px;">
-            <image wx:for="{{love.images}}" wx:for-item="image" wx:key="*this" src="{{image}}" data-current="{{image}}" data-urls="{{love.images}}" mode="aspectFill" class="article-image" style="width:{{image_width}}px;height:{{image_width}}px;" catchtap="previewImage"></image>
-          </view>
         </view>
       </block>
-
     </view>
+    
   </view>
 </view>
 
