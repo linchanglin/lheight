@@ -1,7 +1,15 @@
 import common from '../../utils/common.js';
 
 Page({
-    data: {},
+    data: {
+        // 测试用
+        test_loves: [
+            { id: 1, content: '华侨大学（Huaqiao University）是由“中侨委”于1960年在周恩来总理直接关怀下创办的中央部属高校[1]  ，是国家重点建设大学、福建省重点建设高校、福建省高水平大学[2]  ，入选国家特色重点学科项目、外专千人计划[3]  、1+2+1中美人才培养计划创新人才培养实验基地[4]  ，是福建省继厦门大学之后第二所设有研究生院并具有教授、副教授评审权的高等学府[5]  ，具有推荐免试研究生资格，是首批获得“本科教学工作水平优秀评估”以及新中国最早实行董事会制度的大学。' },
+        ],
+
+
+
+    },
     onLoad: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -11,7 +19,7 @@ Page({
                 wesecret: wesecret,
                 userInfo: my_userInfo
             })
-        } 
+        }
         // else {
         //     common.signIn().then(() => {
         //         let wesecret = wx.getStorageSync('wesecret');
@@ -22,7 +30,7 @@ Page({
         //         })
         //         that.get_unreadNoticeNums();
         //         that.get_unreadSystemNoticeNums();
-                
+
         //     })
         // }
     },
@@ -86,6 +94,11 @@ Page({
             })
         }
     },
+    navigateToRelatedApplet: function () {
+        wx.navigateTo({
+            url: '../relatedApplet/relatedApplet',
+        })
+    },
     navigateToManage: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -123,7 +136,7 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
-                that.get_unreadSystemNoticeNums();               
+                that.get_unreadSystemNoticeNums();
 
                 wx.navigateTo({
                     url: '../praiseMeUser/praiseMeUser',
@@ -146,7 +159,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../profileInput/profileInput',
                 })
@@ -168,7 +181,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../myCommentLove/myCommentLove',
                 })
@@ -190,7 +203,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../myLove/myLove',
                 })
@@ -212,7 +225,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../notice/notice',
                 })
@@ -234,7 +247,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../message/message',
                 })
@@ -265,7 +278,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 let userInfo = that.data.userInfo;
                 if (userInfo.available == 0) {
                     that.showNoAvailableModal();

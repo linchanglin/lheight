@@ -15,6 +15,21 @@ Page({
     //         url: '../blackList/blackList',
     //     })
     // },
+    navigateToAboutLoveWall: function () {
+        wx.navigateTo({
+            url: '../aboutLoveWall/aboutLoveWall',
+        })
+    },
+    onShareAppMessage: function () {
+        let that = this;
+        return {
+            title: `分享表白墙`,
+            path: `/pages/board/board`,
+            success: function (res) {
+                console.log("onShareAppMessage", res);
+            }
+        }
+    },
     navigateToSystemNotice: function () {
         wx.navigateTo({
             url: '../systemNotice/systemNotice',

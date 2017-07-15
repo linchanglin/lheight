@@ -17,6 +17,29 @@
 
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
+        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToAboutLoveWall">
+          <view class="weui-cell__bd">
+            <view style="display: inline-block; vertical-align: middle">关于表白墙</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <view class="weui-cell weui-cell_access" style="padding: 0;" hover="true" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">
+            <button hover-class="none" open-type="share">分享表白墙</button>
+            <view class="weui-cell__ft weui-cell__ft_in-access" style="position:relative; top:-23px; left:-15px;"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
         <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToSystemNotice">
           <view class="weui-cell__bd">
             <view style="display: inline-block; vertical-align: middle">系统通知</view>
@@ -28,17 +51,19 @@
       </view>
     </view>
 
+    
+
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" style="padding: 0;" hover="true" hover-class="weui-cell_active" bindtap="navigateToCollegeInput">
+        <view class="weui-cell weui-cell_access" style="padding: 0;" hover="true" hover-class="weui-cell_active">
           <view class="weui-cell__bd">
-            <button wx:if="{{canIUseContact}}" hover-class="none" open-type="contact"> 客服</button>
+            <button wx:if="{{canIUseContact}}" hover-class="none" open-type="contact">客服</button>
             <view class="weui-cell__ft weui-cell__ft_in-access" style="position:relative; top:-23px; left:-15px;"></view>
-
           </view>
         </view>
       </view>
     </view>
+
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
         <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="signOut">

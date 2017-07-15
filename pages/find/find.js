@@ -7,10 +7,9 @@ Page({
     data: {
         // 测试用
         test_loves: [
-            {id: 1, content: '南京中医药大学翰林学院，位于江苏省泰州市，是2005年5月经教育部批准设立的独立学院，其前身是2002年3月由江苏省教育厅批准成立的南京中医药大学公有民办二级学院。自2010年起，南京中医药大学翰林学院移址素有“文昌水秀，祥泰之州”之誉的苏中历史名城泰州市,坐落在中国医药城内（江苏省泰州市学院路6号）办学。校园依湖而建，建筑新颖、环境优美、景色怡人，学术氛围浓厚。校内各项教学、实验及生活设施先进齐全，是莘莘学子理想的学习深造场所。'},
+            { id: 1, content: '华侨大学（Huaqiao University）是由“中侨委”于1960年在周恩来总理直接关怀下创办的中央部属高校[1]  ，是国家重点建设大学、福建省重点建设高校、福建省高水平大学[2]  ，入选国家特色重点学科项目、外专千人计划[3]  、1+2+1中美人才培养计划创新人才培养实验基地[4]  ，是福建省继厦门大学之后第二所设有研究生院并具有教授、副教授评审权的高等学府[5]  ，具有推荐免试研究生资格，是首批获得“本科教学工作水平优秀评估”以及新中国最早实行董事会制度的大学。' },
         ],
 
-        
 
 
 
@@ -316,21 +315,24 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (!that.data.hot_loves || that.data.hot_loves.length == 0) {
-                    wx.showModal({
-                        // title: '提示',
-                        showCancel: false,
-                        content: '没有表白',
-                        success: function (res) {
-                            if (res.confirm) {
-                                console.log('用户点击确定')
-                            } else if (res.cancel) {
-                                console.log('用户点击取消')
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (!that.data.hot_loves || that.data.hot_loves.length == 0) {
+                        wx.showModal({
+                            // title: '提示',
+                            showCancel: false,
+                            content: '没有表白',
+                            success: function (res) {
+                                if (res.confirm) {
+                                    console.log('用户点击确定')
+                                } else if (res.cancel) {
+                                    console.log('用户点击取消')
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
-
             }
         })
 
@@ -390,20 +392,24 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (parameter != 'onLoad') {
-                    if (!that.data.image_loves || that.data.image_loves.length == 0) {
-                        wx.showModal({
-                            // title: '提示',
-                            showCancel: false,
-                            content: '没有表白',
-                            success: function (res) {
-                                if (res.confirm) {
-                                    console.log('用户点击确定')
-                                } else if (res.cancel) {
-                                    console.log('用户点击取消')
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (parameter != 'onLoad') {
+                        if (!that.data.image_loves || that.data.image_loves.length == 0) {
+                            wx.showModal({
+                                // title: '提示',
+                                showCancel: false,
+                                content: '没有表白',
+                                success: function (res) {
+                                    if (res.confirm) {
+                                        console.log('用户点击确定')
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }
                     }
                 }
             }
@@ -465,20 +471,24 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (parameter != 'onLoad') {
-                    if (!that.data.video_loves || that.data.video_loves.length == 0) {
-                        wx.showModal({
-                            // title: '提示',
-                            showCancel: false,
-                            content: '没有表白',
-                            success: function (res) {
-                                if (res.confirm) {
-                                    console.log('用户点击确定')
-                                } else if (res.cancel) {
-                                    console.log('用户点击取消')
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (parameter != 'onLoad') {
+                        if (!that.data.video_loves || that.data.video_loves.length == 0) {
+                            wx.showModal({
+                                // title: '提示',
+                                showCancel: false,
+                                content: '没有表白',
+                                success: function (res) {
+                                    if (res.confirm) {
+                                        console.log('用户点击确定')
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }
                     }
                 }
             }

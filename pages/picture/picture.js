@@ -2,6 +2,15 @@ var app = getApp()
 Page({
 
     data: {
+        // 测试用
+        test_loves: [
+            { id: 1, content: '华侨大学（Huaqiao University）是由“中侨委”于1960年在周恩来总理直接关怀下创办的中央部属高校[1]  ，是国家重点建设大学、福建省重点建设高校、福建省高水平大学[2]  ，入选国家特色重点学科项目、外专千人计划[3]  、1+2+1中美人才培养计划创新人才培养实验基地[4]  ，是福建省继厦门大学之后第二所设有研究生院并具有教授、副教授评审权的高等学府[5]  ，具有推荐免试研究生资格，是首批获得“本科教学工作水平优秀评估”以及新中国最早实行董事会制度的大学。' },
+        ],
+
+
+
+
+
         imgUrl: [],
 
         page: 1,
@@ -114,21 +123,24 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (!that.data.pictures || that.data.pictures.length == 0) {
-                    wx.showModal({
-                        // title: '提示',
-                        showCancel: false,
-                        content: '没有照片',
-                        success: function (res) {
-                            if (res.confirm) {
-                                console.log('用户点击确定')
-                            } else if (res.cancel) {
-                                console.log('用户点击取消')
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (!that.data.pictures || that.data.pictures.length == 0) {
+                        wx.showModal({
+                            // title: '提示',
+                            showCancel: false,
+                            content: '没有照片',
+                            success: function (res) {
+                                if (res.confirm) {
+                                    console.log('用户点击确定')
+                                } else if (res.cancel) {
+                                    console.log('用户点击取消')
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
-
             }
         })
     },
