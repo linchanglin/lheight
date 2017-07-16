@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="page__bd" style="padding-top: 15px;">
+    <block wx:for="{{aboutLoveWalls}}" wx:for-item="aboutLoveWall" wx:key="id">
+      <view style="padding: 0 15px 15px 15px;">
+        <view style="background-color: #fff;border-radius: 5px;border: 0.5px solid #ccc;padding: 15px;">
+          <video wx:if="{{aboutLoveWall.video_url.length > 0}}" style="width: 100%;height: 200px;" src="{{aboutLoveWall.video_url}}"></video>
+          <image wx:if="{{aboutLoveWall.image.length > 0}}" style="width: 100%;height: 200px;" mode="aspectFill" src="{{aboutLoveWall.image}}" data-current="{{aboutLoveWall.image}}" catchtap="previewImage"></image>
+          <text wx:if="{{aboutLoveWall.content.length > 0}}" >{{aboutLoveWall.content}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

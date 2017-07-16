@@ -72,23 +72,26 @@ Page({
                     }
                 }
 
-                if (parameter && parameter == 'onLoad') {
-                    if (!that.data.systemNotices || that.data.systemNotices.length == 0) {
-                        wx.showModal({
-                            // title: '提示',
-                            showCancel: false,
-                            content: '没有系统通知',
-                            success: function (res) {
-                                if (res.confirm) {
-                                    console.log('用户点击确定')
-                                } else if (res.cancel) {
-                                    console.log('用户点击取消')
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (parameter && parameter == 'onLoad') {
+                        if (!that.data.systemNotices || that.data.systemNotices.length == 0) {
+                            wx.showModal({
+                                // title: '提示',
+                                showCancel: false,
+                                content: '没有系统通知',
+                                success: function (res) {
+                                    if (res.confirm) {
+                                        console.log('用户点击确定')
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }
                     }
                 }
-
             }
         })
     },

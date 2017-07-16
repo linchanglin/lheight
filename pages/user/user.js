@@ -1,7 +1,15 @@
 import common from '../../utils/common.js';
 
 Page({
-    data: {},
+    data: {
+        // 测试用
+        test_loves: [
+            { id: 1, content: '福州大学，简称福大，是国家“211工程”重点建设高校，教育部与福建省人民政府共建高校[1]  ，教育部首批“卓越工程师教育培养计划”试点高校之一[2]  ，福建省三所重点建设的高水平大学之一，入选“千人计划”[3]  、“国家建设高水平大学公派研究生项目”。' },
+        ],
+
+
+
+    },
     onLoad: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -11,22 +19,26 @@ Page({
                 wesecret: wesecret,
                 userInfo: my_userInfo
             })
-        } else {
-            common.signIn().then(() => {
-                let wesecret = wx.getStorageSync('wesecret');
-                let my_userInfo = wx.getStorageSync('my_userInfo');
-                that.setData({
-                    wesecret: wesecret,
-                    userInfo: my_userInfo
-                })
-                that.get_unreadNoticeNums();
-                that.get_unreadSystemNoticeNums();
-                
-            })
         }
+        // else {
+        //     common.signIn().then(() => {
+        //         let wesecret = wx.getStorageSync('wesecret');
+        //         let my_userInfo = wx.getStorageSync('my_userInfo');
+        //         that.setData({
+        //             wesecret: wesecret,
+        //             userInfo: my_userInfo
+        //         })
+        //         that.get_unreadNoticeNums();
+        //         that.get_unreadSystemNoticeNums();
+
+        //     })
+        // }
     },
     onShow: function () {
         let that = this;
+
+        that.get_available();
+
         let user_need_refresh = wx.getStorageSync('user_need_refresh')
         if (user_need_refresh) {
             let my_userInfo = wx.getStorageSync('my_userInfo');
@@ -38,6 +50,18 @@ Page({
         that.get_unreadNoticeNums();
         that.get_unreadSystemNoticeNums();
     },
+    get_available: function () {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/apis/get_available',
+            success: function (res) {
+                let get_available = res.data.data;
+                that.setData({
+                    get_available: get_available
+                })
+            }
+        })
+    },
     get_unreadNoticeNums: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -47,13 +71,8 @@ Page({
                 success: function (res) {
                     console.log('unreadNoticeNums', res);
                     let unreadNoticeNums = res.data.unreadNoticeNums;
-
-                    let availablePostLove = res.data.availablePostLove;
-                    
                     that.setData({
-                        unreadNoticeNums: unreadNoticeNums,
-
-                        availablePostLove: availablePostLove
+                        unreadNoticeNums: unreadNoticeNums
                     })
                 }
             })
@@ -74,6 +93,11 @@ Page({
                 }
             })
         }
+    },
+    navigateToRelatedApplet: function () {
+        wx.navigateTo({
+            url: '../relatedApplet/relatedApplet',
+        })
     },
     navigateToManage: function () {
         let that = this;
@@ -112,7 +136,7 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
-                that.get_unreadSystemNoticeNums();               
+                that.get_unreadSystemNoticeNums();
 
                 wx.navigateTo({
                     url: '../praiseMeUser/praiseMeUser',
@@ -135,7 +159,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../profileInput/profileInput',
                 })
@@ -157,7 +181,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../myCommentLove/myCommentLove',
                 })
@@ -179,7 +203,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../myLove/myLove',
                 })
@@ -201,7 +225,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../notice/notice',
                 })
@@ -223,7 +247,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 wx.navigateTo({
                     url: '../message/message',
                 })
@@ -254,7 +278,7 @@ Page({
                 })
                 that.get_unreadNoticeNums();
                 that.get_unreadSystemNoticeNums();
-                
+
                 let userInfo = that.data.userInfo;
                 if (userInfo.available == 0) {
                     that.showNoAvailableModal();

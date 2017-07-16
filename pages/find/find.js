@@ -5,6 +5,16 @@ var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
     data: {
+        // 测试用
+        test_loves: [
+            { id: 1, content: '福州大学，简称福大，是国家“211工程”重点建设高校，教育部与福建省人民政府共建高校[1]  ，教育部首批“卓越工程师教育培养计划”试点高校之一[2]  ，福建省三所重点建设的高水平大学之一，入选“千人计划”[3]  、“国家建设高水平大学公派研究生项目”。' },
+        ],
+
+
+
+
+
+
         tabs: ["热门", "图片", "视频"],
         activeIndex: 0,
         sliderOffset: 0,
@@ -73,6 +83,8 @@ Page({
     onShow: function () {
         let that = this;
 
+        that.get_available();
+
         let find_loves_need_refresh = wx.getStorageSync('find_loves_need_refresh')
         if (find_loves_need_refresh) {
             that.load_refresh_loves(find_loves_need_refresh);
@@ -83,6 +95,18 @@ Page({
             that.load_refresh_loves_delete_love(find_loves_need_refresh_delete_love);
             wx.removeStorageSync('find_loves_need_refresh_delete_love')
         }
+    },
+    get_available: function () {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/apis/get_available',
+            success: function (res) {
+                let get_available = res.data.data;
+                that.setData({
+                    get_available: get_available
+                })
+            }
+        })
     },
     load_refresh_loves: function (need_refresh_love_id) {
         let that = this;
@@ -291,21 +315,24 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (!that.data.hot_loves || that.data.hot_loves.length == 0) {
-                    wx.showModal({
-                        // title: '提示',
-                        showCancel: false,
-                        content: '没有表白',
-                        success: function (res) {
-                            if (res.confirm) {
-                                console.log('用户点击确定')
-                            } else if (res.cancel) {
-                                console.log('用户点击取消')
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (!that.data.hot_loves || that.data.hot_loves.length == 0) {
+                        wx.showModal({
+                            // title: '提示',
+                            showCancel: false,
+                            content: '没有表白',
+                            success: function (res) {
+                                if (res.confirm) {
+                                    console.log('用户点击确定')
+                                } else if (res.cancel) {
+                                    console.log('用户点击取消')
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
-
             }
         })
 
@@ -365,20 +392,24 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (parameter != 'onLoad') {
-                    if (!that.data.image_loves || that.data.image_loves.length == 0) {
-                        wx.showModal({
-                            // title: '提示',
-                            showCancel: false,
-                            content: '没有表白',
-                            success: function (res) {
-                                if (res.confirm) {
-                                    console.log('用户点击确定')
-                                } else if (res.cancel) {
-                                    console.log('用户点击取消')
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (parameter != 'onLoad') {
+                        if (!that.data.image_loves || that.data.image_loves.length == 0) {
+                            wx.showModal({
+                                // title: '提示',
+                                showCancel: false,
+                                content: '没有表白',
+                                success: function (res) {
+                                    if (res.confirm) {
+                                        console.log('用户点击确定')
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }
                     }
                 }
             }
@@ -440,20 +471,24 @@ Page({
                     wx.hideLoading()
                 }
 
-                if (parameter != 'onLoad') {
-                    if (!that.data.video_loves || that.data.video_loves.length == 0) {
-                        wx.showModal({
-                            // title: '提示',
-                            showCancel: false,
-                            content: '没有表白',
-                            success: function (res) {
-                                if (res.confirm) {
-                                    console.log('用户点击确定')
-                                } else if (res.cancel) {
-                                    console.log('用户点击取消')
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (parameter != 'onLoad') {
+                        if (!that.data.video_loves || that.data.video_loves.length == 0) {
+                            wx.showModal({
+                                // title: '提示',
+                                showCancel: false,
+                                content: '没有表白',
+                                success: function (res) {
+                                    if (res.confirm) {
+                                        console.log('用户点击确定')
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }
                     }
                 }
             }
