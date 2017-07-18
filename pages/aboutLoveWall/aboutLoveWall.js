@@ -7,7 +7,7 @@ Page({
     load_aboutLoveWalls: function () {
         let that = this;
         wx.request({
-            url: 'https://collhome.com/apis/aboutLoveWalls',
+            url: 'https://collhome.com/life/apis/aboutLoveWalls',
             success: function (res) {
                 console.log("load_aboutLoveWalls res", res);
                 let aboutLoveWalls = res.data.data;

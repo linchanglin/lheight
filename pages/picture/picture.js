@@ -44,7 +44,7 @@ Page({
     get_available: function () {
         let that = this;
         wx.request({
-            url: 'https://collhome.com/apis/get_available',
+            url: 'https://collhome.com/life/apis/get_available',
             success: function (res) {
                 let get_available = res.data.data;
                 that.setData({
@@ -86,9 +86,9 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/pictures?page=${page}&search=${search}&wesecret=${wesecret}`
+            url = `https://collhome.com/life/apis/pictures?page=${page}&search=${search}&wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/pictures?page=${page}&search=${search}&wesecret=`
+            url = `https://collhome.com/life/apis/pictures?page=${page}&search=${search}&wesecret=`
         }
         wx.request({
             url: url,

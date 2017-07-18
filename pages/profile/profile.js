@@ -6,7 +6,7 @@ Page({
     let that = this;
     let wesecret = wx.getStorageSync('wesecret');
     wx.request({
-      url: 'https://collhome.com/apis/user?wesecret=' + wesecret,
+      url: 'https://collhome.com/life/apis/user?wesecret=' + wesecret,
 
       success: function (res) {
         console.log('userInfo', res.data)

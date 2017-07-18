@@ -59,16 +59,22 @@
         "backgroundColor": "#f5f5f5",
         "list": [
             {
-                "text": "表白墙",
+                "text": "表白",
                 "pagePath": "pages/board/board",
                 "iconPath": "pages/images/like.png",
                 "selectedIconPath": "pages/images/like_fill.png"
             },
             {
-                "text": "眼缘墙",
-                "pagePath": "pages/picture/picture",
-                "iconPath": "pages/images/picture1.png",
-                "selectedIconPath": "pages/images/picture1_fill.png"
+                "text": "活动",
+                "pagePath": "pages/board/board",
+                "iconPath": "pages/images/like.png",
+                "selectedIconPath": "pages/images/like_fill.png"
+            },
+            {
+                "text": "求助",
+                "pagePath": "pages/board/board",
+                "iconPath": "pages/images/like.png",
+                "selectedIconPath": "pages/images/like_fill.png"
             },
             {
                 "text": "发现",

@@ -29,7 +29,7 @@ Page({
         let wesecret = that.data.wesecret;
         let page = that.data.page;
         wx.request({
-            url: `https://collhome.com/apis/notices?wesecret=${wesecret}&page=${page}`,
+            url: `https://collhome.com/life/apis/notices?wesecret=${wesecret}&page=${page}`,
             success: function (res) {
                 console.log("load_notices res", res);
                 let notices = res.data.data;
@@ -157,7 +157,7 @@ Page({
         }
         if (notice_ifRead == 0) {
             wx.request({
-                url: 'https://collhome.com/apis/read/notice',
+                url: 'https://collhome.com/life/apis/read/notice',
                 method: 'POST',
                 data: {
                     wesecret: that.data.wesecret,

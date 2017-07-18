@@ -99,7 +99,7 @@ Page({
     get_available: function () {
         let that = this;
         wx.request({
-            url: 'https://collhome.com/apis/get_available',
+            url: 'https://collhome.com/life/apis/get_available',
             success: function (res) {
                 let get_available = res.data.data;
                 that.setData({
@@ -113,9 +113,9 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/loves/${need_refresh_love_id}?wesecret=${wesecret}`
+            url = `https://collhome.com/life/apis/loves/${need_refresh_love_id}?wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/loves/${need_refresh_love_id}?wesecret=`
+            url = `https://collhome.com/life/apis/loves/${need_refresh_love_id}?wesecret=`
         }
         wx.request({
             url: url,
@@ -278,9 +278,9 @@ Page({
         let type = 'hotLoves';
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=${wesecret}`
+            url = `https://collhome.com/life/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=`
+            url = `https://collhome.com/life/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=`
         }
         wx.request({
             url: url,
@@ -355,9 +355,9 @@ Page({
         let type = 'imageLoves';
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=${wesecret}`
+            url = `https://collhome.com/life/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=`
+            url = `https://collhome.com/life/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=`
         }
         wx.request({
             url: url,
@@ -434,9 +434,9 @@ Page({
         let type = 'videoLoves';
         let url;
         if (wesecret) {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${video_page}&search=${search}&wesecret=${wesecret}`
+            url = `https://collhome.com/life/apis/loves?type=${type}&page=${video_page}&search=${search}&wesecret=${wesecret}`
         } else {
-            url = `https://collhome.com/apis/loves?type=${type}&page=${video_page}&search=${search}&wesecret=`
+            url = `https://collhome.com/life/apis/loves?type=${type}&page=${video_page}&search=${search}&wesecret=`
         }
         wx.request({
             url: url,

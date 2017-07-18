@@ -25,7 +25,7 @@ Page({
 
 		let comment_id = that.data.comment_id;
 		wx.request({
-			url: `https://collhome.com/apis/comments/${comment_id}/replies`,
+			url: `https://collhome.com/life/apis/comments/${comment_id}/replies`,
 			method: 'POST',
 			data: {
 				wesecret: that.data.wesecret,

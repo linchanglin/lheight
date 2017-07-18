@@ -53,7 +53,7 @@ Page({
     get_available: function () {
         let that = this;
         wx.request({
-            url: 'https://collhome.com/apis/get_available',
+            url: 'https://collhome.com/life/apis/get_available',
             success: function (res) {
                 let get_available = res.data.data;
                 that.setData({
@@ -67,7 +67,7 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.request({
-                url: `https://collhome.com/apis/unreadNoticeNums?wesecret=${wesecret}`,
+                url: `https://collhome.com/life/apis/unreadNoticeNums?wesecret=${wesecret}`,
                 success: function (res) {
                     console.log('unreadNoticeNums', res);
                     let unreadNoticeNums = res.data.unreadNoticeNums;
@@ -83,7 +83,7 @@ Page({
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.request({
-                url: `https://collhome.com/apis/unreadSystemNoticeNums?wesecret=${wesecret}`,
+                url: `https://collhome.com/life/apis/unreadSystemNoticeNums?wesecret=${wesecret}`,
                 success: function (res) {
                     console.log('unreadSystemNoticeNums', res);
                     let unreadSystemNoticeNums = res.data.data.unreadSystemNoticeNums;
