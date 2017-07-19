@@ -10,7 +10,7 @@ Page({
             that.setData({
                 badReport_id: options.love_id,
                 badReport_content: options.love_content,
-                badReportFrom: '的表白：',
+                badReportFrom: '的帖子：',
                 badReportFrom_id: 1
             })
         } else if (options.comment_id) {

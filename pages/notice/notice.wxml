@@ -31,7 +31,7 @@
                 <text class="comment_reply_text_color">来自</text>
                 <text class="comment_reply_text {{notice.id == item_selected_notice_id && notice.source.userInfo.id == item_selected_notice_source_userInfo_id ? 'comment_reply_hover_class':''}}" data-noticeId="{{notice.id}}" data-noticeSourceUserInfoId="{{notice.source.userInfo.id}}"
                   catchtap="navigateToProfileShowInSource">{{notice.source.userInfo.nickname}}</text>
-                <text wx:if="{{notice.type == 'comment'}}" class="comment_reply_text_color">的表白</text>
+                <text wx:if="{{notice.type == 'comment'}}" class="comment_reply_text_color">的帖子</text>
                 <text wx:if="{{notice.type == 'reply'}}" class="comment_reply_text_color">的评论</text>
                 <text class="comment_reply_text_color">{{notice.source.content}}</text>
 

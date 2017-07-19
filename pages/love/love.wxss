@@ -1,0 +1,57 @@
+@import "../../utils/common_css/love-item.wxss";
+@import "../../utils/common_css/ripple-bounceIn.wxss";
+
+page {
+  /*background-color: #eee;*//*background-color: #fbf7ed;*/
+  background-color: #edecf2;
+}
+
+.page__bd {
+  padding-bottom: 0px;
+}
+
+.weui-toptips_notice1 {
+  background-color: #ff8140;
+}
+
+.weui-toptips_notice2 {
+  background-color: #ffba07;
+}
+
+.weui-toptips {
+  padding: 6.3px;
+  font-size: 16px;
+}
+
+.weui-loadmore {
+  margin: 25px 0 0;
+  font-size: 16px;
+}
+
+.reach_loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px 0 0;
+  width: 100%;
+  height: 50px;
+  /*background-color: #fff;*/
+  background-color: transparent;
+
+  font-size: 16px;
+}
+
+
+.on_loading {
+    width: 25px;height: 25px
+}
+
+.page_no_data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px 0 0;
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+}

@@ -1,5 +1,3 @@
-// 从find.js 复制过来  只是去掉了 video 和 改了 let type = 'commentLoves'; let type = 'praiseLoves'; 还有 find 改为 mycomment;
-
 import common from '../../utils/common.js';
 var app = getApp()
 
@@ -7,7 +5,17 @@ var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
     data: {
-        tabs: ["评论", "喜欢"],
+        // 测试用
+        test_loves: [
+            { id: 1, content: '福州大学，简称福大，是国家“211工程”重点建设高校，教育部与福建省人民政府共建高校[1]  ，教育部首批“卓越工程师教育培养计划”试点高校之一[2]  ，福建省三所重点建设的高水平大学之一，入选“千人计划”[3]  、“国家建设高水平大学公派研究生项目”。' },
+        ],
+
+
+
+
+
+
+        tabs: ["最新", "热门", "置顶"],
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
@@ -19,13 +27,16 @@ Page({
         image_page: 1,
         image_reach_bottom: false,
         image_page_no_data: false,
-
+        video_page: 1,
+        video_reach_bottom: false,
+        video_page_no_data: false,
 
         hot_inputShowed: false,
         hot_inputVal: "",
         image_inputShowed: false,
         image_inputVal: "",
-
+        video_inputShowed: false,
+        video_inputVal: "",
     },
     tabClick: function (e) {
         let that = this;
@@ -67,20 +78,35 @@ Page({
         })
         that.load_hotLoves('onLoad');
         that.load_imageLoves('onLoad');
+        that.load_videoLoves('onLoad');
     },
     onShow: function () {
         let that = this;
 
-        let mycomment_loves_need_refresh = wx.getStorageSync('mycomment_loves_need_refresh')
-        if (mycomment_loves_need_refresh) {
-            that.load_refresh_loves(mycomment_loves_need_refresh);
-            wx.removeStorageSync('mycomment_loves_need_refresh')
+        that.get_available();
+
+        let find_loves_need_refresh = wx.getStorageSync('find_loves_need_refresh')
+        if (find_loves_need_refresh) {
+            that.load_refresh_loves(find_loves_need_refresh);
+            wx.removeStorageSync('find_loves_need_refresh')
         }
-        let mycomment_loves_need_refresh_delete_love = wx.getStorageSync('mycomment_loves_need_refresh_delete_love')
-        if (mycomment_loves_need_refresh_delete_love) {
-            that.load_refresh_loves_delete_love(mycomment_loves_need_refresh_delete_love);
-            wx.removeStorageSync('mycomment_loves_need_refresh_delete_love')
+        let find_loves_need_refresh_delete_love = wx.getStorageSync('find_loves_need_refresh_delete_love')
+        if (find_loves_need_refresh_delete_love) {
+            that.load_refresh_loves_delete_love(find_loves_need_refresh_delete_love);
+            wx.removeStorageSync('find_loves_need_refresh_delete_love')
         }
+    },
+    get_available: function () {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/life/apis/get_available',
+            success: function (res) {
+                let get_available = res.data.data;
+                that.setData({
+                    get_available: get_available
+                })
+            }
+        })
     },
     load_refresh_loves: function (need_refresh_love_id) {
         let that = this;
@@ -99,6 +125,7 @@ Page({
 
                 let old_hot_loves = that.data.hot_loves;
                 let old_image_loves = that.data.image_loves;
+                let old_video_loves = that.data.video_loves;
 
                 for (let old_love of old_hot_loves) {
                     if (old_love.id == need_refresh_love_id) {
@@ -118,11 +145,20 @@ Page({
                         old_love.if_my_praise = the_refresh_love.if_my_praise;
                     }
                 }
-
+                for (let old_love of old_video_loves) {
+                    if (old_love.id == need_refresh_love_id) {
+                        // old_love = the_refresh_love
+                        old_love.praise_nums = the_refresh_love.praise_nums;
+                        old_love.comment_nums = the_refresh_love.comment_nums;
+                        old_love.if_my_comment = the_refresh_love.if_my_comment;
+                        old_love.if_my_praise = the_refresh_love.if_my_praise;
+                    }
+                }
 
                 that.setData({
                     hot_loves: old_hot_loves,
                     image_loves: old_image_loves,
+                    video_loves: old_video_loves,
                 })
             }
         })
@@ -131,8 +167,10 @@ Page({
         let that = this;
         let old_hot_loves = that.data.hot_loves;
         let old_image_loves = that.data.image_loves;
+        let old_video_loves = that.data.video_loves;
         let new_hot_loves = [];
         let new_image_loves = [];
+        let new_video_loves = [];
         for (let old_hot_love of old_hot_loves) {
             if (old_hot_love.id != love_id) {
                 new_hot_loves.push(old_hot_love)
@@ -143,11 +181,16 @@ Page({
                 new_image_loves.push(old_image_love)
             }
         }
-
+        for (let old_video_love of old_video_loves) {
+            if (old_video_love.id != love_id) {
+                new_video_loves.push(old_video_love)
+            }
+        }
         console.log('load_refresh_loves_delete_love', love_id);
         that.setData({
             hot_loves: new_hot_loves,
             image_loves: new_image_loves,
+            video_loves: new_video_loves,
         })
     },
     onPullDownRefresh: function () {
@@ -155,8 +198,10 @@ Page({
         let activeIndex = that.data.activeIndex;
         if (activeIndex == 0) {
             that.load_hotLoves('pulldown');
-        } else {
+        } else if (activeIndex == 1) {
             that.load_imageLoves('pulldown');
+        } else {
+            that.load_videoLoves('pulldown');
         }
     },
     onReachBottom: function () {
@@ -172,7 +217,7 @@ Page({
                 })
                 that.load_hotLoves('add_page')
             }
-        } else {
+        } else if (activeIndex == 1) {
             if (!that.data.image_page_no_data) {
                 that.setData({
                     image_reach_bottom: true,
@@ -181,7 +226,17 @@ Page({
                 })
                 that.load_imageLoves('add_page')
             }
+        } else {
+            if (!that.data.video_page_no_data) {
+                that.setData({
+                    video_reach_bottom: true,
+                    video_page_no_data: false,
+                    video_page: that.data.video_page + 1
+                })
+                that.load_videoLoves('add_page')
+            }
         }
+
     },
     share_touchstart: function (e) {
         let share_loveId = e.currentTarget.dataset.loveid;
@@ -220,7 +275,7 @@ Page({
         }
         let search = that.data.hot_inputVal;
         let wesecret = wx.getStorageSync('wesecret');
-        let type = 'commentLoves';
+        let type = 'newQuestions';
         let url;
         if (wesecret) {
             url = `https://collhome.com/life/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=${wesecret}`
@@ -297,7 +352,7 @@ Page({
         }
         let search = that.data.image_inputVal;
         let wesecret = wx.getStorageSync('wesecret');
-        let type = 'praiseLoves';
+        let type = 'hotQuestions';
         let url;
         if (wesecret) {
             url = `https://collhome.com/life/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=${wesecret}`
@@ -361,6 +416,85 @@ Page({
         })
 
     },
+    load_videoLoves: function (parameter) {
+        let that = this;
+        let video_page;
+        if (parameter == 'add_page') {
+            video_page = that.data.video_page;
+        } else {
+            video_page = 1;
+            that.setData({
+                video_page: 1,
+                video_reach_bottom: false,
+                video_page_no_data: false
+            })
+        }
+        let search = that.data.video_inputVal;
+        let wesecret = wx.getStorageSync('wesecret');
+        let type = 'topQuestions';
+        let url;
+        if (wesecret) {
+            url = `https://collhome.com/life/apis/loves?type=${type}&page=${video_page}&search=${search}&wesecret=${wesecret}`
+        } else {
+            url = `https://collhome.com/life/apis/loves?type=${type}&page=${video_page}&search=${search}&wesecret=`
+        }
+        wx.request({
+            url: url,
+            success: function (res) {
+                console.log('loves', res.data);
+                let loves = res.data.data;
+                if (parameter == 'add_page') {
+                    console.log("loves.length", loves.length)
+                    if (loves.length == 0) {
+                        that.setData({
+                            video_reach_bottom: false,
+                            video_page_no_data: true
+                        })
+                    } else {
+                        let new_loves = that.data.video_loves.concat(loves);
+                        that.setData({
+                            video_loves: new_loves
+                        })
+                        that.setData({
+                            video_reach_bottom: false,
+                            video_page_no_data: false
+
+                        })
+                    }
+                } else {
+                    that.setData({
+                        video_loves: loves
+                    })
+                }
+                if (parameter == 'pulldown' || parameter == 'onLoad') {
+                    wx.stopPullDownRefresh();
+                    wx.hideLoading()
+                }
+
+                let status = res.data.status;
+                console.log('status', status);
+                if (status == 200) {
+                    if (parameter != 'onLoad') {
+                        if (!that.data.video_loves || that.data.video_loves.length == 0) {
+                            wx.showModal({
+                                // title: '提示',
+                                showCancel: false,
+                                content: '没有帖子',
+                                success: function (res) {
+                                    if (res.confirm) {
+                                        console.log('用户点击确定')
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+            }
+        })
+
+    },
     previewImage: function (e) {
         console.log('preview e', e);
         var current = e.currentTarget.dataset.current;
@@ -397,6 +531,7 @@ Page({
 
                 let old_hot_loves = that.data.hot_loves;
                 let old_image_loves = that.data.image_loves;
+                let old_video_loves = that.data.video_loves;
                 for (let value of old_hot_loves) {
                     if (value.id == love_id) {
                         value.praise_nums = parseInt(value.praise_nums);
@@ -421,9 +556,22 @@ Page({
                         }
                     }
                 }
+                for (let value of old_video_loves) {
+                    if (value.id == love_id) {
+                        value.praise_nums = parseInt(value.praise_nums);
+                        if (love_if_my_praise == 0) {
+                            value.if_my_praise = 1;
+                            value.praise_nums++
+                        } else {
+                            value.if_my_praise = 0
+                            value.praise_nums--
+                        }
+                    }
+                }
                 that.setData({
                     hot_loves: old_hot_loves,
                     image_loves: old_image_loves,
+                    video_loves: old_video_loves,
 
                     selected_love_id: love_id
                 })
@@ -435,6 +583,7 @@ Page({
 
                     let old_hot_loves = that.data.hot_loves;
                     let old_image_loves = that.data.image_loves;
+                    let old_video_loves = that.data.video_loves;
                     for (let value of old_hot_loves) {
                         if (value.id == love_id) {
                             value.praise_nums = parseInt(value.praise_nums);
@@ -459,10 +608,22 @@ Page({
                             }
                         }
                     }
-
+                    for (let value of old_video_loves) {
+                        if (value.id == love_id) {
+                            value.praise_nums = parseInt(value.praise_nums);
+                            if (love_if_my_praise == 0) {
+                                value.if_my_praise = 1;
+                                value.praise_nums++
+                            } else {
+                                value.if_my_praise = 0
+                                value.praise_nums--
+                            }
+                        }
+                    }
                     that.setData({
                         hot_loves: old_hot_loves,
                         image_loves: old_image_loves,
+                        video_loves: old_video_loves,
 
                         selected_love_id: love_id
                     })
@@ -570,11 +731,16 @@ Page({
             that.setData({
                 hot_inputShowed: true
             });
-        } else {
+        } else if (activeIndex == 1) {
             that.setData({
                 image_inputShowed: true
             });
+        } else {
+            that.setData({
+                video_inputShowed: true
+            });
         }
+
     },
     hideInput: function () {
         let that = this;
@@ -584,10 +750,15 @@ Page({
                 hot_inputVal: "",
                 hot_inputShowed: false
             });
-        } else {
+        } else if (activeIndex == 1) {
             that.setData({
                 image_inputVal: "",
                 image_inputShowed: false
+            });
+        } else {
+            that.setData({
+                video_inputVal: "",
+                video_inputShowed: false
             });
         }
     },
@@ -598,9 +769,13 @@ Page({
             that.setData({
                 hot_inputVal: ""
             });
-        } else {
+        } else if (activeIndex == 1) {
             that.setData({
                 image_inputVal: ""
+            });
+        } else {
+            that.setData({
+                video_inputVal: ""
             });
         }
     },
@@ -611,9 +786,13 @@ Page({
             that.setData({
                 hot_inputVal: e.detail.value
             });
-        } else {
+        } else if (activeIndex == 1) {
             that.setData({
                 image_inputVal: e.detail.value
+            });
+        } else {
+            that.setData({
+                video_inputVal: e.detail.value
             });
         }
     },
@@ -622,8 +801,10 @@ Page({
         let activeIndex = that.data.activeIndex;
         if (activeIndex == 0) {
             that.load_hotLoves('pulldown');
-        } else {
+        } else if (activeIndex == 1) {
             that.load_imageLoves('pulldown');
+        } else {
+            that.load_videoLoves('pulldown');
         }
     }
 });

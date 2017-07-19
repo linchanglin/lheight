@@ -5,7 +5,7 @@
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea class="weui-textarea" style="height: 3.3em" maxlength="-1" value="{{signature}}" bindconfirm="confirmInput" auto-focus/>
+            <textarea class="weui-textarea" auto-height="true" maxlength="-1" value="{{signature}}" bindconfirm="confirmInput" auto-focus/>
           </view>
         </view>
       </view>

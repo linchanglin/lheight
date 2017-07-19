@@ -23,7 +23,7 @@ Page({
     onShareAppMessage: function () {
         let that = this;
         return {
-            title: `分享表白墙`,
+            title: `分享校园生活墙`,
             path: `/pages/board/board`,
             success: function (res) {
                 console.log("onShareAppMessage", res);

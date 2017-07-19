@@ -104,7 +104,7 @@ function showLoveActionSheet(e) {
                     })
                 } else if (index == 2) {
                     wx.showActionSheet({
-                        itemList: ['删除表白'],
+                        itemList: ['删除帖子'],
                         itemColor: '#ff0000',
                         success: function (res) {
                             if (res.tapIndex == 0) {

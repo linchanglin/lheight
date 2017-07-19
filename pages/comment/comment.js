@@ -111,7 +111,7 @@ Page({
         let share_loveId = that.data.love_id;
         let share_userNickname = that.data.love.userInfo.nickname;
         return {
-            title: `分享${share_userNickname}的表白`,
+            title: `分享${share_userNickname}的帖子`,
             path: `/pages/comment/comment?love_id=${share_loveId}`
         }
     },

@@ -1,15 +1,30 @@
 {
     "pages": [
+        "pages/user/user",
+        
+        "pages/profileDetailsInput/profileDetailsInput",
+        
+        
+        "pages/love/love",
+        "pages/activity/activity",
+        "pages/question/question",
+        "pages/find/find",
+
+
+
+
+
+
+        "pages/board/board",
+        
+        
         "pages/test/breadtrip/breadtrip",
         
-        "pages/board/board",
         "pages/aboutLoveWall/aboutLoveWall",
         "pages/manage/manage",
-        "pages/user/user",
         "pages/relatedApplet/relatedApplet",
         "pages/systemNotice/systemNotice",
         "pages/chat/chat",
-        "pages/find/find",
         "pages/myCommentLove/myCommentLove",
         "pages/loveInput/loveInput",
         "pages/picture/picture",
@@ -21,7 +36,6 @@
         "pages/reply/reply",
         "pages/profileShow/profileShow",
         "pages/profileShowMore/profileShowMore",
-        "pages/profileDetailsInput/profileDetailsInput",
         "pages/avatarUrlInput/avatarUrlInput",
         "pages/avatarUrl/avatarUrl",
         "pages/nicknameInput/nicknameInput",
@@ -48,7 +62,7 @@
     ],
     "window": {
         "navigationBarBackgroundColor": "#353535",
-        "navigationBarTitleText": "表白墙",
+        "navigationBarTitleText": "表白",
         "navigationBarTextStyle": "white",
         "backgroundColor": "#F8F8F8",
         "backgroundTextStyle": "light"
@@ -61,21 +75,21 @@
         "list": [
             {
                 "text": "表白",
-                "pagePath": "pages/board/board",
+                "pagePath": "pages/love/love",
                 "iconPath": "pages/images/like.png",
                 "selectedIconPath": "pages/images/like_fill.png"
             },
             {
                 "text": "活动",
-                "pagePath": "pages/board/board",
-                "iconPath": "pages/images/like.png",
-                "selectedIconPath": "pages/images/like_fill.png"
+                "pagePath": "pages/activity/activity",
+                "iconPath": "pages/images/favor.png",
+                "selectedIconPath": "pages/images/favor_fill.png"
             },
             {
                 "text": "求助",
-                "pagePath": "pages/board/board",
-                "iconPath": "pages/images/like.png",
-                "selectedIconPath": "pages/images/like_fill.png"
+                "pagePath": "pages/question/question",
+                "iconPath": "pages/images/question.png",
+                "selectedIconPath": "pages/images/question_fill.png"
             },
             {
                 "text": "发现",

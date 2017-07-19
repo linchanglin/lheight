@@ -19,9 +19,9 @@
 <view wx:if="{{get_available == 1}}" class="page">
   <view class="page__bd">
 
-    <view wx:if="{{showTopTips1}}" class="weui-toptips weui-toptips_notice1">您有{{unreadLoveNums}}条表白未查看</view>
-    <view wx:if="{{showTopTips2}}" animation="{{animationData}}" class="weui-toptips weui-toptips_notice2">更新了{{unreadLoveNums}}条表白</view>
-    <!--<view wx:if="{{showTopTips2}}" animation="{{animationData}}" class="weui-toptips weui-toptips_notice2">更新了{{unreadLoveNums}}条表白</view>-->
+    <view wx:if="{{showTopTips1}}" class="weui-toptips weui-toptips_notice1">您有{{unreadLoveNums}}条帖子未查看</view>
+    <view wx:if="{{showTopTips2}}" animation="{{animationData}}" class="weui-toptips weui-toptips_notice2">更新了{{unreadLoveNums}}条帖子</view>
+    <!--<view wx:if="{{showTopTips2}}" animation="{{animationData}}" class="weui-toptips weui-toptips_notice2">更新了{{unreadLoveNums}}条帖子</view>-->
 
 
     <view class="weui-search-bar">

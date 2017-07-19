@@ -15,7 +15,7 @@ Page({
 
 
 
-        tabs: ["热门", "图片", "视频"],
+        tabs: ["物品", "吐槽", "兼职"],
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
@@ -253,7 +253,7 @@ Page({
         let share_userNickname = that.data.share_userNickname;
         console.log('share_loveId', share_loveId);
         return {
-            title: `分享${share_userNickname}的表白`,
+            title: `分享${share_userNickname}的帖子`,
             path: `/pages/comment/comment?love_id=${share_loveId}`,
             success: function (res) {
                 console.log("onShareAppMessage", res);
@@ -275,7 +275,7 @@ Page({
         }
         let search = that.data.hot_inputVal;
         let wesecret = wx.getStorageSync('wesecret');
-        let type = 'hotLoves';
+        let type = 'goods';
         let url;
         if (wesecret) {
             url = `https://collhome.com/life/apis/loves?type=${type}&page=${hot_page}&search=${search}&wesecret=${wesecret}`
@@ -322,7 +322,7 @@ Page({
                         wx.showModal({
                             // title: '提示',
                             showCancel: false,
-                            content: '没有表白',
+                            content: '没有帖子',
                             success: function (res) {
                                 if (res.confirm) {
                                     console.log('用户点击确定')
@@ -352,7 +352,7 @@ Page({
         }
         let search = that.data.image_inputVal;
         let wesecret = wx.getStorageSync('wesecret');
-        let type = 'imageLoves';
+        let type = 'complaints';
         let url;
         if (wesecret) {
             url = `https://collhome.com/life/apis/loves?type=${type}&page=${image_page}&search=${search}&wesecret=${wesecret}`
@@ -400,7 +400,7 @@ Page({
                             wx.showModal({
                                 // title: '提示',
                                 showCancel: false,
-                                content: '没有表白',
+                                content: '没有帖子',
                                 success: function (res) {
                                     if (res.confirm) {
                                         console.log('用户点击确定')
@@ -431,7 +431,7 @@ Page({
         }
         let search = that.data.video_inputVal;
         let wesecret = wx.getStorageSync('wesecret');
-        let type = 'videoLoves';
+        let type = 'jobs';
         let url;
         if (wesecret) {
             url = `https://collhome.com/life/apis/loves?type=${type}&page=${video_page}&search=${search}&wesecret=${wesecret}`
@@ -479,7 +479,7 @@ Page({
                             wx.showModal({
                                 // title: '提示',
                                 showCancel: false,
-                                content: '没有表白',
+                                content: '没有帖子',
                                 success: function (res) {
                                     if (res.confirm) {
                                         console.log('用户点击确定')
