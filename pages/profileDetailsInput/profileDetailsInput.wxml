@@ -103,6 +103,15 @@
                                 <input name="major" value="{{userInfo.major}}" class="weui-input" placeholder="请输入专业" cursor-spacing="50" />
                             </view>
                         </view>
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">年级</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <input name="major" value="{{userInfo.major}}" class="weui-input" placeholder="请输入专业" cursor-spacing="50" />
+                            </view>
+                        </view>
+                        
 
                         <view class="weui-cell weui-cell_select">
                             <view class="weui-cell__hd weui-cell__hd_in-select-after">
