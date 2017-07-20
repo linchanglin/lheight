@@ -6,7 +6,7 @@ Page({
         let that = this;
         let my_userInfo = wx.getStorageSync('my_userInfo');
         let genders;
-        if (my_userInfo.gender == 1) {
+        if (my_userInfo.gender == 1) {{
             genders = [
                 { name: '男', value: 1, checked: true },
                 { name: '女', value: 2 }

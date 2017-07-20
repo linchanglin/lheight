@@ -108,12 +108,12 @@
                                 <view class="weui-label">年级</view>
                             </view>
                             <view class="weui-cell__bd">
-                                <input name="major" value="{{userInfo.major}}" class="weui-input" placeholder="请输入专业" cursor-spacing="50" />
+                                <input name="grade" value="{{userInfo.grade}}" class="weui-input" placeholder="请输入年级" cursor-spacing="50" />
                             </view>
                         </view>
                         
 
-                        <view class="weui-cell weui-cell_select">
+                        <!-- <view class="weui-cell weui-cell_select">
                             <view class="weui-cell__hd weui-cell__hd_in-select-after">
                                 <view class="weui-label">年级</view>
                             </view>
@@ -122,7 +122,9 @@
                                     <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex]}}</view>
                                 </picker>
                             </view>
-                        </view>
+                        </view> -->
+
+                        
                     </view>
                 </view>
             </view>

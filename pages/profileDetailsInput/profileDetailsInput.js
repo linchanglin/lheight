@@ -5,15 +5,8 @@ Page({
     data: {
         save_loading: false,
 
-
-
-
-
-
-
-
-
-         region: ['广东省', '广州市', '海珠区']
+        // region: ['广东省', '广州市', '海珠区']
+        region: []
     },
     onLoad: function () {
         let that = this;
@@ -24,49 +17,37 @@ Page({
         })
 
         wx.request({
-            url: 'https://collhome.com/life/apis/grades',
-            success: function (res) {
-                that.setData({
-                    grades: res.data.data
-                })
-            }
-        })
-
-        wx.request({
             url: 'https://collhome.com/life/apis/user?wesecret=' + wesecret,
             success: function (res) {
                 console.log(res.data)
                 let userInfo = res.data.data;
-                if (userInfo.grade != '') {
-                    userInfo.grade--;
-                }
                 that.setData({
                     userInfo: userInfo,
-                    birthdayIndex: userInfo.birthday,
-                    gradeIndex: userInfo.grade
+                    birthdayIndex: userInfo.birthday
                 })
             }
         })
     },
     onShow: function (e) {
-        let that = this;
-        let hometown = wx.getStorageSync('hometown');
-        if (hometown) {
-            that.setData({
-                hometown: hometown
-            });
-            wx.removeStorageSync('province');
-            wx.removeStorageSync('hometown');
-        }
+        // let that = this;
+        // let hometown = wx.getStorageSync('hometown');
+        // if (hometown) {
+        //     that.setData({
+        //         hometown: hometown
+        //     });
+        //     wx.removeStorageSync('province');
+        //     wx.removeStorageSync('hometown');
+        // }
     },
     bindBirthdayChange: function (e) {
         this.setData({
             birthdayIndex: e.detail.value
         })
     },
-    bindGradeChange: function (e) {
+    bindRegionChange: function (e) {
+        console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
-            gradeIndex: e.detail.value
+            region: e.detail.value
         })
     },
     formSubmit: function (e) {
@@ -74,19 +55,21 @@ Page({
         let that = this;
         let submitData = e.detail.value;
 
-        if (submitData.grade != '') {
-            submitData.grade = parseInt(submitData.grade) + 1;
-        }
+        let region = that.data.region;
+        // if (submitData.grade != '') {
+        //     submitData.grade = parseInt(submitData.grade) + 1;
+        // }
         submitData.birthday = that.data.birthdayIndex;
-        if (that.data.hometown) {
-            submitData.hometown = that.data.hometown;
-        } else {
-            if (that.data.userInfo) {
-                submitData.hometown = that.data.userInfo.hometown;
-            } else {
-                submitData.hometown = '';
-            }
-        }
+        submitData.hometown = region[0] + ' ' + region[1] + ' ' + region[2];
+        // if (that.data.hometown) {
+        //     submitData.hometown = that.data.hometown;
+        // } else {
+        //     if (that.data.userInfo) {
+        //         submitData.hometown = that.data.userInfo.hometown;
+        //     } else {
+        //         submitData.hometown = '';
+        //     }
+        // }
         console.log("submitData", submitData);
 
         that.setData({
@@ -121,26 +104,11 @@ Page({
         setTimeout(function () {
             wx.navigateBack();
         }, 1000)
-    },
-    navigateToCityMultiPage: function () {
-        wx.navigateTo({
-            url: '../city_multi_page/city_multi_page',
-        })
-    },
+    }
+    // navigateToCityMultiPage: function () {
+    //     wx.navigateTo({
+    //         url: '../city_multi_page/city_multi_page',
+    //     })
+    // },
 
-
-
-
-
-
-
-
-
-
-     bindRegionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      region: e.detail.value
-    })
-  }
 });

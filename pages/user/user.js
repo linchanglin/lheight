@@ -94,6 +94,28 @@ Page({
             })
         }
     },
+    navigateToProfileInput: function () {
+        let that = this;
+        let wesecret = wx.getStorageSync('wesecret');
+        if (wesecret) {
+            wx.navigateTo({
+                url: '../profileInput/profileInput',
+            })
+        } else {
+            common.signIn().then(() => {
+                let my_userInfo = wx.getStorageSync('my_userInfo');
+                that.setData({
+                    userInfo: my_userInfo
+                })
+                that.get_unreadNoticeNums();
+                that.get_unreadSystemNoticeNums();
+
+                wx.navigateTo({
+                    url: '../profileInput/profileInput',
+                })
+            });
+        }
+    },
     navigateToRelatedApplet: function () {
         wx.navigateTo({
             url: '../relatedApplet/relatedApplet',
@@ -140,28 +162,6 @@ Page({
 
                 wx.navigateTo({
                     url: '../praiseMeUser/praiseMeUser',
-                })
-            });
-        }
-    },
-    navigateToProfileInput: function () {
-        let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
-            wx.navigateTo({
-                url: '../profileInput/profileInput',
-            })
-        } else {
-            common.signIn().then(() => {
-                let my_userInfo = wx.getStorageSync('my_userInfo');
-                that.setData({
-                    userInfo: my_userInfo
-                })
-                that.get_unreadNoticeNums();
-                that.get_unreadSystemNoticeNums();
-
-                wx.navigateTo({
-                    url: '../profileInput/profileInput',
                 })
             });
         }

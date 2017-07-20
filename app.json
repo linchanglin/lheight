@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/user/user",
+        "pages/interestInput/interestInput",
         
         "pages/profileDetailsInput/profileDetailsInput",
         
