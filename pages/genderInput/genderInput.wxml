@@ -3,8 +3,8 @@
     <view class="weui-panel weui-panel_access" style="margin-top: 20px">
       <view class="weui-cells weui-cells_after-title">
         <radio-group bindchange="radioChange">
-          <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="{{item.value}}">
-            <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+          <label class="weui-cell weui-check__label" wx:for="{{genders}}" wx:key="{{item.id}}">
+            <radio class="weui-check" value="{{item.id}}" checked="{{item.checked}}" />
             <view class="weui-cell__bd">
               {{item.name}}
             </view>

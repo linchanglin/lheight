@@ -2,39 +2,31 @@ import common from '../../utils/common.js';
 
 Page({
     data: {},
-    onLoad: function (options) {
+    onLoad: function () {
         let that = this;
         let my_userInfo = wx.getStorageSync('my_userInfo');
-        let genders;
-        if (my_userInfo.gender == 1) {{
-            genders = [
-                { name: '男', value: 1, checked: true },
-                { name: '女', value: 2 }
-            ]
-        } else if (my_userInfo.gender == 2) {
-            genders = [
-                { name: '男', value: 1 },
-                { name: '女', value: 2, checked: true }
-            ]
-        } else {
-            genders = [
-                { name: '男', value: 1 },
-                { name: '女', value: 2 }
-            ]
+        let genders = [
+            { id: 1, name: '男'},
+            { id: 2, name: '女'}
+        ]
+        for (let gender of genders) {
+            gender.checked = gender.id == my_userInfo.gender_id;
         }
+
         that.setData({
-            radioItems: genders
+            genders: genders
         })
     },
     radioChange: function (e) {
-        console.log('radio发生change事件，携带value值为：', e.detail.value);
-        let value = e.detail.value;
-        var radioItems = this.data.radioItems;
-        for (var i = 0, len = radioItems.length; i < len; ++i) {
-            radioItems[i].checked = radioItems[i].value == value;
+        let gender_id = e.detail.value;
+        let that = this;
+        let genders = that.data.genders;
+        for (let gender of genders) {
+            gender.checked = gender.id == gender_id;
         }
-        this.setData({
-            radioItems: radioItems
+
+        that.setData({
+            genders: genders
         });
 
         let wesecret = wx.getStorageSync('wesecret');
@@ -44,7 +36,7 @@ Page({
             data: {
                 wesecret: wesecret,
                 userInfo: {
-                    gender: parseInt(value)
+                    gender_id: gender_id
                 }
             },
             success: function (res) {
