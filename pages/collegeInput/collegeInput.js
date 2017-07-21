@@ -3,37 +3,32 @@ import common from '../../utils/common.js';
 Page({
     data: {},
     onLoad: function (options) {
+        let city_id = options.city_id;
         let that = this;
         let my_userInfo = wx.getStorageSync('my_userInfo');
         wx.request({
-            url: 'https://collhome.com/life/apis/colleges',
+            url: `https://collhome.com/life/apis/cities/${city_id}/colleges`,
             success: function (res) {
-                console.log('colleges res', res);
-                let originColleges = res.data.data;
-                let colleges = [];
-                for (let i = 0; i < originColleges.length; i++) {
-                    let college_element = {
-                        name: originColleges[i],
-                        value: i,
-                        checked: originColleges[i] == my_userInfo.college_name
-                    }
-                    colleges.push(college_element)
+                let colleges = res.data.data;
+                for (let college of colleges) {
+                    college.checked = college.id == my_userInfo.college_id;
                 }
                 that.setData({
-                    radioItems: colleges
+                    colleges: colleges
                 })
             }
         })
     },
     radioChange: function (e) {
-        console.log('radio发生change事件，携带value值为：', e.detail.value);
-        let value = e.detail.value;
-        var radioItems = this.data.radioItems;
-        for (var i = 0, len = radioItems.length; i < len; ++i) {
-            radioItems[i].checked = radioItems[i].value == value;
+        let college_id = e.detail.value;
+        let that = this;
+        let colleges = that.data.colleges;
+        for (let college of colleges) {
+            college.checked = college.id == college_id;
         }
-        this.setData({
-            radioItems: radioItems
+
+        that.setData({
+            colleges: colleges
         });
 
         let wesecret = wx.getStorageSync('wesecret');
@@ -43,13 +38,15 @@ Page({
             data: {
                 wesecret: wesecret,
                 userInfo: {
-                    college: parseInt(value) + 1
+                    college_id: college_id
                 }
             },
             success: function (res) {
                 wx.setStorageSync('profile_need_refresh', 1);
                 common.get_my_userInfo(wesecret).then((user_id) => {
-                    wx.navigateBack()
+                    wx.navigateBack({
+                        delta: 3
+                    })
                 });
             }
         })

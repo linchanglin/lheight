@@ -18,18 +18,12 @@ Page({
         } else {
             signature = signature_show
         }
-        // let pictureOnWall;
-        // if (my_userInfo.pictureOnWall == 1) {
-        //     pictureOnWall = true
-        // } else {
-        //     pictureOnWall = false
-        // }
+        
         that.setData({
             wesecret: wesecret,
             userInfo: my_userInfo,
             signature: signature,
             files: my_userInfo.pictures,
-            // pictureOnWall: pictureOnWall
         })
 
     },
@@ -46,17 +40,11 @@ Page({
             } else {
                 signature = signature_show
             }
-            // let pictureOnWall;
-            // if (my_userInfo.pictureOnWall == 1) {
-            //     pictureOnWall = true
-            // } else {
-            //     pictureOnWall = false
-            // }
+            
             that.setData({
                 userInfo: my_userInfo,
                 signature: signature,
                 files: my_userInfo.pictures,
-                // pictureOnWall: pictureOnWall
             })
             wx.removeStorageSync('profile_need_refresh')
         }
@@ -169,38 +157,6 @@ Page({
             }
         })
     },
-    // showPictureOnWall: function (e) {
-    //     console.log("showPictureOnWall e", e);
-    //     let that = this;
-    //     let value = e.detail.value;
-    //     if (value) {
-    //         that.setData({
-    //             pictureOnWall: 1
-    //         })
-    //     } else {
-    //         that.setData({
-    //             pictureOnWall: 0
-    //         })
-    //     }
-    //     that.postSavePictureOnWall();
-    // },
-    // postSavePictureOnWall: function () {
-    //     let that = this;
-    //     let wesecret = that.data.wesecret;
-    //     wx.request({
-    //         url: 'https://collhome.com/life/apis/users',
-    //         method: 'POST',
-    //         data: {
-    //             wesecret: wesecret,
-    //             userInfo: {
-    //                 pictureOnWall: that.data.pictureOnWall
-    //             }
-    //         },
-    //         success: function (res) {
-    //             common.get_my_userInfo(wesecret);
-    //         }
-    //     })
-    // },
     navigateToAvatarUrlInput: function () {
         wx.navigateTo({
             url: '../avatarUrlInput/avatarUrlInput',
@@ -218,7 +174,7 @@ Page({
     },
     navigateToCollegeInput: function () {
         wx.navigateTo({
-            url: '../collegeInput/collegeInput',
+            url: '../provinceInput/provinceInput',
         })
     },
     navigateToInterestInput: function () {

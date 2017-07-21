@@ -1,11 +1,9 @@
-import dataAPI from '../../utils/utils.js'
 import common from '../../utils/common.js';
 
 Page({
     data: {
         save_loading: false,
 
-        // region: ['广东省', '广州市', '海珠区']
         region: []
     },
     onLoad: function () {
@@ -28,17 +26,6 @@ Page({
             }
         })
     },
-    onShow: function (e) {
-        // let that = this;
-        // let hometown = wx.getStorageSync('hometown');
-        // if (hometown) {
-        //     that.setData({
-        //         hometown: hometown
-        //     });
-        //     wx.removeStorageSync('province');
-        //     wx.removeStorageSync('hometown');
-        // }
-    },
     bindBirthdayChange: function (e) {
         this.setData({
             birthdayIndex: e.detail.value
@@ -56,20 +43,9 @@ Page({
         let submitData = e.detail.value;
 
         let region = that.data.region;
-        // if (submitData.grade != '') {
-        //     submitData.grade = parseInt(submitData.grade) + 1;
-        // }
         submitData.birthday = that.data.birthdayIndex;
         submitData.hometown = region[0] + ' ' + region[1] + ' ' + region[2];
-        // if (that.data.hometown) {
-        //     submitData.hometown = that.data.hometown;
-        // } else {
-        //     if (that.data.userInfo) {
-        //         submitData.hometown = that.data.userInfo.hometown;
-        //     } else {
-        //         submitData.hometown = '';
-        //     }
-        // }
+        
         console.log("submitData", submitData);
 
         that.setData({
@@ -105,10 +81,4 @@ Page({
             wx.navigateBack();
         }, 1000)
     }
-    // navigateToCityMultiPage: function () {
-    //     wx.navigateTo({
-    //         url: '../city_multi_page/city_multi_page',
-    //     })
-    // },
-
 });

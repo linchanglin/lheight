@@ -1,3 +1,5 @@
+import common from '../../utils/common.js';
+
 Page({
     data: {},
     onLoad: function (option) {
@@ -20,8 +22,6 @@ Page({
     },
     radioChange: function (e) {
         let interest_id = e.detail.value;
-        wx.setStorageSync('interest_id', interest_id);
-
         let that = this;
         let interests = that.data.interests;
 
@@ -33,6 +33,22 @@ Page({
             interests: interests
         });
 
-        wx.navigateBack();
+        let wesecret = wx.getStorageSync('wesecret');
+        wx.request({
+            url: 'https://collhome.com/life/apis/users',
+            method: 'POST',
+            data: {
+                wesecret: wesecret,
+                userInfo: {
+                    interest_id: interest_id
+                }
+            },
+            success: function (res) {
+                wx.setStorageSync('profile_need_refresh', 1);
+                common.get_my_userInfo(wesecret).then((user_id) => {
+                    wx.navigateBack()
+                });
+            }
+        })
     }
 })

@@ -1,5 +1,3 @@
-import dataAPI from '../../utils/utils.js'
-
 Page({
     data: {
         genders: ['男', '女'],
