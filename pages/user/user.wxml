@@ -1,156 +1,136 @@
 <view wx:if="{{get_available == 0}}" class="page">
-  <view class="page__bd">
+    <view class="page__bd">
 
-    <view class="container">
-      <block wx:for="{{test_loves}}" wx:for-item="love" wx:key="id">
-        <view class="list-item">
-          <view class="article-content">
-            <text>{{love.content}}</text>
-          </view>
+        <view class="container">
+            <block wx:for="{{test_loves}}" wx:for-item="love" wx:key="id">
+                <view class="list-item">
+                    <view class="article-content">
+                        <text>{{love.content}}</text>
+                    </view>
+                </view>
+            </block>
         </view>
-      </block>
-    </view>
 
-  </view>
+    </view>
 </view>
 
 <view wx:if="{{get_available == 1}}" class="page">
-  <view class="page__bd">
+    <view class="page__bd">
 
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_appmsg" hover="true" bindtap="navigateToProfileInput" hover-class="weui-cell_active">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" mode="aspectFill" src="{{userInfo.avatarUrl}}" />
-          </view>
-          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">{{userInfo.nickname}}</view>
-            <view class="weui-media-box__desc">{{userInfo.gender_name}}</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_appmsg" hover="true" bindtap="navigateToProfileInput" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" mode="aspectFill" src="{{userInfo.avatarUrl}}" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">{{userInfo.nickname}}</view>
+                        <view class="weui-media-box__desc">{{userInfo.gender_name}}</view>
+                    </view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </view>
+            </view>
         </view>
-      </view>
-    </view>
 
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="weui-cells weui-cells_after-title">
+        <view class="weui-panel">
+            <view class="weui-panel__bd">
+                <view class="weui-cells weui-cells_after-title">
 
-          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToRelatedApplet">
-            <view class="weui-cell__hd">
-              <image src="../images/applet1.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
-            </view>
-            <view class="weui-cell__bd">
-              <view style="display: inline-block; vertical-align: middle">相关小程序</view>
-            </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access">
-            </view>
-          </view>
+                    <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToRelatedApplet">
+                        <view class="weui-cell__hd">
+                            <image src="../images/applet1.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <view style="display: inline-block; vertical-align: middle">相关小程序</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                        </view>
+                    </view>
 
-          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToManage">
-            <view class="weui-cell__hd">
-              <image src="../images/setting.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
-            </view>
-            <view class="weui-cell__bd">
-              <view style="display: inline-block; vertical-align: middle">我的管理</view>
-            </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access">
-              <view wx:if="{{unreadSystemNoticeNums > 0}}" class="weui-badge weui-badge_dot" style="margin-left: 5px;margin-right: 5px;"></view>
-            </view>
-          </view>
+                    <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToManage">
+                        <view class="weui-cell__hd">
+                            <image src="../images/setting.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <view style="display: inline-block; vertical-align: middle">我的管理</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                            <view wx:if="{{unreadSystemNoticeNums > 0}}" class="weui-badge weui-badge_dot" style="margin-left: 5px;margin-right: 5px;"></view>
+                        </view>
+                    </view>
 
-          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToPraiseMeUsers" hover-class="weui-cell_active">
-            <view class="weui-cell__hd">
-              <image wx:if="{{ userInfo.gender == 2}}" src="../images/actor_male.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
-              <image wx:else src="../images/actor_female.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
-            </view>
-            <view class="weui-cell__bd">
-              <view style="display: inline-block; vertical-align: middle">喜欢我的</view>
-            </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access">
-              <!--<view class="weui-badge weui-badge_dot" style="margin-left: 5px;margin-right: 5px;"></view>-->
-            </view>
-          </view>
+                    <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToPraiseMeUsers" hover-class="weui-cell_active">
+                        <view class="weui-cell__hd">
+                            <image wx:if="{{ userInfo.gender == 2}}" src="../images/actor_male.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+                            <image wx:else src="../images/actor_female.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <view style="display: inline-block; vertical-align: middle">喜欢我的</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                        </view>
+                    </view>
 
+                </view>
+            </view>
         </view>
-      </view>
-    </view>
 
 
 
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="weui-cells weui-cells_after-title">
+        <view class="weui-panel">
+            <view class="weui-panel__bd">
+                <view class="weui-cells weui-cells_after-title">
 
-          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMyCommentLove" hover-class="weui-cell_active">
-            <view class="weui-cell__hd">
-              <image src="../images/comment_and_love1.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+                    <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMyCommentLove" hover-class="weui-cell_active">
+                        <view class="weui-cell__hd">
+                            <image src="../images/comment_and_love1.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <view style="display: inline-block; vertical-align: middle">评论 & 喜欢</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </view>
+
+                    <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMyLove" hover-class="weui-cell_active">
+                        <view class="weui-cell__hd">
+                            <image src="../images/love_stores.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <view style="display: inline-block; vertical-align: middle">我的帖子</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </view>
+
+                    <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToNotice" hover-class="weui-cell_active">
+                        <view class="weui-cell__hd">
+                            <image src="../images/lovestore.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <view style="display: inline-block; vertical-align: middle">提醒</view>
+                            <view wx:if="{{unreadNoticeNums > 0}}" class="weui-badge" style="margin-left: 5px;">{{unreadNoticeNums}}</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </view>
+
+                </view>
             </view>
-            <view class="weui-cell__bd">
-              <view style="display: inline-block; vertical-align: middle">评论 & 喜欢</view>
-            </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </view>
-
-          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMyLove" hover-class="weui-cell_active">
-            <view class="weui-cell__hd">
-              <image src="../images/love_stores.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
-            </view>
-            <view class="weui-cell__bd">
-              <view style="display: inline-block; vertical-align: middle">我的帖子</view>
-            </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </view>
-
         </view>
-      </view>
-    </view>
 
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="weui-cells weui-cells_after-title">
-
-          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToNotice" hover-class="weui-cell_active">
-            <view class="weui-cell__hd">
-              <image src="../images/lovestore.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+        <view class="weui-panel">
+            <view class="weui-panel__bd">
+                <view class="weui-cells weui-cells_after-title">
+                    <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToLoveInput" hover-class="weui-cell_active">
+                        <view class="weui-cell__hd">
+                            <image src="../images/love.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <view style="display: inline-block; vertical-align: middle">发帖</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </view>
+                </view>
             </view>
-            <view class="weui-cell__bd">
-              <view style="display: inline-block; vertical-align: middle">提醒</view>
-              <view wx:if="{{unreadNoticeNums > 0}}" class="weui-badge" style="margin-left: 5px;">{{unreadNoticeNums}}</view>
-            </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </view>
-
-          <!--<view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToMessage" hover-class="weui-cell_active">
-            <view class="weui-cell__hd">
-              <image src="../images/letter1.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
-            </view>
-            <view class="weui-cell__bd">
-              <view style="display: inline-block; vertical-align: middle">私信</view>
-              <view class="weui-badge" style="margin-left: 5px;">8</view>
-            </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </view>-->
-
         </view>
-      </view>
-    </view>
 
-    <view class="weui-panel">
-      <view class="weui-panel__bd">
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_access" hover="true" bindtap="navigateToLoveInput" hover-class="weui-cell_active">
-            <view class="weui-cell__hd">
-              <image src="../images/love.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
-            </view>
-            <view class="weui-cell__bd">
-              <view style="display: inline-block; vertical-align: middle">发帖</view>
-            </view>
-            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </view>
-        </view>
-      </view>
     </view>
-
-  </view>
 </view>

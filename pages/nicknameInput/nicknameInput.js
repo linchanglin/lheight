@@ -9,8 +9,15 @@ Page({
             nickname: my_userInfo.nickname
         })
     },
-    confirmInput: function (e) {
+    bindContentInput: function (e) {
+        let that = this;
         let value = e.detail.value;
+        that.setData({
+            nickname: value
+        })
+    },
+    confirmInput: function () {
+        let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         wx.request({
             url: 'https://collhome.com/life/apis/users',
@@ -18,7 +25,7 @@ Page({
             data: {
                 wesecret: wesecret,
                 userInfo: {
-                    nickname: value
+                    nickname: that.data.nickname
                 }
             },
             success: function (res) {

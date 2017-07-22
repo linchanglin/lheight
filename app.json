@@ -1,9 +1,22 @@
 {
     "pages": [
         "pages/user/user",
-        "pages/interestInput/interestInput",
+        
+        "pages/loveInput/loveInput",
+        
+        "pages/profileInput/profileInput",
         
         "pages/profileDetailsInput/profileDetailsInput",
+        
+        
+        
+        
+        "pages/badReportInput/badReportInput",
+        
+        
+        
+        "pages/interestInput/interestInput",
+        
         
         
         "pages/love/love",
@@ -27,9 +40,7 @@
         "pages/systemNotice/systemNotice",
         "pages/chat/chat",
         "pages/myCommentLove/myCommentLove",
-        "pages/loveInput/loveInput",
         "pages/picture/picture",
-        "pages/profileInput/profileInput",
         "pages/notice/notice",
         "pages/message/message",
         "pages/blackList/blackList",
@@ -43,20 +54,16 @@
         "pages/genderInput/genderInput",
         "pages/profileShowInput/profileShowInput",
         "pages/comment/comment",
-        "pages/badReportInput/badReportInput",
         "pages/replyInput/replyInput",
         "pages/commentInput/commentInput",
         "pages/videoUrlInput/videoUrlInput",
-        "pages/virtualLoveInput/virtualLoveInput",
         "pages/myLove/myLove",
         "pages/provinceInput/provinceInput",
         "pages/cityInput/cityInput",
         "pages/collegeInput/collegeInput",
         "pages/index/index",
-        "pages/visiableInput/visiableInput",
         "pages/profile/profile",
         "pages/realNameInput/realNameInput",
-        "pages/signatureInput/signatureInput",
         "pages/logs/logs"
     ],
     "window": {

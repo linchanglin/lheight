@@ -12,31 +12,43 @@ Page({
         location: {},
         visiable: 0,
         anonymous: 0,
-
+        postingTypeIndex: 0,
         save_loading: 0,
     },
     onLoad: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
+        that.setData({
+            wesecret: wesecret,
+        })
+        that.load_user();
+        that.load_postingTypes();
+    },
+    load_user: function () {
+        let that = this;
+        let wesecret = that.data.wesecret;
         wx.request({
             url: `https://collhome.com/life/apis/user?wesecret=${wesecret}`,
             success: function (res) {
                 that.setData({
-                    wesecret: wesecret,
                     my_userInfo: res.data.data
+                })
+            }
+        })
+    },
+    load_postingTypes: function () {
+        let that = this;
+        wx.request({
+            url: 'https://collhome.com/life/apis/postingTypes',
+            success: function (res) {
+                that.setData({
+                    postingTypes: res.data.data
                 })
             }
         })
     },
     onShow: function () {
         let that = this;
-        // let visiable = wx.getStorageSync('visiable');
-        // if (visiable) {
-        //     that.setData({
-        //         visiable: visiable
-        //     });
-        //     wx.removeStorageSync('visiable');
-        // }
         let video_url = wx.getStorageSync('video_url');
         if (video_url) {
             if (video_url == 'setnull') {
@@ -53,6 +65,15 @@ Page({
             wx.removeStorageSync('video_url');
             that.set_loading_status();
         }
+    },
+    bindContentInput: function (e) {
+        console.log('bindContentInput content', e.detail.value)
+        let that = this;
+        that.setData({
+            content: e.detail.value
+        })
+
+        that.set_loading_status();
     },
     chooseImage: function (e) {
         var that = this;
@@ -119,6 +140,12 @@ Page({
         })
         that.set_loading_status();
     },
+    postingTypeChange: function (e) {
+        let that = this;
+        that.setData({
+            postingTypeIndex: e.detail.value
+        })
+    },
     chooseLocation: function () {
         let that = this;
         wx.chooseLocation({
@@ -136,15 +163,6 @@ Page({
                 })
             }
         })
-    },
-    bindContentInput: function (e) {
-        console.log('bindContentInput content', e.detail.value)
-        let that = this;
-        that.setData({
-            content: e.detail.value
-        })
-
-        that.set_loading_status();
     },
     anonymousSwitchChange: function (e) {
         console.log("anonymousSwitchChange e", e);
@@ -173,12 +191,6 @@ Page({
             url: url,
         })
     },
-    // navigateToVisiableInput: function () {
-    //     let that = this;
-    //     wx.navigateTo({
-    //         url: `../visiableInput/visiableInput?visiable=${that.data.visiable}`
-    //     })
-    // },
     saveLove: function () {
         let that = this;
         if (that.data.my_userInfo.available == 0) {
@@ -232,8 +244,10 @@ Page({
     },
     postSaveLove: function () {
         let that = this;
+        let postingType_id = Number(that.data.postingTypeIndex) + 1 ;
         let data = {
             'wesecret': that.data.wesecret,
+            'postingType_id': postingType_id,
             'content': that.data.content,
             'images': that.data.images,
             'video_url': that.data.video_url,

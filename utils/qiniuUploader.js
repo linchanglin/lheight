@@ -12,12 +12,16 @@ function getUptoken() {
 
 
 function upload(uptoken, filePath, success, fail, complete) {
-    let visit_url = 'http://cdn.collhome.com';
-    let upload_url = 'https://upload-z2.qbox.me'
+    let visit_url = 'http://lifecdn.collhome.com';
+    let upload_url = 'https://upload-z2.qbox.me';
     let fileName = filePath.split('//')[1];
+
+    let my_userInfo = wx.getStorageSync('my_userInfo');
+    let user_id = my_userInfo.id;
+    let key = `${user_id}/${fileName}`;
     let formData = {
         'token': uptoken,
-        'key': fileName
+        'key': key
     };
     wx.uploadFile({
         url: upload_url,

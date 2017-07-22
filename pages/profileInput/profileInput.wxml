@@ -38,60 +38,13 @@
           <view class="weui-cell__ft weui-cell__ft_in-access">{{userInfo.interest_name}}</view>
         </view>
 
-
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToSignatureInput">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">个性签名</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access">{{signature}}</view>
-        </view>
-
-
-
         <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToProfileDetailsInput">
           <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">更多信息</view>
+            <view style="display: inline-block; vertical-align: middle">更多</view>
           </view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
 
-        <!-- <view class="weui-cell weui-cell_switch">
-          <view class="weui-cell__bd">是否上眼缘墙</view>
-          <view class="weui-cell__ft">
-            <switch checked="{{pictureOnWall}}" bindchange="showPictureOnWall" />
-          </view>
-        </view> -->
-
-      </view>
-
-    </view>
-    <!-- <view wx:if="{{pictureOnWall == 1}}" class="weui-cells__title">提示：您的照片或头像将展示在眼缘墙上。</view> -->
-
-    <view class="weui-panel weui-panel_access" style="margin-bottom: 20px">
-      <view class="weui-panel__bd">
-        <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <view class="weui-uploader">
-              <view class="weui-uploader__hd">
-                <view class="weui-uploader__title">相册</view>
-                <view class="weui-uploader__info">{{files.length}}/9</view>
-              </view>
-              <view class="weui-uploader__bd">
-                <block wx:for-items="{{files}}" wx:key="{{index}}">
-                  <view class="weui-uploader__file weui-uploader__file_statuss">
-                    <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" id="{{item}}" mode="aspectFill" />
-                    <view class="weui-uploader__file-contentt">
-                      <icon type="clear" size="20" data-image="{{item}}" bindtap="deleteImage"></icon>
-                    </view>
-                  </view>
-                </block>
-                <view class="weui-uploader__input-box">
-                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
       </view>
     </view>
 
