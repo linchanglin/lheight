@@ -1,7 +1,0 @@
-.weui-media-box__thumb {
-    border-radius:5px;
-}
-
-.weui-cells__title {
-  margin-top: 0px;
-}

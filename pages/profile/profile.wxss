@@ -1,5 +1,0 @@
-/* pages/profile/profile.wxss */
-
-.weui-media-box__thumb {
-    border-radius:5px;
-}
