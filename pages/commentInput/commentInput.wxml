@@ -1,18 +1,2 @@
 <import src="../../utils/common.wxml" />
 <template is="comment_and_reply_input" />
-<!--<view class="page">
-  <view class="page__bd">
-    <view class="weui-panel"></view>
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <textarea class="weui-textarea" style="height: 10em" maxlength="-1" bindinput="bindContentInput" bindconfirm="confirmInput" auto-focus />
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <button class="weui-btn" type="primary" bindtap="confirmInput">保存</button>
-  </view>
-</view>-->

@@ -33,7 +33,7 @@
           <view class="profileShow_cells">
             <view class="profileShow_cell">
               <view class="profileShow_cell_left">
-                <image class="image_picture_middle" mode="aspectFit" src="../images/camera.png"></image>
+                <image class="image_picture_middle" mode="aspectFit" src="../images/picture.png"></image>
               </view>
               <view class="profileShow_cell_right">
                 <view class="profileShow_cell_hd">
@@ -222,11 +222,6 @@
 
     <view class="weui-tabbar">
 
-      <!--<view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToChat">
-        <image class="image-comment" src="../images/comment.png"></image>
-        <text class="weui-tabbar__label">私信</text>
-      </view>-->
-
       <view class="weui-tabbar__item" data-userId="{{userInfo.id}}" data-userIfMyPraise="{{userInfo.if_my_praise}}" catchtap="praiseUser">
         <image wx:if="{{userInfo.if_my_praise == 0}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme.png"></image>
         <image wx:if="{{userInfo.if_my_praise == 1}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme_fill.png"></image>
@@ -239,12 +234,6 @@
           <text class="weui-tabbar__label">分享</text>
         </button>
       </view>
-
-      <!--<view class="weui-tabbar__item" hover-class="weui-cell_active" catchtap="navigateToUserMore">
-        <image class="image-comment" src="../images/round_right.png"></image>
-
-        <text class="weui-tabbar__label">更多</text>
-      </view>-->
 
     </view>
 

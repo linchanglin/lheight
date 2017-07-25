@@ -12,7 +12,7 @@
         </view>
       </view>
 
-      <!--<button class="weui-btn" type="primary" bindtap="confirmInput">保存</button>-->
+      <button class="weui-btn" style="margin: 20px 15px;" type="primary" bindtap="confirmInput">保存</button>
     </view>
   </view>
 </template>

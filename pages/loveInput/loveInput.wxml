@@ -47,7 +47,7 @@
 <view class="weui-panel weui-panel_access">
             <view class="weui-cells weui-cells_after-title  border-bottom-none">
 
-                <view wx:if="{{my_userInfo.trust > 0}}" class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToVideoUrlInput">
+                <view wx:if="{{my_userInfo.trust > 1}}" class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToVideoUrlInput">
                     <view class="weui-cell__hd">
                         <image wx:if="{{videoUrl_exist == 0}}" src="../images/video.png" class="iconfront"></image>
                         <image wx:else src="../images/video_fill.png" class="iconfront"></image>
