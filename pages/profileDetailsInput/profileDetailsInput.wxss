@@ -1,19 +1,18 @@
-.weui-vcode-btnn {
-  display: inline-block;
-  height: 2.58823529em;
-  margin-left: 5px;
-  padding: 0 0.6em 0 0.7em;
-  border-left: 1px solid #E5E5E5;
-  line-height: 2.58823529em;
-  vertical-align: middle;
-  font-size: 17px;
-  color: #000;
-  white-space: nowrap;
-  width: 25px;
+.weui-uploader__file-contentt {
+  position: absolute;
+  left: 58.5px;
+  top: -3.5px;
+}
+
+.weui-uploader__file_statuss {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .page__bd {
-  padding: 20px 0
+  padding: 20px 0 0;
 }
 
 .weui-cells__title {
@@ -22,5 +21,5 @@
 }
 
 .weui-btn-area {
-  margin: 20px 15px 0 15px;
+  margin: 20px 15px ;
 }

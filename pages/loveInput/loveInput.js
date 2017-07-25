@@ -244,7 +244,7 @@ Page({
     },
     postSaveLove: function () {
         let that = this;
-        let postingType_id = Number(that.data.postingTypeIndex) + 1 ;
+        let postingType_id = Number(that.data.postingTypeIndex) + 1;
         let data = {
             'wesecret': that.data.wesecret,
             'postingType_id': postingType_id,
@@ -300,17 +300,32 @@ Page({
         that.setData({
             save_loading: 1
         })
-        wx.setStorageSync('board_loves_need_refresh_create_love', 1);
         wx.showToast({
             title: '成功',
             icon: 'success',
             duration: 1000
         });
+
+        let postingType_id = Number(that.data.postingTypeIndex) + 1;
+        let url;
+        if (postingType_id == 1) {
+            wx.setStorageSync('love_loves_need_refresh_create_love', 1);
+            url = '/pages/love/love';
+        } else if (postingType_id == 2) {
+            wx.setStorageSync('activity_loves_need_refresh_create_love', 1);
+            url = '/pages/activity/activity';
+        } else if (postingType_id == 3) {
+            wx.setStorageSync('question_loves_need_refresh_create_love', 1);
+            url = '/pages/question/question';
+        } else {
+            wx.setStorageSync('find_loves_need_refresh_create_love', 1);
+            url = '/pages/find/find';
+        }
+
         setTimeout(function () {
             wx.switchTab({
-                url: '/pages/board/board'
+                url: url
             })
         }, 1000)
     }
-
 })

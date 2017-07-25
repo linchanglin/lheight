@@ -20,7 +20,6 @@ Page({
 
         showTopTips1: false,
         showTopTips2: false,
-        // showTopTips2: true,
         animationData: {},
 
 

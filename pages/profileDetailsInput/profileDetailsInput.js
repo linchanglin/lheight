@@ -11,12 +11,21 @@ Page({
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         let my_userInfo = wx.getStorageSync('my_userInfo');
+        console.log('my_userInfo', my_userInfo);
+        let region;
+        let my_userInfo_region = my_userInfo.hometown;
+        if (my_userInfo_region.length > 0) {
+            region = my_userInfo_region.split(" ");
+        } else {
+            region = [];
+        }
 
         that.setData({
             wesecret: wesecret,
             userInfo: my_userInfo,
             birthdayIndex: my_userInfo.birthday,
             files: my_userInfo.pictures,
+            region: region
         })
     },
     chooseImage: function (e) {

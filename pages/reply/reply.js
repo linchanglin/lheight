@@ -158,7 +158,9 @@ Page({
             common.showCommentActionSheet(e).then((comment_id) => {
                 console.log('delete comment_id', comment_id)
                 wx.setStorageSync('comments_need_refresh_delete_comment', comment_id);
-                wx.setStorageSync('board_loves_need_refresh', love_id);
+                wx.setStorageSync('love_loves_need_refresh', love_id);
+                wx.setStorageSync('activity_loves_need_refresh', love_id);
+                wx.setStorageSync('question_loves_need_refresh', love_id);
                 wx.setStorageSync('find_loves_need_refresh', love_id);
                 wx.setStorageSync('mycomment_loves_need_refresh', love_id);
                 wx.setStorageSync('my_loves_need_refresh', love_id);
@@ -170,7 +172,9 @@ Page({
                 common.showCommentActionSheet(e).then((comment_id) => {
                     console.log('delete comment_id', comment_id)
                     wx.setStorageSync('comments_need_refresh_delete_comment', comment_id);
-                    wx.setStorageSync('board_loves_need_refresh', love_id);
+                    wx.setStorageSync('love_loves_need_refresh', love_id);
+                    wx.setStorageSync('activity_loves_need_refresh', love_id);
+                    wx.setStorageSync('question_loves_need_refresh', love_id);
                     wx.setStorageSync('find_loves_need_refresh', love_id);
                     wx.setStorageSync('mycomment_loves_need_refresh', love_id);
                     wx.setStorageSync('my_loves_need_refresh', love_id);

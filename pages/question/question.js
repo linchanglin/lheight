@@ -31,6 +31,12 @@ Page({
         video_reach_bottom: false,
         video_page_no_data: false,
 
+
+        showTopTips1: false,
+        showTopTips2: false,
+        animationData: {},
+
+
         hot_inputShowed: false,
         hot_inputVal: "",
         image_inputShowed: false,
@@ -85,15 +91,26 @@ Page({
 
         that.get_available();
 
-        let find_loves_need_refresh = wx.getStorageSync('find_loves_need_refresh')
-        if (find_loves_need_refresh) {
-            that.load_refresh_loves(find_loves_need_refresh);
-            wx.removeStorageSync('find_loves_need_refresh')
+        let question_loves_need_refresh = wx.getStorageSync('question_loves_need_refresh')
+        if (question_loves_need_refresh) {
+            that.load_refresh_loves(question_loves_need_refresh);
+            wx.removeStorageSync('question_loves_need_refresh')
         }
-        let find_loves_need_refresh_delete_love = wx.getStorageSync('find_loves_need_refresh_delete_love')
-        if (find_loves_need_refresh_delete_love) {
-            that.load_refresh_loves_delete_love(find_loves_need_refresh_delete_love);
-            wx.removeStorageSync('find_loves_need_refresh_delete_love')
+        let question_loves_need_refresh_delete_love = wx.getStorageSync('question_loves_need_refresh_delete_love')
+        if (question_loves_need_refresh_delete_love) {
+            that.load_refresh_loves_delete_love(question_loves_need_refresh_delete_love);
+            wx.removeStorageSync('question_loves_need_refresh_delete_love')
+        }
+        let question_loves_need_refresh_create_love = wx.getStorageSync('question_loves_need_refresh_create_love')
+        if (question_loves_need_refresh_create_love) {
+            that.load_hotLoves('pulldown');
+            that.load_imageLoves('pulldown');
+            that.load_videoLoves('pulldown');
+            wx.removeStorageSync('question_loves_need_refresh_create_love')
+        }
+
+        if (that.data.loves && !question_loves_need_refresh_create_love) {
+            that.get_unreadLoveNums();
         }
     },
     get_available: function () {
@@ -193,10 +210,39 @@ Page({
             video_loves: new_video_loves,
         })
     },
+    get_unreadLoveNums: function () {
+        let that = this;
+        let url;
+        let love_id = that.data.loves[0].id;
+        let wesecret = wx.getStorageSync('wesecret');
+        let postingType_id = 3;
+        if (wesecret) {
+            url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${postingType_id}&love_id=${love_id}&wesecret=${wesecret}`
+        } else {
+            url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${postingType_id}&love_id=${love_id}&wesecret=`
+        }
+        wx.request({
+            url: url,
+            success: function (res) {
+                console.log('get_unreadLoveNums res', res);
+                let unreadLoveNums = res.data.unreadLoveNums;
+                if (unreadLoveNums > 0) {
+                    that.setData({
+                        showTopTips1: true,
+                        unreadLoveNums: res.data.unreadLoveNums
+                    })
+                }
+            }
+        })
+    },
     onPullDownRefresh: function () {
         let that = this;
         let activeIndex = that.data.activeIndex;
         if (activeIndex == 0) {
+            that.setData({
+                showTopTips1: false,
+            });
+
             that.load_hotLoves('pulldown');
         } else if (activeIndex == 1) {
             that.load_imageLoves('pulldown');
@@ -313,6 +359,31 @@ Page({
                 if (parameter == 'pulldown' || parameter == 'onLoad') {
                     wx.stopPullDownRefresh();
                     wx.hideLoading()
+                }
+
+                if (parameter == 'pulldown') {
+                    if (that.data.unreadLoveNums > 0) {
+                        that.setData({
+                            showTopTips2: true
+                        });
+                        setTimeout(function () {
+                            let animation = wx.createAnimation({
+                                duration: 500,
+                            })
+                            animation.translateY(-100).step()
+                            that.setData({
+                                animationData: animation.export()
+                            })
+                        }, 1500)
+                        setTimeout(function () {
+                            that.setData({
+                                showTopTips2: false,
+                                animationData: {},
+
+                                unreadLoveNums: 0
+                            });
+                        }, 2000);
+                    }
                 }
             }
         })
