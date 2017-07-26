@@ -24,7 +24,7 @@ Page({
         let that = this;
         return {
             title: `分享校园生活墙`,
-            path: `/pages/board/board`,
+            path: `/pages/love/love`,
             success: function (res) {
                 console.log("onShareAppMessage", res);
             }
