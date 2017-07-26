@@ -5,6 +5,9 @@ var app = getApp()
 
 Page({
     data: {
+        hot_loves: [],
+
+
         hot_page: 1,
         hot_reach_bottom: false,
         hot_page_no_data: false,
