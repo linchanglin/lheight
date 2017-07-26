@@ -13,7 +13,7 @@
               </button>-->
             <image class="more_image" src="../images/more.png" data-loveUserId="{{love.userInfo.id}}" data-loveUserNickName="{{love.userInfo.nickname}}" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" data-belongsToMe="{{love.belongsToMe}}" catchtap="showLoveActionSheet"></image>
             <text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickname}}</text>
-            <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college}}</text>
+            <text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college_name}}</text>
           </view>
 
           <view class="article-content">
