@@ -10,7 +10,6 @@
         "pages/profileDetailsInput/profileDetailsInput",
         "pages/badReportInput/badReportInput",
         "pages/interestInput/interestInput",
-        "pages/board/board",
         "pages/aboutLoveWall/aboutLoveWall",
         "pages/manage/manage",
         "pages/relatedApplet/relatedApplet",
