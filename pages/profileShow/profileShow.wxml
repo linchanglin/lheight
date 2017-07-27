@@ -1,274 +1,276 @@
 <view wx:if="{{userInfo.role == 1}}" class="page">
-  <view class="page__bd" style="margin: 0; padding: 0; height: 100%">
-    <view wx:if="{{ifShowAvatarUrl}}" class="showAvatarUrl" catchtap="hideAvatarUrl">
-      <image src="{{userInfo.avatarUrl}}" mode="aspectFit" style="width: 100%;height: 100%"></image>
-    </view>
-    <image style="position: fixed;top: 0;left: 0; z-index; -1;height: 210px;width: 100%; opacity:1" mode="aspectFill" src="../images/meet.jpeg"></image>
-    <scroll-view scroll-y="true" style="height: {{wh}}px">
-
-      <view style="position: absolute; top: 0; width: 100%;height: 210px;display: flex; justify-content: center;align-items: center">
-        <view style="display: flex; flex-direction: column">
-          <view class="classname" style="display: flex; justify-content: center;align-items: center">
-            <image style="position: relative;z-index: 500; border:  2px solid #fff;width: 75px; height: 75px;border-radius: 50%" mode="aspectFill" src="{{userInfo.avatarUrl}}" bindtap="showAvatarUrl"></image>
-          </view>
-
-          <view class="classname" style="text-align: center">
-            <view style="color: #ff8140;display: flex; justify-content: center;align-items: center">
-              <text style="padding-right: 5px">{{userInfo.nickname}}</text>
-              <image wx:if="{{userInfo.gender == 1}}" src="../images/gender_male.png" style="width: 16px; height: 16px"></image>
-              <image wx:if="{{userInfo.gender == 2}}" src="../images/gender_female.png" style="width: 16px; height: 16px"></image>
-            </view>
-            <view style="color: #FF3366;display: flex; justify-content: center;align-items: center">
-              <image src="../images/loveme_fill.png" style="width: 20px; height: 20px;"></image>
-              <text style="padding: 0 5px">{{userInfo.praise_nums}}</text>
-            </view>
-          </view>
+    <view class="page__bd" style="margin: 0; padding: 0; height: 100%">
+        <view wx:if="{{ifShowAvatarUrl}}" class="showAvatarUrl" catchtap="hideAvatarUrl">
+            <image src="{{userInfo.avatarUrl}}" mode="aspectFit" style="width: 100%;height: 100%"></image>
         </view>
-      </view>
+        <image style="position: fixed;top: 0;left: 0; z-index; -1;height: 210px;width: 100%; opacity:1" mode="aspectFill" src="{{userInfo.background_image}}"></image>
+        <scroll-view scroll-y="true" style="height: {{wh}}px">
 
+            <view style="position: absolute; top: 0; width: 100%;height: 210px;display: flex; justify-content: center;align-items: center">
+                <view style="display: flex; flex-direction: column">
+                    <view class="classname" style="display: flex; justify-content: center;align-items: center">
+                        <image style="position: relative;z-index: 500; border:  2px solid #fff;width: 75px; height: 75px;border-radius: 50%" mode="aspectFill" src="{{userInfo.avatarUrl}}" bindtap="showAvatarUrl"></image>
+                    </view>
 
-
-      <view class="weui-panel" style="position: relative; top: 210px; margin-top: 0;width: 100%;background-color: #edecf2">
-        <view class="weui-panel__bd" style="background-color: #ffffff">
-          <view class="profileShow_cells">
-            <view class="profileShow_cell">
-              <view class="profileShow_cell_left">
-                <image class="image_picture_middle" mode="aspectFit" src="../images/picture.png"></image>
-              </view>
-              <view class="profileShow_cell_right">
-                <view class="profileShow_cell_hd">
-                  相册
+                    <view class="classname" style="text-align: center">
+                        <view style="color: #ff8140;display: flex; justify-content: center;align-items: center">
+                            <text style="padding-right: 5px">{{userInfo.nickname}}</text>
+                            <image wx:if="{{userInfo.gender == 1}}" src="../images/gender_male.png" style="width: 16px; height: 16px"></image>
+                            <image wx:if="{{userInfo.gender == 2}}" src="../images/gender_female.png" style="width: 16px; height: 16px"></image>
+                        </view>
+                        <view style="color: #FF3366;display: flex; justify-content: center;align-items: center">
+                            <image src="../images/loveme_fill.png" style="width: 20px; height: 20px;"></image>
+                            <text style="padding: 0 5px">{{userInfo.praise_nums}}</text>
+                        </view>
+                    </view>
                 </view>
-                <view class="profileShow_cell_bd">
-                  <view class="display: flex; justify-content: flex-start">
-
-                    <block wx:for-items="{{userInfo.pictures}}" wx:key="*this">
-                      <image style="width: 79px; height: 79px; padding: 0 5px 5px 0;" src="{{item}}" bindtap="previewImage" data-current="{{item}}" id="{{item}}" mode="aspectFill" />
-                    </block>
-                  </view>
-
-                </view>
-              </view>
             </view>
-          </view>
-        </view>
-        <view class="weui-panel__bd new_panel_bd">
-          <view class="profileShow_cells">
-            <view class="profileShow_cell">
-              <view class="profileShow_cell_left">
-                <image class="image_picture_big" mode="aspectFit" src="../images/show_self.png"></image>
-              </view>
-              <view class="profileShow_cell_right">
-                <view class="profileShow_cell_hd">
-                  个人
+
+
+
+            <view class="weui-panel" style="position: relative; top: 210px; margin-top: 0;width: 100%;background-color: #edecf2">
+                <view class="weui-panel__bd" style="background-color: #ffffff">
+                    <view class="profileShow_cells">
+                        <view class="profileShow_cell">
+                            <view class="profileShow_cell_left">
+                                <image class="image_picture_middle" mode="aspectFit" src="../images/picture.png"></image>
+                            </view>
+                            <view class="profileShow_cell_right">
+                                <view class="profileShow_cell_hd">
+                                    相册
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    <view class="display: flex; justify-content: flex-start">
+
+                                        <block wx:for-items="{{userInfo.pictures}}" wx:key="*this">
+                                            <image style="width: 79px; height: 79px; padding: 0 5px 5px 0;" src="{{item}}" bindtap="previewImage" data-current="{{item}}" id="{{item}}" mode="aspectFill" />
+                                        </block>
+                                    </view>
+
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.realname}}
+                <view class="weui-panel__bd new_panel_bd">
+                    <view class="profileShow_cells">
+                        <view class="profileShow_cell">
+                            <view class="profileShow_cell_left">
+                                <image class="image_picture_big" mode="aspectFit" src="../images/show_self.png"></image>
+                            </view>
+                            <view class="profileShow_cell_right">
+                                <view class="profileShow_cell_hd">
+                                    个人
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.realname}}
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.gender_name}}
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.birthday}}
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.age}}
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.constellation}}
+                                </view>
+                                <view wx:if="{{userInfo.height}}" class="profileShow_cell_bd">
+                                    {{userInfo.height}} cm
+                                </view>
+                                <view wx:if="{{userInfo.weight}}" class="profileShow_cell_bd">
+                                    {{userInfo.weight}} kg
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.hometown}}
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.signature}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.gender_name}}
+
+                <view class="weui-panel__bd new_panel_bd">
+                    <view class="profileShow_cells">
+                        <view class="profileShow_cell">
+                            <view class="profileShow_cell_left">
+                                <image class="image_picture" mode="aspectFit" src="../images/show_college.png"></image>
+                            </view>
+                            <view class="profileShow_cell_right">
+                                <view class="profileShow_cell_hd">
+                                    学校
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.college_name}}
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.major}}
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.grade}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.birthday}}
+
+                <view class="weui-panel__bd new_panel_bd">
+                    <view class="profileShow_cells">
+                        <view class="profileShow_cell">
+                            <view class="profileShow_cell_left">
+                                <image class="image_picture" mode="aspectFit" src="../images/show_contact.png"></image>
+                            </view>
+                            <view class="profileShow_cell_right">
+                                <view class="profileShow_cell_hd">
+                                    社交
+                                </view>
+                                <view class="profileShow_cell_bd" wx:if="{{userInfo.wechat}}">
+                                    微信: {{userInfo.wechat}}
+                                </view>
+                                <view class="profileShow_cell_bd" wx:if="{{userInfo.qq}}">
+                                    QQ: {{userInfo.qq}}
+                                </view>
+                                <view class="profileShow_cell_bd" wx:if="{{userInfo.weibo}}">
+                                    微博: {{userInfo.weibo}}
+                                </view>
+                                <view class="profileShow_cell_bd" wx:if="{{userInfo.mobilePhone}}">
+                                    电话: {{userInfo.mobilePhone}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.age}}
+
+                <view wx:if="{{userInfo.character != ''}}" class="weui-panel__bd new_panel_bd">
+                    <view class="profileShow_cells">
+                        <view class="profileShow_cell">
+                            <view class="profileShow_cell_left">
+                                <image class="image_picture" mode="aspectFit" src="../images/show_character.png"></image>
+                            </view>
+                            <view class="profileShow_cell_right">
+                                <view class="profileShow_cell_hd">
+                                    性格
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.character}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.constellation}}
+
+                <view wx:if="{{userInfo.hobby != ''}}" class="weui-panel__bd new_panel_bd">
+                    <view class="profileShow_cells">
+                        <view class="profileShow_cell">
+                            <view class="profileShow_cell_left">
+                                <image class="image_picture_big" mode="aspectFit" src="../images/show_hobby.png"></image>
+                            </view>
+                            <view class="profileShow_cell_right">
+                                <view class="profileShow_cell_hd">
+                                    爱好
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.hobby}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
-                <view wx:if="{{userInfo.height}}" class="profileShow_cell_bd">
-                  {{userInfo.height}} cm
+
+                <view wx:if="{{userInfo.love_history != ''}}" class="weui-panel__bd new_panel_bd">
+                    <view class="profileShow_cells">
+                        <view class="profileShow_cell">
+                            <view class="profileShow_cell_left">
+                                <image class="image_picture" mode="aspectFit" src="../images/show_loveHistory.png"></image>
+                            </view>
+                            <view class="profileShow_cell_right">
+                                <view class="profileShow_cell_hd">
+                                    恋爱史
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.love_history}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
-                <view wx:if="{{userInfo.weight}}" class="profileShow_cell_bd">
-                  {{userInfo.weight}} kg
+
+                <view wx:if="{{userInfo.love_selecting != ''}}" class="weui-panel__bd new_panel_bd">
+                    <view class="profileShow_cells">
+                        <view class="profileShow_cell">
+                            <view class="profileShow_cell_left">
+                                <image class="image_picture_big" mode="aspectFit" src="../images/show_selecting.png"></image>
+                            </view>
+                            <view class="profileShow_cell_right">
+                                <view class="profileShow_cell_hd">
+                                    择偶观
+                                </view>
+                                <view class="profileShow_cell_bd">
+                                    {{userInfo.love_selecting}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.hometown}}
-                </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.signature}}
-                </view>
-              </view>
+
             </view>
-          </view>
-        </view>
+        </scroll-view>
 
-        <view class="weui-panel__bd new_panel_bd">
-          <view class="profileShow_cells">
-            <view class="profileShow_cell">
-              <view class="profileShow_cell_left">
-                <image class="image_picture" mode="aspectFit" src="../images/show_college.png"></image>
-              </view>
-              <view class="profileShow_cell_right">
-                <view class="profileShow_cell_hd">
-                  学校
-                </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.college_name}}
-                </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.major}}
-                </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.grade_name}}
-                </view>
-              </view>
+        <view class="weui-tabbar">
+
+            <view class="weui-tabbar__item" data-userId="{{userInfo.id}}" data-userIfMyPraise="{{userInfo.if_my_praise}}" catchtap="praiseUser">
+                <image wx:if="{{userInfo.if_my_praise == 0}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme.png"></image>
+                <image wx:if="{{userInfo.if_my_praise == 1}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme_fill.png"></image>
+                <text class="weui-tabbar__label">喜欢</text>
             </view>
-          </view>
-        </view>
 
-        <view class="weui-panel__bd new_panel_bd">
-          <view class="profileShow_cells">
-            <view class="profileShow_cell">
-              <view class="profileShow_cell_left">
-                <image class="image_picture" mode="aspectFit" src="../images/show_contact.png"></image>
-              </view>
-              <view class="profileShow_cell_right">
-                <view class="profileShow_cell_hd">
-                  社交
-                </view>
-                <view class="profileShow_cell_bd" wx:if="{{userInfo.wechat}}">
-                  微信: {{userInfo.wechat}}
-                </view>
-                <view class="profileShow_cell_bd" wx:if="{{userInfo.qq}}">
-                  QQ: {{userInfo.qq}}
-                </view>
-                <view class="profileShow_cell_bd" wx:if="{{userInfo.weibo}}">
-                  微博: {{userInfo.weibo}}
-                </view>
-                <view class="profileShow_cell_bd" wx:if="{{userInfo.mobilePhone}}">
-                  电话: {{userInfo.mobilePhone}}
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-
-        <view wx:if="{{userInfo.character != ''}}" class="weui-panel__bd new_panel_bd">
-          <view class="profileShow_cells">
-            <view class="profileShow_cell">
-              <view class="profileShow_cell_left">
-                <image class="image_picture" mode="aspectFit" src="../images/show_character.png"></image>
-              </view>
-              <view class="profileShow_cell_right">
-                <view class="profileShow_cell_hd">
-                  性格
-                </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.character}}
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-
-        <view wx:if="{{userInfo.hobby != ''}}" class="weui-panel__bd new_panel_bd">
-          <view class="profileShow_cells">
-            <view class="profileShow_cell">
-              <view class="profileShow_cell_left">
-                <image class="image_picture_big" mode="aspectFit" src="../images/show_hobby.png"></image>
-              </view>
-              <view class="profileShow_cell_right">
-                <view class="profileShow_cell_hd">
-                  爱好
-                </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.hobby}}
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-
-        <view wx:if="{{userInfo.love_history != ''}}" class="weui-panel__bd new_panel_bd">
-          <view class="profileShow_cells">
-            <view class="profileShow_cell">
-              <view class="profileShow_cell_left">
-                <image class="image_picture" mode="aspectFit" src="../images/show_loveHistory.png"></image>
-              </view>
-              <view class="profileShow_cell_right">
-                <view class="profileShow_cell_hd">
-                  恋爱史
-                </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.love_history}}
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-
-        <view wx:if="{{userInfo.love_selecting != ''}}" class="weui-panel__bd new_panel_bd">
-          <view class="profileShow_cells">
-            <view class="profileShow_cell">
-              <view class="profileShow_cell_left">
-                <image class="image_picture_big" mode="aspectFit" src="../images/show_selecting.png"></image>
-              </view>
-              <view class="profileShow_cell_right">
-                <view class="profileShow_cell_hd">
-                  择偶观
-                </view>
-                <view class="profileShow_cell_bd">
-                  {{userInfo.love_selecting}}
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-
-      </view>
-    </scroll-view>
-
-    <view class="weui-tabbar">
-
-      <view class="weui-tabbar__item" data-userId="{{userInfo.id}}" data-userIfMyPraise="{{userInfo.if_my_praise}}" catchtap="praiseUser">
-        <image wx:if="{{userInfo.if_my_praise == 0}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme.png"></image>
-        <image wx:if="{{userInfo.if_my_praise == 1}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme_fill.png"></image>
-        <text class="weui-tabbar__label">喜欢</text>
-      </view>
-
-      <view class="weui-tabbar__item">
-        <button class="shareButton1" open-type="share">
+            <view class="weui-tabbar__item">
+                <button class="shareButton1" open-type="share">
           <image class="image-comment" src="../images/share.png"></image>
           <text class="weui-tabbar__label">分享</text>
         </button>
-      </view>
+            </view>
+
+        </view>
 
     </view>
-
-  </view>
 </view>
 
 
 
 
 <view wx:if="{{userInfo.role == 0}}" class="page">
-  <view class="page__bd">
 
-    <view class="weui-panel weui-panel_access" style="margin-top: 20px">
-      <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_appmsg">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image style="border-radius: 5px;" class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
-          </view>
-          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">{{userInfo.nickname}}</view>
-            <view class="weui-media-box__desc">{{userInfo.college_name}}</view>
-          </view>
+    <view class="page__bd" style="padding-bottom: 20px;">
+
+        <view class="weui-panel weui-panel_access" style="margin-top: 20px">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_appmsg">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image style="border-radius: 5px;" class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">{{userInfo.nickname}}</view>
+                        <view class="weui-media-box__desc">{{userInfo.gender_name}}</view>
+                    </view>
+                </view>
+            </view>
         </view>
-      </view>
+
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text" style="font-size: 16.5px; color:  #ff8140">介绍</view>
+                    <view class="" style="font-size: 16px; color: #000000; line-height:1.7;">{{userInfo.signature}}</view>
+                </view>
+            </view>
+        </view>
+
+
     </view>
 
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_text">
-          <view class="weui-media-box__title weui-media-box__title_in-text" style="font-size: 16px; color:  #ff8140">介绍</view>
-          <view class="weui-media-box__desc" style="font-size: 15px; color: #000000;">{{userInfo.signature}}</view>
-        </view>
-      </view>
-    </view>
-
-
-  </view>
 </view>
