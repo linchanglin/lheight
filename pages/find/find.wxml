@@ -17,8 +17,14 @@
 
 <view wx:if="{{get_available == 1}}" class="page">
 
-  <view wx:if="{{showTopTips1}}" class="weui-toptips weui-toptips_notice1">您有{{unreadLoveNums}}条帖子未查看</view>
-  <view wx:if="{{showTopTips2}}" animation="{{animationData}}" class="weui-toptips weui-toptips_notice2">更新了{{unreadLoveNums}}条帖子</view>
+  <view wx:if="{{hot_showTopTips1 && activeIndex == 0 && hot_unreadLoveNums > 0}}" class="weui-toptips weui-toptips_notice1">您有{{hot_unreadLoveNums}}条帖子未查看</view>
+  <view wx:if="{{hot_showTopTips2 && activeIndex == 0 && hot_unreadLoveNums > 0}}" animation="{{animationData}}" class="weui-toptips weui-toptips_notice2">更新了{{hot_unreadLoveNums}}条帖子</view>
+
+  <view wx:if="{{image_showTopTips1 && activeIndex == 1 && image_unreadLoveNums > 0}}" class="weui-toptips weui-toptips_notice1">您有{{image_unreadLoveNums}}条帖子未查看</view>
+  <view wx:if="{{image_showTopTips2 && activeIndex == 1 && image_unreadLoveNums > 0}}" animation="{{animationData}}" class="weui-toptips weui-toptips_notice2">更新了{{image_unreadLoveNums}}条帖子</view>
+
+  <view wx:if="{{video_showTopTips1 && activeIndex == 2 && video_unreadLoveNums > 0}}" class="weui-toptips weui-toptips_notice1">您有{{video_unreadLoveNums}}条帖子未查看</view>
+  <view wx:if="{{video_showTopTips2 && activeIndex == 2 && video_unreadLoveNums > 0}}" animation="{{animationData}}" class="weui-toptips weui-toptips_notice2">更新了{{video_unreadLoveNums}}条帖子</view>
 
   <view class="page__bd">
     <view class="weui-tab">

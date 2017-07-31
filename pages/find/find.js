@@ -25,6 +25,9 @@ Page({
         image_loves: [],
         video_loves: [],
 
+        hot_unreadLoveNums: 0,
+        image_unreadLoveNums: 0,
+        video_unreadLoveNums: 0,
 
         hot_page: 1,
         hot_reach_bottom: false,
@@ -37,8 +40,12 @@ Page({
         video_page_no_data: false,
 
 
-        showTopTips1: false,
-        showTopTips2: false,
+        hot_showTopTips1: false,
+        hot_showTopTips2: false,
+        image_showTopTips1: false,
+        image_showTopTips2: false,
+        video_showTopTips1: false,
+        video_showTopTips2: false,
         animationData: {},
 
 
@@ -226,48 +233,83 @@ Page({
     },
     get_unreadLoveNums: function () {
         let that = this;
-        let url;
+
+        let hot_url;
+        let image_url;
+        let video_url;
+
         let wesecret = wx.getStorageSync('wesecret');
-        let activeIndex = that.data.activeIndex;
-        let love_id;
-        let postingType_id;
-        if (activeIndex == 0) {
-            if (that.data.hot_loves[0].id) {
-                love_id = that.data.hot_loves[0].id;
-            } else {
-                love_id = 0;
-            }
-            postingType_id = 4;
-        } else if (activeIndex == 1) {
-            if (that.data.image_loves[0].id) {
-                love_id = that.data.image_loves[0].id;
-            } else {
-                love_id = 0;
-            }
-            postingType_id = 5;
+
+        let hot_love_id;
+        let hot_postingType_id;
+        let image_love_id;
+        let image_postingType_id;
+        let video_love_id;
+        let video_postingType_id;
+
+        if (that.data.hot_loves[0].id) {
+            hot_love_id = that.data.hot_loves[0].id;
         } else {
-            if (that.data.video_loves[0].id) {
-                love_id = that.data.video_loves[0].id;
-            } else {
-                love_id = 0;
-            }
-            postingType_id = 6;
+            hot_love_id = 0;
         }
+        hot_postingType_id = 4;
+        if (that.data.image_loves[0].id) {
+            image_love_id = that.data.image_loves[0].id;
+        } else {
+            image_love_id = 0;
+        }
+        image_postingType_id = 5;
+        if (that.data.video_loves[0].id) {
+            video_love_id = that.data.video_loves[0].id;
+        } else {
+            video_love_id = 0;
+        }
+        video_postingType_id = 6;
 
         if (wesecret) {
-            url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${postingType_id}&love_id=${love_id}&wesecret=${wesecret}`
+            hot_url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${hot_postingType_id}&love_id=${hot_love_id}&wesecret=${wesecret}`;
+            image_url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${image_postingType_id}&love_id=${image_love_id}&wesecret=${wesecret}`;
+            video_url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${video_postingType_id}&love_id=${video_love_id}&wesecret=${wesecret}`;
         } else {
-            url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${postingType_id}&love_id=${love_id}&wesecret=`
+            hot_url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${hot_postingType_id}&love_id=${hot_love_id}&wesecret=`;
+            image_url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${image_postingType_id}&love_id=${image_love_id}&wesecret=`;
+            video_url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${video_postingType_id}&love_id=${video_love_id}&wesecret=`;
         }
         wx.request({
-            url: url,
+            url: hot_url,
             success: function (res) {
-                console.log('get_unreadLoveNums res', res);
+                console.log('hot unreadLoveNums res', res);
                 let unreadLoveNums = res.data.unreadLoveNums;
                 if (unreadLoveNums > 0) {
                     that.setData({
-                        showTopTips1: true,
-                        unreadLoveNums: res.data.unreadLoveNums
+                        hot_showTopTips1: true,
+                        hot_unreadLoveNums: res.data.unreadLoveNums
+                    })
+                }
+            }
+        })
+        wx.request({
+            url: image_url,
+            success: function (res) {
+                console.log('image unreadLoveNums res', res);
+                let unreadLoveNums = res.data.unreadLoveNums;
+                if (unreadLoveNums > 0) {
+                    that.setData({
+                        image_showTopTips1: true,
+                        image_unreadLoveNums: res.data.unreadLoveNums
+                    })
+                }
+            }
+        })
+        wx.request({
+            url: video_url,
+            success: function (res) {
+                console.log('video unreadLoveNums res', res);
+                let unreadLoveNums = res.data.unreadLoveNums;
+                if (unreadLoveNums > 0) {
+                    that.setData({
+                        video_showTopTips1: true,
+                        video_unreadLoveNums: res.data.unreadLoveNums
                     })
                 }
             }
@@ -278,13 +320,18 @@ Page({
         let activeIndex = that.data.activeIndex;
         if (activeIndex == 0) {
             that.setData({
-                showTopTips1: false,
+                hot_showTopTips1: false,
             });
-
             that.load_hotLoves('pulldown');
         } else if (activeIndex == 1) {
+            that.setData({
+                image_showTopTips1: false,
+            });
             that.load_imageLoves('pulldown');
         } else {
+            that.setData({
+                video_showTopTips1: false,
+            });
             that.load_videoLoves('pulldown');
         }
     },
@@ -410,9 +457,9 @@ Page({
                 }
 
                 if (parameter == 'pulldown') {
-                    if (that.data.unreadLoveNums > 0) {
+                    if (that.data.hot_unreadLoveNums > 0) {
                         that.setData({
-                            showTopTips2: true
+                            hot_showTopTips2: true
                         });
                         setTimeout(function () {
                             let animation = wx.createAnimation({
@@ -425,10 +472,10 @@ Page({
                         }, 1500)
                         setTimeout(function () {
                             that.setData({
-                                showTopTips2: false,
+                                hot_showTopTips2: false,
                                 animationData: {},
 
-                                unreadLoveNums: 0
+                                hot_unreadLoveNums: 0
                             });
                         }, 2000);
                     }
@@ -491,6 +538,32 @@ Page({
                     wx.stopPullDownRefresh();
                     wx.hideLoading()
                 }
+
+                if (parameter == 'pulldown') {
+                    if (that.data.image_unreadLoveNums > 0) {
+                        that.setData({
+                            image_showTopTips2: true
+                        });
+                        setTimeout(function () {
+                            let animation = wx.createAnimation({
+                                duration: 500,
+                            })
+                            animation.translateY(-100).step()
+                            that.setData({
+                                animationData: animation.export()
+                            })
+                        }, 1500)
+                        setTimeout(function () {
+                            that.setData({
+                                image_showTopTips2: false,
+                                animationData: {},
+
+                                image_unreadLoveNums: 0
+                            });
+                        }, 2000);
+                    }
+                }
+
             }
         })
 
@@ -549,6 +622,32 @@ Page({
                     wx.stopPullDownRefresh();
                     wx.hideLoading()
                 }
+
+                if (parameter == 'pulldown') {
+                    if (that.data.video_unreadLoveNums > 0) {
+                        that.setData({
+                            video_showTopTips2: true
+                        });
+                        setTimeout(function () {
+                            let animation = wx.createAnimation({
+                                duration: 500,
+                            })
+                            animation.translateY(-100).step()
+                            that.setData({
+                                animationData: animation.export()
+                            })
+                        }, 1500)
+                        setTimeout(function () {
+                            that.setData({
+                                video_showTopTips2: false,
+                                animationData: {},
+
+                                video_unreadLoveNums: 0
+                            });
+                        }, 2000);
+                    }
+                }
+
             }
         })
 

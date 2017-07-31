@@ -25,6 +25,7 @@ Page({
         image_loves: [],
         video_loves: [],
 
+        unreadLoveNums: 0,
 
         hot_page: 1,
         hot_reach_bottom: false,
@@ -107,7 +108,7 @@ Page({
             wx.removeStorageSync('question_loves_need_refresh_delete_love')
         }
         let question_loves_need_refresh_create_love = wx.getStorageSync('question_loves_need_refresh_create_love')
-        if (that.data.hot_loves.length > 0 && that.data.activeIndex == 0 && !question_loves_need_refresh_create_love) {
+        if (that.data.hot_loves.length > 0 && !question_loves_need_refresh_create_love) {
             that.get_unreadLoveNums();
         }
         if (question_loves_need_refresh_create_love) {

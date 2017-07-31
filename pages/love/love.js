@@ -25,6 +25,7 @@ Page({
         image_loves: [],
         video_loves: [],
 
+        unreadLoveNums: 0,
 
         hot_page: 1,
         hot_reach_bottom: false,
@@ -108,7 +109,7 @@ Page({
         }
 
         let love_loves_need_refresh_create_love = wx.getStorageSync('love_loves_need_refresh_create_love')
-        if (that.data.hot_loves.length > 0 && that.data.activeIndex == 0 && !love_loves_need_refresh_create_love) {
+        if (that.data.hot_loves.length > 0 && !love_loves_need_refresh_create_love) {
             that.get_unreadLoveNums();
         }
         if (love_loves_need_refresh_create_love) {
