@@ -64,9 +64,9 @@ Page({
             success: function (res) {
                 console.log('systemInfo', res);
                 that.setData({
+                    windowWidth: res.windowWidth,
                     sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
                     sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
-                    mapHeight: res.windowHeight - 51
                 });
             }
         });
@@ -111,8 +111,11 @@ Page({
             that.get_unreadLoveNums();
         }
         if (activity_loves_need_refresh_create_love) {
+            let activeIndex = 0;
             that.setData({
-                activeIndex: 0
+                activeIndex: activeIndex,
+                sliderLeft: (that.data.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+                sliderOffset: that.data.windowWidth / that.data.tabs.length * activeIndex,
             })
             that.load_hotLoves('pulldown');
             that.load_imageLoves('pulldown');

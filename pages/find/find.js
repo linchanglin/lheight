@@ -15,7 +15,7 @@ Page({
 
 
 
-        tabs: ["物品", "吐槽", "兼职"],
+        tabs: ["物品", "吐槽", "工作"],
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
@@ -64,9 +64,9 @@ Page({
             success: function (res) {
                 console.log('systemInfo', res);
                 that.setData({
+                    windowWidth: res.windowWidth,
                     sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
                     sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
-                    mapHeight: res.windowHeight - 51
                 });
             }
         });
@@ -111,8 +111,11 @@ Page({
             that.get_unreadLoveNums();
         }
         if (find_loves_need_refresh_create_love) {
+            let activeIndex = find_loves_need_refresh_create_love - 4;
             that.setData({
-                activeIndex: find_loves_need_refresh_create_love - 4
+                activeIndex: activeIndex,
+                sliderLeft: (that.data.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+                sliderOffset: that.data.windowWidth / that.data.tabs.length * activeIndex,
             })
             that.load_hotLoves('pulldown');
             that.load_imageLoves('pulldown');
