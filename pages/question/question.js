@@ -107,15 +107,17 @@ Page({
             wx.removeStorageSync('question_loves_need_refresh_delete_love')
         }
         let question_loves_need_refresh_create_love = wx.getStorageSync('question_loves_need_refresh_create_love')
+        if (that.data.hot_loves.length > 0 && that.data.activeIndex == 0 && !question_loves_need_refresh_create_love) {
+            that.get_unreadLoveNums();
+        }
         if (question_loves_need_refresh_create_love) {
+            that.setData({
+                activeIndex: 0
+            })
             that.load_hotLoves('pulldown');
             that.load_imageLoves('pulldown');
             that.load_videoLoves('pulldown');
             wx.removeStorageSync('question_loves_need_refresh_create_love')
-        }
-
-        if (that.data.loves && !question_loves_need_refresh_create_love) {
-            that.get_unreadLoveNums();
         }
     },
     get_available: function () {
@@ -218,7 +220,12 @@ Page({
     get_unreadLoveNums: function () {
         let that = this;
         let url;
-        let love_id = that.data.loves[0].id;
+        let love_id;
+        if (that.data.hot_loves[0].id) {
+            love_id = that.data.hot_loves[0].id;
+        } else {
+            love_id = 0;
+        }
         let wesecret = wx.getStorageSync('wesecret');
         let postingType_id = 3;
         if (wesecret) {
@@ -303,11 +310,21 @@ Page({
         let share_loveId = that.data.share_loveId;
         let share_userNickname = that.data.share_userNickname;
         console.log('share_loveId', share_loveId);
-        return {
-            title: `分享${share_userNickname}的帖子`,
-            path: `/pages/comment/comment?love_id=${share_loveId}`,
-            success: function (res) {
-                console.log("onShareAppMessage", res);
+        if (share_loveId) {
+            return {
+                title: `分享${share_userNickname}的帖子`,
+                path: `/pages/comment/comment?love_id=${share_loveId}`,
+                success: function (res) {
+                    console.log("onShareAppMessage", res);
+                }
+            }
+        } else {
+            return {
+                title: `分享校园生活墙`,
+                path: `/pages/question/question`,
+                success: function (res) {
+                    console.log("onShareAppMessage", res);
+                }
             }
         }
     },

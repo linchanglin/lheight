@@ -107,7 +107,13 @@ Page({
             wx.removeStorageSync('find_loves_need_refresh_delete_love')
         }
         let find_loves_need_refresh_create_love = wx.getStorageSync('find_loves_need_refresh_create_love')
+        if (!find_loves_need_refresh_create_love) {
+            that.get_unreadLoveNums();
+        }
         if (find_loves_need_refresh_create_love) {
+            that.setData({
+                activeIndex: find_loves_need_refresh_create_love - 4
+            })
             that.load_hotLoves('pulldown');
             that.load_imageLoves('pulldown');
             that.load_videoLoves('pulldown');
@@ -218,9 +224,33 @@ Page({
     get_unreadLoveNums: function () {
         let that = this;
         let url;
-        let love_id = that.data.loves[0].id;
         let wesecret = wx.getStorageSync('wesecret');
-        let postingType_id = 4;
+        let activeIndex = that.data.activeIndex;
+        let love_id;
+        let postingType_id;
+        if (activeIndex == 0) {
+            if (that.data.hot_loves[0].id) {
+                love_id = that.data.hot_loves[0].id;
+            } else {
+                love_id = 0;
+            }
+            postingType_id = 4;
+        } else if (activeIndex == 1) {
+            if (that.data.image_loves[0].id) {
+                love_id = that.data.image_loves[0].id;
+            } else {
+                love_id = 0;
+            }
+            postingType_id = 5;
+        } else {
+            if (that.data.video_loves[0].id) {
+                love_id = that.data.video_loves[0].id;
+            } else {
+                love_id = 0;
+            }
+            postingType_id = 6;
+        }
+
         if (wesecret) {
             url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${postingType_id}&love_id=${love_id}&wesecret=${wesecret}`
         } else {
@@ -303,11 +333,21 @@ Page({
         let share_loveId = that.data.share_loveId;
         let share_userNickname = that.data.share_userNickname;
         console.log('share_loveId', share_loveId);
-        return {
-            title: `分享${share_userNickname}的帖子`,
-            path: `/pages/comment/comment?love_id=${share_loveId}`,
-            success: function (res) {
-                console.log("onShareAppMessage", res);
+        if (share_loveId) {
+            return {
+                title: `分享${share_userNickname}的帖子`,
+                path: `/pages/comment/comment?love_id=${share_loveId}`,
+                success: function (res) {
+                    console.log("onShareAppMessage", res);
+                }
+            }
+        } else {
+            return {
+                title: `分享校园生活墙`,
+                path: `/pages/find/find`,
+                success: function (res) {
+                    console.log("onShareAppMessage", res);
+                }
             }
         }
     },
@@ -447,7 +487,7 @@ Page({
                 if (parameter == 'pulldown' || parameter == 'onLoad') {
                     wx.stopPullDownRefresh();
                     wx.hideLoading()
-                }              
+                }
             }
         })
 

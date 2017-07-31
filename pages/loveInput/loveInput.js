@@ -318,7 +318,7 @@ Page({
             wx.setStorageSync('question_loves_need_refresh_create_love', 1);
             url = '/pages/question/question';
         } else {
-            wx.setStorageSync('find_loves_need_refresh_create_love', 1);
+            wx.setStorageSync('find_loves_need_refresh_create_love', postingType_id);
             url = '/pages/find/find';
         }
 

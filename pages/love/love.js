@@ -106,17 +106,20 @@ Page({
             that.load_refresh_loves_delete_love(love_loves_need_refresh_delete_love);
             wx.removeStorageSync('love_loves_need_refresh_delete_love')
         }
+
         let love_loves_need_refresh_create_love = wx.getStorageSync('love_loves_need_refresh_create_love')
+        if (that.data.hot_loves.length > 0 && that.data.activeIndex == 0 && !love_loves_need_refresh_create_love) {
+            that.get_unreadLoveNums();
+        }
         if (love_loves_need_refresh_create_love) {
+            that.setData({
+                activeIndex: 0
+            })
             that.load_hotLoves('pulldown');
             that.load_imageLoves('pulldown');
             that.load_videoLoves('pulldown');
             wx.removeStorageSync('love_loves_need_refresh_create_love')
-        }
-
-        if (that.data.loves && !love_loves_need_refresh_create_love) {
-            that.get_unreadLoveNums();
-        }
+        }     
     },
     get_available: function () {
         let that = this;
@@ -218,7 +221,12 @@ Page({
     get_unreadLoveNums: function () {
         let that = this;
         let url;
-        let love_id = that.data.loves[0].id;
+        let love_id;
+        if (that.data.hot_loves[0].id) {
+            love_id = that.data.hot_loves[0].id;
+        } else {
+            love_id = 0;
+        }
         let wesecret = wx.getStorageSync('wesecret');
         let postingType_id = 1;
         if (wesecret) {
@@ -303,11 +311,21 @@ Page({
         let share_loveId = that.data.share_loveId;
         let share_userNickname = that.data.share_userNickname;
         console.log('share_loveId', share_loveId);
-        return {
-            title: `分享${share_userNickname}的帖子`,
-            path: `/pages/comment/comment?love_id=${share_loveId}`,
-            success: function (res) {
-                console.log("onShareAppMessage", res);
+        if (share_loveId) {
+            return {
+                title: `分享${share_userNickname}的帖子`,
+                path: `/pages/comment/comment?love_id=${share_loveId}`,
+                success: function (res) {
+                    console.log("onShareAppMessage", res);
+                }
+            }
+        } else {
+            return {
+                title: `分享校园生活墙`,
+                path: `/pages/love/love`,
+                success: function (res) {
+                    console.log("onShareAppMessage", res);
+                }
             }
         }
     },

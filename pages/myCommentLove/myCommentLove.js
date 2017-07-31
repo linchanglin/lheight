@@ -201,11 +201,21 @@ Page({
         let share_loveId = that.data.share_loveId;
         let share_userNickname = that.data.share_userNickname;
         console.log('share_loveId', share_loveId);
-        return {
-            title: `分享${share_userNickname}的帖子`,
-            path: `/pages/comment/comment?love_id=${share_loveId}`,
-            success: function (res) {
-                console.log("onShareAppMessage", res);
+        if (share_loveId) {
+            return {
+                title: `分享${share_userNickname}的帖子`,
+                path: `/pages/comment/comment?love_id=${share_loveId}`,
+                success: function (res) {
+                    console.log("onShareAppMessage", res);
+                }
+            }
+        } else {
+            return {
+                title: `分享校园生活墙`,
+                path: `/pages/love/love`,
+                success: function (res) {
+                    console.log("onShareAppMessage", res);
+                }
             }
         }
     },
