@@ -97,19 +97,16 @@ Page({
 
         that.get_available();
 
-        let activity_loves_need_refresh = wx.getStorageSync('activity_loves_need_refresh')
-        if (activity_loves_need_refresh) {
-            that.load_refresh_loves(activity_loves_need_refresh);
-            wx.removeStorageSync('activity_loves_need_refresh')
-        }
-        let activity_loves_need_refresh_delete_love = wx.getStorageSync('activity_loves_need_refresh_delete_love')
-        if (activity_loves_need_refresh_delete_love) {
-            that.load_refresh_loves_delete_love(activity_loves_need_refresh_delete_love);
-            wx.removeStorageSync('activity_loves_need_refresh_delete_love')
-        }
+        let activity_need_refresh_for_interest_changed = wx.getStorageSync('activity_need_refresh_for_interest_changed');
         let activity_loves_need_refresh_create_love = wx.getStorageSync('activity_loves_need_refresh_create_love')
-        if (that.data.hot_loves.length > 0 && !activity_loves_need_refresh_create_love) {
+        if (that.data.hot_loves.length > 0 && !activity_need_refresh_for_interest_changed && !activity_loves_need_refresh_create_love) {
             that.get_unreadLoveNums();
+        }
+        if (activity_need_refresh_for_interest_changed) {
+            that.load_hotLoves('pulldown');
+            that.load_imageLoves('pulldown');
+            that.load_videoLoves('pulldown');
+            wx.removeStorageSync('activity_need_refresh_for_interest_changed')
         }
         if (activity_loves_need_refresh_create_love) {
             let activeIndex = 0;
@@ -122,6 +119,17 @@ Page({
             that.load_imageLoves('pulldown');
             that.load_videoLoves('pulldown');
             wx.removeStorageSync('activity_loves_need_refresh_create_love')
+        }
+
+        let activity_loves_need_refresh = wx.getStorageSync('activity_loves_need_refresh')
+        if (activity_loves_need_refresh) {
+            that.load_refresh_loves(activity_loves_need_refresh);
+            wx.removeStorageSync('activity_loves_need_refresh')
+        }
+        let activity_loves_need_refresh_delete_love = wx.getStorageSync('activity_loves_need_refresh_delete_love')
+        if (activity_loves_need_refresh_delete_love) {
+            that.load_refresh_loves_delete_love(activity_loves_need_refresh_delete_love);
+            wx.removeStorageSync('activity_loves_need_refresh_delete_love')
         }
     },
     get_available: function () {

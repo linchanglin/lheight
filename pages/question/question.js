@@ -97,19 +97,16 @@ Page({
 
         that.get_available();
 
-        let question_loves_need_refresh = wx.getStorageSync('question_loves_need_refresh')
-        if (question_loves_need_refresh) {
-            that.load_refresh_loves(question_loves_need_refresh);
-            wx.removeStorageSync('question_loves_need_refresh')
-        }
-        let question_loves_need_refresh_delete_love = wx.getStorageSync('question_loves_need_refresh_delete_love')
-        if (question_loves_need_refresh_delete_love) {
-            that.load_refresh_loves_delete_love(question_loves_need_refresh_delete_love);
-            wx.removeStorageSync('question_loves_need_refresh_delete_love')
-        }
+        let question_need_refresh_for_interest_changed = wx.getStorageSync('question_need_refresh_for_interest_changed');
         let question_loves_need_refresh_create_love = wx.getStorageSync('question_loves_need_refresh_create_love')
-        if (that.data.hot_loves.length > 0 && !question_loves_need_refresh_create_love) {
+        if (that.data.hot_loves.length > 0 && !question_need_refresh_for_interest_changed && !question_loves_need_refresh_create_love) {
             that.get_unreadLoveNums();
+        }
+        if (question_need_refresh_for_interest_changed) {
+            that.load_hotLoves('pulldown');
+            that.load_imageLoves('pulldown');
+            that.load_videoLoves('pulldown');
+            wx.removeStorageSync('question_need_refresh_for_interest_changed')
         }
         if (question_loves_need_refresh_create_love) {
             let activeIndex = 0;
@@ -122,6 +119,17 @@ Page({
             that.load_imageLoves('pulldown');
             that.load_videoLoves('pulldown');
             wx.removeStorageSync('question_loves_need_refresh_create_love')
+        }
+
+        let question_loves_need_refresh = wx.getStorageSync('question_loves_need_refresh')
+        if (question_loves_need_refresh) {
+            that.load_refresh_loves(question_loves_need_refresh);
+            wx.removeStorageSync('question_loves_need_refresh')
+        }
+        let question_loves_need_refresh_delete_love = wx.getStorageSync('question_loves_need_refresh_delete_love')
+        if (question_loves_need_refresh_delete_love) {
+            that.load_refresh_loves_delete_love(question_loves_need_refresh_delete_love);
+            wx.removeStorageSync('question_loves_need_refresh_delete_love')
         }
     },
     get_available: function () {

@@ -37,12 +37,21 @@ Page({
             method: 'POST',
             data: {
                 wesecret: wesecret,
+                just_college_changed: 1,
                 userInfo: {
                     college_id: college_id
                 }
             },
             success: function (res) {
                 wx.setStorageSync('profile_need_refresh', 1);
+
+                if (res.data.need_refresh_loves == 1) {
+                    wx.setStorageSync('love_need_refresh_for_interest_changed', 1);
+                    wx.setStorageSync('activity_need_refresh_for_interest_changed', 1);
+                    wx.setStorageSync('question_need_refresh_for_interest_changed', 1);
+                    wx.setStorageSync('find_need_refresh_for_interest_changed', 1);
+                }
+
                 common.get_my_userInfo(wesecret).then((user_id) => {
                     wx.navigateBack({
                         delta: 3

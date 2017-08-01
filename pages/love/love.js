@@ -97,20 +97,17 @@ Page({
 
         that.get_available();
 
-        let love_loves_need_refresh = wx.getStorageSync('love_loves_need_refresh')
-        if (love_loves_need_refresh) {
-            that.load_refresh_loves(love_loves_need_refresh);
-            wx.removeStorageSync('love_loves_need_refresh')
-        }
-        let love_loves_need_refresh_delete_love = wx.getStorageSync('love_loves_need_refresh_delete_love')
-        if (love_loves_need_refresh_delete_love) {
-            that.load_refresh_loves_delete_love(love_loves_need_refresh_delete_love);
-            wx.removeStorageSync('love_loves_need_refresh_delete_love')
-        }
-
+        let love_need_refresh_for_interest_changed = wx.getStorageSync('love_need_refresh_for_interest_changed');
         let love_loves_need_refresh_create_love = wx.getStorageSync('love_loves_need_refresh_create_love')
-        if (that.data.hot_loves.length > 0 && !love_loves_need_refresh_create_love) {
+        
+        if (that.data.hot_loves.length > 0 && !love_need_refresh_for_interest_changed && !love_loves_need_refresh_create_love) {
             that.get_unreadLoveNums();
+        }
+        if (love_need_refresh_for_interest_changed) {
+            that.load_hotLoves('pulldown');
+            that.load_imageLoves('pulldown');
+            that.load_videoLoves('pulldown');
+            wx.removeStorageSync('love_need_refresh_for_interest_changed')
         }
         if (love_loves_need_refresh_create_love) {
             let activeIndex = 0;
@@ -123,7 +120,18 @@ Page({
             that.load_imageLoves('pulldown');
             that.load_videoLoves('pulldown');
             wx.removeStorageSync('love_loves_need_refresh_create_love')
-        }     
+        }
+
+        let love_loves_need_refresh = wx.getStorageSync('love_loves_need_refresh')
+        if (love_loves_need_refresh) {
+            that.load_refresh_loves(love_loves_need_refresh);
+            wx.removeStorageSync('love_loves_need_refresh')
+        }
+        let love_loves_need_refresh_delete_love = wx.getStorageSync('love_loves_need_refresh_delete_love')
+        if (love_loves_need_refresh_delete_love) {
+            that.load_refresh_loves_delete_love(love_loves_need_refresh_delete_love);
+            wx.removeStorageSync('love_loves_need_refresh_delete_love')
+        }            
     },
     get_available: function () {
         let that = this;
