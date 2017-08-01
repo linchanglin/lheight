@@ -12,10 +12,12 @@ page {
 
 .weui-toptips_notice1 {
   background-color: #ff8140;
+  opacity: 0.9;
 }
 
 .weui-toptips_notice2 {
   background-color: #ffba07;
+  opacity: 0.9;
 }
 
 .weui-toptips {

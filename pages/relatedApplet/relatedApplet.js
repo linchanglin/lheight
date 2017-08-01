@@ -23,7 +23,7 @@ Page({
                 if (parameter == 'onLoad') {
                     let applets_nums = applets.length;
                     wx.setNavigationBarTitle({
-                        title: `${applets_nums} 个相关小程序`
+                        title: `${applets_nums} 个校园服务号`
                     })
                 }
             }

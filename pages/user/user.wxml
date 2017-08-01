@@ -41,7 +41,7 @@
                             <image src="../images/applet1.png" style="margin-right: 10px;vertical-align: middle;width:25px; height: 25px;"></image>
                         </view>
                         <view class="weui-cell__bd">
-                            <view style="display: inline-block; vertical-align: middle">相关小程序</view>
+                            <view style="display: inline-block; vertical-align: middle">校园服务号</view>
                         </view>
                         <view class="weui-cell__ft weui-cell__ft_in-access">
                         </view>
