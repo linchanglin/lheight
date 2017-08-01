@@ -1,7 +1,7 @@
 {
     "pages": [
         "pages/user/user",
-        
+        "pages/aboutCollegeService/aboutCollegeService",
         "pages/love/love",
         "pages/loveInput/loveInput",
         "pages/activity/activity",

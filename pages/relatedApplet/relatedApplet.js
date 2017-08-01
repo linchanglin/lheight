@@ -30,16 +30,21 @@ Page({
         })
     },
     navigateToApplet: function (e) {
+        let id = e.currentTarget.dataset.id;
+        let name = e.currentTarget.dataset.name;
+        let if_applet = e.currentTarget.dataset.ifapplet;
         let appId = e.currentTarget.dataset.appid;
-        wx.navigateToMiniProgram({
-            appId: appId,
-            success(res) {
-                // 打开成功
-                console.log('navigateToApplet res', res);
-            }
-        })
+        if (if_applet == 1) {
+            wx.navigateToMiniProgram({
+                appId: appId,
+            })
+        } else {
+            wx.navigateTo({
+                url: `../aboutCollegeService/aboutCollegeService?service_id=${id}&service_name=${name}`,
+            })
+        }
     },
-    
+
 
     showInput: function () {
         this.setData({
