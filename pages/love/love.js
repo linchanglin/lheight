@@ -1,7 +1,13 @@
 import common from '../../utils/common.js';
-var app = getApp()
+let app = getApp()
+let deviceInfo = app.data.deviceInfo;
+let windowWidth = deviceInfo.windowWidth;
+let sliderWidth = app.data.sliderWidth;
+let ww = app.data.ww;
+let image_width = app.data.image_width;
 
-var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+
+// var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
     data: {
@@ -16,6 +22,7 @@ Page({
 
 
         tabs: ["最新", "热门", "置顶"],
+
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
@@ -61,33 +68,24 @@ Page({
     onLoad: function () {
         let that = this;
 
-        wx.getSystemInfo({
-            success: function (res) {
-                console.log('systemInfo', res);
-                that.setData({
-                    windowWidth: res.windowWidth,
-                    sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-                    sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
-                });
-            }
-        });
-
+        wx.showLoading({
+          title: '加载中',
+        })
 
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
-            that.setData({
-                wesecret: wesecret
-            })
+          that.setData({
+            wesecret: wesecret
+          })
         }
-        wx.showLoading({
-            title: '加载中',
-        })
-        let ww = app.data.deviceInfo.windowWidth - 20;
-        let image_width = (ww - 2) / 3;
         that.setData({
-            ww: ww,
-            image_width: image_width
-        })
+          ww: ww,
+          image_width: image_width,
+          windowWidth: windowWidth,
+          sliderLeft: (windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: windowWidth / that.data.tabs.length * that.data.activeIndex,
+        });
+
         that.load_hotLoves('onLoad');
         that.load_imageLoves('onLoad');
         that.load_videoLoves('onLoad');

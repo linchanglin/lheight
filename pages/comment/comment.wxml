@@ -56,7 +56,7 @@
             <text wx:if="{{love.praise_nums == 0}}">喜欢</text>
             <text wx:if="{{love.praise_nums != 0}}">{{love.praise_nums}}</text>
           </view>
-          <view class="weui-flex__item flex_center">
+          <view wx:if="{{love}}" class="weui-flex__item flex_center">
             <button class="shareButton  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" open-type="share">
               <view class="share_image_box flex_center">
                 <image class="icon_size" src="../images/share.png"></image>
@@ -147,7 +147,7 @@
 
       <view class="weui-tabbar__item">
         <button class="shareButton1" open-type="share">
-          <image class="image-comment" src="../images/share.png"></image>
+          <image wx:if="{{love}}"  class="image-comment" src="../images/share.png"></image>
           <text class="weui-tabbar__label">分享</text>
         </button>
       </view>

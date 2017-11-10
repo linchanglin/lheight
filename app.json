@@ -1,8 +1,9 @@
 {
     "pages": [
+        "pages/love/love",
+        "pages/picture/picture",
         "pages/user/user",
         "pages/aboutCollegeService/aboutCollegeService",
-        "pages/love/love",
         "pages/loveInput/loveInput",
         "pages/activity/activity",
         "pages/question/question",
@@ -47,20 +48,14 @@
         "backgroundColor": "#f5f5f5",
         "list": [
             {
-                "text": "表白",
+                "text": "表白墙",
                 "pagePath": "pages/love/love",
                 "iconPath": "pages/images/like.png",
                 "selectedIconPath": "pages/images/like_fill.png"
             },
             {
-                "text": "活动",
-                "pagePath": "pages/activity/activity",
-                "iconPath": "pages/images/favor.png",
-                "selectedIconPath": "pages/images/favor_fill.png"
-            },
-            {
-                "text": "求助",
-                "pagePath": "pages/question/question",
+                "text": "眼缘墙",
+                "pagePath": "pages/picture/picture",
                 "iconPath": "pages/images/question.png",
                 "selectedIconPath": "pages/images/question_fill.png"
             },

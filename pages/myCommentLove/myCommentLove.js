@@ -48,7 +48,6 @@ Page({
                 that.setData({
                     sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
                     sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
-                    mapHeight: res.windowHeight - 51
                 });
             }
         });
