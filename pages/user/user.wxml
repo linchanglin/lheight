@@ -24,8 +24,12 @@
                         <image class="weui-media-box__thumb" mode="aspectFill" src="{{userInfo.avatarUrl}}" />
                     </view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">{{userInfo.nickname}}</view>
-                        <view class="weui-media-box__desc">{{userInfo.gender_name}}</view>
+                        <view class="weui-media-box__title">
+                            <text>{{userInfo.nickname}}</text>
+                            <image wx:if="{{userInfo.gender_id == 1}}" src="../images/male.png"></image>
+                            <image wx:if="{{userInfo.gender_id == 2}}" src="../images/female.png"></image>
+                        </view>
+                        <view class="weui-media-box__desc">{{userInfo.college_name}}</view>
                     </view>
                     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
                 </view>

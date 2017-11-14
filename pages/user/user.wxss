@@ -5,3 +5,11 @@
 .weui-media-box__thumb {
     border-radius:5px;
 }
+.weui-media-box__title {
+    display: flex; 
+    align-items: center
+}
+.weui-media-box__title image{
+    width: 18px; 
+    height: 18px
+}

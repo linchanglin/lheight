@@ -55,10 +55,11 @@
         </swiper-item>
       </swiper>
       <view class="banner_bottom">
-        <view style="display: flex; justify-content: center; align-items: center">
+        <view class="flex_center">
           <text class="title1" data-userId="{{userInfo.id}}" catchtap="navigateToProfileShow">{{userInfo.nickname}}</text>
-          <image wx:if="{{userInfo.gender == 1}}" src="../images/gender_male.png" style="width: 16px; height: 16px"></image>
-          <image wx:if="{{userInfo.gender == 2}}" src="../images/gender_female.png" style="width: 16px; height: 16px"></image>
+          <image wx:if="{{userInfo.gender_id == 1}}" src="../images/male.png"></image>
+          <image wx:if="{{userInfo.gender_id == 2}}" src="../images/female.png"></image>
+          <text class="title12">{{userInfo.college_name}}</text>
         </view>
         <view class="title3" data-userId="{{userInfo.id}}" catchtap="navigateToProfileShow">查看资料</view>
       </view>

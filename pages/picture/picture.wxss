@@ -38,12 +38,27 @@ page {
   color: #ffffff;
   padding: 0 20px;
 }
-
+.flex_center {
+  display: flex; 
+  justify-content: center; 
+  align-items: center
+}
 .title1 {
   color: #ff8140;
   font-size: 17px;
-  margin-right: 8px;
+  margin-right: 2px;
 }
+.flex_center image{
+  width: 18px; 
+  height: 18px;
+  margin-right: 4px;
+}
+.title12{
+  color: deepskyblue; 
+  font-size: 14px;
+}
+
+
 
 .title2 {
   color: #fff;

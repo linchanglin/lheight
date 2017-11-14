@@ -53,6 +53,15 @@ Page({
             }
         })
     },
+    onShareAppMessage: function () {
+        return {
+            title: `分享校园生活墙`,
+            path: `/pages/love/love`,
+            success: function (res) {
+                console.log("onShareAppMessage", res);
+            }
+        }
+    },
     onPullDownRefresh: function () {
         let that = this;
         that.load_pictures('pulldown');
@@ -149,6 +158,8 @@ Page({
         let userInfo = e.target.dataset.userinfo;
         let imgUrl = e.target.dataset.imgurl;
 
+        console.log('userInfo', userInfo);
+        
         this.setData({
             showPictures: true,
             userInfo: userInfo,

@@ -14,9 +14,9 @@
 
                     <view class="classname" style="text-align: center">
                         <view style="color: #ff8140;display: flex; justify-content: center;align-items: center">
-                            <text style="padding-right: 5px">{{userInfo.nickname}}</text>
-                            <image wx:if="{{userInfo.gender == 1}}" src="../images/gender_male.png" style="width: 16px; height: 16px"></image>
-                            <image wx:if="{{userInfo.gender == 2}}" src="../images/gender_female.png" style="width: 16px; height: 16px"></image>
+                            <text>{{userInfo.nickname}}</text>
+                            <image wx:if="{{userInfo.gender_id == 1}}" src="../images/male.png" style="width: 18px; height: 18px"></image>
+                            <image wx:if="{{userInfo.gender_id == 2}}" src="../images/female.png" style="width: 18px; height: 18px"></image>
                         </view>
                         <view style="color: #FF3366;display: flex; justify-content: center;align-items: center">
                             <image src="../images/loveme_fill.png" style="width: 20px; height: 20px;"></image>
