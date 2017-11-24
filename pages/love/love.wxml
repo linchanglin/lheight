@@ -13,14 +13,17 @@
 
     </view>
 </view>
-
-
+ 
 <view wx:if="{{get_available == 1}}" class="page">
+   
 
     <view wx:if="{{ showTopTips1 && activeIndex == 0 }}" class="weui-toptips weui-toptips_notice1">您有{{unreadLoveNums}}条帖子未查看</view>
     <view wx:if="{{ showTopTips2 && activeIndex == 0 }}" animation="{{animationData}}" class="weui-toptips weui-toptips_notice2">更新了{{unreadLoveNums}}条帖子</view>
 
+    <image class='sendLove' src='../images/love.png' />
+
     <view class="page__bd">
+
         <view class="weui-tab">
             <view class="weui-navbar" style="background-color: white;">
                 <block wx:for-items="{{tabs}}" wx:key="{{index}}">
@@ -56,6 +59,7 @@
 
 
                             <view class="container">
+                            
                                 <block wx:for="{{hot_loves}}" wx:for-item="love" wx:key="id">
 
                                     <view class="list-item {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" data-loveId="{{love.id}}" catchtap="navigateToLove" bindlongtap="longtap_love" bindtouchmove="touchmove_love">
@@ -349,3 +353,4 @@
         </view>
     </view>
 </view>
+

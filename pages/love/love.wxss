@@ -57,3 +57,13 @@ page {
   height: 50px;
   background-color: #fff;
 }
+
+ .sendLove {
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  z-index: 5; 
+  width: 45px;
+  height: 45px;
+  /* background-color: red; */
+} 

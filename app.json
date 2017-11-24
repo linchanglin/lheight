@@ -1,9 +1,11 @@
 {
     "pages": [
-        "pages/voice/voice",
-        "pages/picture/picture",
-        "pages/user/user",
         "pages/love/love",
+        "pages/square/square",
+        "pages/topic/topic",
+        "pages/picture/picture",
+        "pages/voice/voice",
+        "pages/user/user",
         "pages/aboutCollegeService/aboutCollegeService",
         "pages/loveInput/loveInput",
         "pages/activity/activity",
@@ -61,8 +63,8 @@
                 "selectedIconPath": "pages/images/a2_fill.png"
             },
             {
-                "text": "发现",
-                "pagePath": "pages/find/find",
+                "text": "广场",
+                "pagePath": "pages/square/square",
                 "iconPath": "pages/images/a3.png",
                 "selectedIconPath": "pages/images/a3_fill.png"
             },

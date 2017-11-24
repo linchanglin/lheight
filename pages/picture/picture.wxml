@@ -59,7 +59,7 @@
           <text class="title1" data-userId="{{userInfo.id}}" catchtap="navigateToProfileShow">{{userInfo.nickname}}</text>
           <image wx:if="{{userInfo.gender_id == 1}}" src="../images/male.png"></image>
           <image wx:if="{{userInfo.gender_id == 2}}" src="../images/female.png"></image>
-          <text class="title12">{{userInfo.college_name}}</text>
+          <text wx:if="{{userInfo.college_name != ''}}" class="title12">({{userInfo.college_name}})</text>
         </view>
         <view class="title3" data-userId="{{userInfo.id}}" catchtap="navigateToProfileShow">查看资料</view>
       </view>

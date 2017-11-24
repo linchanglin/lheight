@@ -1,18 +1,24 @@
 <template name="comment_and_reply_input">
   <view class="page">
-    <view class="page__bd">
-      <view class="weui-panel"></view>
-      <view class="weui-panel weui-panel_access">
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <textarea class="weui-textarea" style="height: 10em" maxlength="-1" bindinput="bindContentInput" bindconfirm="confirmInput" auto-focus />
+
+    <form bindsubmit="formSubmit" report-submit="true">
+  
+      <view class="page__bd">
+        <view class="weui-panel"></view>
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell">
+                <view class="weui-cell__bd">
+                  <textarea name="content" class="weui-textarea" style="height: 10em" maxlength="-1" auto-focus />
+                </view>
+              </view>
             </view>
-          </view>
         </view>
+
+        <button formType="submit" class="weui-btn" style="margin: 20px 15px;" type="primary">保存</button>
       </view>
 
-      <button class="weui-btn" style="margin: 20px 15px;" type="primary" bindtap="confirmInput">保存</button>
-    </view>
+    </form>
+    
   </view>
 </template>

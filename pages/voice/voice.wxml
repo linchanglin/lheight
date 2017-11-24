@@ -1,7 +1,7 @@
 <view class="page">
   <view class="page__bd">
 
-    <swiper autoplay="true" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#ffffff">
+    <swiper autoplay="true" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#ffffff" style='height: 180px'>
         <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
             <image src="{{item}}" mode="aspectFill" style="width:100%;"/>
         </swiper-item>
@@ -9,10 +9,10 @@
     
     <view class='tab_hd'>
       <view class='tab_hd_item' hover-class="weui-cell_active">
-        <text style="color: #21b100">重点班</text>
+        <text style="color: #21b100">最新</text>
       </view>
       <view class='tab_hd_item' hover-class="weui-cell_active">
-        <text>宝宝团</text>
+        <text>热门</text>
       </view>
     </view>
 

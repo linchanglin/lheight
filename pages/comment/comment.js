@@ -467,15 +467,18 @@ Page({
     },
     navigateToCommentInput: function () {
         let that = this;
+        let love_id = that.data.love_id;
+        let love_content = that.data.love.content;
+        let openid = that.data.love.userInfo.openid;
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.navigateTo({
-                url: '../commentInput/commentInput?love_id=' + that.data.love_id
+              url: `../commentInput/commentInput?love_id=${love_id}&openid=${openid}&love_content=${love_content}`
             })
         } else {
             common.signIn().then(() => {
                 wx.navigateTo({
-                    url: '../commentInput/commentInput?love_id=' + that.data.love_id
+                  url: `../commentInput/commentInput?love_id=${love_id}&openid=${openid}&love_content=${love_content}`
                 })
             });
         }

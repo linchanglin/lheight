@@ -1,0 +1,104 @@
+<view class="page">
+  <view class="page__bd">
+
+    <swiper interval="10000000000" autoplay="true" indicator-dots='true' indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#ffffff" circular='true' style='height: 180px'>
+        <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
+            <image src="{{item}}" mode="aspectFill" style="width:100%;"/>
+        </swiper-item>
+    </swiper>
+
+    <view class='tab_hd'>
+      <view class='tab_hd_item' hover-class="weui-cell_active" bindtap='tapVoice' hover-start-time="0" hover-stay-time="100">
+        <text class="{{ selectedLab == 'voice' ? 'selected_lab':''}}">电台</text>
+      </view>
+      <view class='tab_hd_item' hover-class="weui-cell_active"  bindtap='tapTopic' hover-start-time="0" hover-stay-time="100">
+        <text class="{{ selectedLab == 'topic' ? 'selected_lab':''}}">话题</text>
+      </view>
+    </view>
+
+    <!-- <view class='theme'>
+        <image style="width: {{theme_image_width}}px;" src='{{img}}' mode="aspectFill" />
+        <image style="width: {{theme_image_width}}px;" src='{{img}}' mode="aspectFill" bindtap='navigateToVoice'/>
+         <image style="width: {{theme_image_width}}px;" src='{{img}}' mode="aspectFill" />
+        <image style="width: {{theme_image_width}}px;" src='{{img}}' mode="aspectFill" />
+        <image style="width: {{theme_image_width}}px;" src='{{img}}' mode="aspectFill" /> 
+    </view> -->
+
+    <view wx:if="{{ selectedLab == 'voice'}}" class="weui-panel weui-panel_access">
+      <!-- <view class="weui-panel__hd">图文组合列表</view> -->
+      <view class="weui-panel__bd">
+          <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="{{img}}" />
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title">标题一</view>
+                  <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+              </view>
+          </navigator>
+          <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="{{img}}" />
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title">标题一</view>
+                  <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+              </view>
+          </navigator>
+      </view>
+      <view class="weui-panel__ft">
+          <view class="weui-cell weui-cell_access weui-cell_link">
+              <view class="weui-cell__bd">查看更多</view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>
+      </view>
+    </view> 
+
+    <view wx:else class="weui-panel">
+        <!-- <view class="weui-panel__hd">文字列表附来源</view> -->
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_text">
+                <view>
+                  <view class="weui-media-box__title weui-media-box__title_in-text">标题一</view>
+                  <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+                  <view class="weui-media-box__info">
+                      <view class="weui-media-box__info__meta">依水儿</view>
+                      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">中山大学</view>
+                      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">一天前</view>
+                  </view>
+                </view>
+                <view style='display: flex; justify-content: center; align-items: center;'>
+                  <image src="{{img}}" mode="aspectFill" style='width: 70px;height: 60px'/>
+                </view>
+            </view>
+            <view class="weui-media-box weui-media-box_text">
+                <view>
+                  <view class="weui-media-box__title weui-media-box__title_in-text">标题一</view>
+                  <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+                  <view class="weui-media-box__info">
+                      <view class="weui-media-box__info__meta">依水儿</view>
+                      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">中山大学</view>
+                      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">一天前</view>
+                  </view>
+                </view>
+                <view style='display: flex; justify-content: center; align-items: center;'>
+                  <image src="{{img}}" mode="aspectFill" style='width: 70px;height: 60px'/>
+                </view>
+            </view>
+            
+        </view>
+        <view class="weui-panel__ft">
+            <view class="weui-cell weui-cell_access weui-cell_link">
+                <view class="weui-cell__bd">查看更多</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+        </view>
+    </view>
+    
+    
+
+    
+    
+
+  </view>
+</view>
