@@ -60,7 +60,7 @@ page {
 
  .sendLove {
   position: fixed;
-  bottom: 20px;
+  bottom: 10px;
   right: 10px;
   z-index: 5; 
   width: 45px;

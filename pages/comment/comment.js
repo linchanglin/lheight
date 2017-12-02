@@ -486,17 +486,19 @@ Page({
     navigateToReplyInput: function (e) {
         console.log('navigateToReplyInput e', e);
         let comment_id = e.currentTarget.dataset.commentid;
+        let comment_content = e.currentTarget.dataset.commentcontent;
         let user_id = e.currentTarget.dataset.userid;
+        let openid = e.currentTarget.dataset.openid;
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
         if (wesecret) {
             wx.navigateTo({
-                url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+              url: `../replyInput/replyInput?comment_id=${comment_id}&comment_content=${comment_content}&user_id=${user_id}&openid=${openid}`
             });
         } else {
             common.signIn().then(() => {
                 wx.navigateTo({
-                    url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+                  url: `../replyInput/replyInput?comment_id=${comment_id}&comment_content=${comment_content}&user_id=${user_id}&openid=${openid}`
                 });
             });
         }

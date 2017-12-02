@@ -1,11 +1,14 @@
 {
     "pages": [
+        "pages/profileShow/profileShow",
+        
+        "pages/user/user",
+        
         "pages/love/love",
         "pages/square/square",
         "pages/topic/topic",
         "pages/picture/picture",
         "pages/voice/voice",
-        "pages/user/user",
         "pages/aboutCollegeService/aboutCollegeService",
         "pages/loveInput/loveInput",
         "pages/activity/activity",
@@ -23,7 +26,6 @@
         "pages/notice/notice",
         "pages/praiseMeUser/praiseMeUser",
         "pages/reply/reply",
-        "pages/profileShow/profileShow",
         "pages/avatarUrlInput/avatarUrlInput",
         "pages/avatarUrl/avatarUrl",
         "pages/nicknameInput/nicknameInput",

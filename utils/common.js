@@ -145,6 +145,7 @@ function showCommentActionSheet(e) {
     console.log('showCommentActionSheet', e);
     return new Promise((resolve, reject) => {
         let user_id = e.currentTarget.dataset.commentuserid
+        let openid = e.currentTarget.dataset.commentopenid
         let user_nickname = e.currentTarget.dataset.commentusernickname;
         let comment_id = e.currentTarget.dataset.commentid;
         let comment_content = e.currentTarget.dataset.commentcontent;
@@ -166,7 +167,7 @@ function showCommentActionSheet(e) {
                 let index = res.tapIndex;
                 if (index == 1) {
                     wx.navigateTo({
-                        url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+                      url: `../replyInput/replyInput?comment_id=${comment_id}&comment_content=${comment_content}&user_id=${user_id}&openid=${openid}`
                     });
                 } else if (index == 2) {
                     let comment_contentt;
@@ -213,7 +214,9 @@ function showReplyActionSheet(e, comment_id) {
     console.log('showReplyActionSheet', e);
     return new Promise((resolve, reject) => {
         let user_id = e.currentTarget.dataset.replyuserid
+        let openid = e.currentTarget.dataset.replyopenid
         let user_nickname = e.currentTarget.dataset.replyusernickname;
+        let comment_content = e.currentTarget.dataset.commentcontent;
         let reply_id = e.currentTarget.dataset.replyid;
         let reply_content = e.currentTarget.dataset.replycontent;
         let reply = `${user_nickname}: ${reply_content}`;
@@ -234,7 +237,7 @@ function showReplyActionSheet(e, comment_id) {
                 let index = res.tapIndex;
                 if (index == 1) {
                     wx.navigateTo({
-                        url: `../replyInput/replyInput?comment_id=${comment_id}&user_id=${user_id}`
+                      url: `../replyInput/replyInput?comment_id=${comment_id}&comment_content=${comment_content}&reply_id=${reply_id}&reply_content=${reply_content}&user_id=${user_id}&openid=${openid}`
                     });
                 } else if (index == 2) {
                     let reply_contentt;

@@ -74,7 +74,7 @@
       <!--评论列表-->
       <view wx:if="{{comments.length > 0}}" class="comments" id="scroll_to_comments">
         <block wx:for="{{comments}}" wx:for-item="comment" wx:key="id">
-          <view class="item {{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentUserId="{{comment.userInfo.id}}" data-commentUserNickName="{{comment.userInfo.nickname}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}"
+          <view class="item {{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentUserId="{{comment.userInfo.id}}" data-commentOpenid="{{comment.userInfo.openid}}" data-commentUserNickName="{{comment.userInfo.nickname}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}"
             catchtap="showCommentActionSheet" bindlongtap="longtap_comment" bindtouchmove="touchmove_comment">
             <view class="i-left">
               <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" mode="aspectFill" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
@@ -89,7 +89,7 @@
                   <image wx:if="{{comment.if_my_praise == 0}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment"></image>
                   <image wx:if="{{comment.if_my_praise == 1}}" class="comment_image1 ripple {{comment.id == selected_comment_id ? 'bounceIn':''}}" src="../images/praise_fill.png" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment"></image>
                   <text class="image_box_text" wx:if="{{comment.praise_nums > 0}}" data-commentId="{{comment.id}}" data-commentIfMyPraise="{{comment.if_my_praise}}" catchtap="praiseComment">{{comment.praise_nums}}</text>
-                  <image class="comment_image1" src="../images/comment.png" data-userId="{{comment.userInfo.id}}" data-commentId="{{comment.id}}" catchtap="navigateToReplyInput"></image>
+                  <image class="comment_image1" src="../images/comment.png" data-userId="{{comment.userInfo.id}}" data-openid="{{comment.userInfo.openid}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}" catchtap="navigateToReplyInput"></image>
                 </view>
               </view>
 

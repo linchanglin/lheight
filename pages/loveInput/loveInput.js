@@ -12,41 +12,58 @@ Page({
         location: {},
         visiable: 0,
         anonymous: 0,
-        postingTypeIndex: 0,
+        // postingTypeIndex: 0,
         save_loading: 0,
     },
     onLoad: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
-        that.setData({
-            wesecret: wesecret,
-        })
-        that.load_user();
-        that.load_postingTypes();
+        if (wesecret) {
+            let my_userInfo = wx.getStorageSync('my_userInfo');
+          
+            that.setData({
+              wesecret: wesecret,
+              my_userInfo: my_userInfo
+            })
+            // that.load_user();
+            // that.load_postingTypes();
+        } else {
+          common.signIn().then(() => {
+            let wesecret = wx.getStorageSync('wesecret');
+            let my_userInfo = wx.getStorageSync('my_userInfo');
+            that.setData({
+              wesecret: wesecret,
+              my_userInfo: my_userInfo
+            })
+            // that.load_user();
+            // that.load_postingTypes();
+          });
+        }
+        
     },
-    load_user: function () {
-        let that = this;
-        let wesecret = that.data.wesecret;
-        wx.request({
-            url: `https://collhome.com/life/apis/user?wesecret=${wesecret}`,
-            success: function (res) {
-                that.setData({
-                    my_userInfo: res.data.data
-                })
-            }
-        })
-    },
-    load_postingTypes: function () {
-        let that = this;
-        wx.request({
-            url: 'https://collhome.com/life/apis/postingTypes',
-            success: function (res) {
-                that.setData({
-                    postingTypes: res.data.data
-                })
-            }
-        })
-    },
+    // load_user: function () {
+    //     let that = this;
+    //     let wesecret = that.data.wesecret;
+    //     wx.request({
+    //         url: `https://collhome.com/life/apis/user?wesecret=${wesecret}`,
+    //         success: function (res) {
+    //             that.setData({
+    //                 my_userInfo: res.data.data
+    //             })
+    //         }
+    //     })
+    // },
+    // load_postingTypes: function () {
+    //     let that = this;
+    //     wx.request({
+    //         url: 'https://collhome.com/life/apis/postingTypes',
+    //         success: function (res) {
+    //             that.setData({
+    //                 postingTypes: res.data.data
+    //             })
+    //         }
+    //     })
+    // },
     onShow: function () {
         let that = this;
         let video_url = wx.getStorageSync('video_url');
@@ -140,12 +157,12 @@ Page({
         })
         that.set_loading_status();
     },
-    postingTypeChange: function (e) {
-        let that = this;
-        that.setData({
-            postingTypeIndex: e.detail.value
-        })
-    },
+    // postingTypeChange: function (e) {
+    //     let that = this;
+    //     that.setData({
+    //         postingTypeIndex: e.detail.value
+    //     })
+    // },
     chooseLocation: function () {
         let that = this;
         wx.chooseLocation({
@@ -193,49 +210,53 @@ Page({
     },
     saveLove: function () {
         let that = this;
-        if (that.data.my_userInfo.available == 0) {
-            that.showNoAvailableModal();
-        } else {
-            if (that.data.my_userInfo.college == '') {
-                that.showNoCollegeModal();
+        let wesecret = that.data.wesecret;
+        let my_userInfo = that.data.my_userInfo;
+        if (wesecret && my_userInfo) {
+            if (that.data.my_userInfo.available == 0) {
+                that.showNoAvailableModal();
             } else {
+                if (that.data.my_userInfo.college == '') {
+                    that.showNoCollegeModal();
+                } else {
 
-                let content = that.data.content;
-                let files = that.data.files;
-                let images = that.data.images;
-                let video_url = that.data.video_url;
-                if (content.length > 0 || files.length > 0 || video_url.length > 0) {
-                    that.setData({
-                        save_loading: 2
-                    })
-                    if (video_url.length > 0) {
+                    let content = that.data.content;
+                    let files = that.data.files;
+                    let images = that.data.images;
+                    let video_url = that.data.video_url;
+                    if (content.length > 0 || files.length > 0 || video_url.length > 0) {
                         that.setData({
-                            images: []
+                            save_loading: 2
                         })
-                        that.postSaveLove();
-                    } else {
-                        if (files.length > 0) {
-                            qiniuUploader.getUptoken().then((uptoken) => {
-                                let i = 0;
-                                for (let filePath of files) {
-                                    qiniuUploader.upload(uptoken, filePath, (res) => {
-                                        images.push(res.imageURL)
-                                        that.setData({
-                                            images: images
-                                        })
-                                    }, (error) => {
-                                        console.error('error: ' + JSON.stringify(error));
-                                    }, (complete) => {
-                                        console.log('complete', complete)
-                                        i++;
-                                        if (i == files.length) {
-                                            that.postSaveLove();
-                                        }
-                                    });
-                                }
+                        if (video_url.length > 0) {
+                            that.setData({
+                                images: []
                             })
-                        } else {
                             that.postSaveLove();
+                        } else {
+                            if (files.length > 0) {
+                                qiniuUploader.getUptoken().then((uptoken) => {
+                                    let i = 0;
+                                    for (let filePath of files) {
+                                        qiniuUploader.upload(uptoken, filePath, (res) => {
+                                            images.push(res.imageURL)
+                                            that.setData({
+                                                images: images
+                                            })
+                                        }, (error) => {
+                                            console.error('error: ' + JSON.stringify(error));
+                                        }, (complete) => {
+                                            console.log('complete', complete)
+                                            i++;
+                                            if (i == files.length) {
+                                                that.postSaveLove();
+                                            }
+                                        });
+                                    }
+                                })
+                            } else {
+                                that.postSaveLove();
+                            }
                         }
                     }
                 }
@@ -244,10 +265,11 @@ Page({
     },
     postSaveLove: function () {
         let that = this;
-        let postingType_id = Number(that.data.postingTypeIndex) + 1;
+        // let postingType_id = Number(that.data.postingTypeIndex) + 1;
         let data = {
             'wesecret': that.data.wesecret,
-            'postingType_id': postingType_id,
+            // 'postingType_id': postingType_id,
+            'postingType_id': 1,
             'content': that.data.content,
             'images': that.data.images,
             'video_url': that.data.video_url,
@@ -261,7 +283,17 @@ Page({
             method: 'POST',
             data: data,
             success: function (res) {
-                that.switchTabToBoardWithSuccess();
+              console.log('postSaveLove res', res);
+
+                that.setData({
+                  save_loading: 1
+                })
+
+                if (res.data.status == 200) {
+                    that.switchTabToBoardWithSuccess();
+                } else {
+                    common.signIn();
+                }
             }
         })
     },
@@ -297,30 +329,28 @@ Page({
     },
     switchTabToBoardWithSuccess: function () {
         let that = this;
-        that.setData({
-            save_loading: 1
-        })
+        
         wx.showToast({
             title: '成功',
             icon: 'success',
             duration: 1000
         });
 
-        let postingType_id = Number(that.data.postingTypeIndex) + 1;
+        // let postingType_id = Number(that.data.postingTypeIndex) + 1;
         let url;
-        if (postingType_id == 1) {
+        // if (postingType_id == 1) {
             wx.setStorageSync('love_loves_need_refresh_create_love', 1);
             url = '/pages/love/love';
-        } else if (postingType_id == 2) {
-            wx.setStorageSync('activity_loves_need_refresh_create_love', 1);
-            url = '/pages/activity/activity';
-        } else if (postingType_id == 3) {
-            wx.setStorageSync('question_loves_need_refresh_create_love', 1);
-            url = '/pages/question/question';
-        } else {
-            wx.setStorageSync('find_loves_need_refresh_create_love', postingType_id);
-            url = '/pages/find/find';
-        }
+        // } else if (postingType_id == 2) {
+        //     wx.setStorageSync('activity_loves_need_refresh_create_love', 1);
+        //     url = '/pages/activity/activity';
+        // } else if (postingType_id == 3) {
+        //     wx.setStorageSync('question_loves_need_refresh_create_love', 1);
+        //     url = '/pages/question/question';
+        // } else {
+        //     wx.setStorageSync('find_loves_need_refresh_create_love', postingType_id);
+        //     url = '/pages/find/find';
+        // }
 
         setTimeout(function () {
             wx.switchTab({

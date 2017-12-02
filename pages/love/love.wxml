@@ -20,7 +20,7 @@
     <view wx:if="{{ showTopTips1 && activeIndex == 0 }}" class="weui-toptips weui-toptips_notice1">您有{{unreadLoveNums}}条帖子未查看</view>
     <view wx:if="{{ showTopTips2 && activeIndex == 0 }}" animation="{{animationData}}" class="weui-toptips weui-toptips_notice2">更新了{{unreadLoveNums}}条帖子</view>
 
-    <image class='sendLove' src='../images/love.png' />
+    <image class='sendLove' src='../images/love.png' bindtap='navigateToLoveInput' />
 
     <view class="page__bd">
 
@@ -101,7 +101,7 @@
 
 
                                     <view class="weui-flex  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}">
-                                        <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
+                                        <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" data-openid="{{love.userInfo.openid}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
                                             <image wx:if="{{love.if_my_comment == 0}}" class="icon_size" src="../images/comment.png"></image>
                                             <image wx:if="{{love.if_my_comment == 1}}" class="icon_size" src="../images/comment_fill.png"></image>
                                             <text wx:if="{{love.comment_nums == 0}}">评论</text>
@@ -206,7 +206,7 @@
 
 
                                     <view class="weui-flex  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}">
-                                        <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
+                                        <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" data-openid="{{love.userInfo.openid}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
                                             <image wx:if="{{love.if_my_comment == 0}}" class="icon_size" src="../images/comment.png"></image>
                                             <image wx:if="{{love.if_my_comment == 1}}" class="icon_size" src="../images/comment_fill.png"></image>
                                             <text wx:if="{{love.comment_nums == 0}}">评论</text>
@@ -311,7 +311,7 @@
 
 
                                     <view class="weui-flex  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}">
-                                        <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
+                                        <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-loveContent="{{love.content}}" data-openid="{{love.userInfo.openid}}" data-commentNums="{{love.comment_nums}}" catchtap="navigateToComment" hover="true" hover-class="weui-cell_active">
                                             <image wx:if="{{love.if_my_comment == 0}}" class="icon_size" src="../images/comment.png"></image>
                                             <image wx:if="{{love.if_my_comment == 1}}" class="icon_size" src="../images/comment_fill.png"></image>
                                             <text wx:if="{{love.comment_nums == 0}}">评论</text>

@@ -19,7 +19,7 @@
       <view class="weui-panel__bd">
         <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToAboutLoveWall">
           <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">关于校园生活墙</view>
+            <view style="display: inline-block; vertical-align: middle">关于我们</view>
           </view>
           <view class="weui-cell__ft weui-cell__ft_in-access">
           </view>
@@ -27,7 +27,7 @@
       </view>
     </view>
 
-    <view class="weui-panel weui-panel_access">
+    <!-- <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
         <view class="weui-cell weui-cell_access" style="padding: 0;" hover="true" hover-class="weui-cell_active">
           <view class="weui-cell__bd">
@@ -36,7 +36,7 @@
           </view>
         </view>
       </view>
-    </view>
+    </view> -->
 
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">

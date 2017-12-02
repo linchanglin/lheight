@@ -9,7 +9,8 @@ Page({
         let that = this;
         let user_id = option.user_id;
         that.setData({
-            user_id: user_id
+          // user_id: user_id
+            user_id: 2
         })
 
         // let wh = app.data.deviceInfo.windowHeight + 3;

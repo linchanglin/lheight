@@ -708,6 +708,8 @@ Page({
     navigateToComment: function (e) {
         console.log('navigateToComment', e);
         let love_id = e.currentTarget.dataset.loveid;
+        let love_content = e.currentTarget.dataset.lovecontent;
+        let openid = e.currentTarget.dataset.openid;
         let comment_nums = e.currentTarget.dataset.commentnums;
 
         var that = this;
@@ -715,12 +717,12 @@ Page({
         if (comment_nums == 0) {
             if (wesecret) {
                 wx.navigateTo({
-                    url: '../commentInput/commentInput?love_id=' + love_id
+                    url: `../commentInput/commentInput?love_id=${love_id}&openid=${openid}&love_content=${love_content}`
                 });
             } else {
                 common.signIn().then(() => {
                     wx.navigateTo({
-                        url: '../commentInput/commentInput?love_id=' + love_id
+                        url: `../commentInput/commentInput?love_id=${love_id}&openid=${openid}&love_content=${love_content}`
                     });
                 });
             }
@@ -754,6 +756,24 @@ Page({
                 console.log('openLocation fail', res);
             }
         })
+    },
+    navigateToLoveInput: function () {
+      let that = this;
+      wx.navigateTo({
+        url: '../loveInput/loveInput'
+      });
+      // let wesecret = wx.getStorageSync('wesecret');
+      // if (wesecret) {
+      //   wx.navigateTo({
+      //     url: '../loveInput/loveInput'
+      //   });
+      // } else {
+      //   common.signIn().then(() => {
+      //     wx.navigateTo({
+      //       url: '../loveInput/loveInput'
+      //     });
+      //   });
+      // }
     },
 
 

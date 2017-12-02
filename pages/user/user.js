@@ -126,11 +126,11 @@ Page({
             });
         }
     },
-    navigateToRelatedApplet: function () {
-        wx.navigateTo({
-            url: '../relatedApplet/relatedApplet',
-        })
-    },
+    // navigateToRelatedApplet: function () {
+    //     wx.navigateTo({
+    //         url: '../relatedApplet/relatedApplet',
+    //     })
+    // },
     navigateToManage: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');

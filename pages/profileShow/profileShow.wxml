@@ -222,6 +222,11 @@
 
         <view class="weui-tabbar">
 
+            <view class="weui-tabbar__item" data-userId="{{userInfo.id}}"catchtap="navigateToMessageInput">
+                <image class="image-comment" src="../images/comment.png"></image>
+                <text class="weui-tabbar__label">私信</text>
+            </view>
+
             <view class="weui-tabbar__item" data-userId="{{userInfo.id}}" data-userIfMyPraise="{{userInfo.if_my_praise}}" catchtap="praiseUser">
                 <image wx:if="{{userInfo.if_my_praise == 0}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme.png"></image>
                 <image wx:if="{{userInfo.if_my_praise == 1}}" class="image-comment  ripple {{userInfo.id == selected_user_id ? 'bounceIn':''}}" src="../images/loveme_fill.png"></image>
@@ -230,9 +235,9 @@
 
             <view class="weui-tabbar__item">
                 <button class="shareButton1" open-type="share">
-          <image class="image-comment" src="../images/share.png"></image>
-          <text class="weui-tabbar__label">分享</text>
-        </button>
+                  <image class="image-comment" src="../images/share.png"></image>
+                  <text class="weui-tabbar__label">分享</text>
+                </button>
             </view>
 
         </view>
