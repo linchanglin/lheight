@@ -15,7 +15,7 @@
             </view>
         </view>
 
-        <button formType="submit" class="weui-btn" style="margin: 20px 15px;" type="primary">保存</button>
+        <button formType="submit" class="weui-btn" style="margin: 20px 15px;" type="primary">发送</button>
       </view>
 
     </form>

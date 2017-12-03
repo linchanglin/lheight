@@ -1,8 +1,14 @@
 {
     "pages": [
+        "pages/user/user",
+        
         "pages/profileShow/profileShow",
         
-        "pages/user/user",
+        "pages/messageInput/messageInput",
+        
+        
+        "pages/message/message",
+        
         
         "pages/love/love",
         "pages/square/square",

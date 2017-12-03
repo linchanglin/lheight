@@ -135,5 +135,78 @@ Page({
                 })
             });
         }
-    }
+    },
+
+
+    // navigateToMessageInput: function () {
+    //   let that = this;
+    //   let wesecret = wx.getStorageSync('wesecret');
+    //   if (wesecret) {
+    //     let userInfo = that.data.userInfo;
+    //     if (userInfo.available == 0) {
+    //       that.showNoAvailableModal();
+    //     } else {
+    //       if (that.data.userInfo.college == '') {
+    //         that.showNoCollegeModal();
+    //       } else {
+    //         wx.navigateTo({
+    //           url: '../loveInput/loveInput',
+    //         })
+    //       }
+    //     }
+    //   } else {
+    //     common.signIn().then(() => {
+    //       let my_userInfo = wx.getStorageSync('my_userInfo');
+    //       that.setData({
+    //         userInfo: my_userInfo
+    //       })
+    //       that.get_unreadNoticeNums();
+    //       that.get_unreadSystemNoticeNums();
+
+    //       let userInfo = that.data.userInfo;
+    //       if (userInfo.available == 0) {
+    //         that.showNoAvailableModal();
+    //       } else {
+    //         if (that.data.userInfo.college == '') {
+    //           that.showNoCollegeModal();
+    //         } else {
+    //           wx.navigateTo({
+    //             url: '../loveInput/loveInput',
+    //           })
+    //         }
+    //       }
+    //     });
+    //   }
+    // },
+    // showNoAvailableModal: function () {
+    //   let that = this;
+    //   let disabled_reason = that.data.userInfo.disabled_reason;
+    //   wx.showModal({
+    //     // title: '不能帖子',
+    //     content: `您被禁止发帖，原因是: ${disabled_reason} 请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！给您造成不便，谢谢您的谅解！`,
+    //     showCancel: false,
+    //     success: function (res) {
+    //       if (res.confirm) {
+    //         console.log('用户点击确定')
+    //       } else if (res.cancel) {
+    //         console.log('用户点击取消')
+    //       }
+    //     }
+    //   })
+    // },
+    // showNoCollegeModal: function () {
+    //   let that = this;
+    //   wx.showModal({
+    //     title: '未知学校',
+    //     content: '发帖需要知道您的学校呢，请去 我 -> 个人信息 -> 学校，选择您的学校！',
+    //     showCancel: false,
+    //     success: function (res) {
+    //       if (res.confirm) {
+    //         console.log('用户点击确定')
+    //       } else if (res.cancel) {
+    //         console.log('用户点击取消')
+    //       }
+    //     }
+    //   })
+    // },
 })

@@ -1,0 +1,2 @@
+<import src="../../utils/common.wxml" />
+<template is="comment_and_reply_input" />
