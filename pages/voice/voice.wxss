@@ -1,4 +1,4 @@
-.tab_hd {
+/* .tab_hd {
   display: flex; 
   height: 44px;
   justify-content: center;
@@ -16,4 +16,26 @@
 }
 .weui-media-box__hd_in-appmsg {
   width: 80px;
+} */
+
+.page__bd {
+  padding: 0 15px 15px;
+}
+
+.weui-panel__bd {
+  margin-top: 15px;
+  background-color: #fcfbfc;
+  border: 0.5px solid #ccc;
+  border-radius: 5px;
+}
+
+.plays {
+  display: flex;
+  justify-content: space-between;
+}
+
+.audio_times {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5px;
 }

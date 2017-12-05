@@ -43,3 +43,26 @@
 /* .weui-media-box {
   width: 80px;
 } */
+
+
+
+audio {
+  background-color: red;
+  color: red;
+}
+.audio {
+  background-color: red;
+  color: red;
+}
+
+.icon_share_audio_switch {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAMAAAArteDzAAAAaVBMV…CDa46/v5DZ6OoIhcf7dg7Y7mPalb7XcVEwDEFU+V3H/QOplcP+ctPpgwAAAABJRU5ErkJggg==) no-repeat 0 0;
+  width: 42px;
+    height: 42px;
+    vertical-align: middle;
+    display: inline-block;
+    -webkit-background-size: 42px auto;
+    background-size: 42px auto;
+    overflow: hidden;
+    color: transparent;
+}

@@ -7,14 +7,20 @@
         </swiper-item>
     </swiper>
 
-    <view class='tab_hd'>
+    <!-- <view class='tab_hd'>
       <view class='tab_hd_item' hover-class="weui-cell_active" bindtap='tapVoice' hover-start-time="0" hover-stay-time="100">
         <text class="{{ selectedLab == 'voice' ? 'selected_lab':''}}">电台</text>
       </view>
       <view class='tab_hd_item' hover-class="weui-cell_active"  bindtap='tapTopic' hover-start-time="0" hover-stay-time="100">
         <text class="{{ selectedLab == 'topic' ? 'selected_lab':''}}">话题</text>
       </view>
-    </view>
+    </view> -->
+
+     <view class='tab_hd'>
+      <view class='tab_hd_item'>
+        <text>FM80℃ 电台</text>
+      </view>
+    </view> 
 
     <!-- <view class='theme'>
         <image style="width: {{theme_image_width}}px;" src='{{img}}' mode="aspectFill" />
@@ -56,7 +62,7 @@
 
     <view wx:else class="weui-panel">
         <!-- <view class="weui-panel__hd">文字列表附来源</view> -->
-        <view class="weui-panel__bd">
+         <view class="weui-panel__bd">
             <view class="weui-media-box weui-media-box_text">
                 <view>
                   <view class="weui-media-box__title weui-media-box__title_in-text">标题一</view>
@@ -92,10 +98,20 @@
                 <view class="weui-cell__bd">查看更多</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
             </view>
-        </view>
+        </view> 
 
-        <audio poster="http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000" name="虹子湖畔，寂寞烟花" author="狸攸&白茶&苏木" src="http://cdn5.lizhi.fm/audio/2013/12/10/7975862186571270_hd.mp3"
-      id="myAudio" controls loop></audio>
+
+
+
+        <!-- <audio class="audio" name="虹子湖畔，寂寞烟花" author="狸攸&白茶&苏木" src="http://cdn5.lizhi.fm/audio/2013/12/10/7975862186571270_hd.mp3"
+      id="myAudio" controls="true" loop></audio> -->
+      <!-- <audio poster="http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000" name="虹子湖畔，寂寞烟花" author="狸攸&白茶&苏木" src="http://cdn5.lizhi.fm/audio/2013/12/10/7975862186571270_hd.mp3"
+      id="myAudio" controls="true" loop></audio> -->
+
+
+
+
+
 
     </view>
     

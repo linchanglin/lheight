@@ -1,5 +1,12 @@
 {
     "pages": [
+        "pages/square/square",
+        
+        "pages/voice/voice",
+        
+        
+        
+        
         "pages/user/user",
         
         "pages/profileShow/profileShow",
@@ -11,10 +18,8 @@
         
         
         "pages/love/love",
-        "pages/square/square",
         "pages/topic/topic",
         "pages/picture/picture",
-        "pages/voice/voice",
         "pages/aboutCollegeService/aboutCollegeService",
         "pages/loveInput/loveInput",
         "pages/activity/activity",

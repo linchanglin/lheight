@@ -38,15 +38,33 @@
           <view class="weui-cell__ft weui-cell__ft_in-access">{{userInfo.interest_name}}</view>
         </view>
 
+        
+      </view>
+    </view>
+
+    <view class="weui-panel weui-panel_access" style="margin-top: 20px">
+      <view class="weui-panel__bd">
+
         <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToProfileDetailsInput">
           <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">更多</view>
+            <view style="display: inline-block; vertical-align: middle">眼缘信息</view>
           </view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
 
+         <!-- <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">是否上眼缘墙</view>
+          <view class="weui-cell__ft">
+            <switch checked="{{pictureOnWall}}" bindchange="showPictureOnWall" />
+          </view>
+        </view>  -->
+
       </view>
+      
+      
     </view>
+    <view class="weui-cells__title">提示：完善眼缘信息后，您的照片与信息将自动展示在眼缘墙上，并增加发送私信的功能。</view> 
+    
 
   </view>
 </view>
