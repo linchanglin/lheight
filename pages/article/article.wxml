@@ -1,0 +1,40 @@
+<view class="page">
+  <view class="page__bd">
+     <image class="bg-img" src="https://img3.doubanio.com/view/note/large/public/p33317524.jpg" mode="widthFix" /> 
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_appmsg">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <view class="{{ playing ? 'playing' : 'paused' }}" bindtap='play'></view>
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">虹子湖畔，寂寞烟花</view>
+          <view class="weui-media-box__desc">狸攸&白茶&苏木</view>
+        </view>
+      </view>
+      <view class="plays">
+        <view style='flex: 4'>
+          <slider max="{{slider_max}}" value="{{slider_value}}" bindchange="sliderChange" />
+          <view class="weui-media-box__desc audio_times">
+            <view>{{currentTime}}</view>
+            <view>{{duration}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <image class="bg-img" src="https://img3.doubanio.com/view/note/large/public/p33317524.jpg" mode="widthFix" /> -->
+    
+    <view class='article'>
+      <view class='article_author'>
+        作者：刘同 美工：九月
+      </view>
+      <view class='article_content'>
+        同学十年聚会，人群里我没有看见二毛，也没有看过莹子。他们俩的恋情始于大一。 二毛是爱好吉他的男青年，从不上课，即使告诉他某个老师点到特别严格，他也不往心里去。他每天抱着吉他，坐在寝室里写歌，大半个学期了，班同学也不认识几个。 听说还有一位男同学叫二毛，从来不上课，只在寝室里写歌，女生们进行积极脑补，二毛或许长发，必须冷酷，一把忧伤的吉他，弹唱一辈子青春。
+      </view>
+      <view class='article_remark'>
+        配乐：1、马頔—南山南 2、马頔—傲寒
+      </view>
+    </view>
+
+
+  </view>
+</view>

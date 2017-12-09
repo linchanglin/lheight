@@ -2,6 +2,10 @@
     "pages": [
         "pages/square/square",
         
+        "pages/article/article",
+        
+        
+        
         "pages/voice/voice",
         
         

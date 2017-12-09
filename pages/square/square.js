@@ -1,7 +1,6 @@
-let app = getApp()
-let deviceInfo = app.data.deviceInfo;
-let windowWidth = deviceInfo.windowWidth;
-let theme_image_width = (windowWidth - 45) / 2;
+// let app = getApp()
+// let deviceInfo = app.data.deviceInfo;
+// let windowWidth = deviceInfo.windowWidth;
 
 Page({
   data: {
@@ -11,15 +10,11 @@ Page({
       'http://mmbiz.qpic.cn/mmbiz/wJ1zCBmADTGS87cogy6cEPmxNqfMsTdCHDxEaLBCTmAmUXicfdlcQxa6P6h8UFoqB98ia0WjVtN8CVACulXHyH0w/0',
 
     ],
-    img: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
+    img: 'http://mmbiz.qpic.cn/mmbiz/wJ1zCBmADTG51P470aib7ZiburTZ41jdqX8thOo4pibZ5ibiaQaKoGG5bibCDJ5D6Sfxrrgc7G9tW4RdShcmKmuhTXpw/0',
     
-    selectedLab: 'topic'
   },
   onLoad: function () {
     let that = this;
-    that.setData({
-      theme_image_width: theme_image_width
-    })
 
 
 
@@ -35,18 +30,18 @@ Page({
 
 
   },
-  tapVoice: function () {
-    let that = this;
-    that.setData({
-      selectedLab: 'voice'
-    })
-  },
-  tapTopic: function () {
-    let that = this;
-    that.setData({
-      selectedLab: 'topic'
-    })
-  },
+  // tapVoice: function () {
+  //   let that = this;
+  //   that.setData({
+  //     selectedLab: 'voice'
+  //   })
+  // },
+  // tapTopic: function () {
+  //   let that = this;
+  //   that.setData({
+  //     selectedLab: 'topic'
+  //   })
+  // },
   navigateToVoice: function (e) {
     console.log('navigateToVoice', e);
     let that = this;
@@ -54,4 +49,11 @@ Page({
       url: '../voice/voice'
     })
   },
+  navigateToArticle: function (e) {
+    console.log('navigateToArticle', e);
+    let that = this;
+    wx.navigateTo({
+      url: '../article/article',
+    })
+  }
 })
