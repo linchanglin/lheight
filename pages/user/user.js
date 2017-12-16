@@ -272,7 +272,7 @@ Page({
             if (userInfo.available == 0) {
                 that.showNoAvailableModal();
             } else {
-                if (that.data.userInfo.college == '') {
+                if (that.data.userInfo.college_id == '') {
                     that.showNoCollegeModal();
                 } else {
                     wx.navigateTo({
@@ -293,7 +293,7 @@ Page({
                 if (userInfo.available == 0) {
                     that.showNoAvailableModal();
                 } else {
-                    if (that.data.userInfo.college == '') {
+                    if (that.data.userInfo.college_id == '') {
                         that.showNoCollegeModal();
                     } else {
                         wx.navigateTo({
@@ -323,7 +323,7 @@ Page({
     showNoCollegeModal: function () {
         let that = this;
         wx.showModal({
-            title: '未知学校',
+            title: '未完善学校信息',
             content: '发帖需要知道您的学校呢，请去 我 -> 个人信息 -> 学校，选择您的学校！',
             showCancel: false,
             success: function (res) {

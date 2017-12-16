@@ -31,53 +31,68 @@ Page({
   },
   onLoad: function (options) {
     console.log('options', options);
-    let title = '虹子湖畔，寂寞烟火';
-    let epname = 'FM 80℃';
-    let singer = '狸攸&白茶&苏木';
-    let coverImgUrl = 'https://img3.doubanio.com/view/note/large/public/p33317524.jpg';
-    // let src = 'http://cdn5.lizhi.fm/audio/2013/12/10/7975862186571270_hd.mp3';
-    let src = 'http://cdn5.lizhi.fm/audio/2017/11/30/2638868453702758406_ud.mp3';
-
     let that = this;
+    let id = options.id;
+    that.load_radio(id);
 
-    // that.setData({
-    //   title: title,
-    //   epname: epname,
-    //   singer: singer,
-    //   coverImgUrl: coverImgUrl,
-    //   src: src,
-    // })
-
-    const backgroundAudioManager = wx.getBackgroundAudioManager();
-    backgroundAudioManager.title = title;
-    backgroundAudioManager.epname = epname;
-    backgroundAudioManager.singer = singer;
-    backgroundAudioManager.coverImgUrl = coverImgUrl;
-    backgroundAudioManager.src = src;
-
-    backgroundAudioManager.onEnded(function () {
-      backgroundAudioManager.title = title;
-      backgroundAudioManager.epname = epname;
-      backgroundAudioManager.singer = singer;
-      backgroundAudioManager.coverImgUrl = coverImgUrl;
-      backgroundAudioManager.src = src;
+    that.setData({
+      id: id
     })
+  },
+  onShareAppMessage: function () {
+    let that = this;
+    let title = that.data.radio.title;
+    let id = that.data.id;
+    return {
+      title: title,
+      path: `/pages/article/article?id=${id}`
+    }
+  },
+  load_radio: function (id) {
+    let that = this;
+    wx.request({
+      url: `https://collhome.com/life/apis/radios/${id}`,
+      success: function (res) {
+        let radio = res.data.data;
+        that.setData({
+          radio: radio
+        })
 
-    setTimeout(function () {
-      backgroundAudioManager.pause();
-    }, 100)
-    setTimeout(function () {
-      that.setData({
-        currentTime: formatSeconds(backgroundAudioManager.currentTime),
-        duration: formatSeconds(backgroundAudioManager.duration),
-        slider_max: Math.round(backgroundAudioManager.duration)
-      })
-    }, 1000)
+        wx.setNavigationBarTitle({
+          title: radio.title
+        })
+
+        const backgroundAudioManager = wx.getBackgroundAudioManager();
+        backgroundAudioManager.title = radio.title;
+        backgroundAudioManager.epname = radio.epname;
+        backgroundAudioManager.singer = radio.author;
+        backgroundAudioManager.coverImgUrl = radio.img_url;
+        backgroundAudioManager.src = radio.url;
+
+        backgroundAudioManager.onEnded(function () {
+          backgroundAudioManager.title = radio.title;
+          backgroundAudioManager.epname = radio.epname;
+          backgroundAudioManager.singer = radio.author;
+          backgroundAudioManager.coverImgUrl = radio.img_url;
+          backgroundAudioManager.src = radio.url;
+        })
+
+        setTimeout(function () {
+          backgroundAudioManager.pause();
+        }, 100)
+        setTimeout(function () {
+          that.setData({
+            currentTime: formatSeconds(backgroundAudioManager.currentTime),
+            duration: formatSeconds(backgroundAudioManager.duration),
+            slider_max: Math.round(backgroundAudioManager.duration)
+          })
+        }, 1000)
+      }
+    })
   },
   onUnload: function () {
     let that = this;
     clearInterval(that.data.timer);
-    // Do something when page close.
   },
   play: function () {
     let that = this;

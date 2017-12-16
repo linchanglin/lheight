@@ -86,9 +86,9 @@
                                 <view class="profileShow_cell_bd">
                                     {{userInfo.hometown}}
                                 </view>
-                                <view class="profileShow_cell_bd">
+                                <!-- <view class="profileShow_cell_bd">
                                     {{userInfo.signature}}
-                                </view>
+                                </view> -->
                             </view>
                         </view>
                     </view>
@@ -118,7 +118,7 @@
                     </view>
                 </view>
 
-                <view class="weui-panel__bd new_panel_bd">
+                <!-- <view class="weui-panel__bd new_panel_bd">
                     <view class="profileShow_cells">
                         <view class="profileShow_cell">
                             <view class="profileShow_cell_left">
@@ -143,9 +143,9 @@
                             </view>
                         </view>
                     </view>
-                </view>
+                </view> -->
 
-                <view wx:if="{{userInfo.character != ''}}" class="weui-panel__bd new_panel_bd">
+                <!-- <view wx:if="{{userInfo.character != ''}}" class="weui-panel__bd new_panel_bd">
                     <view class="profileShow_cells">
                         <view class="profileShow_cell">
                             <view class="profileShow_cell_left">
@@ -161,7 +161,7 @@
                             </view>
                         </view>
                     </view>
-                </view>
+                </view> -->
 
                 <view wx:if="{{userInfo.hobby != ''}}" class="weui-panel__bd new_panel_bd">
                     <view class="profileShow_cells">
@@ -171,7 +171,7 @@
                             </view>
                             <view class="profileShow_cell_right">
                                 <view class="profileShow_cell_hd">
-                                    爱好
+                                    兴趣爱好
                                 </view>
                                 <view class="profileShow_cell_bd">
                                     {{userInfo.hobby}}
@@ -181,7 +181,7 @@
                     </view>
                 </view>
 
-                <view wx:if="{{userInfo.love_history != ''}}" class="weui-panel__bd new_panel_bd">
+                <!-- <view wx:if="{{userInfo.love_history != ''}}" class="weui-panel__bd new_panel_bd">
                     <view class="profileShow_cells">
                         <view class="profileShow_cell">
                             <view class="profileShow_cell_left">
@@ -197,7 +197,7 @@
                             </view>
                         </view>
                     </view>
-                </view>
+                </view> -->
 
                 <view wx:if="{{userInfo.love_selecting != ''}}" class="weui-panel__bd new_panel_bd">
                     <view class="profileShow_cells">
@@ -207,7 +207,7 @@
                             </view>
                             <view class="profileShow_cell_right">
                                 <view class="profileShow_cell_hd">
-                                    择偶观
+                                    心仪对象要求
                                 </view>
                                 <view class="profileShow_cell_bd">
                                     {{userInfo.love_selecting}}

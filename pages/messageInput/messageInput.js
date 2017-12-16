@@ -1,18 +1,19 @@
 // pages/commentInput/commentInput.js
+import util from '../../utils/util.js';
+
 let app = getApp()
 let appId = app.data.appId;
 let appSecret = app.data.appSecret;
-let template_id_comment = app.data.template_id_comment;
+let template_id_message = app.data.template_id_message;
 
 Page({
   data: {},
   onLoad: function (options) {
-    console.log('commentInput  options', options)
+    console.log('messageInput  options', options)
     let that = this;
     that.setData({
-      love_id: options.love_id,
-      openid: options.openid,
-      love_content: options.love_content
+      to_user_id: options.userid,
+      openid: options.openid
     })
 
     let wesecret = wx.getStorageSync('wesecret');
@@ -21,30 +22,36 @@ Page({
     })
   },
   formSubmit: function (e) {
+    console.log('formSubmit e', e);
     let that = this;
     let form_id = e.detail.formId;
     let content = e.detail.value.content;
+    console.log('formSubmit content', content);
 
     wx.request({
-      url: 'https://collhome.com/life/apis/loves/' + that.data.love_id + '/comments',
+      url: 'https://collhome.com/life/apis/save_private_message',
       method: 'POST',
       data: {
         wesecret: that.data.wesecret,
+        to_user_id: that.data.to_user_id,
         content: content
       },
       success: function (res) {
-        console.log('post comment', res.data)
-        wx.setStorageSync('comments_need_refresh_create_comment', that.data.love_id);
-        wx.setStorageSync('love_loves_need_refresh', that.data.love_id);
-        wx.setStorageSync('activity_loves_need_refresh', that.data.love_id);
-        wx.setStorageSync('question_loves_need_refresh', that.data.love_id);
-        wx.setStorageSync('find_loves_need_refresh', that.data.love_id);
-        wx.setStorageSync('mycomment_loves_need_refresh', that.data.love_id);
-        wx.setStorageSync('my_loves_need_refresh', that.data.love_id);
+        console.log('post message', res.data)
+        // wx.setStorageSync('comments_need_refresh_create_comment', that.data.love_id);
+        // wx.setStorageSync('love_loves_need_refresh', that.data.love_id);
+        // wx.setStorageSync('activity_loves_need_refresh', that.data.love_id);
+        // wx.setStorageSync('question_loves_need_refresh', that.data.love_id);
+        // wx.setStorageSync('find_loves_need_refresh', that.data.love_id);
+        // wx.setStorageSync('mycomment_loves_need_refresh', that.data.love_id);
+        // wx.setStorageSync('my_loves_need_refresh', that.data.love_id);
+        if (res.data.code == 200) {
+          that.navigateBackWithSuccess();
+          that.send_templateMessage(form_id, content);
+        } else {
+          that.rejectWithReason(res.data.message);
+        }
 
-        wx.navigateBack()
-
-        that.send_templateMessage(form_id, content);
       }
     })
   },
@@ -52,8 +59,7 @@ Page({
     let that = this;
     let openid = that.data.openid;
     console.log("openid", openid);
-    let love_id = that.data.love_id;
-    let love_content = that.data.love_content;
+    let now_data = util.formatTime(new Date());
     wx.request({
       url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`,
       success: function (res) {
@@ -61,14 +67,14 @@ Page({
 
         let access_token = res.data.access_token;
         let my_userInfo = wx.getStorageSync('my_userInfo');
-        let nickname = my_userInfo.nickname;
+        let realname = my_userInfo.realname;
         wx.request({
           url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${access_token}`,
           method: 'POST',
           data: {
             touser: openid,
-            template_id: template_id_comment,
-            page: `/pages/comment/comment?love_id=${love_id}`,
+            template_id: template_id_message,
+            page: `/pages/myMessage/myMessage`,
             form_id: form_id,
             data: {
               keyword1: {
@@ -76,20 +82,44 @@ Page({
                 "color": "#173177"
               },
               keyword2: {
-                "value": nickname,
+                "value": realname,
               },
               keyword3: {
-                "value": love_content,
+                "value": now_data,
               },
-              keyword4: {
-                value: "小程序具体页面更多精彩",
-              }
             }
           },
           success: function (res) {
             console.log('send_templateMessage res', res);
           }
         })
+      }
+    })
+  },
+  navigateBackWithSuccess: function () {
+    let that = this;
+
+    wx.showToast({
+      title: '成功',
+      icon: 'success',
+      duration: 1000
+    });
+
+    setTimeout(function () {
+      wx.navigateBack()
+    }, 1000)
+  },
+  rejectWithReason: function (message) {
+    wx.showModal({
+      title: '发送失败',
+      content: message,
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
   }

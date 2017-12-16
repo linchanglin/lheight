@@ -154,7 +154,6 @@ Page({
         submitData.hometown = region[0] + ' ' + region[1] + ' ' + region[2];
 
         console.log("submitData", submitData);
-        return
 
         that.setData({
             save_loading: true

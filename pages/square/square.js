@@ -1,59 +1,68 @@
-// let app = getApp()
-// let deviceInfo = app.data.deviceInfo;
-// let windowWidth = deviceInfo.windowWidth;
-
 Page({
   data: {
-    imgUrls: [
-      'http://mmbiz.qpic.cn/mmbiz/wJ1zCBmADTGcvaOfIId1RyZ5QctTGuic7LvsuBR5LSebkuicyN01TKMk7uy2wdiaia2PDZaaWQsZkItI6JC0qPyK7Q/0',
-      'http://mmbiz.qpic.cn/mmbiz/wJ1zCBmADTG51P470aib7ZiburTZ41jdqX8thOo4pibZ5ibiaQaKoGG5bibCDJ5D6Sfxrrgc7G9tW4RdShcmKmuhTXpw/0',
-      'http://mmbiz.qpic.cn/mmbiz/wJ1zCBmADTGS87cogy6cEPmxNqfMsTdCHDxEaLBCTmAmUXicfdlcQxa6P6h8UFoqB98ia0WjVtN8CVACulXHyH0w/0',
-
-    ],
-    img: 'http://mmbiz.qpic.cn/mmbiz/wJ1zCBmADTG51P470aib7ZiburTZ41jdqX8thOo4pibZ5ibiaQaKoGG5bibCDJ5D6Sfxrrgc7G9tW4RdShcmKmuhTXpw/0',
-    
+    radios: [],
+    page: 1,
+    reach_bottom: false,
+    page_no_data: false,
   },
   onLoad: function () {
     let that = this;
-
-
-
-    // const backgroundAudioManager = wx.getBackgroundAudioManager()
-
-    // backgroundAudioManager.title = '此时此刻'
-    // backgroundAudioManager.epname = '此时此刻'
-    // backgroundAudioManager.singer = '汪峰'
-    // backgroundAudioManager.coverImgUrl = 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000'
-    // backgroundAudioManager.src = 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E061FF02C31F716658E5C81F5594D561F2E88B854E81CAAB7806D5E4F103E55D33C16F3FAC506D1AB172DE8600B37E43FAD&fromtag=46' // 设置了 src 之后会自动播放
-
-
-
-
+    that.load_radios();
   },
-  // tapVoice: function () {
-  //   let that = this;
-  //   that.setData({
-  //     selectedLab: 'voice'
-  //   })
-  // },
-  // tapTopic: function () {
-  //   let that = this;
-  //   that.setData({
-  //     selectedLab: 'topic'
-  //   })
-  // },
-  navigateToVoice: function (e) {
-    console.log('navigateToVoice', e);
+  onReachBottom: function () {
     let that = this;
-    wx.navigateTo({
-      url: '../voice/voice'
+    if (!that.data.page_no_data) {
+      that.setData({
+        reach_bottom: true,
+        page_no_data: false,
+        page: that.data.page + 1
+      })
+      that.load_radios()
+    }
+  },
+  onShareAppMessage: function () {
+    let that = this;
+    return {
+      title: `分享电台`,
+      path: `/pages/square/square`
+    }
+  },
+  load_radios: function () {
+    let that = this;
+    let page = that.data.page;
+    console.log('page', page);
+    wx.request({
+      url: `https://collhome.com/life/apis/radios?page=${page}`,
+      success: function (res) {
+        console.log('load_radios res', res);
+        if (page == 1) {
+          that.setData({
+            square_imgs: res.data.square_imgs,
+            square_title: res.data.square_title
+          })
+        }
+
+        let radios = res.data.data;
+        if (radios.length == 0) {
+          that.setData({
+            reach_bottom: false,
+            page_no_data: true
+          })
+        } else {
+          let new_radios = that.data.radios.concat(radios);
+          that.setData({
+            radios: new_radios
+          })
+        }
+      }
     })
   },
   navigateToArticle: function (e) {
     console.log('navigateToArticle', e);
+    let id = e.currentTarget.dataset.id;
     let that = this;
     wx.navigateTo({
-      url: '../article/article',
+      url: `../article/article?id=${id}`,
     })
   }
 })

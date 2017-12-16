@@ -1,8 +1,8 @@
 <view class="page">
   <view class="page__bd">
 
-    <swiper interval="10000000000" autoplay="true" indicator-dots='true' indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#ffffff" circular='true' style='height: 180px'>
-        <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
+    <swiper autoplay="true" indicator-dots='true' indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#ffffff" circular='true' style='height: 180px'>
+        <swiper-item wx:for="{{square_imgs}}" wx:key="*this">
             <image src="{{item}}" mode="aspectFill" style="width:100%;"/>
         </swiper-item>
     </swiper>
@@ -18,21 +18,20 @@
 
      <view class='tab_hd'>
       <view class='tab_hd_item'>
-        <text>FM 80℃ 电台</text>
+        <text>{{square_title}}</text>
       </view>
     </view> 
 
     <view class="weui-panel weui-panel_access">
-      <!-- <view class="weui-panel__hd">图文组合列表</view> -->
       <view class="weui-panel__bd">
-          <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" data-id="" bindtap='navigateToArticle'>
+          <view wx:for="{{radios}}" wx:for-item="radio" wx:key="id" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" data-id="{{radio.id}}" bindtap='navigateToArticle'>
               <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="{{img}}" />
+                  <image class="weui-media-box__thumb" src="{{radio.img_url}}" />
               </view>
               <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                  <view class="weui-media-box__title">那个和你一起吃路边摊的姑娘</view>
-                  <view class="weui-media-box__desc">主播：狸攸</view>
-                  <view style="margin-top: 2px;" class="weui-media-box__desc">时长：12'12'</view> 
+                  <view class="weui-media-box__title">{{radio.title}}</view>
+                  <view class="weui-media-box__desc">主播：{{radio.author}}</view>
+                  <view style="margin-top: 2px;" class="weui-media-box__desc">时长：{{radio.duration}}</view> 
                   
               </view>
           </view>
@@ -47,7 +46,10 @@
     </view> 
 
 
-
+    <view wx:if="{{reach_bottom}}" class="reach_loading">
+      <view class="weui-loading on_loading"></view>
+      <view class="weui-loadmore__tips">正在加载...</view>
+    </view>
 
         <!-- <audio class="audio" name="虹子湖畔，寂寞烟花" author="狸攸&白茶&苏木" src="http://cdn5.lizhi.fm/audio/2013/12/10/7975862186571270_hd.mp3"
       id="myAudio" controls="true" loop></audio> -->

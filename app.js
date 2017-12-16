@@ -9,7 +9,8 @@ App({
         appId: 'wx6700db6c36e6eed1',
         appSecret: '3220627137eaa581d7061a7bc4b11c66',
         template_id_comment: 'JoC-lW0-3dkHEDzVv_hSdsDA3ZFAwS3vUZqLyybhp5I',
-        template_id_reply: '_TBgH7x2J3mOogsE2wiv1ZLzBtWL1Osk-6ASLjCdJdQ'
+        template_id_reply: '_TBgH7x2J3mOogsE2wiv1ZLzBtWL1Osk-6ASLjCdJdQ',
+        template_id_message: 'Ucyd9cfANqZFbRE3Cb1-K57p7qFakCbllCxRyciYPTc',
     },
     onLaunch: function () {
         let res = wx.getSystemInfoSync();
