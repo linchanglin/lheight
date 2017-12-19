@@ -1,1 +1,16 @@
-/* pages/message/message.wxss */
+@import "../love/love.wxss";
+
+.list-item {
+  margin: 10px !important;
+  border: 0.5px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.weui-cell_active {
+  background-color: #ececec;
+}
+
+.unreadBackgroundColor {
+    background-color: #fddd7d
+}

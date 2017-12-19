@@ -48,6 +48,7 @@ Page({
             wx.removeStorageSync('user_need_refresh')
         }
         that.get_unreadNoticeNums();
+        that.get_unreadMessages();
         that.get_unreadSystemNoticeNums();
     },
     get_available: function () {
@@ -88,6 +89,22 @@ Page({
             })
         }
     },
+    get_unreadMessages: function () {
+      let that = this;
+      let wesecret = wx.getStorageSync('wesecret');
+      if (wesecret) {
+        wx.request({
+          url: `https://collhome.com/life/apis/unreadMessages?wesecret=${wesecret}`,
+          success: function (res) {
+            console.log('unreadNoticeNums', res);
+            let unreadMessages = res.data.unreadMessages;
+            that.setData({
+              unreadMessages: unreadMessages
+            })
+          }
+        })
+      }
+    },
     get_unreadSystemNoticeNums: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -118,6 +135,7 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
+                that.get_unreadMessages();
                 that.get_unreadSystemNoticeNums();
 
                 wx.navigateTo({
@@ -146,6 +164,7 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
+                that.get_unreadMessages();
                 that.get_unreadSystemNoticeNums();
 
                 wx.navigateTo({
@@ -168,6 +187,7 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
+                that.get_unreadMessages();
                 that.get_unreadSystemNoticeNums();
 
                 wx.navigateTo({
@@ -176,6 +196,30 @@ Page({
             });
         }
     },
+    navigateToMessage: function () {
+      let that = this;
+      let wesecret = wx.getStorageSync('wesecret');
+      if (wesecret) {
+        wx.navigateTo({
+          url: '../message/message',
+        })
+      } else {
+        common.signIn().then(() => {
+          let my_userInfo = wx.getStorageSync('my_userInfo');
+          that.setData({
+            userInfo: my_userInfo
+          })
+          that.get_unreadNoticeNums();
+          that.get_unreadMessages();
+          that.get_unreadSystemNoticeNums();
+
+          wx.navigateTo({
+            url: '../message/message',
+          })
+        });
+      }
+    },
+
     navigateToMyCommentLove: function () {
         let that = this;
         let wesecret = wx.getStorageSync('wesecret');
@@ -190,6 +234,7 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
+                that.get_unreadMessages();                
                 that.get_unreadSystemNoticeNums();
 
                 wx.navigateTo({
@@ -212,6 +257,7 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
+                that.get_unreadMessages();                
                 that.get_unreadSystemNoticeNums();
 
                 wx.navigateTo({
@@ -234,32 +280,11 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
+                that.get_unreadMessages();                
                 that.get_unreadSystemNoticeNums();
 
                 wx.navigateTo({
                     url: '../notice/notice',
-                })
-            });
-        }
-    },
-    navigateToMessage: function () {
-        let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
-            wx.navigateTo({
-                url: '../message/message',
-            })
-        } else {
-            common.signIn().then(() => {
-                let my_userInfo = wx.getStorageSync('my_userInfo');
-                that.setData({
-                    userInfo: my_userInfo
-                })
-                that.get_unreadNoticeNums();
-                that.get_unreadSystemNoticeNums();
-
-                wx.navigateTo({
-                    url: '../message/message',
                 })
             });
         }
@@ -287,6 +312,9 @@ Page({
                     userInfo: my_userInfo
                 })
                 that.get_unreadNoticeNums();
+                that.get_unreadMessages();                                
+                that.get_unreadMessages();                
+                
                 that.get_unreadSystemNoticeNums();
 
                 let userInfo = that.data.userInfo;

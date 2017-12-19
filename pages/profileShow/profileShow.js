@@ -138,6 +138,10 @@ Page({
   },
 
 
+
+
+
+
   navigateToMessageInput: function () {
     let that = this;
     let userid = that.data.userInfo.id

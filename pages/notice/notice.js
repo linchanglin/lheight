@@ -173,4 +173,41 @@ Page({
             the_item_selected_notice_id: ''
         })
     },
+
+
+    set_showActionSheet: function () {
+      let that = this;
+      wx.showActionSheet({
+        itemList: ['全部已读'],
+        success: function (res) {
+          if (res.tapIndex == 0) {
+            that.read_all_notices();
+          }
+          console.log(res.tapIndex)
+        },
+        fail: function (res) {
+          console.log(res.errMsg)
+        }
+      })
+    },
+    read_all_notices: function () {
+      let that = this;
+      wx.request({
+        url: 'https://collhome.com/life/apis/read_all/notices',
+        method: 'POST',
+        data: {
+          wesecret: that.data.wesecret,
+        },
+        success: function (res) {
+          let new_notices = that.data.notices;
+          for (let new_notice of new_notices) {
+            new_notice.if_read = 1
+          }
+          that.setData({
+            notices: new_notices
+          })
+        }
+      })
+    }
+    
 })

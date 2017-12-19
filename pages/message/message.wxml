@@ -1,2 +1,114 @@
-<!--pages/message/message.wxml-->
-<text>pages/message/message.wxml</text>
+<view class="page">
+
+  <image class='sendLove' src='../images/set.png' bindtap='set_showActionSheet' />
+
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar" style="background-color: white;">
+        <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+
+
+<view class="page">
+  <view class="page__bd">
+    
+    
+
+    <view class="container">
+      <block wx:for="{{hot_loves}}" wx:for-item="love" wx:key="id">
+
+        <view class="list-item {{love.if_read == 0 ? 'unreadBackgroundColor': ''}}" hover-class="weui-cell_active" data-id="{{love.id}}" data-content="{{love.content}}" data-userid="{{love.userInfo.id}}" data-openid="{{love.userInfo.openid}}" bindtap='showActionSheet'>
+          <view class="item-header">
+            <view class="header_image_box" hover-stop-propagation="true" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
+              <image class="header_image" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
+            </view>
+            
+            <view hover-stop-propagation="true" ><text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickname}}</text></view>
+            <view><text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college_name}}</text></view>
+          </view>
+
+          <view class="article-content">
+            <text>{{love.content}}</text>
+          </view>
+
+
+        </view>
+
+      </block>
+    </view>
+    <view wx:if="{{hot_reach_bottom}}" class="reach_loading">
+      <view class="weui-loading on_loading"></view>
+      <view class="weui-loadmore__tips">正在加载...</view>
+    </view>
+    <!--<view wx:if="{{hot_page_no_data}}" class="page_no_data">
+      <view class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+      </view>
+    </view>-->
+  </view>
+</view>
+
+
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          
+
+<view class="page">
+  <view class="page__bd">
+    
+    
+
+    
+
+    <view class="container">
+      <block wx:for="{{image_loves}}" wx:for-item="love" wx:key="id">
+
+        <view class="list-item">
+          <view class="item-header">
+            <view class="header_image_box" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">
+              <image class="header_image" src="{{love.userInfo.avatarUrl}}" mode="aspectFill"></image>
+            </view>
+            
+            <view><text class="header-name" data-userId="{{love.userInfo.id}}" catchtap="navigateToProfileShow">{{love.userInfo.nickname}}</text></view>
+            <view><text class="header-time">{{love.created_at}} 来自 {{love.userInfo.college_name}}</text></view>
+          </view>
+
+          <view class="article-content">
+            <text>{{love.content}}</text>
+          </view>
+
+          
+
+
+
+        </view>
+
+
+      </block>
+    </view>
+    <view wx:if="{{image_reach_bottom}}" class="reach_loading">
+      <view class="weui-loading on_loading"></view>
+      <view class="weui-loadmore__tips">正在加载...</view>
+    </view>
+    <!--<view wx:if="{{image_page_no_data}}" class="page_no_data">
+      <view class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+      </view>
+    </view>-->
+  </view>
+</view>
+
+
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>

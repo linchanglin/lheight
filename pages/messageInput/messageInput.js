@@ -74,7 +74,7 @@ Page({
           data: {
             touser: openid,
             template_id: template_id_message,
-            page: `/pages/myMessage/myMessage`,
+            page: `/pages/message/message`,
             form_id: form_id,
             data: {
               keyword1: {

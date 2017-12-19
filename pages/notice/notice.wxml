@@ -1,4 +1,6 @@
 <view class="page">
+
+  <image class='sendLove' src='../images/set.png' bindtap='set_showActionSheet' />
   <view class="page__bd">
 
     <!--提醒列表-->

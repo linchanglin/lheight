@@ -63,7 +63,7 @@
       
       
     </view>
-    <view class="weui-cells__title">提示：完善眼缘信息后，您的照片与信息将自动展示在眼缘墙上，并增加发送私信的功能。</view> 
+    <view class="weui-cells__title">提示：完善学校和眼缘信息后，您的照片将自动展示在眼缘墙上，并增加发送私信的功能。</view> 
     
 
   </view>
