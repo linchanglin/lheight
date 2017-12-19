@@ -1,5 +1,15 @@
 Page({
   data: {
+    // 测试用
+    test_loves: [
+      { id: 1, content: '这里是校园生活墙，这里是校园生活墙这里是校园生活墙，这里是校园生活墙，这里是校园生活墙，这里是校园生活墙这里是校园生活墙，这里是校园生活墙。' },
+    ],
+
+
+
+
+
+
     radios: [],
     page: 1,
     reach_bottom: false,
@@ -8,6 +18,22 @@ Page({
   onLoad: function () {
     let that = this;
     that.load_radios();
+  },
+  onShow: function () {
+    let that = this;
+    that.get_available();
+  },
+  get_available: function () {
+    let that = this;
+    wx.request({
+      url: 'https://collhome.com/life/apis/get_availables',
+      success: function (res) {
+        let get_available = res.data.data;
+        that.setData({
+          get_available: get_available
+        })
+      }
+    })
   },
   onReachBottom: function () {
     let that = this;

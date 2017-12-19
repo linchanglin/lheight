@@ -1,4 +1,21 @@
-<view class="page">
+<view wx:if="{{get_available == 0}}" class="page">
+    <view class="page__bd">
+
+        <view class="container">
+            <block wx:for="{{test_loves}}" wx:for-item="love" wx:key="id">
+                <view class="list-item">
+                    <view class="article-content">
+                        <text>{{love.content}}</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+
+    </view>
+</view>
+ 
+<view wx:if="{{get_available == 1}}" class="page">
+
   <view class="page__bd">
 
     <swiper autoplay="true" indicator-dots='true' indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#ffffff" circular='true' style='height: 180px'>
