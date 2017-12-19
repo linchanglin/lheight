@@ -40,10 +40,10 @@
       <video id="myVideo" style="width: 100%;" src="http://gslb.miaopai.com/stream/jdAWk5hXUOZm13bvzhO6T2PnhrhqY0Mz.mp4?ssig=539a30d870c3b75b76b159af62212874&time_stamp=1496837741678&cookie_id=&vend=1&os=3&partner=1&platform=2&cookie_id=&refer=miaopai&scid=jdAWk5hXUOZm13bvzhO6T2PnhrhqY0Mz"></video>
     </view>-->
 
-    <view style="width: {{ww}}px;display: flex;flex-wrap: wrap; justify-content: space-between;">
-      <block wx:for="{{pictures}}" wx:key="id">
-        <image src="{{item.pictures[0]}}" mode="aspectFill" style="margin-bottom: 1px;width:{{image_width}}px;height:{{image_width}}px;" data-userInfo="{{item}}" data-imgUrl="{{item.pictures}}" bindtap="openPictures"></image>
-      </block>
+    <view class="all_pictures" style="width: {{ww}}px;">
+      <!-- <block wx:for="{{pictures}}" wx:key="id"> -->
+        <image class="one_picture" wx:for="{{pictures}}" wx:key="id" src="{{item.pictures[0]}}" mode="aspectFill" style="width:{{image_width}}px;height:{{image_width}}px;" data-userInfo="{{item}}" data-imgUrl="{{item.pictures}}" bindtap="openPictures"></image>
+      <!-- </block> -->
 
     </view>
 

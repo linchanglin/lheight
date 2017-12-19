@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/love/love",
+    "pages/picture/picture",
     "pages/user/user",
     "pages/message/message",
     "pages/profileInput/profileInput",
@@ -10,7 +11,6 @@
     "pages/profileShow/profileShow",
     "pages/messageInput/messageInput",
     "pages/topic/topic",
-    "pages/picture/picture",
     "pages/aboutCollegeService/aboutCollegeService",
     "pages/loveInput/loveInput",
     "pages/activity/activity",
