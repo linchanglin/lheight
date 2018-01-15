@@ -29,7 +29,7 @@ Page({
   get_available: function () {
     let that = this;
     wx.request({
-      url: 'https://collhome.com/life/apis/get_availables',
+      url: 'https://collhome.com/life/apis/get_available',
       success: function (res) {
         let get_available = res.data.data;
         that.setData({
