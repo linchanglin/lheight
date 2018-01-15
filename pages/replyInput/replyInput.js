@@ -53,54 +53,101 @@ Page({
 			}
 		})
 	},
+
   send_templateMessage: function (form_id, content) {
     let that = this;
     let openid = that.data.objectUser_openid;
-    console.log("openid", openid);
     let comment_id = that.data.comment_id;
     let source_content = that.data.source_content;
     let now_data = util.formatTime(new Date());
-    wx.request({
-      url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`,
-      success: function (res) {
-        console.log('get_access_token res', res);
+    let my_userInfo = wx.getStorageSync('my_userInfo');
+    let nickname = my_userInfo.nickname;
 
-        let access_token = res.data.access_token;
-        let my_userInfo = wx.getStorageSync('my_userInfo');
-        let nickname = my_userInfo.nickname;
-        wx.request({
-          url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${access_token}`,
-          method: 'POST',
-          data: {
-            touser: openid,
-            template_id: template_id_reply,
-            page: `/pages/reply/reply?comment_id=${comment_id}`,
-            form_id: form_id,
-            data: {
-              keyword1: {
-                "value": content,
-                "color": "#173177"
-              },
-              keyword2: {
-                "value": nickname,
-              },
-              keyword3: {
-                "value": now_data,
-              },
-              keyword4: {
-                "value": source_content,
-              },
-              keyword5: {
-                value: "小程序具体页面更多精彩",
-              }
-            }
-          },
-          success: function (res) {
-            console.log('send_templateMessage res', res);
-          }
-        })
+    let data = {
+      touser: openid,
+      template_id: template_id_reply,
+      page: `/pages/reply/reply?comment_id=${comment_id}`,
+      form_id: form_id,
+      data: {
+        keyword1: {
+          "value": content,
+          "color": "#173177"
+        },
+        keyword2: {
+          "value": nickname,
+        },
+        keyword3: {
+          "value": now_data,
+        },
+        keyword4: {
+          "value": source_content,
+        },
+        keyword5: {
+          value: "小程序具体页面更多精彩",
+        }
+      }
+    };
+    console.log("data", data);
+
+    wx.request({
+      url: 'https://collhome.com/life/apis/send_templateMessage',
+      method: 'POST',
+      data: data,
+      success: function (res) {
+        console.log('send_templateMessage res', res);
       }
     })
   }
+
+
+  // send_templateMessage: function (form_id, content) {
+  //   let that = this;
+  //   let openid = that.data.objectUser_openid;
+  //   console.log("openid", openid);
+  //   let comment_id = that.data.comment_id;
+  //   let source_content = that.data.source_content;
+  //   let now_data = util.formatTime(new Date());
+  //   wx.request({
+  //     url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`,
+  //     success: function (res) {
+  //       console.log('get_access_token res', res);
+
+  //       let access_token = res.data.access_token;
+  //       let my_userInfo = wx.getStorageSync('my_userInfo');
+  //       let nickname = my_userInfo.nickname;
+  //       wx.request({
+  //         url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${access_token}`,
+  //         method: 'POST',
+  //         data: {
+  //           touser: openid,
+  //           template_id: template_id_reply,
+  //           page: `/pages/reply/reply?comment_id=${comment_id}`,
+  //           form_id: form_id,
+  //           data: {
+  //             keyword1: {
+  //               "value": content,
+  //               "color": "#173177"
+  //             },
+  //             keyword2: {
+  //               "value": nickname,
+  //             },
+  //             keyword3: {
+  //               "value": now_data,
+  //             },
+  //             keyword4: {
+  //               "value": source_content,
+  //             },
+  //             keyword5: {
+  //               value: "小程序具体页面更多精彩",
+  //             }
+  //           }
+  //         },
+  //         success: function (res) {
+  //           console.log('send_templateMessage res', res);
+  //         }
+  //       })
+  //     }
+  //   })
+  // }
 
 })

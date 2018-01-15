@@ -58,44 +58,89 @@ Page({
   send_templateMessage: function (form_id, content) {
     let that = this;
     let openid = that.data.openid;
-    console.log("openid", openid);
-    let now_data = util.formatTime(new Date());
-    wx.request({
-      url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`,
-      success: function (res) {
-        console.log('get_access_token res', res);
+    let my_userInfo = wx.getStorageSync('my_userInfo');
+    let realname = my_userInfo.realname;
+    let now_date = util.formatTime(new Date());
 
-        let access_token = res.data.access_token;
-        let my_userInfo = wx.getStorageSync('my_userInfo');
-        let realname = my_userInfo.realname;
-        wx.request({
-          url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${access_token}`,
-          method: 'POST',
-          data: {
-            touser: openid,
-            template_id: template_id_message,
-            page: `/pages/message/message`,
-            form_id: form_id,
-            data: {
-              keyword1: {
-                "value": content,
-                "color": "#173177"
-              },
-              keyword2: {
-                "value": realname,
-              },
-              keyword3: {
-                "value": now_data,
-              },
-            }
-          },
-          success: function (res) {
-            console.log('send_templateMessage res', res);
-          }
-        })
+    let data = {
+      touser: openid,
+      template_id: template_id_message,
+      page: '/pages/message/message',
+      form_id: form_id,
+      data: {
+        keyword1: {
+          "value": content,
+          "color": "#173177"
+        },
+        keyword2: {
+          "value": realname,
+        },
+        keyword3: {
+          "value": now_date,
+        },
+      }
+    }
+    console.log("data", data);
+
+    wx.request({
+      url: 'https://collhome.com/life/apis/send_templateMessage',
+      method: 'POST',
+      data: data,
+      success: function (res) {
+        console.log('send_templateMessage res', res);
       }
     })
+
   },
+  // send_templateMessage: function (form_id, content) {
+  //   let that = this;
+  //   let openid = that.data.openid;
+  //   let my_userInfo = wx.getStorageSync('my_userInfo');
+  //   let realname = my_userInfo.realname;
+  //   let now_date = util.formatTime(new Date());
+
+  //   console.log("openid", openid);
+  //   console.log("template_id_message", template_id_message);
+  //   console.log("form_id", form_id);
+  //   console.log("content", content);
+  //   console.log("realname", realname);
+  //   console.log("now_date", now_date);
+
+  //   wx.request({
+  //     url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`,
+  //     success: function (res) {
+  //       console.log('get_access_token res', res);
+
+  //       let access_token = res.data.access_token;
+        
+  //       wx.request({
+  //         url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${access_token}`,
+  //         method: 'POST',
+  //         data: {
+  //           touser: openid,
+  //           template_id: template_id_message,
+  //           page: `/pages/message/message`,
+  //           form_id: form_id,
+  //           data: {
+  //             keyword1: {
+  //               "value": content,
+  //               "color": "#173177"
+  //             },
+  //             keyword2: {
+  //               "value": realname,
+  //             },
+  //             keyword3: {
+  //               "value": now_date,
+  //             },
+  //           }
+  //         },
+  //         success: function (res) {
+  //           console.log('send_templateMessage res', res);
+  //         }
+  //       })
+  //     }
+  //   })
+  // },
   navigateBackWithSuccess: function () {
     let that = this;
 

@@ -51,47 +51,89 @@ Page({
   send_templateMessage: function (form_id, content) {
     let that = this;
     let openid = that.data.openid;
-    console.log("openid", openid);
     let love_id = that.data.love_id;
     let love_content = that.data.love_content;
+    let my_userInfo = wx.getStorageSync('my_userInfo');
+    let nickname = my_userInfo.nickname;
+
+    let data = {
+      touser: openid,
+      template_id: template_id_comment,
+      page: `/pages/comment/comment?love_id=${love_id}`,
+      form_id: form_id,
+      data: {
+        keyword1: {
+          "value": content,
+          "color": "#173177"
+        },
+        keyword2: {
+          "value": nickname,
+        },
+        keyword3: {
+          "value": love_content,
+        },
+        keyword4: {
+          value: "小程序具体页面更多精彩",
+        }
+      }
+    };
+    console.log("data", data);
+
     wx.request({
-      url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`,
+      url: 'https://collhome.com/life/apis/send_templateMessage',
+      method: 'POST',
+      data: data,
       success: function (res) {
-        console.log('get_access_token res', res);
-        
-        let access_token = res.data.access_token;
-        let my_userInfo = wx.getStorageSync('my_userInfo');
-        let nickname = my_userInfo.nickname;
-        wx.request({
-          url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${access_token}`,
-          method: 'POST',
-          data: {
-            touser: openid,
-            template_id: template_id_comment,
-            page: `/pages/comment/comment?love_id=${love_id}`,
-            form_id: form_id,
-            data: {
-              keyword1: {
-                "value": content,
-                "color": "#173177"
-              },
-              keyword2: {
-                "value": nickname,
-              },
-              keyword3: {
-                "value": love_content,
-              },
-              keyword4: {
-                value: "小程序具体页面更多精彩",
-              } 
-            }
-          },
-          success: function (res) {
-            console.log('send_templateMessage res', res);
-          }
-        })
+        console.log('send_templateMessage res', res);
       }
     })
+
   }
+  
+  // send_templateMessage: function (form_id, content) {
+  //   let that = this;
+  //   let openid = that.data.openid;
+  //   console.log("openid", openid);
+  //   let love_id = that.data.love_id;
+  //   let love_content = that.data.love_content;
+  //   wx.request({
+  //     url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`,
+  //     success: function (res) {
+  //       console.log('get_access_token res', res);
+        
+  //       let access_token = res.data.access_token;
+  //       let my_userInfo = wx.getStorageSync('my_userInfo');
+  //       let nickname = my_userInfo.nickname;
+  //       wx.request({
+  //         url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${access_token}`,
+  //         method: 'POST',
+  //         data: {
+  //           touser: openid,
+  //           template_id: template_id_comment,
+  //           page: `/pages/comment/comment?love_id=${love_id}`,
+  //           form_id: form_id,
+  //           data: {
+  //             keyword1: {
+  //               "value": content,
+  //               "color": "#173177"
+  //             },
+  //             keyword2: {
+  //               "value": nickname,
+  //             },
+  //             keyword3: {
+  //               "value": love_content,
+  //             },
+  //             keyword4: {
+  //               value: "小程序具体页面更多精彩",
+  //             } 
+  //           }
+  //         },
+  //         success: function (res) {
+  //           console.log('send_templateMessage res', res);
+  //         }
+  //       })
+  //     }
+  //   })
+  // }
 
 })
