@@ -55,8 +55,8 @@ Page({
     },
     onShareAppMessage: function () {
         return {
-            title: `分享校园生活墙`,
-            path: `/pages/love/love`,
+            title: `分享眼缘墙`,
+            path: `/pages/picture/picture`,
             success: function (res) {
                 console.log("onShareAppMessage", res);
             }

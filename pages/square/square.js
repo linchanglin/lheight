@@ -17,7 +17,10 @@ Page({
   },
   onLoad: function () {
     let that = this;
-    that.load_radios();
+    wx.showLoading({
+      title: '加载中',
+    })
+    that.load_radios('onLoad');
   },
   onShow: function () {
     let that = this;
@@ -35,6 +38,10 @@ Page({
       }
     })
   },
+  onPullDownRefresh: function () {
+    let that = this;
+    that.load_radios('pulldown');
+  },
   onReachBottom: function () {
     let that = this;
     if (!that.data.page_no_data) {
@@ -43,7 +50,7 @@ Page({
         page_no_data: false,
         page: that.data.page + 1
       })
-      that.load_radios()
+      that.load_radios('add_page')
     }
   },
   onShareAppMessage: function () {
@@ -53,9 +60,22 @@ Page({
       path: `/pages/square/square`
     }
   },
-  load_radios: function () {
+  load_radios: function (parameter) {
     let that = this;
-    let page = that.data.page;
+    // let page = that.data.page;
+
+    let page;
+    if (parameter == 'add_page') {
+      page = that.data.page;
+    } else {
+      page = 1;
+      that.setData({
+        page: 1,
+        reach_bottom: false,
+        page_no_data: false
+      })
+    }
+
     console.log('page', page);
     wx.request({
       url: `https://collhome.com/life/apis/radios?page=${page}`,
@@ -69,17 +89,29 @@ Page({
         }
 
         let radios = res.data.data;
-        if (radios.length == 0) {
-          that.setData({
-            reach_bottom: false,
-            page_no_data: true
-          })
+        if (parameter == 'add_page') {
+          if (radios.length == 0) {
+            that.setData({
+              reach_bottom: false,
+              page_no_data: true
+            })
+          } else {
+            let new_radios = that.data.radios.concat(radios);
+            that.setData({
+              radios: new_radios
+            })
+          }
         } else {
-          let new_radios = that.data.radios.concat(radios);
           that.setData({
-            radios: new_radios
+            radios: radios
           })
         }
+
+        if (parameter == 'pulldown' || parameter == 'onLoad') {
+          wx.stopPullDownRefresh();
+          wx.hideLoading()
+        }
+
       }
     })
   },
