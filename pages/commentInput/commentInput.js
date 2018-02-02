@@ -30,7 +30,8 @@ Page({
       method: 'POST',
       data: {
         wesecret: that.data.wesecret,
-        content: content
+        content: content,
+        form_id: form_id
       },
       success: function (res) {
         console.log('post comment', res.data)

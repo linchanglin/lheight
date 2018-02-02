@@ -1,5 +1,8 @@
 <view class="page">
     <view class="page__bd">
+
+      <form bindsubmit="formSubmit" report-submit='true'>
+
         <view class="weui-panel weui-panel_access">
             <view class="weui-cells weui-cells_after-title">
                 <view class="weui-cell">
@@ -84,8 +87,12 @@
         <view wx:if="{{anonymous == 1}}" class="weui-cells__title">提示：此帖将以墙君的名义发表。</view>
         <view class="weui-btn-area">
             <button wx:if="{{save_loading == 0}}" class="weui-btn" type="primary" disabled="true">提交</button>
-            <button wx:elif="{{save_loading == 1}}" class="weui-btn" type="primary" bindtap="saveLove">提交</button>
+            <button formType="submit" wx:elif="{{save_loading == 1}}" class="weui-btn" type="primary">提交</button>
+            <!-- <button formType="submit" wx:elif="{{save_loading == 1}}" class="weui-btn" type="primary" bindtap="saveLove">提交</button> -->
             <button wx:else class="weui-btn" type="primary" loading="true" disabled="true">提交中</button>
         </view>
+
+      </form>
+
     </view>
 </view>

@@ -2,360 +2,372 @@ import common from '../../utils/common.js';
 import qiniuUploader from '../../utils/qiniuUploader.js';
 
 Page({
-    data: {
-        files: [],
-        content: "",
-        images: [],
-        videoUrl_exist: 0,
-        video_url: '',
-        location_exist: 0,
-        location: {},
-        visiable: 0,
-        anonymous: 0,
-        // postingTypeIndex: 0,
-        save_loading: 0,
-    },
-    onLoad: function () {
-        let that = this;
+  data: {
+    files: [],
+    content: "",
+    images: [],
+    videoUrl_exist: 0,
+    video_url: '',
+    location_exist: 0,
+    location: {},
+    visiable: 0,
+    anonymous: 0,
+    // postingTypeIndex: 0,
+    save_loading: 0,
+  },
+  onLoad: function () {
+    let that = this;
+    let wesecret = wx.getStorageSync('wesecret');
+    if (wesecret) {
+      let my_userInfo = wx.getStorageSync('my_userInfo');
+
+      that.setData({
+        wesecret: wesecret,
+        my_userInfo: my_userInfo
+      })
+      // that.load_user();
+      // that.load_postingTypes();
+    } else {
+      common.signIn().then(() => {
         let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
-            let my_userInfo = wx.getStorageSync('my_userInfo');
-          
-            that.setData({
-              wesecret: wesecret,
-              my_userInfo: my_userInfo
-            })
-            // that.load_user();
-            // that.load_postingTypes();
-        } else {
-          common.signIn().then(() => {
-            let wesecret = wx.getStorageSync('wesecret');
-            let my_userInfo = wx.getStorageSync('my_userInfo');
-            that.setData({
-              wesecret: wesecret,
-              my_userInfo: my_userInfo
-            })
-            // that.load_user();
-            // that.load_postingTypes();
-          });
-        }
-        
-    },
-    // load_user: function () {
-    //     let that = this;
-    //     let wesecret = that.data.wesecret;
-    //     wx.request({
-    //         url: `https://collhome.com/life/apis/user?wesecret=${wesecret}`,
-    //         success: function (res) {
-    //             that.setData({
-    //                 my_userInfo: res.data.data
-    //             })
-    //         }
-    //     })
-    // },
-    // load_postingTypes: function () {
-    //     let that = this;
-    //     wx.request({
-    //         url: 'https://collhome.com/life/apis/postingTypes',
-    //         success: function (res) {
-    //             that.setData({
-    //                 postingTypes: res.data.data
-    //             })
-    //         }
-    //     })
-    // },
-    onShow: function () {
-        let that = this;
-        let video_url = wx.getStorageSync('video_url');
-        if (video_url) {
-            if (video_url == 'setnull') {
-                that.setData({
-                    videoUrl_exist: 0,
-                    video_url: ''
-                });
-            } else {
-                that.setData({
-                    videoUrl_exist: 1,
-                    video_url: video_url
-                });
-            }
-            wx.removeStorageSync('video_url');
-            that.set_loading_status();
-        }
-    },
-    bindContentInput: function (e) {
-        console.log('bindContentInput content', e.detail.value)
-        let that = this;
+        let my_userInfo = wx.getStorageSync('my_userInfo');
         that.setData({
-            content: e.detail.value
+          wesecret: wesecret,
+          my_userInfo: my_userInfo
         })
-
-        that.set_loading_status();
-    },
-    chooseImage: function (e) {
-        var that = this;
-        wx.chooseImage({
-            sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-            success: function (res) {
-                // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-                let totalPictureLength = res.tempFilePaths.length + that.data.files.length;
-                if (totalPictureLength > 9) {
-                    that.openAlertPictureTooMany();
-                    return;
-                }
-                that.setData({
-                    files: that.data.files.concat(res.tempFilePaths)
-                });
-
-                that.set_loading_status();
-            }
-        })
-    },
-    set_loading_status: function () {
-        let that = this;
-        if (that.data.content.length > 0 || that.data.files.length > 0 || that.data.video_url.length > 0) {
-            that.setData({
-                save_loading: 1
-            })
-        } else {
-            that.setData({
-                save_loading: 0
-            })
-        }
-    },
-    openAlertPictureTooMany: function () {
-        wx.showModal({
-            content: '照片最多只能上传9张哟!',
-            showCancel: false,
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-                }
-            }
-        });
-    },
-    previewImage: function (e) {
-        console.log('e.currentTarget.id', e.currentTarget.id);
-        console.log('this.data.files', this.data.files);
-        wx.previewImage({
-            current: e.currentTarget.id, // 当前显示图片的http链接
-            urls: this.data.files // 需要预览的图片http链接列表
-        })
-    },
-    deleteImage: function (e) {
-        let that = this;
-        let the_delete_image = e.currentTarget.dataset.image;
-        let new_files = [];
-        for (let value of that.data.files) {
-            if (the_delete_image != value) {
-                new_files.push(value)
-            }
-        }
-        that.setData({
-            files: new_files
-        })
-        that.set_loading_status();
-    },
-    // postingTypeChange: function (e) {
-    //     let that = this;
-    //     that.setData({
-    //         postingTypeIndex: e.detail.value
-    //     })
-    // },
-    chooseLocation: function () {
-        let that = this;
-        wx.chooseLocation({
-            type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-            success: function (res) {
-                console.log('ressssttttttttttt', res);
-                that.setData({
-                    location_exist: 1,
-                    location: {
-                        latitude: res.latitude,
-                        longitude: res.longitude,
-                        name: res.name,
-                        address: res.address
-                    }
-                })
-            }
-        })
-    },
-    anonymousSwitchChange: function (e) {
-        console.log("anonymousSwitchChange e", e);
-        let that = this;
-        let value = e.detail.value;
-        if (value) {
-            that.setData({
-                anonymous: 1
-            })
-        } else {
-            that.setData({
-                anonymous: 0
-            })
-        }
-    },
-    navigateToVideoUrlInput: function () {
-        let that = this;
-        let url;
-        let video_url = that.data.video_url;
-        if (video_url) {
-            url = `../videoUrlInput/videoUrlInput?video_url=${video_url}`
-        } else {
-            url = "../videoUrlInput/videoUrlInput";
-        }
-        wx.navigateTo({
-            url: url,
-        })
-    },
-    saveLove: function () {
-        let that = this;
-        let wesecret = that.data.wesecret;
-        let my_userInfo = that.data.my_userInfo;
-        if (wesecret && my_userInfo) {
-            if (that.data.my_userInfo.available == 0) {
-                that.showNoAvailableModal();
-            } else {
-                if (that.data.my_userInfo.college_id == '') {
-                    that.showNoCollegeModal();
-                } else {
-
-                    let content = that.data.content;
-                    let files = that.data.files;
-                    let images = that.data.images;
-                    let video_url = that.data.video_url;
-                    if (content.length > 0 || files.length > 0 || video_url.length > 0) {
-                        that.setData({
-                            save_loading: 2
-                        })
-                        if (video_url.length > 0) {
-                            that.setData({
-                                images: []
-                            })
-                            that.postSaveLove();
-                        } else {
-                            if (files.length > 0) {
-                                qiniuUploader.getUptoken().then((uptoken) => {
-                                    let i = 0;
-                                    for (let filePath of files) {
-                                        qiniuUploader.upload(uptoken, filePath, (res) => {
-                                            images.push(res.imageURL)
-                                            that.setData({
-                                                images: images
-                                            })
-                                        }, (error) => {
-                                            console.error('error: ' + JSON.stringify(error));
-                                        }, (complete) => {
-                                            console.log('complete', complete)
-                                            i++;
-                                            if (i == files.length) {
-                                                that.postSaveLove();
-                                            }
-                                        });
-                                    }
-                                })
-                            } else {
-                                that.postSaveLove();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    postSaveLove: function () {
-        let that = this;
-        // let postingType_id = Number(that.data.postingTypeIndex) + 1;
-        let data = {
-            'wesecret': that.data.wesecret,
-            // 'postingType_id': postingType_id,
-            'postingType_id': 1,
-            'content': that.data.content,
-            'images': that.data.images,
-            'video_url': that.data.video_url,
-            'location': that.data.location,
-            'visiable': that.data.visiable,
-            'anonymous': that.data.anonymous
-        };
-        console.log("postSaveLove data", data);
-        wx.request({
-            url: 'https://collhome.com/life/apis/loves',
-            method: 'POST',
-            data: data,
-            success: function (res) {
-              console.log('postSaveLove res', res);
-
-                that.setData({
-                  save_loading: 1
-                })
-
-                if (res.data.status == 200) {
-                    that.switchTabToBoardWithSuccess();
-                } else {
-                    common.signIn();
-                }
-            }
-        })
-    },
-    showNoAvailableModal: function () {
-        let that = this;
-        let disabled_reason = that.data.my_userInfo.disabled_reason;
-        wx.showModal({
-            content: `您被禁止发帖，原因是: ${disabled_reason} 请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！给您造成不便，谢谢您的谅解！`,
-            showCancel: false,
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-                } else if (res.cancel) {
-                    console.log('用户点击取消')
-                }
-            }
-        })
-    },
-    showNoCollegeModal: function () {
-        let that = this;
-        wx.showModal({
-            title: '未完善学校信息',
-            content: '发帖需要知道您的学校呢，请去 我 -> 个人信息 -> 学校，选择您的学校！',
-            showCancel: false,
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-                } else if (res.cancel) {
-                    console.log('用户点击取消')
-                }
-            }
-        })
-    },
-    switchTabToBoardWithSuccess: function () {
-        let that = this;
-        
-        wx.showToast({
-            title: '成功',
-            icon: 'success',
-            duration: 1000
-        });
-
-        // let postingType_id = Number(that.data.postingTypeIndex) + 1;
-        let url;
-        // if (postingType_id == 1) {
-            wx.setStorageSync('love_loves_need_refresh_create_love', 1);
-            url = '/pages/love/love';
-        // } else if (postingType_id == 2) {
-        //     wx.setStorageSync('activity_loves_need_refresh_create_love', 1);
-        //     url = '/pages/activity/activity';
-        // } else if (postingType_id == 3) {
-        //     wx.setStorageSync('question_loves_need_refresh_create_love', 1);
-        //     url = '/pages/question/question';
-        // } else {
-        //     wx.setStorageSync('find_loves_need_refresh_create_love', postingType_id);
-        //     url = '/pages/find/find';
-        // }
-
-        setTimeout(function () {
-            wx.switchTab({
-                url: url
-            })
-        }, 1000)
+        // that.load_user();
+        // that.load_postingTypes();
+      });
     }
+
+  },
+  // load_user: function () {
+  //     let that = this;
+  //     let wesecret = that.data.wesecret;
+  //     wx.request({
+  //         url: `https://collhome.com/life/apis/user?wesecret=${wesecret}`,
+  //         success: function (res) {
+  //             that.setData({
+  //                 my_userInfo: res.data.data
+  //             })
+  //         }
+  //     })
+  // },
+  // load_postingTypes: function () {
+  //     let that = this;
+  //     wx.request({
+  //         url: 'https://collhome.com/life/apis/postingTypes',
+  //         success: function (res) {
+  //             that.setData({
+  //                 postingTypes: res.data.data
+  //             })
+  //         }
+  //     })
+  // },
+  onShow: function () {
+    let that = this;
+    let video_url = wx.getStorageSync('video_url');
+    if (video_url) {
+      if (video_url == 'setnull') {
+        that.setData({
+          videoUrl_exist: 0,
+          video_url: ''
+        });
+      } else {
+        that.setData({
+          videoUrl_exist: 1,
+          video_url: video_url
+        });
+      }
+      wx.removeStorageSync('video_url');
+      that.set_loading_status();
+    }
+  },
+  bindContentInput: function (e) {
+    console.log('bindContentInput content', e.detail.value)
+    let that = this;
+    that.setData({
+      content: e.detail.value
+    })
+
+    that.set_loading_status();
+  },
+  chooseImage: function (e) {
+    var that = this;
+    wx.chooseImage({
+      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        let totalPictureLength = res.tempFilePaths.length + that.data.files.length;
+        if (totalPictureLength > 9) {
+          that.openAlertPictureTooMany();
+          return;
+        }
+        that.setData({
+          files: that.data.files.concat(res.tempFilePaths)
+        });
+
+        that.set_loading_status();
+      }
+    })
+  },
+  set_loading_status: function () {
+    let that = this;
+    if (that.data.content.length > 0 || that.data.files.length > 0 || that.data.video_url.length > 0) {
+      that.setData({
+        save_loading: 1
+      })
+    } else {
+      that.setData({
+        save_loading: 0
+      })
+    }
+  },
+  openAlertPictureTooMany: function () {
+    wx.showModal({
+      content: '照片最多只能上传9张哟!',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        }
+      }
+    });
+  },
+  previewImage: function (e) {
+    console.log('e.currentTarget.id', e.currentTarget.id);
+    console.log('this.data.files', this.data.files);
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.files // 需要预览的图片http链接列表
+    })
+  },
+  deleteImage: function (e) {
+    let that = this;
+    let the_delete_image = e.currentTarget.dataset.image;
+    let new_files = [];
+    for (let value of that.data.files) {
+      if (the_delete_image != value) {
+        new_files.push(value)
+      }
+    }
+    that.setData({
+      files: new_files
+    })
+    that.set_loading_status();
+  },
+  // postingTypeChange: function (e) {
+  //     let that = this;
+  //     that.setData({
+  //         postingTypeIndex: e.detail.value
+  //     })
+  // },
+  chooseLocation: function () {
+    let that = this;
+    wx.chooseLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      success: function (res) {
+        console.log('ressssttttttttttt', res);
+        that.setData({
+          location_exist: 1,
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude,
+            name: res.name,
+            address: res.address
+          }
+        })
+      }
+    })
+  },
+  anonymousSwitchChange: function (e) {
+    console.log("anonymousSwitchChange e", e);
+    let that = this;
+    let value = e.detail.value;
+    if (value) {
+      that.setData({
+        anonymous: 1
+      })
+    } else {
+      that.setData({
+        anonymous: 0
+      })
+    }
+  },
+  navigateToVideoUrlInput: function () {
+    let that = this;
+    let url;
+    let video_url = that.data.video_url;
+    if (video_url) {
+      url = `../videoUrlInput/videoUrlInput?video_url=${video_url}`
+    } else {
+      url = "../videoUrlInput/videoUrlInput";
+    }
+    wx.navigateTo({
+      url: url,
+    })
+  },
+  // formSubmit: function (e) {
+  //   console.log('formSubmit e',e);
+  // },
+  // saveLove: function () {
+  formSubmit: function (e) {
+    let that = this;
+    console.log('formSubmit e', e);
+    let form_id = e.detail.formId;
+    that.setData({
+      form_id: form_id
+    })
+
+    let wesecret = that.data.wesecret;
+    let my_userInfo = that.data.my_userInfo;
+    if (wesecret && my_userInfo) {
+      if (that.data.my_userInfo.available == 0) {
+        that.showNoAvailableModal();
+      } else {
+        if (that.data.my_userInfo.college_id == '') {
+          that.showNoCollegeModal();
+        } else {
+
+          let content = that.data.content;
+          let files = that.data.files;
+          let images = that.data.images;
+          let video_url = that.data.video_url;
+          if (content.length > 0 || files.length > 0 || video_url.length > 0) {
+            that.setData({
+              save_loading: 2
+            })
+            if (video_url.length > 0) {
+              that.setData({
+                images: []
+              })
+              that.postSaveLove();
+            } else {
+              if (files.length > 0) {
+                qiniuUploader.getUptoken().then((uptoken) => {
+                  let i = 0;
+                  for (let filePath of files) {
+                    qiniuUploader.upload(uptoken, filePath, (res) => {
+                      images.push(res.imageURL)
+                      that.setData({
+                        images: images
+                      })
+                    }, (error) => {
+                      console.error('error: ' + JSON.stringify(error));
+                    }, (complete) => {
+                      console.log('complete', complete)
+                      i++;
+                      if (i == files.length) {
+                        that.postSaveLove();
+                      }
+                    });
+                  }
+                })
+              } else {
+                that.postSaveLove();
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  postSaveLove: function () {
+    let that = this;
+    // let postingType_id = Number(that.data.postingTypeIndex) + 1;
+    let data = {
+      'wesecret': that.data.wesecret,
+      // 'postingType_id': postingType_id,
+      'postingType_id': 1,
+      'content': that.data.content,
+      'images': that.data.images,
+      'video_url': that.data.video_url,
+      'location': that.data.location,
+      'visiable': that.data.visiable,
+      'anonymous': that.data.anonymous,
+
+      'form_id': that.data.form_id,
+    };
+    console.log("postSaveLove data", data);
+    wx.request({
+      url: 'https://collhome.com/life/apis/loves',
+      method: 'POST',
+      data: data,
+      success: function (res) {
+        console.log('postSaveLove res', res);
+
+        that.setData({
+          save_loading: 1
+        })
+
+        if (res.data.status == 200) {
+          that.switchTabToBoardWithSuccess();
+        } else {
+          common.signIn();
+        }
+      }
+    })
+  },
+  showNoAvailableModal: function () {
+    let that = this;
+    let disabled_reason = that.data.my_userInfo.disabled_reason;
+    wx.showModal({
+      content: `您被禁止发帖，原因是: ${disabled_reason} 请去 我 -> 我的管理 -> 客服，联系客服解禁，或其他方式联系客服解禁！给您造成不便，谢谢您的谅解！`,
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  showNoCollegeModal: function () {
+    let that = this;
+    wx.showModal({
+      title: '未完善学校信息',
+      content: '发帖需要知道您的学校呢，请去 我 -> 个人信息 -> 学校，选择您的学校！',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  switchTabToBoardWithSuccess: function () {
+    let that = this;
+
+    wx.showToast({
+      title: '成功',
+      icon: 'success',
+      duration: 1000
+    });
+
+    // let postingType_id = Number(that.data.postingTypeIndex) + 1;
+    let url;
+    // if (postingType_id == 1) {
+    wx.setStorageSync('love_loves_need_refresh_create_love', 1);
+    url = '/pages/love/love';
+    // } else if (postingType_id == 2) {
+    //     wx.setStorageSync('activity_loves_need_refresh_create_love', 1);
+    //     url = '/pages/activity/activity';
+    // } else if (postingType_id == 3) {
+    //     wx.setStorageSync('question_loves_need_refresh_create_love', 1);
+    //     url = '/pages/question/question';
+    // } else {
+    //     wx.setStorageSync('find_loves_need_refresh_create_love', postingType_id);
+    //     url = '/pages/find/find';
+    // }
+
+    setTimeout(function () {
+      wx.switchTab({
+        url: url
+      })
+    }, 1000)
+  }
 })

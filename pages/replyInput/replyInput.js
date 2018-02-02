@@ -41,7 +41,8 @@ Page({
 			data: {
 				wesecret: that.data.wesecret,
 				content: content,
-				objectUser_id: that.data.objectUser_id
+				objectUser_id: that.data.objectUser_id,
+        form_id: form_id
 			},
 			success: function (res) {
 				console.log('post reply', res.data)
