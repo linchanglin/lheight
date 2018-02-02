@@ -68,6 +68,13 @@ Page({
     onLoad: function () {
         let that = this;
 
+        wx.setTabBarStyle({
+          color: '#8e8e8e',
+          selectedColor: '#09bb07',
+          backgroundColor: '#F7F7FA',
+          borderStyle: 'black'
+        })
+
         wx.showLoading({
           title: '加载中',
         })
@@ -99,7 +106,7 @@ Page({
         let love_loves_need_refresh_create_love = wx.getStorageSync('love_loves_need_refresh_create_love')
         
         if (that.data.hot_loves.length > 0 && !love_need_refresh_for_interest_changed && !love_loves_need_refresh_create_love) {
-            that.get_unreadLoveNums();
+          that.get_unreadNums();
         }
         if (love_need_refresh_for_interest_changed) {
             that.load_hotLoves('pulldown');
@@ -132,16 +139,25 @@ Page({
         }            
     },
     get_available: function () {
-        let that = this;
-        wx.request({
-            url: 'https://collhome.com/life/apis/get_available',
-            success: function (res) {
-                let get_available = res.data.data;
-                that.setData({
-                    get_available: get_available
-                })
-            }
+      let that = this;
+      common.get_available().then((get_available) => {
+        console.log('common get_available', get_available);
+        that.setData({
+          get_available: get_available
         })
+      });
+    },
+    get_unreadNums: function () {
+      let that = this;
+      common.get_unreadNums().then((unreadNums) => {
+        let unreadLoveNums = unreadNums.unreadLoveNums;
+        if (unreadLoveNums > 0) {
+          that.setData({
+            showTopTips1: true,
+            unreadLoveNums: unreadLoveNums
+          })
+        }
+      })
     },
     load_refresh_loves: function (need_refresh_love_id) {
         let that = this;
@@ -228,36 +244,36 @@ Page({
             video_loves: new_video_loves,
         })
     },
-    get_unreadLoveNums: function () {
-        let that = this;
-        let url;
-        let love_id;
-        if (that.data.hot_loves[0].id) {
-            love_id = that.data.hot_loves[0].id;
-        } else {
-            love_id = 0;
-        }
-        let wesecret = wx.getStorageSync('wesecret');
-        let postingType_id = 1;
-        if (wesecret) {
-            url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${postingType_id}&love_id=${love_id}&wesecret=${wesecret}`
-        } else {
-            url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${postingType_id}&love_id=${love_id}&wesecret=`
-        }
-        wx.request({
-            url: url,
-            success: function (res) {
-                console.log('get_unreadLoveNums res', res);
-                let unreadLoveNums = res.data.unreadLoveNums;
-                if (unreadLoveNums > 0) {
-                    that.setData({
-                        showTopTips1: true,
-                        unreadLoveNums: res.data.unreadLoveNums
-                    })
-                }
-            }
-        })
-    },
+    // get_unreadLoveNums: function () {
+    //     let that = this;
+    //     let url;
+    //     let love_id;
+    //     if (that.data.hot_loves[0].id) {
+    //         love_id = that.data.hot_loves[0].id;
+    //     } else {
+    //         love_id = 0;
+    //     }
+    //     let wesecret = wx.getStorageSync('wesecret');
+    //     let postingType_id = 1;
+    //     if (wesecret) {
+    //         url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${postingType_id}&love_id=${love_id}&wesecret=${wesecret}`
+    //     } else {
+    //         url = `https://collhome.com/life/apis/unreadLoveNums?postingType_id=${postingType_id}&love_id=${love_id}&wesecret=`
+    //     }
+    //     wx.request({
+    //         url: url,
+    //         success: function (res) {
+    //             console.log('get_unreadLoveNums res', res);
+    //             let unreadLoveNums = res.data.unreadLoveNums;
+    //             if (unreadLoveNums > 0) {
+    //                 that.setData({
+    //                     showTopTips1: true,
+    //                     unreadLoveNums: res.data.unreadLoveNums
+    //                 })
+    //             }
+    //         }
+    //     })
+    // },
     onPullDownRefresh: function () {
         let that = this;
         let activeIndex = that.data.activeIndex;
@@ -385,10 +401,23 @@ Page({
                         })
                     }
                 } else {
+                  // 等同于 parameter == 'pulldown' || parameter == 'onLoad';
+
                     that.setData({
                         hot_loves: loves
                     })
+
+                    console.log('loves[0].id', loves[0].id);
+                    wx.setStorage({
+                      key: "the_last_love_id",
+                      data: loves[0].id
+                    })
+
+                    wx.removeTabBarBadge({
+                      index: 0,
+                    })
                 }
+
                 if (parameter == 'pulldown' || parameter == 'onLoad') {
                     wx.stopPullDownRefresh();
                     wx.hideLoading()

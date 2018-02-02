@@ -364,6 +364,61 @@ function praiseUser(e) {
     })
 }
 
+function get_unreadNums() {
+  return new Promise((resolve, reject) => {
+    let wesecret = wx.getStorageSync('wesecret');
+    let the_last_love_id = wx.getStorageSync('the_last_love_id');
+
+    wx.request({
+      url: `https://collhome.com/life/apis/get_unreadNums?wesecret=${wesecret}&the_last_love_id=${the_last_love_id}`,
+      success: function (res) {
+        let unreadNums = res.data.data;
+        console.log('unreadNums', unreadNums);
+
+        let unreadLoveNums = unreadNums.unreadLoveNums;
+        let unreadMessages = unreadNums.unreadMessages;
+        let unreadNoticeNums = unreadNums.unreadNoticeNums;
+        let unreadSystemNoticeNums = unreadNums.unreadSystemNoticeNums;
+
+        if (unreadLoveNums > 0) {
+          wx.setTabBarBadge({
+            index: 0,
+            text: unreadLoveNums.toString()
+          })
+        } else {
+          wx.removeTabBarBadge({
+            index: 0,
+          })
+        }
+        if (unreadMessages > 0 || unreadNoticeNums > 0 || unreadSystemNoticeNums > 0) {
+          wx.showTabBarRedDot({
+            index: 3,
+          })
+        } else {
+          wx.hideTabBarRedDot({
+            index: 3,
+          })
+        }
+
+        resolve(unreadNums);
+      }
+    })
+  })
+}
+
+function get_available() {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: 'https://collhome.com/life/apis/get_availables',
+      success: function (res) {
+        let get_available = res.data.data;
+        resolve(get_available);
+      }
+    })
+  })
+}
+
+
 module.exports = {
     signIn: signIn,
     get_my_userInfo: get_my_userInfo,
@@ -373,4 +428,7 @@ module.exports = {
     praiseLove: praiseLove,
     praiseComment: praiseComment,
     praiseUser: praiseUser,
+
+    get_unreadNums: get_unreadNums,
+    get_available: get_available,
 }

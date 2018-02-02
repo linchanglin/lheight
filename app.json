@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/love/love",
-    "pages/picture/picture",
     "pages/user/user",
+    "pages/picture/picture",
     "pages/message/message",
     "pages/profileInput/profileInput",
     "pages/square/square",

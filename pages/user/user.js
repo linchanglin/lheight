@@ -20,24 +20,12 @@ Page({
                 userInfo: my_userInfo
             })
         }
-        // else {
-        //     common.signIn().then(() => {
-        //         let wesecret = wx.getStorageSync('wesecret');
-        //         let my_userInfo = wx.getStorageSync('my_userInfo');
-        //         that.setData({
-        //             wesecret: wesecret,
-        //             userInfo: my_userInfo
-        //         })
-        //         that.get_unreadNoticeNums();
-        //         that.get_unreadSystemNoticeNums();
-
-        //     })
-        // }
     },
     onShow: function () {
         let that = this;
-
+        
         that.get_available();
+        that.get_unreadNums();
 
         let user_need_refresh = wx.getStorageSync('user_need_refresh')
         if (user_need_refresh) {
@@ -47,21 +35,30 @@ Page({
             })
             wx.removeStorageSync('user_need_refresh')
         }
-        that.get_unreadNoticeNums();
-        that.get_unreadMessages();
-        that.get_unreadSystemNoticeNums();
     },
     get_available: function () {
-        let that = this;
-        wx.request({
-            url: 'https://collhome.com/life/apis/get_available',
-            success: function (res) {
-                let get_available = res.data.data;
-                that.setData({
-                    get_available: get_available
-                })
-            }
+      let that = this;
+      common.get_available().then((get_available) => {
+        console.log('common get_available', get_available);
+        that.setData({
+          get_available: get_available
         })
+      });
+    },
+    get_unreadNums: function () {
+      let that = this;
+      common.get_unreadNums().then((unreadNums) => {
+        console.log("common unreadNums", unreadNums);
+        let unreadMessages = unreadNums.unreadMessages;
+        let unreadNoticeNums = unreadNums.unreadNoticeNums;
+        let unreadSystemNoticeNums = unreadNums.unreadSystemNoticeNums;
+
+        that.setData({
+          unreadMessages: unreadMessages,
+          unreadNoticeNums: unreadNoticeNums,
+          unreadSystemNoticeNums: unreadSystemNoticeNums
+        })
+      })
     },
     onShareAppMessage: function () {
         let that = this;
@@ -71,54 +68,6 @@ Page({
             success: function (res) {
                 console.log("onShareAppMessage", res);
             }
-        }
-    },
-    get_unreadNoticeNums: function () {
-        let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
-            wx.request({
-                url: `https://collhome.com/life/apis/unreadNoticeNums?wesecret=${wesecret}`,
-                success: function (res) {
-                    console.log('unreadNoticeNums', res);
-                    let unreadNoticeNums = res.data.unreadNoticeNums;
-                    that.setData({
-                        unreadNoticeNums: unreadNoticeNums
-                    })
-                }
-            })
-        }
-    },
-    get_unreadMessages: function () {
-      let that = this;
-      let wesecret = wx.getStorageSync('wesecret');
-      if (wesecret) {
-        wx.request({
-          url: `https://collhome.com/life/apis/unreadMessages?wesecret=${wesecret}`,
-          success: function (res) {
-            console.log('unreadNoticeNums', res);
-            let unreadMessages = res.data.unreadMessages;
-            that.setData({
-              unreadMessages: unreadMessages
-            })
-          }
-        })
-      }
-    },
-    get_unreadSystemNoticeNums: function () {
-        let that = this;
-        let wesecret = wx.getStorageSync('wesecret');
-        if (wesecret) {
-            wx.request({
-                url: `https://collhome.com/life/apis/unreadSystemNoticeNums?wesecret=${wesecret}`,
-                success: function (res) {
-                    console.log('unreadSystemNoticeNums', res);
-                    let unreadSystemNoticeNums = res.data.data.unreadSystemNoticeNums;
-                    that.setData({
-                        unreadSystemNoticeNums: unreadSystemNoticeNums
-                    })
-                }
-            })
         }
     },
     navigateToProfileInput: function () {
@@ -134,9 +83,7 @@ Page({
                 that.setData({
                     userInfo: my_userInfo
                 })
-                that.get_unreadNoticeNums();
-                that.get_unreadMessages();
-                that.get_unreadSystemNoticeNums();
+                that.get_unreadNums();
 
                 wx.navigateTo({
                     url: '../profileInput/profileInput',
@@ -163,9 +110,7 @@ Page({
                 that.setData({
                     userInfo: my_userInfo
                 })
-                that.get_unreadNoticeNums();
-                that.get_unreadMessages();
-                that.get_unreadSystemNoticeNums();
+                that.get_unreadNums();
 
                 wx.navigateTo({
                     url: `../manage/manage?unreadSystemNoticeNums=${unreadSystemNoticeNums}`,
@@ -186,9 +131,7 @@ Page({
                 that.setData({
                     userInfo: my_userInfo
                 })
-                that.get_unreadNoticeNums();
-                that.get_unreadMessages();
-                that.get_unreadSystemNoticeNums();
+                that.get_unreadNums();
 
                 wx.navigateTo({
                     url: '../praiseMeUser/praiseMeUser',
@@ -209,9 +152,7 @@ Page({
           that.setData({
             userInfo: my_userInfo
           })
-          that.get_unreadNoticeNums();
-          that.get_unreadMessages();
-          that.get_unreadSystemNoticeNums();
+          that.get_unreadNums();
 
           wx.navigateTo({
             url: '../message/message',
@@ -233,9 +174,7 @@ Page({
                 that.setData({
                     userInfo: my_userInfo
                 })
-                that.get_unreadNoticeNums();
-                that.get_unreadMessages();                
-                that.get_unreadSystemNoticeNums();
+                that.get_unreadNums();
 
                 wx.navigateTo({
                     url: '../myCommentLove/myCommentLove',
@@ -256,9 +195,7 @@ Page({
                 that.setData({
                     userInfo: my_userInfo
                 })
-                that.get_unreadNoticeNums();
-                that.get_unreadMessages();                
-                that.get_unreadSystemNoticeNums();
+                that.get_unreadNums();
 
                 wx.navigateTo({
                     url: '../myLove/myLove',
@@ -279,9 +216,7 @@ Page({
                 that.setData({
                     userInfo: my_userInfo
                 })
-                that.get_unreadNoticeNums();
-                that.get_unreadMessages();                
-                that.get_unreadSystemNoticeNums();
+                that.get_unreadNums();
 
                 wx.navigateTo({
                     url: '../notice/notice',
@@ -311,11 +246,7 @@ Page({
                 that.setData({
                     userInfo: my_userInfo
                 })
-                that.get_unreadNoticeNums();
-                that.get_unreadMessages();                                
-                that.get_unreadMessages();                
-                
-                that.get_unreadSystemNoticeNums();
+                that.get_unreadNums();
 
                 let userInfo = that.data.userInfo;
                 if (userInfo.available == 0) {

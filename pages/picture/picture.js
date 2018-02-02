@@ -1,3 +1,4 @@
+import common from '../../utils/common.js';
 var app = getApp()
 Page({
 
@@ -40,18 +41,20 @@ Page({
     onShow: function () {
         let that = this;
         that.get_available();
+        that.get_unreadNums();
     },
     get_available: function () {
-        let that = this;
-        wx.request({
-            url: 'https://collhome.com/life/apis/get_available',
-            success: function (res) {
-                let get_available = res.data.data;
-                that.setData({
-                    get_available: get_available
-                })
-            }
+      let that = this;
+      common.get_available().then((get_available) => {
+        console.log('common get_available', get_available);
+        that.setData({
+          get_available: get_available
         })
+      });
+    },
+    get_unreadNums: function () {
+      let that = this;
+      common.get_unreadNums().then((unreadNums) => { })
     },
     onShareAppMessage: function () {
         return {
