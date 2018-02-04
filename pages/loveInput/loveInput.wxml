@@ -1,36 +1,36 @@
 <view class="page">
-    <view class="page__bd">
+  <view class="page__bd">
 
-      <form bindsubmit="formSubmit" report-submit='true'>
+    <form bindsubmit="saveFormid" report-submit='true'>
 
-        <view class="weui-panel weui-panel_access">
-            <view class="weui-cells weui-cells_after-title">
-                <view class="weui-cell">
-                    <view class="weui-cell__bd">
-                        <textarea class="weui-textarea" style="height: 6.6em" maxlength="-1" placeholder="这一刻的想法..." bindinput="bindContentInput" />
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" style="height: 6.6em" maxlength="-1" placeholder="这一刻的想法..." bindinput="bindContentInput" />
+            </view>
+          </view>
+          <view wx:if="{{videoUrl_exist == 0}}" class="weui-cell border-top-none">
+            <view class="weui-cell__bd">
+              <view class="weui-uploader">
+                <view class="weui-uploader__bd">
+                  <block wx:for-items="{{files}}" wx:key="{{index}}">
+                    <view class="weui-uploader__file weui-uploader__file_statuss">
+                      <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" id="{{item}}" mode="aspectFill" />
+                      <view class="weui-uploader__file-contentt">
+                        <icon type="clear" size="20" data-image="{{item}}" bindtap="deleteImage"></icon>
+                      </view>
                     </view>
+                  </block>
+                  <view class="weui-uploader__input-box">
+                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                  </view>
                 </view>
-                <view wx:if="{{videoUrl_exist == 0}}" class="weui-cell border-top-none">
-                    <view class="weui-cell__bd">
-                        <view class="weui-uploader">
-                            <view class="weui-uploader__bd">
-                                <block wx:for-items="{{files}}" wx:key="{{index}}">
-                                    <view class="weui-uploader__file weui-uploader__file_statuss">
-                                        <image class="weui-uploader__img" src="{{item}}" bindtap="previewImage" id="{{item}}" mode="aspectFill" />
-                                        <view class="weui-uploader__file-contentt">
-                                            <icon type="clear" size="20" data-image="{{item}}" bindtap="deleteImage"></icon>
-                                        </view>
-                                    </view>
-                                </block>
-                                <view class="weui-uploader__input-box">
-                                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                 </view> 
+              </view>
+            </view>
+          </view>
 
-                <!-- <view class="weui-cell weui-cell_select" hover-class="weui-cell_active" style="padding-right: 15px;">
+          <!-- <view class="weui-cell weui-cell_select" hover-class="weui-cell_active" style="padding-right: 15px;">
                     <view class="weui-cell__hd weui-cell__hd_in-select-after">
                         <image src="../images/topic.png" class="iconfront"></image>
                         <text>主题</text>
@@ -43,56 +43,55 @@
                     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
                 </view> -->
 
-            <!-- </view>
+          <!-- </view>
 
 
             <view class="weui-panel weui-panel_access"> -->
-                 <view class="weui-cells weui-cells_after-title  border-bottom-none"> 
+          <view class="weui-cells weui-cells_after-title  border-bottom-none">
 
-                    <view wx:if="{{my_userInfo.trust > 1}}" class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToVideoUrlInput">
-                        <view class="weui-cell__hd">
-                            <image wx:if="{{videoUrl_exist == 0}}" src="../images/video.png" class="iconfront"></image>
-                            <image wx:else src="../images/video_fill.png" class="iconfront"></image>
-                        </view>
-                        <view class="weui-cell__bd">
-                            <view wx:if="{{videoUrl_exist == 0}}" style="display: inline-block; vertical-align: middle">视频地址</view>
-                            <view wx:else style="display: inline-block; vertical-align: middle">{{video_url}}</view>
-                        </view>
-                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                    </view>
-                    <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="chooseLocation">
-                        <view class="weui-cell__hd">
-                            <image wx:if="{{location_exist == 0}}" src="../images/location.png" class="iconfront"></image>
-                            <image wx:else src="../images/location_fill.png" class="iconfront"></image>
-                        </view>
-                        <view class="weui-cell__bd">
-                            <view wx:if="{{location_exist == 0}}" style="display: inline-block; vertical-align: middle">所在位置</view>
-                            <view wx:else style="display: inline-block; vertical-align: middle">{{location.name}}</view>
-                        </view>
-                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                    </view>
-                    <view class="weui-cell weui-cell_switch">
-                        <view class="weui-cell__hd">
-                            <image wx:if="{{anonymous == 0}}" src="../images/nickname.png" class="iconfront"></image>
-                            <image wx:else src="../images/nickname_fill.png" class="iconfront"></image>
-                        </view>
-                        <view class="weui-cell__bd">是否匿名</view>
-                        <view class="weui-cell__ft">
-                            <switch bindchange="anonymousSwitchChange" />
-                        </view>
-                    </view>
-                </view>
+            <view wx:if="{{my_userInfo.trust > 1}}" class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToVideoUrlInput">
+              <view class="weui-cell__hd">
+                <image wx:if="{{videoUrl_exist == 0}}" src="../images/video.png" class="iconfront"></image>
+                <image wx:else src="../images/video_fill.png" class="iconfront"></image>
+              </view>
+              <view class="weui-cell__bd">
+                <view wx:if="{{videoUrl_exist == 0}}" style="display: inline-block; vertical-align: middle">视频地址</view>
+                <view wx:else style="display: inline-block; vertical-align: middle">{{video_url}}</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
             </view>
+            <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="chooseLocation">
+              <view class="weui-cell__hd">
+                <image wx:if="{{location_exist == 0}}" src="../images/location.png" class="iconfront"></image>
+                <image wx:else src="../images/location_fill.png" class="iconfront"></image>
+              </view>
+              <view class="weui-cell__bd">
+                <view wx:if="{{location_exist == 0}}" style="display: inline-block; vertical-align: middle">所在位置</view>
+                <view wx:else style="display: inline-block; vertical-align: middle">{{location.name}}</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            <view class="weui-cell weui-cell_switch">
+              <view class="weui-cell__hd">
+                <image wx:if="{{anonymous == 0}}" src="../images/nickname.png" class="iconfront"></image>
+                <image wx:else src="../images/nickname_fill.png" class="iconfront"></image>
+              </view>
+              <view class="weui-cell__bd">是否匿名</view>
+              <view class="weui-cell__ft">
+                <switch bindchange="anonymousSwitchChange" />
+              </view>
+            </view>
+          </view>
         </view>
-        <view wx:if="{{anonymous == 1}}" class="weui-cells__title">提示：此帖将以墙君的名义发表。</view>
-        <view class="weui-btn-area">
-            <button wx:if="{{save_loading == 0}}" class="weui-btn" type="primary" disabled="true">提交</button>
-            <button formType="submit" wx:elif="{{save_loading == 1}}" class="weui-btn" type="primary">提交</button>
-            <!-- <button formType="submit" wx:elif="{{save_loading == 1}}" class="weui-btn" type="primary" bindtap="saveLove">提交</button> -->
-            <button wx:else class="weui-btn" type="primary" loading="true" disabled="true">提交中</button>
-        </view>
+      </view>
+      <view wx:if="{{anonymous == 1}}" class="weui-cells__title">提示：此帖将以墙君的名义发表。</view>
+      <view class="weui-btn-area">
+        <button formType="submit" wx:if="{{save_loading == 0}}" class="weui-btn" type="primary" disabled="true">提交</button>
+        <button formType="submit" wx:elif="{{save_loading == 1}}" class="weui-btn" type="primary" bindtap="saveLove">提交</button>
+        <button formType="submit" wx:else class="weui-btn" type="primary" loading="true" disabled="true">提交中</button>
+      </view>
 
-      </form>
+    </form>
 
-    </view>
+  </view>
 </view>

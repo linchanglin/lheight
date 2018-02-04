@@ -20,6 +20,26 @@ Page({
             video_url: value
         })
     },
+    saveFormid: function (e) {
+      console.log('saveFormid e', e);
+      let that = this;
+      let form_id = e.detail.formId;
+      let wesecret = wx.getStorageSync('wesecret');
+      if (wesecret) {
+        let data = {
+          wesecret: wesecret,
+          form_id, form_id
+        }
+        wx.request({
+          url: 'https://collhome.com/life/apis/templateMessages',
+          method: 'POST',
+          data: data,
+          success: function (res) {
+            console.log('saveFormid res', res);
+          }
+        })
+      }
+    },
     confirmInput: function () {
         let that = this;
         let video = that.data.video_url;

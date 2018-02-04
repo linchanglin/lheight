@@ -21,12 +21,32 @@ Page({
       wesecret: wesecret
     })
   },
+  saveFormid: function (form_id) {
+    let that = this;
+    let wesecret = wx.getStorageSync('wesecret');
+    if (wesecret) {
+      let data = {
+        wesecret: wesecret,
+        form_id, form_id
+      }
+      wx.request({
+        url: 'https://collhome.com/life/apis/templateMessages',
+        method: 'POST',
+        data: data,
+        success: function (res) {
+          console.log('saveFormid res', res);
+        }
+      })
+    }
+  },
   formSubmit: function (e) {
     console.log('formSubmit e', e);
     let that = this;
     let form_id = e.detail.formId;
     let content = e.detail.value.content;
     console.log('formSubmit content', content);
+
+    that.saveFormid(form_id);
 
     wx.request({
       url: 'https://collhome.com/life/apis/save_private_message',

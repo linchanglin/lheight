@@ -1,5 +1,8 @@
 <view class="page">
-  <view class="page__bd">
+
+  <form bindsubmit="saveFormid" report-submit='true'>
+
+    <view class="page__bd">
       <!--love-->
       <view class="container">
 
@@ -45,19 +48,27 @@
 
         <view class="weui-flex  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}">
           <view class="weui-flex__item flex_center" hover="true" hover-class="weui-cell_active" catchtap="navigateToCommentInput">
-            <image wx:if="{{love.if_my_comment == 0}}" class="icon_size" src="../images/comment.png"></image>
-            <image wx:if="{{love.if_my_comment == 1}}" class="icon_size" src="../images/comment_fill.png"></image>
-            <text wx:if="{{love.comment_nums == 0}}">评论</text>
-            <text wx:if="{{love.comment_nums != 0}}">{{love.comment_nums}}</text>
+            <button formType="submit" class="shareButton">
+              <view class="share_image_box flex_center">
+                <image wx:if="{{love.if_my_comment == 0}}" class="icon_size" src="../images/comment.png"></image>
+                <image wx:if="{{love.if_my_comment == 1}}" class="icon_size" src="../images/comment_fill.png"></image>
+                <text wx:if="{{love.comment_nums == 0}}">评论</text>
+                <text wx:if="{{love.comment_nums != 0}}">{{love.comment_nums}}</text>
+              </view>
+            </button>
           </view>
           <view class="weui-flex__item flex_center" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
-            <image wx:if="{{love.if_my_praise == 0}}" class="icon_size  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
-            <image wx:if="{{love.if_my_praise == 1}}" class="icon_size  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
-            <text wx:if="{{love.praise_nums == 0}}">喜欢</text>
-            <text wx:if="{{love.praise_nums != 0}}">{{love.praise_nums}}</text>
+            <button hover-class="none" formType="submit" class="shareButton">
+              <view class="share_image_box flex_center">
+                <image wx:if="{{love.if_my_praise == 0}}" class="icon_size  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
+                <image wx:if="{{love.if_my_praise == 1}}" class="icon_size  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
+                <text wx:if="{{love.praise_nums == 0}}">喜欢</text>
+                <text wx:if="{{love.praise_nums != 0}}">{{love.praise_nums}}</text>
+              </view>
+            </button>
           </view>
           <view wx:if="{{love}}" class="weui-flex__item flex_center">
-            <button class="shareButton  {{love.id == item_selected_love_id ? 'weui-cell_active':''}}" open-type="share">
+            <button formType="submit" class="shareButton" open-type="share">
               <view class="share_image_box flex_center">
                 <image class="icon_size" src="../images/share.png"></image>
                 <text>分享</text>
@@ -74,8 +85,8 @@
       <!--评论列表-->
       <view wx:if="{{comments.length > 0}}" class="comments" id="scroll_to_comments">
         <block wx:for="{{comments}}" wx:for-item="comment" wx:key="id">
-          <view class="item {{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentUserId="{{comment.userInfo.id}}" data-commentOpenid="{{comment.userInfo.openid}}" data-commentUserNickName="{{comment.userInfo.nickname}}" data-commentId="{{comment.id}}" data-commentContent="{{comment.content}}"
-            catchtap="showCommentActionSheet" bindlongtap="longtap_comment" bindtouchmove="touchmove_comment">
+          <view class="item {{comment.id == item_selected_comment_id ? 'weui-cell_active':''}}" data-commentUserId="{{comment.userInfo.id}}" data-commentOpenid="{{comment.userInfo.openid}}" data-commentUserNickName="{{comment.userInfo.nickname}}" data-commentId="{{comment.id}}"
+            data-commentContent="{{comment.content}}" catchtap="showCommentActionSheet" bindlongtap="longtap_comment" bindtouchmove="touchmove_comment">
             <view class="i-left">
               <image class="c-u-img" src="{{comment.userInfo.avatarUrl}}" mode="aspectFill" data-userId="{{comment.userInfo.id}}" catchtap="navigateToProfileShow"></image>
             </view>
@@ -130,31 +141,38 @@
 
       </view>
 
-    <!--tabbar-->
-    <view class="weui-tabbar">
+      <!--tabbar-->
+      <view class="weui-tabbar">
 
-      <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToCommentInput">
-        <image wx:if="{{love.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
-        <image wx:if="{{love.if_my_comment == 1}}" class="image-comment" src="../images/comment_fill.png"></image>
-        <text class="weui-tabbar__label">评论</text>
+        <view class="weui-tabbar__item" hover="true" hover-class="weui-cell_active" catchtap="navigateToCommentInput">
+          <button formType="submit" class="shareButton1">
+            <image wx:if="{{love.if_my_comment == 0}}" class="image-comment" src="../images/comment.png"></image>
+            <image wx:if="{{love.if_my_comment == 1}}" class="image-comment" src="../images/comment_fill.png"></image>
+            <text class="weui-tabbar__label">评论</text>
+          </button>
+        </view>
+
+        <view class="weui-tabbar__item" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
+          <button hover-class="none" formType="submit" class="shareButton1">
+            <image wx:if="{{love.if_my_praise == 0}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
+            <image wx:if="{{love.if_my_praise == 1}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
+            <text class="weui-tabbar__label">喜欢</text>
+          </button>
+        </view>
+
+        <view class="weui-tabbar__item">
+          <button formType="submit" class="shareButton1" open-type="share">
+            <image wx:if="{{love}}" class="image-comment" src="../images/share.png"></image>
+            <text class="weui-tabbar__label">分享</text>
+          </button>
+        </view>
+
+
+
       </view>
-
-      <view class="weui-tabbar__item" data-loveId="{{love.id}}" data-loveIfMyPraise="{{love.if_my_praise}}" catchtap="praiseLove">
-        <image wx:if="{{love.if_my_praise == 0}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise.png"></image>
-        <image wx:if="{{love.if_my_praise == 1}}" class="image-comment  ripple {{love.id == selected_love_id ? 'bounceIn':''}}" src="../images/praise_fill.png"></image>
-        <text class="weui-tabbar__label">喜欢</text>
-      </view>
-
-      <view class="weui-tabbar__item">
-        <button class="shareButton1" open-type="share">
-          <image wx:if="{{love}}"  class="image-comment" src="../images/share.png"></image>
-          <text class="weui-tabbar__label">分享</text>
-        </button>
-      </view>
-
-
 
     </view>
 
-  </view>
+  </form>
+
 </view>

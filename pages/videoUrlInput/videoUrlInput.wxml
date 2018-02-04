@@ -1,18 +1,22 @@
 <view class="page">
-    <view class="page__bd">
-        <view class="weui-panel"></view>
-        <view class="weui-panel weui-panel_access">
-            <view class="weui-cells weui-cells_after-title">
-                <view class="weui-cell">
-                    <view class="weui-cell__bd">
-                        <textarea class="weui-textarea" value="{{video_url}}" maxlength="-1" auto-height="true" bindinput="bindContentInput" bindconfirm="confirmInput" auto-focus />
-                    </view>
-                </view>
-            </view>
-        </view>
+  <form bindsubmit="saveFormid" report-submit='true'>
 
-        <view style="margin: 20px 15px">
-            <button class="weui-btn" type="primary" bindtap="confirmInput">保存</button>
+    <view class="page__bd">
+      <view class="weui-panel"></view>
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{video_url}}" maxlength="-1" auto-height="true" bindinput="bindContentInput" bindconfirm="confirmInput" auto-focus />
+            </view>
+          </view>
         </view>
+      </view>
+
+      <view style="margin: 20px 15px">
+        <button formType="submit" class="weui-btn" type="primary" bindtap="confirmInput">保存</button>
+      </view>
     </view>
+
+  </form>
 </view>

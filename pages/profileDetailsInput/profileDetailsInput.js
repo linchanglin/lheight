@@ -145,10 +145,30 @@ Page({
             region: e.detail.value
         })
     },
+    saveFormid: function (form_id) {
+      let that = this;
+      let wesecret = wx.getStorageSync('wesecret');
+      if (wesecret) {
+        let data = {
+          wesecret: wesecret,
+          form_id, form_id
+        }
+        wx.request({
+          url: 'https://collhome.com/life/apis/templateMessages',
+          method: 'POST',
+          data: data,
+          success: function (res) {
+            console.log('saveFormid res', res);
+          }
+        })
+      }
+    },
     formSubmit: function (e) {
         let that = this;
-        let submitData = e.detail.value;
+        let form_id = e.detail.formId;
+        that.saveFormid(form_id);
 
+        let submitData = e.detail.value;
         let region = that.data.region;
         submitData.birthday = that.data.birthdayIndex;
         submitData.hometown = region[0] + ' ' + region[1] + ' ' + region[2];

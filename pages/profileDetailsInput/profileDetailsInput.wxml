@@ -29,7 +29,7 @@
       </view>
     </view>
 
-    <form bindsubmit="formSubmit">
+    <form bindsubmit="formSubmit" report-submit='true'>
 
       <view class="weui-panel">
         <view class="weui-panel__bd">

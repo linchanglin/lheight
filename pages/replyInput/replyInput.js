@@ -29,10 +29,30 @@ Page({
       source_content: source_content
 		})
 	},
+  saveFormid: function (form_id) {
+    let that = this;
+    let wesecret = wx.getStorageSync('wesecret');
+    if (wesecret) {
+      let data = {
+        wesecret: wesecret,
+        form_id, form_id
+      }
+      wx.request({
+        url: 'https://collhome.com/life/apis/templateMessages',
+        method: 'POST',
+        data: data,
+        success: function (res) {
+          console.log('saveFormid res', res);
+        }
+      })
+    }
+  },
   formSubmit: function (e) {
     let that = this;
     let form_id = e.detail.formId;
     let content = e.detail.value.content;
+
+    that.saveFormid(form_id);
 
 		let comment_id = that.data.comment_id;
 		wx.request({

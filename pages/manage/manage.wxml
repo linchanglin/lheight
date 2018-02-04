@@ -1,10 +1,13 @@
 <view class="page">
-  <view class="page__bd">
 
-    <!--<audio poster="http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000" name="此时此刻" author="许巍" src="http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46"
+  <form bindsubmit="saveFormid" report-submit='true'>
+
+    <view class="page__bd">
+
+      <!--<audio poster="http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000" name="此时此刻" author="许巍" src="http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46"
       id="myAudio" controls loop></audio>-->
 
-    <!--<view class="weui-panel weui-panel_access">
+      <!--<view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
         <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToBlackList">
           <view class="weui-cell__bd">
@@ -15,19 +18,19 @@
       </view>
     </view>-->
 
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToAboutLoveWall">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">关于我们</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access">
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd">
+          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToAboutLoveWall">
+            <view class="weui-cell__bd">
+              <view style="display: inline-block; vertical-align: middle">关于我们</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">
+            </view>
           </view>
         </view>
       </view>
-    </view>
 
-    <!-- <view class="weui-panel weui-panel_access">
+      <!-- <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
         <view class="weui-cell weui-cell_access" style="padding: 0;" hover="true" hover-class="weui-cell_active">
           <view class="weui-cell__bd">
@@ -38,41 +41,44 @@
       </view>
     </view> -->
 
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToSystemNotice">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">系统通知</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access">
-            <view wx:if="{{unreadSystemNoticeNums > 0}}" class="weui-badge weui-badge_dot" style="margin-left: 5px;margin-right: 5px;"></view>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    
-
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" style="padding: 0;" hover="true" hover-class="weui-cell_active">
-          <view class="weui-cell__bd">
-            <button wx:if="{{canIUseContact}}" hover-class="none" open-type="contact">客服</button>
-            <view class="weui-cell__ft weui-cell__ft_in-access" style="position:relative; top:-23px; left:-15px;"></view>
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd">
+          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="navigateToSystemNotice">
+            <view class="weui-cell__bd">
+              <view style="display: inline-block; vertical-align: middle">系统通知</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">
+              <view wx:if="{{unreadSystemNoticeNums > 0}}" class="weui-badge weui-badge_dot" style="margin-left: 5px;margin-right: 5px;"></view>
+            </view>
           </view>
         </view>
       </view>
-    </view>
 
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="signOut">
-          <view class="weui-cell__bd" style="display: flex; justify-content: center; align-items: center">
-            <view style="display: inline-block; vertical-align: middle">退出登录</view>
+
+
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd">
+          <view class="weui-cell weui-cell_access" style="padding: 0;" hover="true" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+              <button formType="submit" wx:if="{{canIUseContact}}" hover-class="none" open-type="contact">客服</button>
+              <view class="weui-cell__ft weui-cell__ft_in-access" style="position:relative; top:-23px; left:-15px;"></view>
+            </view>
           </view>
         </view>
       </view>
+
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd">
+          <view class="weui-cell weui-cell_access" hover="true" hover-class="weui-cell_active" bindtap="signOut">
+            <view class="weui-cell__bd" style="display: flex; justify-content: center; align-items: center">
+              <view style="display: inline-block; vertical-align: middle">退出登录</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
     </view>
 
-  </view>
+  </form>
+
 </view>

@@ -208,18 +208,29 @@ Page({
       url: url,
     })
   },
-  // formSubmit: function (e) {
-  //   console.log('formSubmit e',e);
-  // },
-  // saveLove: function () {
-  formSubmit: function (e) {
+  saveFormid: function (e) {
+    console.log('saveFormid e', e);
     let that = this;
-    console.log('formSubmit e', e);
     let form_id = e.detail.formId;
-    that.setData({
-      form_id: form_id
-    })
-
+    let wesecret = wx.getStorageSync('wesecret');
+    if (wesecret) {
+      let data = {
+        wesecret: wesecret,
+        form_id, form_id
+      }
+      wx.request({
+        url: 'https://collhome.com/life/apis/templateMessages',
+        method: 'POST',
+        data: data,
+        success: function (res) {
+          console.log('saveFormid res', res);
+        }
+      })
+    }
+  },
+  saveLove: function () {
+    console.log('saveLove ing');
+    let that = this;
     let wesecret = that.data.wesecret;
     let my_userInfo = that.data.my_userInfo;
     if (wesecret && my_userInfo) {
@@ -271,6 +282,15 @@ Page({
           }
         }
       }
+    } else {
+      common.signIn().then(() => {
+        let wesecret = wx.getStorageSync('wesecret');
+        let my_userInfo = wx.getStorageSync('my_userInfo');
+        that.setData({
+          wesecret: wesecret,
+          my_userInfo: my_userInfo
+        })
+      });
     }
   },
   postSaveLove: function () {
@@ -286,8 +306,6 @@ Page({
       'location': that.data.location,
       'visiable': that.data.visiable,
       'anonymous': that.data.anonymous,
-
-      'form_id': that.data.form_id,
     };
     console.log("postSaveLove data", data);
     wx.request({
@@ -304,7 +322,7 @@ Page({
         if (res.data.status == 200) {
           that.switchTabToBoardWithSuccess();
         } else {
-          common.signIn();
+          that.postSaveLoveFail();
         }
       }
     })
@@ -369,5 +387,13 @@ Page({
         url: url
       })
     }, 1000)
+  },
+  postSaveLoveFail: function () {
+    let that = this;
+    wx.showToast({
+      title: '失败啦！再试试',
+      icon: 'none',
+      duration: 1000
+    });
   }
 })
