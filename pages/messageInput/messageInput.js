@@ -58,16 +58,9 @@ Page({
       },
       success: function (res) {
         console.log('post message', res.data)
-        // wx.setStorageSync('comments_need_refresh_create_comment', that.data.love_id);
-        // wx.setStorageSync('love_loves_need_refresh', that.data.love_id);
-        // wx.setStorageSync('activity_loves_need_refresh', that.data.love_id);
-        // wx.setStorageSync('question_loves_need_refresh', that.data.love_id);
-        // wx.setStorageSync('find_loves_need_refresh', that.data.love_id);
-        // wx.setStorageSync('mycomment_loves_need_refresh', that.data.love_id);
-        // wx.setStorageSync('my_loves_need_refresh', that.data.love_id);
         if (res.data.code == 200) {
           that.navigateBackWithSuccess();
-          that.send_templateMessage(form_id, content);
+          that.send_templateMessage(content);
         } else {
           that.rejectWithReason(res.data.message);
         }
@@ -75,7 +68,7 @@ Page({
       }
     })
   },
-  send_templateMessage: function (form_id, content) {
+  send_templateMessage: function (content) {
     let that = this;
     let openid = that.data.openid;
     let my_userInfo = wx.getStorageSync('my_userInfo');
@@ -85,8 +78,8 @@ Page({
     let data = {
       touser: openid,
       template_id: template_id_message,
-      page: '/pages/message/message',
-      form_id: form_id,
+      page: 'pages/message/message',
+      // form_id: form_id,
       data: {
         keyword1: {
           "value": content,

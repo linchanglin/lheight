@@ -62,7 +62,6 @@ Page({
 				wesecret: that.data.wesecret,
 				content: content,
 				objectUser_id: that.data.objectUser_id,
-        form_id: form_id
 			},
 			success: function (res) {
 				console.log('post reply', res.data)
@@ -70,12 +69,12 @@ Page({
 				wx.setStorageSync('replies_need_refresh_create_reply', 1);
 				wx.navigateBack()
 
-        that.send_templateMessage(form_id, content);
+        that.send_templateMessage(content);
 			}
 		})
 	},
 
-  send_templateMessage: function (form_id, content) {
+  send_templateMessage: function (content) {
     let that = this;
     let openid = that.data.objectUser_openid;
     let comment_id = that.data.comment_id;
@@ -87,8 +86,8 @@ Page({
     let data = {
       touser: openid,
       template_id: template_id_reply,
-      page: `/pages/reply/reply?comment_id=${comment_id}`,
-      form_id: form_id,
+      page: `pages/reply/reply?comment_id=${comment_id}`,
+      // form_id: form_id,
       data: {
         keyword1: {
           "value": content,

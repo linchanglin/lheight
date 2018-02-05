@@ -51,7 +51,6 @@ Page({
       data: {
         wesecret: that.data.wesecret,
         content: content,
-        form_id: form_id
       },
       success: function (res) {
         console.log('post comment', res.data)
@@ -65,11 +64,11 @@ Page({
 
         wx.navigateBack()
 
-        that.send_templateMessage(form_id, content);
+        that.send_templateMessage(content);
       }
     })
   },
-  send_templateMessage: function (form_id, content) {
+  send_templateMessage: function (content) {
     let that = this;
     let openid = that.data.openid;
     let love_id = that.data.love_id;
@@ -80,8 +79,8 @@ Page({
     let data = {
       touser: openid,
       template_id: template_id_comment,
-      page: `/pages/comment/comment?love_id=${love_id}`,
-      form_id: form_id,
+      page: `pages/comment/comment?love_id=${love_id}`,
+      // form_id: form_id,
       data: {
         keyword1: {
           "value": content,
