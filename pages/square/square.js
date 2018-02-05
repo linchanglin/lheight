@@ -17,7 +17,16 @@ Page({
     reach_bottom: false,
     page_no_data: false,
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    console.log('options', options);
+    let init_college_id = options.college_id;
+    if (init_college_id) {
+      wx.setStorage({
+        key: "init_college_id",
+        data: init_college_id
+      })
+    }
+    
     let that = this;
     wx.showLoading({
       title: '加载中',
