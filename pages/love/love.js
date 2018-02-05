@@ -68,10 +68,17 @@ Page({
   onLoad: function (options) {
     console.log('options', options);
     let init_college_id = options.college_id;
+    let init_interest_id = options.interest_id;
     if (init_college_id) {
       wx.setStorage({
         key: "init_college_id",
         data: init_college_id
+      })
+    }
+    if (init_interest_id) {
+      wx.setStorage({
+        key: "init_interest_id",
+        data: init_interest_id
       })
     }
 

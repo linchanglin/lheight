@@ -29,8 +29,9 @@ function signIn() {
                                                 let wesecret = res.data;
                                                 wx.setStorageSync('wesecret', wesecret);
                                                 let init_college_id = wx.getStorageSync('init_college_id');
+                                                let init_interest_id = wx.getStorageSync('init_interest_id');
                                                 wx.request({
-                                                  url: `https://collhome.com/life/apis/user?wesecret=${wesecret}&init_college_id=${init_college_id}`,
+                                                  url: `https://collhome.com/life/apis/user?wesecret=${wesecret}&init_college_id=${init_college_id}&init_interest_id=${init_interest_id}`,
                                                     success: function (res) {
                                                         console.log('my_userInfo res', res)
                                                         let my_userInfo = res.data.data;
@@ -67,7 +68,7 @@ function get_my_userInfo(wesecret) {
     return new Promise((resolve, reject) => {
         wx.request({
           // url: 'https://collhome.com/life/apis/user?wesecret=' + wesecret,
-          url: `https://collhome.com/life/apis/user?wesecret=${wesecret}&init_college_id=`,
+          url: `https://collhome.com/life/apis/user?wesecret=${wesecret}&init_college_id=&init_interest_id=`,
           success: function (res) {
               console.log('my_userInfo res', res)
               let my_userInfo = res.data.data;
