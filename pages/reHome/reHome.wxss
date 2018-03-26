@@ -1,0 +1,7 @@
+page {
+  background-color: #edecf2;
+}
+
+.color_green {
+  color: #09bb07
+}

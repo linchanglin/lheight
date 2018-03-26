@@ -1,6 +1,11 @@
 {
   "pages": [
+    
+    "pages/reHome/reHome",
+    "pages/reUs/reUs",
+    
     "pages/love/love",
+    
     "pages/user/user",
     "pages/picture/picture",
     "pages/message/message",
@@ -10,13 +15,13 @@
     "pages/voice/voice",
     "pages/profileShow/profileShow",
     "pages/messageInput/messageInput",
+    "pages/aboutLoveWall/aboutLoveWall",
     "pages/topic/topic",
     "pages/aboutCollegeService/aboutCollegeService",
     "pages/loveInput/loveInput",
     "pages/profileDetailsInput/profileDetailsInput",
     "pages/badReportInput/badReportInput",
     "pages/interestInput/interestInput",
-    "pages/aboutLoveWall/aboutLoveWall",
     "pages/manage/manage",
     "pages/relatedApplet/relatedApplet",
     "pages/systemNotice/systemNotice",
@@ -39,7 +44,7 @@
   ],
   "window": {
     "navigationBarBackgroundColor": "#353535",
-    "navigationBarTitleText": "表白",
+    "navigationBarTitleText": "校园生活墙",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#F8F8F8",
     "backgroundTextStyle": "light"
